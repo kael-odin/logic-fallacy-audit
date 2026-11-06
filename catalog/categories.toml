@@ -1,0 +1,69 @@
+[[category]]
+id = "formal"
+name_zh = "形式与演绎错误"
+name_en = "Formal and Deductive Errors"
+description = "推理形式无效，或条件、量词、模态与词项结构被错误处理。"
+report_hint = "仅用于存在明确演绎推理的文本。"
+
+[[category]]
+id = "relevance"
+name_zh = "相关性与人身攻击"
+name_en = "Relevance and Ad Hominem"
+description = "用身份、情绪、来源、流行度或其他无关信息替代结论所需理由。"
+report_hint = "先区分主张真假、证据可信度和说话者资格。"
+
+[[category]]
+id = "presumption"
+name_zh = "预设、责任与辩证规则"
+name_en = "Presumption and Dialectical Rules"
+description = "循环、预设结论、转移举证、封死反驳、移动目标或破坏公平讨论。"
+report_hint = "明确初始主张、举证责任和可反驳条件。"
+
+[[category]]
+id = "ambiguity"
+name_zh = "歧义、定义与语言"
+name_en = "Ambiguity, Definition, and Language"
+description = "词义、句法、范围或分类在论证中发生变化，造成表面连贯。"
+report_hint = "标出同一词在不同出现处的实际含义。"
+
+[[category]]
+id = "causal"
+name_zh = "因果、归纳与类比"
+name_en = "Causal, Inductive, and Analogical Reasoning"
+description = "从有限经验、相似性或事件顺序跳到一般、因果或预测结论。"
+report_hint = "检查样本、机制、时序、对照和替代解释。"
+
+[[category]]
+id = "statistical"
+name_zh = "统计、概率与样本"
+name_en = "Statistics, Probability, and Sampling"
+description = "误解基准率、条件概率、样本选择、变异性或检验过程。"
+report_hint = "明确分母、样本来源、比较对象和不确定性。"
+
+[[category]]
+id = "explanation"
+name_zh = "解释、模式与阴谋论式推理"
+name_en = "Explanation, Pattern, and Conspiratorial Reasoning"
+description = "比较解释时不可证伪、异常猎取、过度归因或采用不对称证据标准。"
+report_hint = "比较至少两个竞争解释，并检查可反驳预测。"
+
+[[category]]
+id = "normative"
+name_zh = "规范、政策与价值"
+name_en = "Normative, Policy, and Value Reasoning"
+description = "从事实跳到应然，或政策比较中缺少价值前提、替代方案与成本分析。"
+report_hint = "分开目标、手段、副作用、分配与价值排序。"
+
+[[category]]
+id = "rhetorical"
+name_zh = "公共说服与宣传"
+name_en = "Public Persuasion and Propaganda"
+description = "通过身份、恐惧、重复、框架或对话控制替代和遮蔽论证。"
+report_hint = "描述说服机制和对话效果，不推断发言者动机。"
+
+[[category]]
+id = "bias"
+name_zh = "认知偏差"
+name_en = "Cognitive Biases"
+description = "影响判断的系统性倾向，不是逻辑谬误本身。"
+report_hint = "只作为背景解释，不单独充当谬误结论。"

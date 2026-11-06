@@ -1,0 +1,319 @@
+[[fallacy]]
+id = "equivocation"
+name_zh = "偷换概念"
+name_en = "Equivocation"
+aliases = ["语词歧义", "一词多义推理"]
+category = "ambiguity"
+kind = "informal"
+severity = 3
+definition = "同一个词或短语在论证的不同位置表达不同含义，使前提看似连接，实际没有共享同一概念。"
+pattern = "P 使用词 W 的含义 M1；Q 使用 W 的含义 M2；结论把 M1 与 M2 当成同一 W。"
+diagnostic = ["关键词在各次出现时能否用同一替换短语测试？", "若明确写出不同定义，论证是否断裂？"]
+example = "法律允许言论自由，所以公司也必须允许员工在任何平台随意发言。"
+boundary = "自然语言会根据语境调整词义，不一定构成偷换；关键是词义变化是否承担了结论的桥接。"
+confusions = ["双关语", "概念演变", "四词项谬误"]
+related = ["four-terms", "persuasive-definition", "amphiboly"]
+
+[[fallacy]]
+id = "amphiboly"
+name_zh = "句法歧义"
+name_en = "Amphiboly"
+aliases = ["语法歧义", "句法结构谬误"]
+category = "ambiguity"
+kind = "informal"
+severity = 2
+definition = "利用句法结构可作多种解释的特点，从一个解释推出另一个解释下的结论。"
+pattern = "句子 S 可解析为 S1 或 S2；论证把 S1 的事实用来支持 S2 的结论。"
+diagnostic = ["修饰语和代词分别指谁？", "句子是否有第二种语法上合理的配组方式？"]
+example = "“公司通知所有员工周五可以带宠物上班”被理解成每名员工都能带多只宠物。"
+boundary = "幽默、标题和广告常故意利用句法歧义；只有歧义造成论证转移时才成为分析问题。"
+confusions = ["词义歧义", "范围歧义", "故意双关"]
+related = ["equivocation", "scope-ambiguity", "misleading-metaphor"]
+
+[[fallacy]]
+id = "accent"
+name_zh = "重音歧义"
+name_en = "Fallacy of Accent"
+aliases = ["强调位置谬误", "语调歧义"]
+category = "ambiguity"
+kind = "informal"
+severity = 2
+definition = "通过改变重音、强调或摘录范围，使同一句话暗示不同结论。"
+pattern = "原句在完整语境中表达 P；重音或截取使其听起来表达更强的 Q。"
+diagnostic = ["强调词是否改变了限制范围？", "原句完整语境是否包含被省略的限定？"]
+example = "原文说“部分测试在理想条件下有效”，传播时强调“测试有效”并删掉“部分”和“理想条件”。"
+boundary = "标题压缩和口头强调是传播常态；判定时需看是否实质误导。"
+confusions = ["quote-mining", "suppressed qualifier", "语气强调"]
+related = ["quote-mining", "suppressed-qualifier", "contextomy"]
+
+[[fallacy]]
+id = "composition"
+name_zh = "合成谬误"
+name_en = "Fallacy of Composition"
+aliases = ["整体属性误推", "部分到整体"]
+category = "ambiguity"
+kind = "informal"
+severity = 2
+definition = "因为每个部分或成员具有某属性，就推出由它们组成的整体也具有该属性。"
+pattern = "每个 xi 都有 F；因此整体 X 有 F。"
+diagnostic = ["该属性在组合后是否可能改变？", "整体是否包含结构、互动或涌现效应？"]
+example = "每位球员都很强，所以这支球队一定配合得最好。"
+boundary = "有些属性可加总，如重量和体积；问题在于属性是否在组合层面保持不变。"
+confusions = ["division", "生态谬误", "涌现属性"]
+related = ["division", "collective-distributive", "ecological-fallacy"]
+
+[[fallacy]]
+id = "division"
+name_zh = "分割谬误"
+name_en = "Fallacy of Division"
+aliases = ["整体属性误推给个体", "整体到部分"]
+category = "ambiguity"
+kind = "informal"
+severity = 2
+definition = "因为整体具有某属性，就推出每个部分或成员也具有该属性。"
+pattern = "整体 X 有 F；xi 是 X 的部分；因此 xi 有 F。"
+diagnostic = ["整体属性是否来自结构、平均值或集体互动？", "单个成员是否可能没有该属性？"]
+example = "这家公司利润很高，所以每位员工都拿到了高收入。"
+boundary = "某些整体属性均匀分配，例如整批液体的温度；关键看属性分布机制。"
+confusions = ["composition", "生态谬误", "集体与个体"]
+related = ["composition", "collective-distributive", "ecological-fallacy"]
+
+[[fallacy]]
+id = "reification"
+name_zh = "具体化谬误"
+name_en = "Reification"
+aliases = ["物化抽象概念", "hypostatization", "把概念当实体"]
+category = "ambiguity"
+kind = "informal"
+severity = 2
+definition = "把抽象概念、统计构造或隐喻当作有独立意志和因果力量的实体。"
+pattern = "概念 C 是抽象命名；论证把 C 当成会主动做事的对象；因此推出结果。"
+diagnostic = ["C 是具体对象，还是对关系、模式或指标的命名？", "是谁或什么机制实际产生了结果？"]
+example = "市场今天很害怕，所以市场决定让某家公司失败。"
+boundary = "拟人化可以用于解释复杂系统；但在因果推断中必须还原到实际行为者与机制。"
+confusions = ["隐喻", "拟人化", "系统层因果"]
+related = ["misleading-metaphor", "category-mistake", "intentionality-bias"]
+
+[[fallacy]]
+id = "strategic-vagueness"
+name_zh = "策略性模糊"
+name_en = "Strategic Vagueness"
+aliases = ["模糊表述", "故意不定义"]
+category = "ambiguity"
+kind = "rhetorical"
+severity = 2
+definition = "使用缺乏明确边界的关键词，使主张能随语境改变含义或回避被反驳。"
+pattern = "主张 P 依赖关键词 W；W 没有可操作标准；不同时候按不同标准使用 W。"
+diagnostic = ["W 的判定标准和边界是什么？", "按不同解释评估时，结论是否悄悄变化？"]
+example = "我们承诺提供“全方位保障”，但合同从不定义保障包含什么。"
+boundary = "法律、政策和早期探索有时需要弹性语言；问题在于弹性是否掩盖责任或不可检验性。"
+confusions = ["故意含糊", "开放概念", "文体模糊"]
+related = ["weasel-words", "definitional-retreat", "persuasive-definition"]
+
+[[fallacy]]
+id = "continuum-fallacy"
+name_zh = "连续体谬误"
+name_en = "Continuum Fallacy"
+aliases = ["划界谬误", "没有明确界线所以无差别"]
+category = "ambiguity"
+kind = "informal"
+severity = 2
+definition = "因为两个极端之间存在连续变化、边界模糊，就断言二者没有实际区别或任何中间界线都任意。"
+pattern = "P 与 Q 之间是连续谱；因此 P 与 Q 相同，或任何分类都无意义。"
+diagnostic = ["边界模糊是否等于没有边界？", "是否存在足以支持决策的阈值、约定或错误成本比较？"]
+example = "胖和瘦没有一条绝对界线，所以健康风险也不该分等级。"
+boundary = "模糊概念需要透明阈值和语境；但某个具体划线不确定，不证明分类完全没有用。"
+confusions = ["vagueness", "sorites paradox", "false precision"]
+related = ["strategic-vagueness", "false-precision", "category-mistake"]
+
+[[fallacy]]
+id = "persuasive-definition"
+name_zh = "说服性定义"
+name_en = "Persuasive Definition"
+aliases = ["定义夹带结论", "重新定义以取胜"]
+category = "ambiguity"
+kind = "informal"
+severity = 3
+definition = "把评价或争议结论塞进词的定义中，使某个立场仅靠定义就自动获胜。"
+pattern = "把 W 定义为带有价值判断或强预设的 D；因此凡不符合 D 的都不是真正 W。"
+diagnostic = ["定义是否包含仍在争议的评价？", "该定义是公共用法、专业约定，还是为当前结论定制？"]
+example = "真正的环保主义者会支持这项法案，所以反对它的人都不环保。"
+boundary = "规范概念常包含价值；透明说明定义来源和后果可以接受，隐蔽夹带才会误导。"
+confusions = ["规定性定义", "no true scotsman", "定义澄清"]
+related = ["equivocation", "no-true-scotsman", "definitional-retreat"]
+
+[[fallacy]]
+id = "definitional-retreat"
+name_zh = "定义退守"
+name_en = "Definitional Retreat"
+aliases = ["改定义避反驳", "含义临时收缩"]
+category = "ambiguity"
+kind = "dialectical"
+severity = 2
+definition = "主张遭遇反例后，不承认错误，而是临时改变关键词定义以排除反例。"
+pattern = "原主张 P 在定义 D1 下被反驳；改称自己在 D2 下说 P；D2 事先未说明。"
+diagnostic = ["定义何时被提出，是否早于反例？", "新定义是否保留了原主张的实际意义？"]
+example = "原来说“所有成功预测都来自模型”，遇到反例后改称“我只指可以写成公式的模型”。"
+boundary = "澄清含义可以在讨论中发生；关键是变化是否公开、合理，并且是否改变原承诺。"
+confusions = ["移动球门", "no true scotsman", "合理澄清"]
+related = ["moving-the-goalposts", "no-true-scotsman", "strategic-vagueness"]
+
+[[fallacy]]
+id = "use-mention-confusion"
+name_zh = "使用与提及混淆"
+name_en = "Use-Mention Confusion"
+aliases = ["词与物混淆", "引语层次错误"]
+category = "ambiguity"
+kind = "informal"
+severity = 2
+definition = "把“使用一个词表达对象”和“提及这个词本身”混为一谈，导致对定义、引语或属性的错误推理。"
+pattern = "词 W 有属性 F；论证推出 W 所指对象也有 F，或反向错误。"
+diagnostic = ["当前是在讨论词本身，还是在讨论词所指对象？", "加引号后意思是否改变？"]
+example = "“狗”有两个字，所以狗有两个字长。"
+boundary = "自指句、元语言讨论和语言哲学问题会更复杂；不能把一切引语都当作普通指称。"
+confusions = ["type-token", "自指", "引号使用"]
+related = ["type-token-confusion", "category-mistake", "equivocation"]
+
+[[fallacy]]
+id = "type-token-confusion"
+name_zh = "类型与个例混淆"
+name_en = "Type-Token Confusion"
+aliases = ["类别与实例混淆", "类型层次错误"]
+category = "ambiguity"
+kind = "informal"
+severity = 2
+definition = "把一个类别、类型或模式同一具体实例、样本或再现混淆。"
+pattern = "类型 T 有属性 F；具体 token t 属于 T；因此 t 也有 F，或反向。"
+diagnostic = ["讨论的是类别本身还是某个成员？", "统计属性是否适用于单个实例？"]
+example = "人类平均每天睡八小时，所以这个新生儿也应该已经睡了八小时。"
+boundary = "一些类型属性确实可下推到每个具体实例，例如元素定义；需要说明分布和适用范围。"
+confusions = ["division", "以偏概全", "平均值误读"]
+related = ["use-mention-confusion", "division", "misleading-average"]
+
+[[fallacy]]
+id = "collective-distributive"
+name_zh = "集体与个体混淆"
+name_en = "Collective-Distributive Fallacy"
+aliases = ["合称分称混淆", "群体属性误推"]
+category = "ambiguity"
+kind = "informal"
+severity = 3
+definition = "把群体作为整体才具备的能力、责任或属性，分配给每个成员，或把每个成员的属性直接加给群体。"
+pattern = "群体 G 集体具有 F；因此每个成员 g 具有 F。"
+diagnostic = ["F 是集体行动、合计结果，还是每人都具备？", "结论需要个体证据还是组织层证据？"]
+example = "公司赚了十亿元，所以每位员工都赚了十亿元。"
+boundary = "有些属性既适用于整体也适用于成员，例如都属于同一行业；需要定义属性层次。"
+confusions = ["composition", "division", "quantifier-shift"]
+related = ["composition", "division", "ecological-fallacy"]
+
+[[fallacy]]
+id = "category-mistake"
+name_zh = "范畴错误"
+name_en = "Category Mistake"
+aliases = ["类别错置", "把不同逻辑层次并列"]
+category = "ambiguity"
+kind = "informal"
+severity = 2
+definition = "把只适用于某一逻辑类别的谓词或问题套到另一类别上，产生表面可问、实际不成立的命题。"
+pattern = "X 属于类别 C1；谓词 F 只适用于 C2；却问 X 是否 F。"
+diagnostic = ["该谓词适用于这个存在层次吗？", "问题是否把制度、个体、概念和数据混在同一层？"]
+example = "问“这个算法是什么颜色”，等于把计算过程当成了具有物理表面的物体。"
+boundary = "隐喻和跨层类比可以启发思考；只有把它们当作字面推理时才可能出错。"
+confusions = ["use-mention", "reification", "错误问题预设"]
+related = ["reification", "use-mention-confusion", "type-token-confusion"]
+
+[[fallacy]]
+id = "misleading-metaphor"
+name_zh = "误导性隐喻"
+name_en = "Misleading Metaphor"
+aliases = ["把隐喻当机制", "类比性解释谬误"]
+category = "ambiguity"
+kind = "informal"
+severity = 2
+definition = "把一个解释性隐喻的关键结构当真，进而推出隐喻没有资格支持的结论。"
+pattern = "把 X 比作 Y；从 Y 的熟悉属性推出 X 的具体因果结果；但不证明二者共享该结构。"
+diagnostic = ["隐喻中哪些相似点被保留，哪些被忽略？", "支持结论的是实际机制，还是只是比喻听起来合理？"]
+example = "记忆像仓库，所以容量满了以后新信息一定会挤掉旧信息。"
+boundary = "隐喻在沟通和模型构建中非常有用；问题在于把未验证的映射当成事实。"
+confusions = ["合理类比", "framing", "reification"]
+related = ["weak-analogy", "reification", "framing-effect"]
+
+[[fallacy]]
+id = "suppressed-qualifier"
+name_zh = "删去限定词"
+name_en = "Suppressed Qualifier"
+aliases = ["遗漏范围", "丢掉概率词"]
+category = "ambiguity"
+kind = "informal"
+severity = 3
+definition = "转述或推理时删除“有些、可能、在特定条件下、平均而言”等限定词，把有限主张扩大为强主张。"
+pattern = "原文 P 在限定 Q 下成立；转述为无条件 P；再据此推出更强结论。"
+diagnostic = ["原文的概率、范围、时间和条件是否保留？", "去掉限定后，结论强度是否明显超过证据？"]
+example = "研究说“部分参与者在高剂量下症状改善”，被概括成“这种疗法有效”。"
+boundary = "摘要必须压缩；关键是压缩是否改变主张强度和适用范围。"
+confusions = ["quote-mining", "accent", "hasty-generalization"]
+related = ["quote-mining", "accent", "contextomy"]
+
+[[fallacy]]
+id = "quote-mining"
+name_zh = "断章取义"
+name_en = "Quote Mining"
+aliases = ["contextomy", "截取引语"]
+category = "ambiguity"
+kind = "rhetorical"
+severity = 3
+definition = "截取原话的一部分，使引语在当前语境中暗示原作者并未表达或明确反对的立场。"
+pattern = "原文在上下文 C 中表达 P；引用只保留片段 F，使读者理解为 Q；Q 与 P 冲突。"
+diagnostic = ["被引用句的完整段落和限定是什么？", "原作者随后是否澄清或反对当前用法？"]
+example = "作者写“不能只靠单一指标判断”，被引用为“不能靠指标判断”。"
+boundary = "选择性引用不等于断章取义；如果片段没有改变原意，压缩通常可接受。"
+confusions = ["accent", "suppressed qualifier", "card stacking"]
+related = ["accent", "suppressed-qualifier", "contextomy"]
+
+[[fallacy]]
+id = "contextomy"
+name_zh = "语境剥离"
+name_en = "Contextomy"
+aliases = ["脱离语境", "去语境化"]
+category = "ambiguity"
+kind = "rhetorical"
+severity = 3
+definition = "把一个陈述从其时间、对话、制度或论证语境中移出，使它在另一语境下产生不同结论。"
+pattern = "原陈述在语境 C 中回答 Q；被搬到语境 C′ 中当作回答 R。"
+diagnostic = ["原话在回答什么问题，针对谁，发生在何时？", "新语境是否改变了指代、条件和结论？"]
+example = "把技术文档中的“默认不安全”截出，写成“专家承认产品不安全”。"
+boundary = "跨语境引用可以用于说明普遍原则；需要证明原则在新语境仍适用。"
+confusions = ["quote-mining", "accent", "misleading framing"]
+related = ["quote-mining", "accent", "suppressed-qualifier"]
+
+[[fallacy]]
+id = "weasel-words"
+name_zh = "模糊来源词"
+name_en = "Weasel Words"
+aliases = ["据说有人说", "来源含糊"]
+category = "ambiguity"
+kind = "rhetorical"
+severity = 2
+definition = "用“研究表明、专家认为、很多人说、众所周知”等模糊来源制造权威或共识印象，却不给可核验来源。"
+pattern = "模糊主体 S 说 P；没有来源、方法或语境；因此 P 显得可信。"
+diagnostic = ["S 具体是谁，是否可追溯？", "该来源是否代表相关证据，而非匿名印象？"]
+example = "研究认为这种习惯能提升专注力，但文中没有研究名、样本或年份。"
+boundary = "口语中常用概括性来源作为简略表达；重要结论仍应给可核验依据。"
+confusions = ["appeal to authority", "unsubstantiated authority", "vagueness"]
+related = ["appeal-to-authority", "unsubstantiated-authority", "strategic-vagueness"]
+
+[[fallacy]]
+id = "scope-ambiguity"
+name_zh = "范围歧义"
+name_en = "Scope Ambiguity"
+aliases = ["辖域歧义", "修饰范围不清"]
+category = "ambiguity"
+kind = "informal"
+severity = 2
+definition = "量词、否定词、条件或修饰语可以作用于不同范围，论证却从一个范围滑到另一个范围。"
+pattern = "句子 S 可解释为“所有 x 都有 F(y)”或“存在 y 对所有 x 都有 F”；论证混用两种范围。"
+diagnostic = ["“所有、每个、可能、不、只”分别修饰哪一段？", "把句子改写成显式量词后，原结论是否仍成立？"]
+example = "“每位员工都能获得一种培训”被理解成“存在一种培训适合所有员工”。"
+boundary = "自然语言常依赖上下文省略范围；只有范围变化承担了关键推理时才成为问题。"
+confusions = ["quantifier shift", "amphiboly", "scope of negation"]
+related = ["quantifier-shift", "amphiboly", "scope-of-negation"]

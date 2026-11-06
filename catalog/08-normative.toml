@@ -1,0 +1,271 @@
+[[fallacy]]
+id = "is-ought"
+name_zh = "实然推应然"
+name_en = "Is-Ought Fallacy"
+aliases = ["事实推价值", "实然应然跳跃"]
+category = "normative"
+kind = "informal"
+severity = 3
+definition = "只凭某事物是什么、正在发生或自然如此，就推出它应该如此、正当或值得追求。"
+pattern = "P 是事实；因此 P 是好的、允许的或应继续。"
+diagnostic = ["从事实到规范中间缺哪条价值前提？", "即使描述为真，是否仍可能有人有理由反对？"]
+example = "人们一直在规避这项规则，所以这项规则就应该被取消。"
+boundary = "事实会约束规范判断；问题在于缺少明确的价值或制度前提，而不是事实与规范完全无关。"
+confusions = ["自然主义谬误", "规范判断", "描述性事实"]
+related = ["naturalistic-fallacy", "moralistic-fallacy", "appeal-to-tradition"]
+
+[[fallacy]]
+id = "naturalistic-fallacy"
+name_zh = "自然主义谬误"
+name_en = "Naturalistic Fallacy"
+aliases = ["自然即善", "从自然属性推道德"]
+category = "normative"
+kind = "informal"
+severity = 2
+definition = "从某行为或属性“自然”“符合进化”或“存在于自然”，直接推出它道德上善或应当如此。"
+pattern = "P 是自然的；因此 P 是善的或应当的。"
+diagnostic = ["“自然”指统计常见、生物功能还是非人工？", "哪一种价值标准把自然属性转成道德应当？"]
+example = "动物竞争中存在强者压制弱者，所以人类社会也应如此。"
+boundary = "自然事实可能影响健康、能力和后果；但道德结论仍需价值原则。不同“自然”定义也会改变论证。"
+confusions = ["appeal to nature", "is-ought", "evolutionary ethics"]
+related = ["appeal-to-nature", "is-ought", "moralistic-fallacy"]
+
+[[fallacy]]
+id = "moralistic-fallacy"
+name_zh = "道德主义谬误"
+name_en = "Moralistic Fallacy"
+aliases = ["应然推实然", "善所以是事实"]
+category = "normative"
+kind = "informal"
+severity = 3
+definition = "因为某结果道德上更可取或令人希望，就推出它在现实中为真或必然发生。"
+pattern = "P 应该为真或 P 若为真更好；因此 P 为真。"
+diagnostic = ["道德可取性是否增加了事实概率？", "是否存在令人不快但可靠的相反证据？"]
+example = "如果人人都平等受益会更好，所以那项政策一定不会伤害任何人。"
+boundary = "价值目标可以指导调查和政策选择；但不能改变已经存在的经验事实。"
+confusions = ["appeal to consequences", "wishful thinking", "is-ought"]
+related = ["is-ought", "appeal-to-consequences", "wishful-thinking"]
+
+[[fallacy]]
+id = "appeal-to-law"
+name_zh = "诉诸法律"
+name_en = "Appeal to Law"
+aliases = ["合法即合理", "法律等于道德"]
+category = "normative"
+kind = "informal"
+severity = 2
+definition = "因为某行为合法或非法，就直接推出它道德上正当或错误、有效或无效，混淆法律地位与其他规范。"
+pattern = "P 合法；因此 P 合乎伦理或有效。"
+diagnostic = ["当前判断的是法律结论、道德结论还是效果结论？", "法律与所要证明的规范是否同一标准？"]
+example = "这家公司利用漏洞避税是合法的，所以它当然也是公平的。"
+boundary = "在法律论证中，法条和判例可能是决定性理由；问题在于把法律地位偷换成道德或事实的全部。"
+confusions = ["legal positivism", "法律与伦理", "社会规范"]
+related = ["is-ought", "appeal-to-authority", "appeal-to-common-sense"]
+
+[[fallacy]]
+id = "appeal-to-justice"
+name_zh = "诉诸正义"
+name_en = "Appeal to Justice"
+aliases = ["不公平所以无效", "正义直觉证明"]
+category = "normative"
+kind = "informal"
+severity = 2
+definition = "仅凭某结果让人感觉不公平，就断言事实主张无效、政策不可行或对方一定错误。"
+pattern = "P 让我觉得不公平；因此 P 为假或不能采用。"
+diagnostic = ["使用的是哪一种分配原则，依据是什么？", "不公平判断是价值前提，还是被当作事实证据？"]
+example = "这个算法淘汰了更多申请人，因此它一定存在技术错误。"
+boundary = "正义原则可以成为规范结论的合理前提；技术效果和道德评价仍需分别证明。"
+confusions = ["normative reasoning", "just-world inference", "appeal to emotion"]
+related = ["appeal-to-emotion", "just-world-inference", "is-ought"]
+
+[[fallacy]]
+id = "two-wrongs-make-right"
+name_zh = "两个错误等于一个正确"
+name_en = "Two Wrongs Make a Right"
+aliases = ["别人也错", "以错制错"]
+category = "normative"
+kind = "informal"
+severity = 2
+definition = "因为另一方也做了错误行为，就推出当前错误行为正当或无需负责。"
+pattern = "X 对 A 做了错事；A 对 Y 做类似错事；因此 A 的行为正当。"
+diagnostic = ["先前错误是否改变了当前行为的道德属性？", "是否存在报复、补偿或制止不法等独立规范原则？"]
+example = "他们先泄露我的隐私，所以我公开所有人的数据也没问题。"
+boundary = "报复、惩罚和自卫在特定规范下可能有条件成立；需要明确条件，不能只用“对方也做过”。"
+confusions = ["whataboutism", "tu quoque", "retributive justice"]
+related = ["tu-quoque", "whataboutism", "moral-equivalence"]
+
+[[fallacy]]
+id = "scapegoating"
+name_zh = "替罪羊归因"
+name_en = "Scapegoating"
+aliases = ["把责任集中给某群体", "替罪羊"]
+category = "normative"
+kind = "rhetorical"
+severity = 3
+definition = "把复杂问题归咎于单一群体或个人，并以该承担者替代对制度、环境和多因因果的分析。"
+pattern = "问题 R 复杂；选择群体 G；宣称 G 是全部原因；因此无需检查其他因素。"
+diagnostic = ["G 的实际因果贡献有何证据？", "是否存在更主要的结构性因素？", "归责是否与证明的贡献成比例？"]
+example = "团队项目失败全怪新来的实习生，因此管理层流程和需求变化都不用讨论。"
+boundary = "某些个人或群体确实承担主要责任；问题是把责任分配当成因果调查的替代。"
+confusions = ["single cause", "appeal to spite", "dehumanization"]
+related = ["single-cause", "cui-bono-fallacy", "dehumanization"]
+
+[[fallacy]]
+id = "victim-blaming-inference"
+name_zh = "受害者归因"
+name_en = "Victim-Blaming Inference"
+aliases = ["结果反推受害者有错", "受害者责任谬误"]
+category = "normative"
+kind = "informal"
+severity = 3
+definition = "从某人受害或遭遇不利结果，反推其一定有某种过失，并据此减少加害者或系统的责任。"
+pattern = "A 受害；因此 A 一定做了什么导致受害。"
+diagnostic = ["受害与先把受害者的某个行为当作必要原因有何证据？", "有多少未受害者也做了同样行为？", "是否存在权力、机会或制度因素？"]
+example = "他被诈骗，说明他一定贪心；所以平台不需要改进风险提示。"
+boundary = "分析风险行为和预防措施可以与责任分配分开；受害者行为不一定消除他人责任。"
+confusions = ["just-world inference", "post hoc", "causal oversimplification"]
+related = ["just-world-inference", "causal-oversimplification", "scapegoating"]
+
+[[fallacy]]
+id = "chronological-snobbery"
+name_zh = "时代势利"
+name_en = "Chronological Snobbery"
+aliases = ["旧必过时", "时代优越感"]
+category = "normative"
+kind = "informal"
+severity = 2
+definition = "仅因为某观点来自较早时代，就断定它今天错误或没有价值。"
+pattern = "P 产生于过去；因此 P 已过时或为假。"
+diagnostic = ["时代变化具体改变了哪些证据或条件？", "旧观点是否包含独立可检验的论点？"]
+example = "这是一百年前的心理学观点，所以其中任何观察都不可能有用。"
+boundary = "知识会更新，旧理论可能被新证据推翻；需要指出具体失效机制，而不是只给出年代。"
+confusions = ["appeal to novelty", "genetic fallacy", "historical context"]
+related = ["appeal-to-novelty", "genetic-fallacy", "appeal-to-progress"]
+
+[[fallacy]]
+id = "appeal-to-progress"
+name_zh = "诉诸进步"
+name_en = "Appeal to Progress"
+aliases = ["历史向前所以正确", "进步必然"]
+category = "normative"
+kind = "informal"
+severity = 2
+definition = "因为某变化代表“进步”“现代化”或未来方向，就推出它一定更好或不可避免。"
+pattern = "P 被视为进步；因此 P 应当采用或必然成功。"
+diagnostic = ["用什么指标定义进步？", "变化是否可能带来分配不均、反弹或新风险？"]
+example = "无人化管理代表未来，所以取消所有人工客服必然提升服务质量。"
+boundary = "长期趋势可以提供证据；但方向性叙事不能单独证明净收益。"
+confusions = ["appeal to novelty", "chronological snobbery", "technological solutionism"]
+related = ["appeal-to-novelty", "chronological-snobbery", "is-ought"]
+
+[[fallacy]]
+id = "appeal-to-common-sense"
+name_zh = "诉诸常识"
+name_en = "Appeal to Common Sense"
+aliases = ["常识证明", "显而易见"]
+category = "normative"
+kind = "informal"
+severity = 2
+definition = "把某说法称为常识或显而易见，而不说明其证据、定义和适用条件。"
+pattern = "人人都知道 P，或 P 显然；因此 P 为真。"
+diagnostic = ["这里所谓常识的具体命题是什么？", "统计上多数人相信它吗？多数信念是否足以证明它？"]
+example = "管理就应该强势一点，这是常识，不用再研究员工反馈。"
+boundary = "常识可以快速调用共享知识并触发合理默认值；争议或反直觉问题需要可检验依据。"
+confusions = ["appeal to popularity", "appeal to authority", "background knowledge"]
+related = ["appeal-to-popularity", "proof-by-assertion", "argument-from-incredulity"]
+
+[[fallacy]]
+id = "appeal-to-possibility"
+name_zh = "诉诸可能性"
+name_en = "Appeal to Possibility"
+aliases = ["可能所以成立", "只要有可能"]
+category = "normative"
+kind = "informal"
+severity = 2
+definition = "从某解释在逻辑上可能或不能被排除，推出它值得相信或应作为政策依据。"
+pattern = "P 可能为真；因此 P 为真或应据此行动。"
+diagnostic = ["P 的概率有多大，和哪些竞争解释相比？", "决策是否只需排除可能，还是需要概率与后果比较？"]
+example = "这项措施也许能降低风险，所以应该无条件采用，不必比较成本。"
+boundary = "在低概率高损害情境中，预防原则可能使可能性变得相关；仍需说明概率、成本和替代方案。"
+confusions = ["appeal to ignorance", "precaution", "possibility vs probability"]
+related = ["appeal-to-ignorance", "existential-fallacy", "appeal-to-probability"]
+
+[[fallacy]]
+id = "policy-paralysis"
+name_zh = "政策瘫痪谬误"
+name_en = "Policy Paralysis"
+aliases = ["不完美所以不行动", "等待绝对确定"]
+category = "normative"
+kind = "informal"
+severity = 2
+definition = "因为证据仍有不确定性，就推出任何行动都不可辩护，忽略不行动本身的风险与成本。"
+pattern = "关于 P 仍不确定；因此不能采取任何措施；忽略基线风险和可逆试验。"
+diagnostic = ["不行动的风险和成本是什么？", "是否存在可逆、渐进或监测式措施？", "所需确定性是否与风险成比例？"]
+example = "气候影响仍有误差，所以暂时什么政策都不该做。"
+boundary = "不确定时审慎是合理的；问题在于把不确定等同于零信息和零成本。"
+confusions = ["nirvana fallacy", "appeal to ignorance", "precautionary principle"]
+related = ["nirvana-fallacy", "appeal-to-ignorance", "status-quo-bias"]
+
+[[fallacy]]
+id = "cost-benefit-neglect"
+name_zh = "成本收益忽视"
+name_en = "Cost-Benefit Neglect"
+aliases = ["只看收益不看成本", "单边政策论证"]
+category = "normative"
+kind = "informal"
+severity = 2
+definition = "政策论证只强调目标收益，不评估实施成本、副作用、机会成本和受影响群体。"
+pattern = "P 可能带来收益 B；因此 P 应实施；忽略成本 C、替代方案与分配效应。"
+diagnostic = ["总成本与边际成本是什么？", "谁支付、谁受益？", "同等资源用于其他方案效果如何？"]
+example = "安装全方位监控能提升安全，所以无论隐私和运维成本多高都值得。"
+boundary = "有些权利或伦理原则不能被简单成本收益化；即使采用成本分析，也要明确不可交易价值。"
+confusions = ["nirvana fallacy", "single cause", "policy analysis"]
+related = ["nirvana-fallacy", "single-cause", "broken-window-fallacy"]
+
+[[fallacy]]
+id = "moral-equivalence"
+name_zh = "道德等同"
+name_en = "Moral Equivalence"
+aliases = ["两边都坏", "错误程度等同"]
+category = "normative"
+kind = "informal"
+severity = 3
+definition = "因为两方都做过错误或有责任，就断言错误的类型、程度、意图和后果完全相同。"
+pattern = "A 和 B 都犯错；因此 A 与 B 的道德责任完全等同。"
+diagnostic = ["比较的是哪种错误、规模、意图、权力和后果？", "哪些差异会改变责任或补救要求？"]
+example = "两个人都在争吵中插话，所以他们的责任和伤害完全一样。"
+boundary = "等同比较可以帮助避免双标；但必须说明相关维度，不能只凭“都有错”。"
+confusions = ["false equivalence", "false balance", "two wrongs"]
+related = ["false-equivalence", "two-wrongs-make-right", "false-balance"]
+
+[[fallacy]]
+id = "just-world-inference"
+name_zh = "公正世界推断"
+name_en = "Just-World Inference"
+aliases = ["善有善报所以受害者有错", "世界公平预设"]
+category = "normative"
+kind = "informal"
+severity = 3
+definition = "因为希望世界公平，就从某人遭遇不幸反推其必然做过错事，或从某人处境良好反推其一定道德优秀。"
+pattern = "A 遭遇坏事；因此 A 必然做了什么导致它；或 B 很成功；因此 B 必然努力且正直。"
+diagnostic = ["结果与个人行为之间有何独立证据？", "是否存在运气、权力、制度和随机因素？"]
+example = "他这么成功，所以他人品一定很好。"
+boundary = "行为和选择会影响结果，也可以讨论责任；问题是从结果本身反推道德应得。"
+confusions = ["victim blaming", "appeal to wealth", "halo effect"]
+related = ["victim-blaming-inference", "appeal-to-wealth", "just-world-hypothesis"]
+
+[[fallacy]]
+id = "appeal-to-status-quo"
+name_zh = "诉诸现状"
+name_en = "Appeal to Status Quo"
+aliases = ["现状即合理", "默认现状"]
+category = "normative"
+kind = "informal"
+severity = 2
+definition = "因为某安排是当前默认状态，就推出它更合理、更安全或不应改变，而不比较替代方案。"
+pattern = "现状是 S；因此应保持 S。"
+diagnostic = ["现状的历史形成和分配结果是什么？", "改变与不改变各自的成本、风险和受益者是谁？"]
+example = "这个流程一直存在，所以不需要重新设计，哪怕它已经造成大量浪费。"
+boundary = "现状具有协调、转换成本和既得预期，这些是真实因素；但不能自动证明现状最优。"
+confusions = ["status quo bias", "appeal to tradition", "loss aversion"]
+related = ["appeal-to-tradition", "status-quo-bias", "loss-aversion"]

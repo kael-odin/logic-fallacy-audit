@@ -1,0 +1,239 @@
+[[fallacy]]
+id = "affirming-the-consequent"
+name_zh = "肯定后件"
+name_en = "Affirming the Consequent"
+aliases = ["逆命题谬误", "条件倒置"]
+category = "formal"
+kind = "formal"
+severity = 3
+definition = "从“P 蕴含 Q”与“Q 成立”推出“P 成立”，忽略了其他条件也能导致 Q。"
+pattern = "P → Q；Q；因此 P。"
+diagnostic = ["Q 是否可能有 P 之外的原因？", "原文是否把必要条件误当成充分条件？"]
+example = "如果系统被入侵，日志就会异常。现在日志异常，所以系统一定被入侵了。"
+boundary = "若前提实际是“Q 当且仅当 P”，则从 Q 推出 P 可以有效；口语中的“只要”与“只有”也可能造成表面混淆。"
+confusions = ["误把充分条件当必要条件", "相关不蕴含唯一原因"]
+related = ["denying-the-antecedent", "false-conversion", "post-hoc"]
+
+[[fallacy]]
+id = "denying-the-antecedent"
+name_zh = "否定前件"
+name_en = "Denying the Antecedent"
+aliases = ["否定条件", "前件否定谬误"]
+category = "formal"
+kind = "formal"
+severity = 3
+definition = "从“P 蕴含 Q”与“非 P”推出“非 Q”，忽略了 Q 也可能由其他条件产生。"
+pattern = "P → Q；非 P；因此非 Q。"
+diagnostic = ["P 是不是 Q 的唯一充分原因？", "非 P 时，是否仍有其他路径导致 Q？"]
+example = "如果认真复习就能通过考试；他没有认真复习，所以他一定不能通过。"
+boundary = "如果 P 是 Q 的必要条件，即 Q → P，那么非 P 确实可推出非 Q；关键是条件方向。"
+confusions = ["必要条件和充分条件互换", "把预测失败当成原因不存在"]
+related = ["affirming-the-consequent", "false-conversion", "single-cause"]
+
+[[fallacy]]
+id = "undistributed-middle"
+name_zh = "中项不周延"
+name_en = "Undistributed Middle"
+aliases = ["中项不周延谬误", "共同属性谬误"]
+category = "formal"
+kind = "formal"
+severity = 3
+definition = "三段论的两个前提都没有覆盖中项的全部范围，因此两个词项可能各自与中项的一部分相关，却不能保证彼此相关。"
+pattern = "所有 A 都是 B；所有 C 都是 B；因此所有 A 都是 C。"
+diagnostic = ["中项 B 是否在两个前提中都被全体覆盖？", "A 和 C 是否可能只是共享 B 的不同部分？"]
+example = "所有猫都是动物，所有狗都是动物，所以所有猫都是狗。"
+boundary = "三段论形式正确时仍需检查词项含义和前提真假；自然语言的“都是”不一定清楚表达包含关系。"
+confusions = ["共同类别当成同一事物", "把相似当等同"]
+related = ["four-terms", "illicit-major", "false-equivalence"]
+
+[[fallacy]]
+id = "illicit-major"
+name_zh = "大项不当周延"
+name_en = "Illicit Major"
+aliases = ["大项非法周延"]
+category = "formal"
+kind = "formal"
+severity = 3
+definition = "三段论的结论把大项扩展到前提没有覆盖的范围，使结论断言多于前提。"
+pattern = "前提只说明某类 A 与 B 的关系；结论却对全部 B 作出断言。"
+diagnostic = ["结论中的大项是否比前提覆盖得更广？", "去掉全称词或量化词后，论证是否仍成立？"]
+example = "所有猫都是哺乳动物；没有狗是猫；因此没有狗是哺乳动物。"
+boundary = "若前提明确排除全部哺乳动物，结论可能成立；需要准确翻译自然语言量词。"
+confusions = ["否定范围扩大", "结论超过前提"]
+related = ["illicit-minor", "undistributed-middle", "scope-of-negation"]
+
+[[fallacy]]
+id = "illicit-minor"
+name_zh = "小项不当周延"
+name_en = "Illicit Minor"
+aliases = ["小项非法周延"]
+category = "formal"
+kind = "formal"
+severity = 3
+definition = "结论把小项从前提中的局部覆盖扩展为全体覆盖，造成范围跳跃。"
+pattern = "前提只说明某些 A 是 B；结论把 B 归属于全部 A。"
+diagnostic = ["结论中的小项是否只出现在局部量化位置？", "前提到结论是否从“有些”变成了“所有”？"]
+example = "有些记者不严谨；所有记者都是人；因此所有人都不严谨。"
+boundary = "自然语言中的泛指可能并非严格全称；分析者应区分修辞概括与逻辑全称。"
+confusions = ["以偏概全", "范围扩大", "泛指当全称"]
+related = ["illicit-major", "hasty-generalization", "sweeping-generalization"]
+
+[[fallacy]]
+id = "four-terms"
+name_zh = "四词项谬误"
+name_en = "Fallacy of Four Terms"
+aliases = ["四概念谬误", "四名词谬误"]
+category = "formal"
+kind = "formal"
+severity = 3
+definition = "三段论表面只有三个词项，实际因同词异义或词项分裂而出现四个不同概念，导致中项没有真正连接两端。"
+pattern = "A 是 B1；B2 是 C；B1 与 B2 被误当成同一个 B；因此 A 是 C。"
+diagnostic = ["中项在两次出现时是否完全同义？", "是否需要拆出隐含限定词才能看出概念变化？"]
+example = "自由意味着不受干涉；鸟在笼外不受干涉；所以放弃社会责任就是自由。"
+boundary = "一词多义不一定错误，只要论证明确使用同义层次；专业术语可能需要上下文定义。"
+confusions = ["偷换概念", "歧义谬误", "概念滑移"]
+related = ["equivocation", "undistributed-middle", "persuasive-definition"]
+
+[[fallacy]]
+id = "existential-fallacy"
+name_zh = "存在性谬误"
+name_en = "Existential Fallacy"
+aliases = ["存在预设错误", "空类推论"]
+category = "formal"
+kind = "formal"
+severity = 3
+definition = "从只讨论类别关系的全称前提，推出某类对象实际存在，除非前提已保证其非空。"
+pattern = "所有 A 都是 B；所有 A 都是 C；因此存在某个 A 同时是 B 与 C。"
+diagnostic = ["前提是否保证 A 至少有一个成员？", "结论是否从规则描述跳到了实际存在？"]
+example = "所有完美的解决方案都成本很低，也存在；所以至少有一种完美方案存在。"
+boundary = "在自然语言中，某些类别词可能带有存在预设；形式分析应与语义学和语境结合。"
+confusions = ["定义不等于实例", "概念可能存在"]
+related = ["quantifier-shift", "false-presupposition", "appeal-to-possibility"]
+
+[[fallacy]]
+id = "affirming-a-disjunct"
+name_zh = "肯定析取支"
+name_en = "Affirming a Disjunct"
+aliases = ["错误析取三段论"]
+category = "formal"
+kind = "formal"
+severity = 3
+definition = "从“P 或 Q”与“P”推出“非 Q”，在没有排他性或额外前提时无效。"
+pattern = "P 或 Q；P；因此非 Q。"
+diagnostic = ["“或”是包含式还是排他式？", "P 与 Q 是否可能同时为真？"]
+example = "这个人有管理经验或技术经验；他有管理经验；所以他不可能有技术经验。"
+boundary = "如果原文明确表示“二选一且不能兼得”，该推理可以成立；否则需要证明互斥。"
+confusions = ["误把兼容选项当互斥", "析取交换"]
+related = ["false-dilemma", "invalid-disjunctive-syllogism", "false-equivalence"]
+
+[[fallacy]]
+id = "invalid-disjunctive-syllogism"
+name_zh = "析取推理误用"
+name_en = "Invalid Disjunctive Syllogism"
+aliases = ["析取三段论误用", "选言推理错误"]
+category = "formal"
+kind = "formal"
+severity = 3
+definition = "从“P 或 Q”和“非 P”应能推出 Q；但若前提结构是否定“P 且 Q”，或“或”的语义不清，就不能机械地消去一个分支。"
+pattern = "非（P 且 Q）；P；因此非 Q，或把非 P 误写成非 P 且非 Q。"
+diagnostic = ["否定作用在单个分支还是整个合取？", "排他性或包含式析取的规则是否明确？"]
+example = "她不能同时是医生和律师；她是医生；所以她绝不可能是律师。"
+boundary = "明确排他析取时，肯定一个分支可以否定另一个；但自然语言可能允许重叠身份。"
+confusions = ["否定合取", "排他或与兼容或混淆"]
+related = ["affirming-a-disjunct", "scope-of-negation", "false-dilemma"]
+
+[[fallacy]]
+id = "negating-a-conjunction"
+name_zh = "否定合取错误"
+name_en = "Negating a Conjunction Fallacy"
+aliases = ["合取否定扩大"]
+category = "formal"
+kind = "formal"
+severity = 3
+definition = "从“并非 P 且 Q”推出“非 P 且非 Q”，忽略了至少一个为假并不等于两个都为假。"
+pattern = "¬(P ∧ Q)；因此 ¬P ∧ ¬Q。"
+diagnostic = ["原文是否把“不是两者同时”误读为“两者都不是”？", "否定范围是否覆盖了整句？"]
+example = "他不是既会英语又会法语，所以他一门外语都不会。"
+boundary = "若前提明确说“两门都不行”，则可推出两项均否定；需看否定词位置。"
+confusions = ["德摩根律误用", "否定范围错误"]
+related = ["scope-of-negation", "invalid-disjunctive-syllogism", "false-dilemma"]
+
+[[fallacy]]
+id = "false-conversion"
+name_zh = "逆命题谬误"
+name_en = "False Conversion"
+aliases = ["错误换位", "条件反转"]
+category = "formal"
+kind = "formal"
+severity = 3
+definition = "把“所有 A 都是 B”或“P → Q”未经限制地换成“所有 B 都是 A”或“Q → P”。"
+pattern = "P → Q；因此 Q → P。"
+diagnostic = ["条件或包含关系是否有逆向必然性？", "哪些反例是 Q 而非 P？"]
+example = "成功的人都很努力，所以他只要努力就一定会成功。"
+boundary = "某些关系可逆，例如“是同一人”或等价关系；全称否定和特称命题的换位规则也各不相同。"
+confusions = ["肯定后件", "相关当因果", "必要充分条件混淆"]
+related = ["affirming-the-consequent", "denying-the-antecedent", "illicit-conversion"]
+
+[[fallacy]]
+id = "illicit-conversion"
+name_zh = "换位不当"
+name_en = "Illicit Conversion"
+aliases = ["不合法换位"]
+category = "formal"
+kind = "formal"
+severity = 3
+definition = "交换主项和谓项时没有遵守该命题形式的换位规则，使结论断言超出原前提。"
+pattern = "所有 A 都是 B；因此所有 B 都是 A。"
+diagnostic = ["交换词项后，量词和否定是否仍保持同样关系？", "是否存在 B 属于其他类别？"]
+example = "所有鲸都是水生动物，所以所有水生动物都是鲸。"
+boundary = "特称否定可以合法换位，某些等价命题也可互换；问题在于未经证明的全称反转。"
+confusions = ["逆命题谬误", "范围扩大", "类别包含关系"]
+related = ["false-conversion", "illicit-major", "illicit-minor"]
+
+[[fallacy]]
+id = "modal-scope-fallacy"
+name_zh = "模态辖域谬误"
+name_en = "Modal Scope Fallacy"
+aliases = ["模态词误置", "必然与可能混淆"]
+category = "formal"
+kind = "formal"
+severity = 3
+definition = "把“必然地，如果 P 则 Q”与“如果 P，那么 Q 必然”混为一谈，或把可能性与必然性交换。"
+pattern = "□(P → Q)；因此 P → □Q，或把“可能为真”读成“必然为真”。"
+diagnostic = ["“必然/可能”修饰整个命题还是其中一个结果？", "是否存在 P 为真但 Q 仅为偶然的情况？"]
+example = "所有正确的预测都必然对应某个模型；所以只要模型存在，它的预测就必然正确。"
+boundary = "自然语言中的“肯定”“一定”可能只是强调，不一定表达形式模态；需要按语境翻译。"
+confusions = ["概率断言当必然断言", "范围歧义"]
+related = ["quantifier-shift", "scope-of-negation", "appeal-to-possibility"]
+
+[[fallacy]]
+id = "quantifier-shift"
+name_zh = "量词移位"
+name_en = "Quantifier Shift"
+aliases = ["量词顺序错误", "∀∃ 颠倒"]
+category = "formal"
+kind = "formal"
+severity = 3
+definition = "交换“对每个”和“存在一个”的顺序，把可能依赖不同对象的存在结论变成同一个对象。"
+pattern = "对所有 x，存在 y 使 R(x,y)；因此存在一个 y，对所有 x 使 R(x,y)。"
+diagnostic = ["不同对象是否可能各自对应不同对象？", "结论是否声称存在一个唯一或统一的方案？"]
+example = "每个人都能找到适合自己的方法，所以存在一种适合所有人的方法。"
+boundary = "若前提明确保证存在统一对象或函数依赖，移位可能合法；自然语言常省略范围。"
+confusions = ["个体适配与统一方案", "集合与成员混淆"]
+related = ["existential-fallacy", "collective-distributive", "scope-of-negation"]
+
+[[fallacy]]
+id = "scope-of-negation"
+name_zh = "否定范围错误"
+name_en = "Scope of Negation Error"
+aliases = ["否定辖域混淆", "否定词错位"]
+category = "formal"
+kind = "formal"
+severity = 3
+definition = "否定词作用于整个命题、谓词、量词还是引语没有区分，导致推出不同结论。"
+pattern = "¬∀xP(x) 被误读为 ∀x¬P(x)，或 ¬(P→Q) 被误读为 P→¬Q。"
+diagnostic = ["否定词到底否定了哪一部分？", "换成“并非所有”“没有一个”“并不必然”后意思是否改变？"]
+example = "并不是所有高收入者都幸福，所以所有高收入者都不幸福。"
+boundary = "有些自然语言句法确实把否定前移；语义分析需要参照上下文和词的辖域。"
+confusions = ["否定合取错误", "量词歧义", "全称与特称混淆"]
+related = ["negating-a-conjunction", "quantifier-shift", "modal-scope-fallacy"]

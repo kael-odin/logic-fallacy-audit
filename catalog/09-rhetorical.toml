@@ -1,0 +1,335 @@
+[[fallacy]]
+id = "glittering-generality"
+name_zh = "光辉泛化"
+name_en = "Glittering Generality"
+aliases = ["漂亮大词", "美德词包装"]
+category = "rhetorical"
+kind = "rhetorical"
+severity = 2
+definition = "用自由、进步、科学、责任等高价值大词支持主张，却不说明具体含义和可检验政策。"
+pattern = "将 P 与高度正面的抽象词 W 绑定；因此 P 显得可取。"
+diagnostic = ["W 在这里的操作定义是什么？", "如果换成中性词，支持 P 的理由还剩什么？"]
+example = "这是面向未来的创新方案，所以当然应该支持。"
+boundary = "价值词可以合法表达共同目标；问题在于抽象好感替代了具体机制和取舍。"
+confusions = ["persuasive definition", "appeal to emotion", "virtue words"]
+related = ["persuasive-definition", "appeal-to-emotion", "loaded-language"]
+
+[[fallacy]]
+id = "transfer"
+name_zh = "移情联想"
+name_en = "Transfer"
+aliases = ["象征转移", "好感迁移"]
+category = "rhetorical"
+kind = "rhetorical"
+severity = 2
+definition = "把受尊敬、喜爱或恐惧的符号、形象和群体与目标对象关联，使受众把原本对符号的情绪迁移到对象上。"
+pattern = "对象 A 与符号 S 并列；受众对 S 有强情绪；因此对 A 形成相似态度。"
+diagnostic = ["符号与对象之间有论证关系还是纯视觉/语言并置？", "去除符号后，对象的独立证据是什么？"]
+example = "产品广告把设备放在科研实验室画面中，让人以为它经过科学研究验证。"
+boundary = "象征可以合法表达身份和共同价值；问题在于情绪联想替代事实关联。"
+confusions = ["testimonial", "guilt by association", "halo effect"]
+related = ["testimonial", "guilt-by-association", "halo-effect"]
+
+[[fallacy]]
+id = "testimonial"
+name_zh = "证言式背书"
+name_en = "Testimonial"
+aliases = ["个人见证", "名人证言"]
+category = "rhetorical"
+kind = "rhetorical"
+severity = 2
+definition = "用某人的个人经历或背书支持广泛结论，而不说明其代表性、专业性和利益关系。"
+pattern = "A 说“我用了 P 后很好”；因此 P 对所有人有效。"
+diagnostic = ["A 的经历是否有样本和机制支持？", "A 是否因背书获益？", "其他人的反例和基线变化是什么？"]
+example = "一位主播说自己用这款面霜后皮肤变好，所以它能治疗所有皮肤问题。"
+boundary = "消费者体验和专家证言可以是线索；还需要区分个人体验、产品效果和普遍医疗主张。"
+confusions = ["appeal to authority", "anecdotal evidence", "celebrity endorsement"]
+related = ["appeal-to-false-authority", "anecdotal-evidence", "transfer"]
+
+[[fallacy]]
+id = "plain-folks"
+name_zh = "平民形象"
+name_en = "Plain Folks"
+aliases = ["亲民人设", "你我普通人"]
+category = "rhetorical"
+kind = "rhetorical"
+severity = 1
+definition = "通过强调自己与普通人一样、说方言、吃家常饭等方式建立身份亲近感，以增加主张可信度。"
+pattern = "A 表现得像普通人；因此 A 的政策或产品更可信。"
+diagnostic = ["亲民表现与政策证据或产品效果有何关系？", "身份表演是否掩盖了资源、利益与责任差异？"]
+example = "这位高管穿便装吃路边摊，因此他的员工政策一定更公平。"
+boundary = "共享经验可以建立信任、说明理解；问题在于把它当能力或善意的充分证明。"
+confusions = ["appeal to popularity", "flattery", "authenticity signal"]
+related = ["appeal-to-flattery", "appeal-to-popularity", "transfer"]
+
+[[fallacy]]
+id = "name-calling"
+name_zh = "贴标签"
+name_en = "Name-Calling"
+aliases = ["负面标签", "标签化"]
+category = "rhetorical"
+kind = "rhetorical"
+severity = 2
+definition = "用贬义标签概括复杂主张或人物，使受众无需检验理由便产生排斥。"
+pattern = "把 P 称为“愚蠢”“极端”“洗地”等；因此不必回应 P。"
+diagnostic = ["标签的定义和证据是什么？", "去掉标签后，是否还有具体论证可供回应？"]
+example = "这不是风险管理，这是懦弱，所以方案不用看。"
+boundary = "某些准确类别词本身带有评价，但应有可检验标准；标签不能替代论证。"
+confusions = ["ad hominem", "poisoning the well", "loaded language"]
+related = ["ad-hominem-abusive", "poisoning-the-well", "loaded-language"]
+
+[[fallacy]]
+id = "euphemism"
+name_zh = "委婉语掩盖"
+name_en = "Euphemism as Concealment"
+aliases = ["粉饰性委婉语", "语言软化"]
+category = "rhetorical"
+kind = "rhetorical"
+severity = 2
+definition = "用温和、技术化或模糊的词替代会引发准确评价的表述，从而降低受众对行为成本的感知。"
+pattern = "把 X 称为较温和的 E；受众据 E 评估；X 的道德或风险特征被淡化。"
+diagnostic = ["被描述的实际行为是什么？", "委婉语省略了哪些受影响对象和后果？"]
+example = "裁员被写成“组织活力优化”，导致责任和规模不透明。"
+boundary = "委婉语有礼貌和降低伤害的功能；问题在于它是否掩盖决策信息。"
+confusions = ["doublespeak", "loaded language", "strategic vagueness"]
+related = ["loaded-language", "strategic-vagueness", "framing-manipulation"]
+
+[[fallacy]]
+id = "loaded-language"
+name_zh = "倾向性措辞"
+name_en = "Loaded Language"
+aliases = ["情绪化词汇", "评价性标签"]
+category = "rhetorical"
+kind = "rhetorical"
+severity = 2
+definition = "使用带有强评价和情绪色彩的措辞描述争议事实，使读者在被证明前先接受某种判断。"
+pattern = "用“打压”“纵容”“洗白”等词描述中立或待查行为；因此情绪判断先于证据。"
+diagnostic = ["是否有中性词能表达同一事实？", "评价词所依据的判断是否已独立证明？"]
+example = "把正常质询称为“恶意围攻”，把未经回应称为“默认认罪”。"
+boundary = "准确评价性词汇可以表达不可忽视的伦理特征；关键是证据是否先于标签。"
+confusions = ["framing", "name-calling", "loaded question"]
+related = ["name-calling", "framing-manipulation", "loaded-question"]
+
+[[fallacy]]
+id = "dehumanization"
+name_zh = "去人化修辞"
+name_en = "Dehumanizing Rhetoric"
+aliases = ["非人化", "群体动物化"]
+category = "rhetorical"
+kind = "rhetorical"
+severity = 3
+definition = "用非人、疾病、污染或动物化隐喻描述群体，降低受众对其痛苦和权利的同理心。"
+pattern = "群体 G 被描述为非人/害虫/病毒；因此对 G 的伤害显得可接受。"
+diagnostic = ["隐喻是否把一个群体整体物化或污名化？", "它是否替代了对具体行为和责任的分析？", "语言是否鼓励暴力或剥夺基本权利？"]
+example = "把某地区居民统称为“污染源”，因此讨论强制隔离时不再考虑个体权利。"
+boundary = "医学和风险传播会使用感染、传播等术语；关键在于是否把抽象机制准确用于行为，还是用来否定群体人格。"
+confusions = ["name-calling", "appeal to spite", "scapegoating"]
+related = ["scapegoating", "appeal-to-spite", "coercive-framing"]
+
+[[fallacy]]
+id = "thought-terminating-cliche"
+name_zh = "终止思考的陈词"
+name_en = "Thought-Terminating Cliche"
+aliases = ["别想太多", "就是这样"]
+category = "rhetorical"
+kind = "rhetorical"
+severity = 2
+definition = "用熟悉口号、俗语或情绪化短句终止追问，让复杂问题看起来已经解决。"
+pattern = "面对问题 Q，回答“这就是人性”“懂的都懂”等；Q 的证据和替代解释未被讨论。"
+diagnostic = ["这句话解释了哪个具体机制？", "它是否阻止了可回答的问题继续展开？"]
+example = "为什么流程失败？答案就是人性，不要再分析制度了。"
+boundary = "口号和俗语可有效压缩共识或表达情绪；问题在于替代了当前所需的理由。"
+confusions = ["proof by assertion", "appeal to common sense", "sloganeering"]
+related = ["proof-by-assertion", "appeal-to-common-sense", "appeal-to-loyalty"]
+
+[[fallacy]]
+id = "unsubstantiated-authority"
+name_zh = "无依据权威引用"
+name_en = "Unsubstantiated Authority Reference"
+aliases = ["模糊专家", "研究都说了"]
+category = "rhetorical"
+kind = "rhetorical"
+severity = 2
+definition = "声称专家、研究或内部人士支持结论，却不给身份、方法、出处或可核验范围。"
+pattern = "模糊权威 S 支持 P；因此 P 为真。"
+diagnostic = ["S 具体是谁，来源在哪里？", "S 是否直接研究该问题并给出可检查的材料？"]
+example = "很多顶级专家都说这项技术安全，但没有论文、机构或名单。"
+boundary = "现实交流可以先用概括来源建立方向；高风险结论应补足出处。"
+confusions = ["appeal to authority", "weasel words", "appeal to false authority"]
+related = ["appeal-to-authority", "appeal-to-false-authority", "weasel-words"]
+
+[[fallacy]]
+id = "fear-uncertainty-doubt"
+name_zh = "恐惧、不确定与怀疑营销"
+name_en = "Fear, Uncertainty, and Doubt"
+aliases = ["FUD", "制造疑虑"]
+category = "rhetorical"
+kind = "rhetorical"
+severity = 3
+definition = "通过强调不确定、潜在灾难或模糊风险，使受众回避某方案并偏好宣传者提供的选择，而不做概率比较。"
+pattern = "强调 P 的未知风险；不量化概率和替代方案；因此接受 Q。"
+diagnostic = ["风险的概率、严重性和可逆性是什么？", "Q 是否也被同样审查？", "不确定性是否被用来制造偏向而非促进调查？"]
+example = "采用开放标准存在未知漏洞，所以必须购买我们的封闭系统。"
+boundary = "不确定性是真实风险信息；问题在于只对竞争方案强调风险，不对自己的方案使用同一标准。"
+confusions = ["appeal to fear", "policy paralysis", "commercial FUD"]
+related = ["appeal-to-fear", "policy-paralysis", "false-dilemma"]
+
+[[fallacy]]
+id = "false-balance"
+name_zh = "虚假平衡"
+name_en = "False Balance"
+aliases = ["两边等重", "证据不对等仍各打五十大板"]
+category = "rhetorical"
+kind = "rhetorical"
+severity = 3
+definition = "为了让报道或讨论看起来中立，给证据质量和专家共识明显不对等的立场相同篇幅或权重。"
+pattern = "立场 A 有强证据，B 只有微弱支持；媒体按 50:50 呈现；因此受众误以为争议对等。"
+diagnostic = ["双方证据数量、质量和共识程度是否相当？", "篇幅平衡是否被误当成证据平衡？"]
+example = "几乎所有数据支持结论 A，却安排一位无相关证据的反对者与三位研究者等时辩论。"
+boundary = "呈现异议能保护少数观点和防止群体思维；但公平不等于机械等时。"
+confusions = ["both-sidesism", "false equivalence", "neutrality"]
+related = ["both-sidesism", "false-equivalence", "weak-man"]
+
+[[fallacy]]
+id = "both-sidesism"
+name_zh = "强行两边都有理"
+name_en = "Both-Sidesism"
+aliases = ["凡事各打五十大板", "强迫对称"]
+category = "rhetorical"
+kind = "rhetorical"
+severity = 2
+definition = "把“任何议题都有两面”当作默认结论，不管责任、证据或伤害是否实际对称。"
+pattern = "存在双方；因此责任和正确性各占一半。"
+diagnostic = ["双方的主张、证据和行为是否真的对称？", "“平衡”是否掩盖了单方伤害或压倒性证据？"]
+example = "一方提出有数据的风险报告，另一方只进行人身攻击，却被总结为“双方都有问题”。"
+boundary = "审视多方立场是必要的；但对称性应由具体维度支持。"
+confusions = ["false balance", "moral equivalence", "false equivalence"]
+related = ["false-balance", "moral-equivalence", "false-equivalence"]
+
+[[fallacy]]
+id = "nutpicking"
+name_zh = "挑极端代表"
+name_en = "Nutpicking"
+aliases = ["极端样本代表群体", "挑疯子"]
+category = "rhetorical"
+kind = "rhetorical"
+severity = 2
+definition = "从某群体中挑选最极端、最荒谬的少数声音，作为整个群体或立场的代表。"
+pattern = "群体 G 中有极端成员 e；e 说 P；因此 G 都支持 P 或因此 G 无效。"
+diagnostic = ["e 在群体中的影响力和代表性有多大？", "主流或最强版本怎么说？", "选择 e 是否因为更容易攻击？"]
+example = "找到社交平台上一个极端评论，便宣称整个职业群体都持有这种观点。"
+boundary = "如果极端声音掌握权力、构成官方立场或造成主要影响，批评它可以具有代表性；仍需证明。"
+confusions = ["weak man", "straw man", "hasty generalization"]
+related = ["weak-man", "hasty-generalization", "hollow-man"]
+
+[[fallacy]]
+id = "dog-whistling"
+name_zh = "狗哨式表达"
+name_en = "Dog Whistling"
+aliases = ["隐性群体信号", "双关动员"]
+category = "rhetorical"
+kind = "rhetorical"
+severity = 2
+definition = "使用表面中性但特定群体能识别为动员或排斥信号的措辞，使发言者保留可否认性。"
+pattern = "表达 E 表面含义中性；在特定历史或社群语境中暗示 G；受众据此动员。"
+diagnostic = ["该词是否有可记录的特定社群用法和历史？", "发言者是否持续使用同一编码模式？", "是否有独立的行为或政策后果支持其功能判断？"]
+example = "使用一个在特定论坛长期用于排斥某群体的暗语，却在被质疑时声称只是字面意思。"
+boundary = "判断狗哨高度依赖语境，误读风险高；仅凭一个词不应给出高置信度。"
+confusions = ["loaded language", "coded speech", "mind reading"]
+related = ["loaded-language", "coercive-framing", "framing-manipulation"]
+
+[[fallacy]]
+id = "gaslighting"
+name_zh = "煤气灯式否定"
+name_en = "Gaslighting as Argumentative Tactic"
+aliases = ["否认对方现实", "让你怀疑自己"]
+category = "rhetorical"
+kind = "rhetorical"
+severity = 3
+definition = "通过持续否认已发生事实、歪曲记录和质疑对方感知，使对方怀疑自己的记忆或判断。"
+pattern = "事实 F 有记录；发言者反复说 F 从未发生、对方记错或有病；因此对方放弃基于 F 的论证。"
+diagnostic = ["是否存在可核验的记录和时间线？", "否认是否持续且与证据直接冲突？", "模式是否使对方无法稳定讨论事实？"]
+example = "会议明确作出承诺，之后领导反复说“你理解错了，大家从没这么说过”。"
+boundary = "单次记忆分歧不等于煤气灯；需要持续模式、权力语境和可核验事实。不能据此诊断人格障碍。"
+confusions = ["lying", "invalidating", "DARVO"]
+related = ["darvo", "self-sealing-argument", "coercive-framing"]
+
+[[fallacy]]
+id = "darvo"
+name_zh = "否认、攻击、反转受害"
+name_en = "DARVO"
+aliases = ["Deny Attack Reverse Victim and Offender"]
+category = "rhetorical"
+kind = "rhetorical"
+severity = 3
+definition = "面对指责依次否认、攻击指责者、把自己塑造成受害者，从而转移对原问题的审查。"
+pattern = "被指控 A；否认；攻击指控者可信度；宣称自己受迫害；因此 A 不再被讨论。"
+diagnostic = ["原指控的证据是否被具体回应？", "攻击与反转是否是替代证据的转移？", "双方权力和伤害是否被对称呈现？"]
+example = "被指出泄露数据后，他先说没有，再攻击举报者别有用心，最后说自己是网络暴力受害者。"
+boundary = "被指控者也可能真的无辜并受到攻击；DARVO 需要看顺序、证据回应和权力语境，不能仅凭否认判断。"
+confusions = ["tu quoque", "victim blaming", "gaslighting"]
+related = ["gaslighting", "tu-quoque", "tone-policing"]
+
+[[fallacy]]
+id = "coercive-framing"
+name_zh = "胁迫性框架"
+name_en = "Coercive Framing"
+aliases = ["不给反对空间", "选择即忠诚"]
+category = "rhetorical"
+kind = "rhetorical"
+severity = 3
+definition = "把政策或事实争论重新框成忠诚、身份或生存选择，使反对者面临社会惩罚。"
+pattern = "P 被定义为唯一正确立场；反对 P 被描述为背叛/敌意；因此 P 免受实质检验。"
+diagnostic = ["反对 P 是否被允许作为事实或价值问题讨论？", "身份惩罚是否替代了证据？"]
+example = "支持团队就必须无条件支持这项决定，提出问题等于破坏团结。"
+boundary = "道德底线和紧急行动确实可能限制选择；但需要独立论证为什么普通质疑应被排除。"
+confusions = ["appeal to loyalty", "argumentum ad baculum", "thought-terminating cliche"]
+related = ["appeal-to-loyalty", "argumentum-ad-baculum", "thought-terminating-cliche"]
+
+[[fallacy]]
+id = "apophasis"
+name_zh = "欲言又止"
+name_en = "Apophasis"
+aliases = ["我不是说他坏", "声明不提及却提及"]
+category = "rhetorical"
+kind = "rhetorical"
+severity = 1
+definition = "声称不讨论某事，却通过否定式提及把指控或联想植入受众心中。"
+pattern = "“我不谈 A，但大家知道 A”；因此 A 被暗示且可否认。"
+diagnostic = ["作者是否主动引入了本可省略的负面内容？", "这个否定式提及是否意在保留可否认性？"]
+example = "我不讨论他的资金来源，只是提醒大家为什么他最近换了好车。"
+boundary = "澄清“我不会讨论隐私”可能合理；判断要看内容是否实际产生攻击效果。"
+confusions = ["innuendo", "JAQing off", "poisoning the well"]
+related = ["jaqing-off", "poisoning-the-well", "loaded-language"]
+
+[[fallacy]]
+id = "rhetorical-question-as-assertion"
+name_zh = "反问当证据"
+name_en = "Rhetorical Question as Assertion"
+aliases = ["答案显然的反问", "问句式断言"]
+category = "rhetorical"
+kind = "rhetorical"
+severity = 1
+definition = "用带强烈暗示的反问让受众自行补出结论，避免承担该结论所需的论证责任。"
+pattern = "“难道不是 P 吗？”使 P 显得显然，但没有支持 P 的证据。"
+diagnostic = ["反问要求受众接受什么结论？", "如果改成陈述句，作者是否能提供证据？"]
+example = "连这么简单的问题都解决不了，你还敢说团队有能力吗？"
+boundary = "反问可有效强调共识、引导反思和节省解释；问题是暗示的结论没有独立支持。"
+confusions = ["loaded question", "JAQing off", "appeal to ridicule"]
+related = ["loaded-question", "jaqing-off", "appeal-to-ridicule"]
+
+[[fallacy]]
+id = "framing-manipulation"
+name_zh = "操纵性框架"
+name_en = "Framing Manipulation"
+aliases = ["议题重述", "框架置换"]
+category = "rhetorical"
+kind = "rhetorical"
+severity = 2
+definition = "通过选择参照点、命名方式和议题边界，使受众在未经说明的价值框架下理解事实。"
+pattern = "事实 F 可置于框架 A 或 B；论证只呈现 B 并使结论看起来唯一；框架本身未受检验。"
+diagnostic = ["等值但不同的框架会怎样改变判断？", "哪些事实被边界排除？", "框架中的价值前提是否明示？"]
+example = "把裁员描述为“释放人才进入市场”，因此不再讨论失去收入和团队知识。"
+boundary = "所有叙述都需要框架；问题在于框架隐蔽、单边或阻止替代描述被比较。"
+confusions = ["framing effect", "loaded language", "strategic vagueness"]
+related = ["framing-effect", "loaded-language", "euphemism"]

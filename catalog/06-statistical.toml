@@ -1,0 +1,319 @@
+[[fallacy]]
+id = "base-rate-neglect"
+name_zh = "基准率忽视"
+name_en = "Base Rate Neglect"
+aliases = ["忽略先验概率", "基础比率谬误"]
+category = "statistical"
+kind = "statistical"
+severity = 3
+definition = "只关注个案特征或测试结果，忽略该事件在总体中的原始发生率，导致概率判断严重偏高或偏低。"
+pattern = "观察到特征 E；忽略 P(P) 和总体分布；因此高估 P(P|E)。"
+diagnostic = ["目标事件在没有该证据时的总体发生率是多少？", "检测的假阳性和假阴性率是什么？"]
+example = "某种病在人群中极罕见，但一次阳性检测就被理解为几乎确诊。"
+boundary = "基准率并非永远压过个案证据；精确评估应结合敏感度、特异度和先验概率。"
+confusions = ["representativeness heuristic", "inverse fallacy", "prosecutor's fallacy"]
+related = ["inverse-fallacy", "representativeness-heuristic", "misleading-vividness"]
+
+[[fallacy]]
+id = "conjunction-fallacy"
+name_zh = "合取谬误"
+name_en = "Conjunction Fallacy"
+aliases = ["细节越多越可信", "联合事件概率误判"]
+category = "statistical"
+kind = "statistical"
+severity = 2
+definition = "认为一个包含更多细节的合取事件比其单个组成事件更可能，因为故事更连贯。"
+pattern = "P(P 且 Q) 被判断为大于 P(P)，违反概率论中合取不超过单项的规则。"
+diagnostic = ["结论要求同时发生几件事？", "细节增加是否提高了可信感，却降低了先验概率？"]
+example = "她更可能是“关心环保的银行柜员”，而不是“银行柜员”。"
+boundary = "现实判断可能把不同描述解释为不同证据集合；只有按同一事件空间概率比较时才构成谬误。"
+confusions = ["representativeness", "story bias", "conjunction probability"]
+related = ["representativeness-heuristic", "base-rate-neglect", "false-precision"]
+
+[[fallacy]]
+id = "prosecutors-fallacy"
+name_zh = "检察官谬误"
+name_en = "Prosecutor's Fallacy"
+aliases = ["条件概率颠倒", "罕见匹配即定罪"]
+category = "statistical"
+kind = "statistical"
+severity = 3
+definition = "把“在无罪条件下出现证据的概率”误当成“在出现证据条件下无罪的概率”，忽略先验概率和对照人群。"
+pattern = "P(E|I) 很小；因此 P(I|E) 很小或接近零。"
+diagnostic = ["两个条件概率分别是什么？", "总体中有多少人也会匹配该证据？", "先验概率是否被纳入？"]
+example = "匹配概率只有百万分之一，所以被告有罪的概率是 99.9999%。"
+boundary = "若总体规模、先验和其他证据被正确纳入，匹配证据可以很强；错误在于颠倒条件方向。"
+confusions = ["base rate", "inverse fallacy", "defense attorney fallacy"]
+related = ["inverse-fallacy", "base-rate-neglect", "defense-attorneys-fallacy"]
+
+[[fallacy]]
+id = "defense-attorneys-fallacy"
+name_zh = "辩护律师谬误"
+name_en = "Defense Attorney's Fallacy"
+aliases = ["错误强调无辜匹配人数", "忽略证据概率"]
+category = "statistical"
+kind = "statistical"
+severity = 3
+definition = "因为总体中有很多人也匹配某项证据，就断言该证据对具体案件毫无证明力，忽略其他证据组合与条件概率。"
+pattern = "很多无辜者也能匹配 E；因此 E 不能提高有罪概率。"
+diagnostic = ["证据是否与其他独立信息组合？", "匹配在嫌疑组和总体中的相对比例是多少？", "先验和条件概率是否被正确比较？"]
+example = "城市里有一百个人鞋码相同，所以现场鞋印不能作为任何证据。"
+boundary = "单一弱证据可能不足以定罪；但“单独不充分”不等于“概率上完全不提供信息”。"
+confusions = ["prosecutor's fallacy", "base rate", "weak evidence"]
+related = ["prosecutors-fallacy", "inverse-fallacy", "base-rate-neglect"]
+
+[[fallacy]]
+id = "inverse-fallacy"
+name_zh = "逆概率谬误"
+name_en = "Inverse Fallacy"
+aliases = ["条件概率倒置", "P(A|B)=P(B|A)"]
+category = "statistical"
+kind = "statistical"
+severity = 3
+definition = "错误地认为 P(A|B) 与 P(B|A) 相同，忽视两者的基准率不同。"
+pattern = "已知 P(B|A)；因此直接推出 P(A|B) 等于同一数值。"
+diagnostic = ["两个条件事件分别是什么？", "P(A) 与 P(B) 的基准率是否不同？"]
+example = "大多数骗子会紧张，所以紧张的人大多数是骗子。"
+boundary = "当 P(A)=P(B) 且概率对称时，两者可以相等；但这需要额外条件。"
+confusions = ["prosecutor's fallacy", "base-rate neglect", "conditional probability"]
+related = ["prosecutors-fallacy", "defense-attorneys-fallacy", "base-rate-neglect"]
+
+[[fallacy]]
+id = "denominator-neglect"
+name_zh = "分母忽视"
+name_en = "Denominator Neglect"
+aliases = ["只看绝对数", "总数比较错误"]
+category = "statistical"
+kind = "statistical"
+severity = 2
+definition = "比较事件数量时忽略总体规模或暴露人数，导致对风险和比例的误判。"
+pattern = "A 组事件数大于 B 组；因此 A 组风险更高；忽略两组的样本量。"
+diagnostic = ["事件数对应的总人数、总交易数或总时长是多少？", "比较的是绝对数、比例还是率？"]
+example = "大城市事故更多，所以大城市比小城市更危险。"
+boundary = "绝对数对资源规划很重要；风险比较则需要分母，两者可以并存。"
+confusions = ["base rate", "misleading average", "raw count bias"]
+related = ["base-rate-neglect", "misleading-average", "selection-bias"]
+
+[[fallacy]]
+id = "selection-bias"
+name_zh = "选择偏差"
+name_en = "Selection Bias"
+aliases = ["样本选择偏差", "自选样本"]
+category = "statistical"
+kind = "statistical"
+severity = 3
+definition = "样本进入分析的过程与目标结论相关，使观察到的结果不能代表总体。"
+pattern = "样本 S 的选择条件 C 与结果 Y 相关；分析把 S 当成随机代表总体。"
+diagnostic = ["谁被纳入、谁被排除？", "选择机制是否与结果变量相关？", "缺失样本会怎样改变结论？"]
+example = "只向已购用户发满意度调查，然后把结果当成所有潜在用户评价。"
+boundary = "不是所有非随机样本都无效；需要说明选择机制是否足以扭曲目标推断。"
+confusions = ["sampling bias", "survivorship bias", "response bias"]
+related = ["survivorship-bias", "hasty-generalization", "cum-hoc"]
+
+[[fallacy]]
+id = "sampling-bias"
+name_zh = "抽样偏差"
+name_en = "Sampling Bias"
+aliases = ["不代表性样本", "抽样框错误"]
+category = "statistical"
+kind = "statistical"
+severity = 3
+definition = "抽取样本的方法系统性偏向某些群体，使样本分布与目标总体不同。"
+pattern = "从框架 F 中抽取 S；F 或抽取规则排除与结论相关的群体；因此总体估计失真。"
+diagnostic = ["抽样框覆盖了谁，漏掉了谁？", "接触和自愿参与机制是否偏向某类回答？"]
+example = "只在白天电话调查在职人员，然后推断全体居民对夜间政策的意见。"
+boundary = "配额、加权和分层可纠正部分偏差；但无法弥补完全缺失的群体。"
+confusions = ["selection bias", "response bias", "small sample"]
+related = ["selection-bias", "survivorship-bias", "false-consensus-bias"]
+
+[[fallacy]]
+id = "survivorship-bias"
+name_zh = "幸存者偏差"
+name_en = "Survivorship Bias"
+aliases = ["只看到成功者", "失败样本消失"]
+category = "statistical"
+kind = "statistical"
+severity = 3
+definition = "只分析通过筛选、仍在运行或留下记录的样本，忽略已经失败、退出或不可见的样本。"
+pattern = "只观察到幸存集合 S；据此推断所有尝试的规律；失败集合 F 未进入分母。"
+diagnostic = ["谁已经退出、失败或未被记录？", "成功样本的共同特征是否在失败样本中也同样常见？"]
+example = "研究所有成功企业后，发现它们都敢冒险，于是说冒险导致成功。"
+boundary = "幸存样本有时是唯一可观察数据；需要明确边界并用额外方法估计缺失部分。"
+confusions = ["selection bias", "survivorship", "appeal to wealth"]
+related = ["selection-bias", "sampling-bias", "appeal-to-wealth"]
+
+[[fallacy]]
+id = "cherry-picking"
+name_zh = "樱桃挑选"
+name_en = "Cherry Picking"
+aliases = ["只挑有利数据", "挑选结果"]
+category = "statistical"
+kind = "statistical"
+severity = 3
+definition = "从大量数据中只选择支持结论的部分，不按预先一致规则报告全部分析或时间区间。"
+pattern = "从数据集 D 中挑选 D+ 支持 P；忽略 D− 和总体基准；因此宣称 P 获数据支持。"
+diagnostic = ["时间区间、变量和排除标准是否在分析前确定？", "不利数据是否也被报告？", "如果把选择规则用于反方，会产生什么结果？"]
+example = "展示产品增长最好的三个月，却不显示其余月份持续下降。"
+boundary = "针对性分析可以合理聚焦问题；但必须说明选择依据，并避免把事后选择当预注册检验。"
+confusions = ["selective evidence", "card stacking", "p-hacking"]
+related = ["selective-evidence", "card-stacking", "p-hacking"]
+
+[[fallacy]]
+id = "texas-sharpshooter"
+name_zh = "德州神枪手谬误"
+name_en = "Texas Sharpshooter Fallacy"
+aliases = ["先射箭后画靶", "事后聚类"]
+category = "statistical"
+kind = "statistical"
+severity = 3
+definition = "先观察随机数据中的模式，再围绕该模式定义假设或边界，使结果看起来像事先预测成功。"
+pattern = "在数据 D 中发现区域 R 有模式；事后把假设限定为 R；因此宣称高准确率。"
+diagnostic = ["假设和分组是否在看见结果前确定？", "若随机生成同样数据，最显眼的聚类可能有多大？"]
+example = "在地图上圈出癌症最多的几个街区，然后宣称该圈是预测中的高风险区。"
+boundary = "探索性分析是合法研究阶段；问题在于把事后发现直接当成验证性证据。"
+confusions = ["multiple comparisons", "p-hacking", "post hoc"]
+related = ["multiple-comparisons", "p-hacking", "cherry-picking"]
+
+[[fallacy]]
+id = "multiple-comparisons"
+name_zh = "多重比较问题"
+name_en = "Multiple Comparisons Problem"
+aliases = ["多重检验", "反复测试必出显著"]
+category = "statistical"
+kind = "statistical"
+severity = 3
+definition = "进行很多假设检验后，只报告偶然达到显著的结果，却不校正整体错误率。"
+pattern = "同时检验 H1…Hn；在未校正情况下挑出 p<0.05 的 Hk；因此宣称发现真实效应。"
+diagnostic = ["一共测试了多少假设、亚组和终点？", "是否预先指定主分析并做多重比较校正？"]
+example = "比较几十种颜色与转化率，只报告唯一达到显著的一种。"
+boundary = "多重检验校正不是机械门槛；探索性发现可用于提出新假设，但不能冒充确认性证据。"
+confusions = ["p-hacking", "Texas sharpshooter", "cherry-picking"]
+related = ["p-hacking", "texas-sharpshooter", "cherry-picking"]
+
+[[fallacy]]
+id = "p-hacking"
+name_zh = "P 值操纵"
+name_en = "P-Hacking"
+aliases = ["数据挖掘到显著", "规格搜索"]
+category = "statistical"
+kind = "statistical"
+severity = 3
+definition = "反复尝试不同分组、协变量、排除标准或停止规则，直到获得统计显著，再把选择过程隐藏。"
+pattern = "测试多种分析规格 A1…An；选择 p 值最小且符合叙事的结果；报告为单一确认性检验。"
+diagnostic = ["分析规格是否事先固定？", "是否因结果而决定继续采样、排除异常或更换指标？"]
+example = "不断添加控制变量，直到目标变量显著，然后只报告最终模型。"
+boundary = "数据探索和模型调整可以合理；关键是披露全部尝试，并用独立数据验证。"
+confusions = ["multiple comparisons", "cherry-picking", "Texas sharpshooter"]
+related = ["multiple-comparisons", "cherry-picking", "texas-sharpshooter"]
+
+[[fallacy]]
+id = "misleading-average"
+name_zh = "误导性平均值"
+name_en = "Misleading Average"
+aliases = ["平均数掩盖分布", "均值误读"]
+category = "statistical"
+kind = "statistical"
+severity = 2
+definition = "用单一平均数或中位数概括高度偏斜、异质或多峰的分布，掩盖大多数人的实际状况。"
+pattern = "分布 D 高度偏斜；报告均值 M；因此推断典型个体接近 M。"
+diagnostic = ["分布的形状、分位数和极值是什么？", "目标是总额、典型值还是特定群体？"]
+example = "某公司平均奖金十万元，但大多数员工只拿到一千元，少数高管拿走大部分。"
+boundary = "均值在比较总量和期望值时可能合适；错误在于把它解释成典型个案。"
+confusions = ["denominator neglect", "ecological fallacy", "type-token confusion"]
+related = ["denominator-neglect", "ecological-fallacy", "type-token-confusion"]
+
+[[fallacy]]
+id = "false-precision"
+name_zh = "虚假精确"
+name_en = "False Precision"
+aliases = ["伪精确", "小数位超过数据质量"]
+category = "statistical"
+kind = "statistical"
+severity = 2
+definition = "给不确定、粗略或主观估计加上过多小数位或精确数字，使受众高估其可靠性。"
+pattern = "数据只有粗略范围；论证报告精确值 X.XX%；因此产生不应有的确定感。"
+diagnostic = ["原始测量的误差和有效数字是多少？", "精确数字是否来自估计、模型或任意权重？"]
+example = "根据未经验证的模型，项目成功率是 87.436%。"
+boundary = "计算中可保留高精度中间值；最终沟通应与数据不确定性和决策需要一致。"
+confusions = ["false precision bias", "overconfidence", "scientific notation"]
+related = ["misleading-average", "base-rate-neglect", "overconfidence-bias"]
+
+[[fallacy]]
+id = "ecological-fallacy"
+name_zh = "生态谬误"
+name_en = "Ecological Fallacy"
+aliases = ["群体平均推个体", "地区数据误推个人"]
+category = "statistical"
+kind = "statistical"
+severity = 3
+definition = "从群体层面的统计关系推断个体层面的关系，而群体内部可能存在巨大异质性。"
+pattern = "群体 G 的平均 X 与平均 Y 相关；因此每个个体 g 的 X 与 Y 也相关。"
+diagnostic = ["数据和结论处于同一个人群层次吗？", "群体内部是否存在相反关系或高方差？"]
+example = "某地区平均收入高且平均寿命长，所以住在这里的每个富人都更长寿。"
+boundary = "群体层结论本身可以合法；错误发生在把群体模式直接下推到个体。"
+confusions = ["division", "collective-distributive", "misleading average"]
+related = ["division", "collective-distributive", "simpsons-paradox"]
+
+[[fallacy]]
+id = "null-result-fallacy"
+name_zh = "零结果谬误"
+name_en = "Null Result Fallacy"
+aliases = ["不显著即无效", "没有差异等于相同"]
+category = "statistical"
+kind = "statistical"
+severity = 2
+definition = "把统计上未达到显著或不显著差异，解释为已经证明没有效应。"
+pattern = "检验未发现显著差异；因此效应为零。"
+diagnostic = ["置信区间跨度有多大？", "样本量是否足以检测目标效应？", "研究是否有足够统计功效？"]
+example = "小样本试验没有显示差异，于是宣称两种治疗完全相同。"
+boundary = "不显著可以表明证据不足或效应不太可能很大；不能自动证明精确等价。"
+confusions = ["statistical significance", "absence of evidence", "power failure"]
+related = ["statistical-significance-fallacy", "absence-of-evidence", "appeal-to-ignorance"]
+
+[[fallacy]]
+id = "statistical-significance-fallacy"
+name_zh = "统计显著性谬误"
+name_en = "Statistical Significance Fallacy"
+aliases = ["p 值即效果", "显著即重要"]
+category = "statistical"
+kind = "statistical"
+severity = 3
+definition = "把“统计显著性”当作效应很大、现实重要或假设为真的充分证据，忽略效应量、不确定性和模型假设。"
+pattern = "p<0.05；因此效应重要、解释正确或可推广。"
+diagnostic = ["效应量和置信区间是多少？", "研究设计、模型假设和多重比较是否可靠？", "统计显著对现实决策意味着什么？"]
+example = "新药只让指标改善 0.1%，但因为样本巨大而显著，所以被说成重大突破。"
+boundary = "统计显著可以是一个有用信号；问题在于赋予它超过定义范围的含义。"
+confusions = ["p-hacking", "null result", "effect size"]
+related = ["null-result-fallacy", "p-hacking", "false-precision"]
+
+[[fallacy]]
+id = "mcnemara-fallacy"
+name_zh = "麦克纳马拉谬误"
+name_en = "McNamara Fallacy"
+aliases = ["只量化容易量化的", "指标代替目标"]
+category = "statistical"
+kind = "informal"
+severity = 2
+definition = "因为某项指标容易测量，就把它当作目标本身，忽略难以量化但同样重要的因素。"
+pattern = "目标 G 难测；指标 M 与 G 相关且易测；因此优化 M 被当成实现 G。"
+diagnostic = ["指标是目标的代理还是目标本身？", "优化指标会产生哪些未测副作用？", "哪些重要因素因为难量化被忽略？"]
+example = "用代码行数衡量生产力，导致员工写更多冗余代码。"
+boundary = "量化能提高反馈和比较能力；关键是使用多指标并定期检查代理偏差。"
+confusions = ["surrogation", "Goodhart's law", "false precision"]
+related = ["false-precision", "misleading-average", "survivorship-bias"]
+
+[[fallacy]]
+id = "simpsons-paradox"
+name_zh = "辛普森悖论陷阱"
+name_en = "Simpson's Paradox Trap"
+aliases = ["分组反转", "总体趋势与子组相反"]
+category = "statistical"
+kind = "statistical"
+severity = 2
+definition = "总体数据与分组数据出现相反趋势时，忽略分组结构而直接解释总体关系。"
+pattern = "在总体中 A 与 B 正相关；在按关键变量分层后，各组内为负相关。"
+diagnostic = ["是否存在影响分组比例的混杂变量？", "因果问题应在总体层还是分层层回答？"]
+example = "两家医院总体死亡率看似不同，但按病情严重程度分组后，各层结论相反。"
+boundary = "分层不一定越细越好，可能引入碰撞偏差；关键是明确目标因果结构和变量角色。"
+confusions = ["ecological fallacy", "confounding", "collider bias"]
+related = ["ecological-fallacy", "selection-bias", "misleading-average"]

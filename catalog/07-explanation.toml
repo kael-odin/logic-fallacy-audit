@@ -1,0 +1,159 @@
+[[fallacy]]
+id = "anomaly-hunting"
+name_zh = "异常猎取"
+name_en = "Anomaly Hunting"
+aliases = ["只盯异常点", "异常即隐藏真相"]
+category = "explanation"
+kind = "informal"
+severity = 3
+definition = "在大量正常数据中专门搜索少数异常，再把异常解释成隐藏阴谋或理论证据，而不先估计随机波动和搜索次数。"
+pattern = "检查很多数据点；找到一个不符合常规的 A；因此理论 P 得到支持。"
+diagnostic = ["一共检查了多少数据点，异常比例多大？", "竞争解释能否同样解释异常？", "异常是否在预测前就被指定？"]
+example = "逐帧检查一段视频，找出一个模糊影子，因此断言整段视频背后有秘密安排。"
+boundary = "异常可以触发调查，也可能提供真实线索；问题在于把事后发现的异常直接当作验证。"
+confusions = ["Texas sharpshooter", "clustering illusion", "cherry-picking"]
+related = ["texas-sharpshooter", "pattern-clustering-illusion", "cherry-picking"]
+
+[[fallacy]]
+id = "impossible-expectation"
+name_zh = "不可能证据标准"
+name_en = "Impossible Expectations"
+aliases = ["永远无法满足的证据要求", "完美记录要求"]
+category = "explanation"
+kind = "dialectical"
+severity = 3
+definition = "给竞争解释设置现实上不可能达到的证据标准，同时对自己偏好的解释采用极低标准。"
+pattern = "理论 P 只需薄弱线索；反对理论 Q 被要求完全无缺口、全部原始资料和绝对确定。"
+diagnostic = ["对两个竞争解释是否使用同一证据门槛？", "要求的证据在现实记录条件下可获得吗？"]
+example = "普通事故要求完整记录每一秒才可信，而阴谋解释只需一句“他们肯定藏起来了”。"
+boundary = "高风险结论值得更严格证据；但标准应对称、可实现，并与结论严重性成比例。"
+confusions = ["moving goalposts", "special pleading", "unfalsifiability"]
+related = ["moving-the-goalposts", "special-pleading", "unfalsifiable-conspiracy"]
+
+[[fallacy]]
+id = "unfalsifiable-conspiracy"
+name_zh = "不可证伪阴谋解释"
+name_en = "Unfalsifiable Conspiracy Explanation"
+aliases = ["反证也是阴谋", "自我封闭阴谋论"]
+category = "explanation"
+kind = "informal"
+severity = 3
+definition = "把支持、反对和缺少证据都解释成阴谋的一部分，使解释不受任何经验结果约束。"
+pattern = "证据支持 P；所以阴谋存在。证据反对 P；所以他们在掩盖。没有证据；所以控制得极好。"
+diagnostic = ["哪种可观察结果会使阴谋主张被放弃？", "反对证据是否被无成本地吸收成支持？", "是否存在可独立调查的具体行为者、时间与文件？"]
+example = "如果文件出现，说明他们伪造；如果文件消失，说明他们销毁；如果文件从未存在，说明他们隐藏得好。"
+boundary = "真实阴谋会用保密和误导掩盖，所以单一反证不一定推翻；仍需可检验预测、独立证据和可失败条件。"
+confusions = ["self-sealing", "unfalsifiability", "impossible expectation"]
+related = ["self-sealing-argument", "unfalsifiability", "impossible-expectation"]
+
+[[fallacy]]
+id = "cui-bono-fallacy"
+name_zh = "谁受益谁策划"
+name_en = "Cui Bono Fallacy"
+aliases = ["利益归因谬误", "得利即有罪"]
+category = "explanation"
+kind = "informal"
+severity = 3
+definition = "仅因某人或组织从事件中获益，就推出他们策划了事件，没有证明能力、动机、行动和因果链。"
+pattern = "事件 E 发生；A 从 E 获益；因此 A 导致 E。"
+diagnostic = ["有多少无关方也从事件获益？", "A 是否有能力、机会和实际行动证据？", "其他原因是否更常见或更有证据？"]
+example = "事故后竞争对手销量上升，所以事故一定是竞争对手制造的。"
+boundary = "利益可以提示调查方向，尤其结合通信、资金或行动证据时；但动机不等于实施。"
+confusions = ["appeal to motive", "false cause", "scapegoating"]
+related = ["appeal-to-motive", "false-cause", "scapegoating"]
+
+[[fallacy]]
+id = "pattern-clustering-illusion"
+name_zh = "模式聚类错觉"
+name_en = "Clustering Illusion"
+aliases = ["随机聚类当信号", "模式幻觉"]
+category = "explanation"
+kind = "informal"
+severity = 2
+definition = "从本可由随机过程产生的聚簇、重复或序列中看出有意义的模式。"
+pattern = "随机数据出现聚簇 C；观察者寻找 C；因此断言背后有非随机机制。"
+diagnostic = ["该聚簇在同等随机数据中有多常见？", "是否只因为聚簇醒目才注意到它？", "事先是否预测了它的位置和时间？"]
+example = "地图上几个相邻街区病例较多，便断言存在秘密污染源，而未检查样本规模和随机波动。"
+boundary = "聚簇也可能是真实信号；需要统计模型、先验假设和独立复核。"
+confusions = ["Texas sharpshooter", "apophenia", "anomaly hunting"]
+related = ["texas-sharpshooter", "anomaly-hunting", "apophenia"]
+
+[[fallacy]]
+id = "proportionality-bias"
+name_zh = "重大事件必有大原因"
+name_en = "Proportionality Bias"
+aliases = ["大事件必有幕后大手", "规模匹配偏误"]
+category = "explanation"
+kind = "informal"
+severity = 2
+definition = "因为事件影响巨大，就推测其原因也必须同样巨大且通常是有意策划的。"
+pattern = "结果 R 很大；因此原因 C 必须宏大且有意；忽略小触发、系统放大和复杂反馈。"
+diagnostic = ["小规模触发是否能通过系统反馈放大？", "自然、组织和技术因素能否共同产生巨大结果？", "“必须有一个大人物”是否有独立证据？"]
+example = "一场巨大金融波动看起来“不可能只是巧合”，所以必定由某个秘密集团操纵。"
+boundary = "大规模结果有时确实由集中权力造成；需比较结构性解释与有意策划解释。"
+confusions = ["intentionality bias", "single cause", "conspiracy reasoning"]
+related = ["intentionality-bias", "single-cause", "causal-oversimplification"]
+
+[[fallacy]]
+id = "conspiratorial-motive-inference"
+name_zh = "阴谋动机推定"
+name_en = "Conspiratorial Motive Inference"
+aliases = ["他们肯定想做", "动机替代行动证据"]
+category = "explanation"
+kind = "informal"
+severity = 3
+definition = "从不透明行为、潜在收益或价值观猜测动机，再把猜测当成证明实际协调行动的证据。"
+pattern = "A 可能希望 R；因此 A 策划了 R；因此阴谋得到确认。"
+diagnostic = ["动机是否被独立证实？", "是否有协调、资源、行动和时间线证据？", "为何其他有同样动机的人没有行动？"]
+example = "这家公司可能从监管放松中获益，所以它肯定秘密写好了整套法规。"
+boundary = "调查常从动机与受益开始，因为它们是假设来源；但仅凭动机不能证明行动。"
+confusions = ["cui bono", "appeal to motive", "intentionality bias"]
+related = ["cui-bono-fallacy", "appeal-to-motive", "intentionality-bias"]
+
+[[fallacy]]
+id = "false-flag-assumption"
+name_zh = "假旗预设"
+name_en = "False-Flag Assumption"
+aliases = ["一切都是自导自演", "反证式假旗"]
+category = "explanation"
+kind = "informal"
+severity = 3
+definition = "在没有具体证据时，把事件解释成相关方自导自演，以便因此否定本来不利的信息。"
+pattern = "事件 E 不利立场 P；声称 P 的对手制造 E 来陷害；因此 E 不能反驳 P。"
+diagnostic = ["是否有行动者、通信、资金或操作证据？", "该解释是否只是为了保护原立场而临时生成？", "正式调查和竞争解释提供了什么证据？"]
+example = "任何针对某公司的可靠指控都被说成竞争对手伪造证据，但没有任何伪造线索。"
+boundary = "假旗行动在历史上有案例，不能先验否认；每个具体主张仍需同样严格的证据。"
+confusions = ["unfalsifiable conspiracy", "appeal to motive", "self-sealing"]
+related = ["unfalsifiable-conspiracy", "conspiratorial-motive-inference", "self-sealing-argument"]
+
+[[fallacy]]
+id = "heads-i-win-tails-you-lose"
+name_zh = "正反都赢"
+name_en = "Heads-I-Win-Tails-You-Lose"
+aliases = ["双向验证", "结果全被吸收"]
+category = "explanation"
+kind = "rhetorical"
+severity = 3
+definition = "无论结果朝哪个方向，都解释成自己正确或对方错误，使主张免于任何失败风险。"
+pattern = "预测 P；若 P 出现则宣称对；若非 P 出现则称对方作弊或掩盖；因此仍宣称对。"
+diagnostic = ["哪一种结果会被承认为失败？", "对成功和失败的解释是否事先对称？"]
+example = "如果调查认定无问题，说明它们是一伙的；如果认定有问题，说明我早就说对了。"
+boundary = "解释复杂世界时可以有后备假设；但后备假设必须有独立成本和可检验内容。"
+confusions = ["self-sealing", "unfalsifiability", "special pleading"]
+related = ["self-sealing-argument", "unfalsifiable-conspiracy", "moving-the-goalposts"]
+
+[[fallacy]]
+id = "absence-of-evidence"
+name_zh = "证据缺失推演"
+name_en = "Absence-of-Evidence Reasoning"
+aliases = ["没找到所以不存在", "没证据所以有证据"]
+category = "explanation"
+kind = "informal"
+severity = 2
+definition = "把“没有发现证据”解释成“已经证明不存在”或“正说明被隐藏”，而不说明搜查范围、方法和基线概率。"
+pattern = "在有限范围内未发现 E；因此 P 为假，或因此 P 的隐藏得到确认。"
+diagnostic = ["如果 P 为真，我们有多大机会找到 E？", "搜查是否覆盖关键地点、时间和方法？", "基线中本来就难以找到的证据有多少？"]
+example = "档案里没找到那段通信，所以通信肯定被删了，从而证明阴谋存在。"
+boundary = "在证据本应常见且搜索充分的领域，缺失可以显著降低概率；关键在于可发现性。"
+confusions = ["appeal to ignorance", "appeal to silence", "unfalsifiable conspiracy"]
+related = ["appeal-to-ignorance", "appeal-to-silence", "unfalsifiable-conspiracy"]

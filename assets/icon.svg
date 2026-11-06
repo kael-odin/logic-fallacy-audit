@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">Logic Fallacy Audit</title>
+  <desc id="desc">A speech mark split into two reasoning paths</desc>
+  <rect width="128" height="128" rx="24" fill="#102A2B"/>
+  <path d="M24 28h80v56c0 7.7-6.3 14-14 14H52L30 112V98h-6c-6.6 0-12-5.4-12-12V40c0-6.6 5.4-12 12-12Z" fill="#F4F1E8"/>
+  <path d="M60 40v48" stroke="#315C5A" stroke-width="7" stroke-linecap="round"/>
+  <path d="M39 55h12c5 0 9 4 9 9v9" fill="none" stroke="#315C5A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M81 55H69c-5 0-9 4-9 9v9" fill="none" stroke="#C66A3D" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="39" cy="48" r="5" fill="#315C5A"/>
+  <circle cx="81" cy="48" r="5" fill="#C66A3D"/>
+</svg>

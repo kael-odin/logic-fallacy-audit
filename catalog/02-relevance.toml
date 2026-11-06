@@ -1,0 +1,527 @@
+[[fallacy]]
+id = "ad-hominem-abusive"
+name_zh = "人身攻击"
+name_en = "Abusive Ad Hominem"
+aliases = ["诉诸人身", "攻击发言者"]
+category = "relevance"
+kind = "informal"
+severity = 3
+definition = "用对发言者人格、智力、品性或身份的贬损替代对其主张和证据的回应。"
+pattern = "A 提出 P；B 侮辱 A；B 因此认为 P 被反驳。"
+diagnostic = ["贬损信息与 P 的证据或该论证所需资格有何关系？", "如果换一个更有威望的人说同样的话，论证会改变吗？"]
+example = "他在网上说过错话，所以他关于这段代码有缺陷的分析一定不对。"
+boundary = "当证人的诚实性、感知能力或专业资格直接决定证言可信度时，人格和资格可以相关；但仍需具体说明关联。"
+confusions = ["批评人格与批评论证", "资格质疑与侮辱"]
+related = ["ad-hominem-circumstantial", "genetic-fallacy", "tone-policing"]
+
+[[fallacy]]
+id = "ad-hominem-circumstantial"
+name_zh = "处境式人身攻击"
+name_en = "Circumstantial Ad Hominem"
+aliases = ["利益关联谬误", "身份否定"]
+category = "relevance"
+kind = "informal"
+severity = 2
+definition = "因为发言者的职业、利益、身份或处境，就断言其主张为假，而没有说明这些处境怎样影响具体证据。"
+pattern = "A 属于群体 G 或从中获益；A 主张 P；因此 P 为假。"
+diagnostic = ["该利益是否实际影响了所给证据？", "是否存在可核验的利益披露机制，而不是仅凭身份猜测？"]
+example = "他推荐这款软件，而他公司卖软件，所以这款软件肯定不好用。"
+boundary = "利益冲突可能要求更严格披露或独立验证；它能解释怀疑理由，却不能单独证明主张真假。"
+confusions = ["披露利益与否定事实", "关联污染"]
+related = ["ad-hominem-abusive", "appeal-to-motive", "guilt-by-association"]
+
+[[fallacy]]
+id = "tu-quoque"
+name_zh = "你也一样"
+name_en = "Tu Quoque"
+aliases = ["诉诸虚伪", "反咬一口"]
+category = "relevance"
+kind = "informal"
+severity = 2
+definition = "以对方也做过某事或持双重标准，转移对当前主张真假的评估。"
+pattern = "A 主张 P；B 指出 A 也曾反对 P；因此 P 不被支持。"
+diagnostic = ["双重标准影响的是规则的一致性，还是当前事实命题的真假？", "回应是否回答了原来的理由，而不是只攻击作者？"]
+example = "你说吸烟有害，可你自己也吸烟，所以吸烟有害没有根据。"
+boundary = "在规范讨论中，双重标准或伪善可以削弱提出规则者的可信度；但这仍需回应规则本身。"
+confusions = ["指出双标与证明主张为假", "whataboutism"]
+related = ["whataboutism", "ad-hominem-circumstantial", "special-pleading"]
+
+[[fallacy]]
+id = "poisoning-the-well"
+name_zh = "毒化井水"
+name_en = "Poisoning the Well"
+aliases = ["预先抹黑", "预置偏见"]
+category = "relevance"
+kind = "informal"
+severity = 3
+definition = "在对方提供证据前先给出负面标签，使受众预先拒绝其任何论证。"
+pattern = "在听 A 之前，先把 A 描述为不可信；因此 A 之后说的一切都不可信。"
+diagnostic = ["负面评价是否早于并替代对具体证据的评估？", "是否存在任何证据能推翻这个预设标签？"]
+example = "接下来这个人肯定会替公司洗地，大家不用听他的数据了。"
+boundary = "有公开记录说明系统性问题时，提出可信度警告可能合理；但它不能替代对当前证据的逐项评价。"
+confusions = ["可信度背景与先验封杀", "人身攻击"]
+related = ["ad-hominem-abusive", "genetic-fallacy", "self-sealing-argument"]
+
+[[fallacy]]
+id = "guilt-by-association"
+name_zh = "关联污染"
+name_en = "Guilt by Association"
+aliases = ["因关联而否定", "同伙谬误"]
+category = "relevance"
+kind = "informal"
+severity = 2
+definition = "因为某人或某观点与不受欢迎的群体、个人或观点有关，就据此否定它。"
+pattern = "A 与 B 有关；B 被视为坏；因此 A 也坏或 A 的主张为假。"
+diagnostic = ["关联具体是什么，是否影响当前主张的证据？", "相同或相似观点是否也可能由独立理由支持？"]
+example = "这个管理方法被一家失败公司用过，所以它本身一定无效。"
+boundary = "若共同网络、资金来源或组织行为本身是调查对象，关联可以是线索；仍需独立证据。"
+confusions = ["利益冲突与有罪推定", "来源谬误"]
+related = ["ad-hominem-circumstantial", "genetic-fallacy", "hasty-generalization"]
+
+[[fallacy]]
+id = "genetic-fallacy"
+name_zh = "发生学谬误"
+name_en = "Genetic Fallacy"
+aliases = ["来源谬误", "起源决定真假"]
+category = "relevance"
+kind = "informal"
+severity = 2
+definition = "以观点、概念或实践的来源、起源或最初动机来判定其当前真假或价值。"
+pattern = "P 来自来源 S；S 可疑；因此 P 为假或不可接受。"
+diagnostic = ["来源是否影响当前主张的可验证内容？", "现在是否有独立理由支持或反驳 P？"]
+example = "这个数学技巧来自古代占星术，所以今天用它解题一定错误。"
+boundary = "来源可以提示偏见、采样或概念问题；对于历史归属和制度由来，起源可能是核心证据。"
+confusions = ["来源审查与内容否定", "关联污染"]
+related = ["ad-hominem-circumstantial", "guilt-by-association", "appeal-to-motive"]
+
+[[fallacy]]
+id = "appeal-to-authority"
+name_zh = "诉诸权威"
+name_en = "Appeal to Authority"
+aliases = ["权威论证误用", "专家说"]
+category = "relevance"
+kind = "informal"
+severity = 2
+definition = "把权威意见当作结论成立的充分理由，而没有检查专业相关性、共识程度、证据和可验证性。"
+pattern = "专家 E 说 P；因此 P 为真。"
+diagnostic = ["E 是否在相关领域具有可靠专长？", "E 是否代表证据或共识，而非个人意见？", "P 是否可以由公开证据核验？"]
+example = "一位著名演员说这种药有效，所以它一定安全。"
+boundary = "在普通读者难以独立评估的复杂领域，合格专家意见可以是合理证据；但仍需来源、相关性和共识支持。"
+confusions = ["合理引用专家", "身份权威", "事实核验"]
+related = ["appeal-to-false-authority", "appeal-to-popularity", "unsubstantiated-authority"]
+
+[[fallacy]]
+id = "appeal-to-false-authority"
+name_zh = "诉诸伪权威"
+name_en = "Appeal to False Authority"
+aliases = ["名人背书", "无关专家"]
+category = "relevance"
+kind = "informal"
+severity = 3
+definition = "引用缺乏相关专业能力、可靠信息或独立性的权威来支持结论。"
+pattern = "人物 E 有名、有权力或自称专家；E 说 P；因此 P 为真。"
+diagnostic = ["E 的专长与具体主张是否匹配？", "E 是否提供可检查的证据，而非只给结论？"]
+example = "某位运动员推荐这款投资产品，因此它值得购买。"
+boundary = "跨学科专家也可能有一般推理能力；但支持专业结论时，仍需相关专长和证据。"
+confusions = ["诉诸权威", "成功者意见", "名人代言"]
+related = ["appeal-to-authority", "appeal-to-wealth", "testimonial"]
+
+[[fallacy]]
+id = "appeal-to-popularity"
+name_zh = "诉诸流行"
+name_en = "Appeal to Popularity"
+aliases = ["从众谬误", "大家都这样", "bandwagon"]
+category = "relevance"
+kind = "informal"
+severity = 2
+definition = "因为很多人相信、购买或支持某观点，就把它当作结论为真或行为正确的充分理由。"
+pattern = "很多人相信 P；因此 P 为真或应该接受 P。"
+diagnostic = ["多数人的偏好能否证明事实或有效性？", "群体是否具有代表性，是否存在操纵、信息 cascade 或从众压力？"]
+example = "这款疗法有上百万用户，所以它一定有效。"
+boundary = "流行度可说明偏好、市场份额或社会接受度；在民主选择中，票数本身也可能是规则性证据。"
+confusions = ["市场偏好与事实", "社会共识与证据", "从众偏差"]
+related = ["appeal-to-tradition", "appeal-to-common-sense", "bandwagon-bias"]
+
+[[fallacy]]
+id = "appeal-to-tradition"
+name_zh = "诉诸传统"
+name_en = "Appeal to Tradition"
+aliases = ["历来如此", "传统权威"]
+category = "relevance"
+kind = "informal"
+severity = 2
+definition = "因为某做法长期存在，就推出它合理、有效或应当继续。"
+pattern = "P 一直如此；因此 P 正确或应继续。"
+diagnostic = ["传统的持续是否能说明它满足当前目标？", "过去的环境和今天的条件是否相同？"]
+example = "这种管理方式用了几十年，所以它对今天的远程团队一定最好。"
+boundary = "传统可以携带经验、制度记忆和协调价值；但它不是对效果或正义的充分证明。"
+confusions = ["历史延续与规范正当性", "现状偏好"]
+related = ["appeal-to-novelty", "status-quo-bias", "is-ought"]
+
+[[fallacy]]
+id = "appeal-to-novelty"
+name_zh = "诉诸新颖"
+name_en = "Appeal to Novelty"
+aliases = ["最新即最好", "新奇谬误"]
+category = "relevance"
+kind = "informal"
+severity = 2
+definition = "因为观点、产品或方法新，就推出它更好、更真或更先进。"
+pattern = "P 是新出现的；因此 P 优于旧的或一定正确。"
+diagnostic = ["新在哪里，更新是否解决了相关比较标准？", "是否有独立测试证明其效果更好？"]
+example = "这是最新一代算法，所以它一定比上一代更准确。"
+boundary = "在快速变化的领域，新方案可能采用新证据或修复旧缺陷；但“新”只是待检验线索。"
+confusions = ["创新与效果", "时间进步假设"]
+related = ["appeal-to-tradition", "chronological-snobbery", "appeal-to-progress"]
+
+[[fallacy]]
+id = "appeal-to-nature"
+name_zh = "诉诸自然"
+name_en = "Appeal to Nature"
+aliases = ["自然即好", "自然主义谬误的通俗形式"]
+category = "relevance"
+kind = "informal"
+severity = 2
+definition = "因为某事物自然、天然或符合自然规律，就推出它安全、道德或更好。"
+pattern = "P 是自然的；因此 P 是好的、安全的或应该做的。"
+diagnostic = ["“自然”在这里指什么？", "自然属性与安全性、道德性或有效性之间需要什么桥接前提？"]
+example = "这种成分来自植物，所以它一定比合成药更安全。"
+boundary = "自然属性可能与风险、生态或历史条件相关；但不能单独推出价值结论。"
+confusions = ["自然主义谬误", "天然与安全", "实然推应然"]
+related = ["naturalistic-fallacy", "appeal-to-tradition", "is-ought"]
+
+[[fallacy]]
+id = "appeal-to-emotion"
+name_zh = "诉诸情感"
+name_en = "Appeal to Emotion"
+aliases = ["情绪替代论证", "情感诉求"]
+category = "relevance"
+kind = "informal"
+severity = 2
+definition = "用恐惧、同情、愤怒、羞耻或自豪等情绪取代对事实和推理的评估。"
+pattern = "P 引发强烈情绪；因此 P 为真或应被接受。"
+diagnostic = ["情绪是对情况的可理解反应，还是替代了结论所需证据？", "去掉情绪诉求后，还剩哪些理由？"]
+example = "这张悲惨照片说明我们的政策一定正确，所以不用再讨论成本。"
+boundary = "情绪可以传达价值、痛苦和紧迫性，也能成为需要回应的证据；问题在于它是否被当作充分论证。"
+confusions = ["情绪表达与情绪谬误", "道德直觉"]
+related = ["appeal-to-fear", "appeal-to-pity", "appeal-to-flattery"]
+
+[[fallacy]]
+id = "appeal-to-fear"
+name_zh = "诉诸恐惧"
+name_en = "Appeal to Fear"
+aliases = ["恐惧诉求", "制造恐慌"]
+category = "relevance"
+kind = "informal"
+severity = 3
+definition = "通过夸大威胁、灾难或不确定性，使受众接受未经证明的主张或政策。"
+pattern = "P 可能带来可怕后果；因此必须接受 Q，且 Q 的证据不必讨论。"
+diagnostic = ["威胁发生的概率和严重性是否有证据？", "所提方案是否确实降低风险，且副作用如何？"]
+example = "如果今天不允许这项监控，明天社会就会完全失控，所以不要再问数据。"
+boundary = "真实高风险需要预警；恐惧可以是决策信息，但不能取代效果、概率和替代方案评估。"
+confusions = ["风险沟通与恐惧操纵", "滑坡", "威胁"]
+related = ["appeal-to-emotion", "slippery-slope", "argumentum-ad-baculum"]
+
+[[fallacy]]
+id = "appeal-to-pity"
+name_zh = "诉诸同情"
+name_en = "Appeal to Pity"
+aliases = ["同情谬误", "卖惨"]
+category = "relevance"
+kind = "informal"
+severity = 2
+definition = "用某人的不幸、困难或可怜处境替代对其主张、行为或资格的评估。"
+pattern = "A 很可怜；因此 A 的主张为真或 A 应免于一切责任。"
+diagnostic = ["困难处境与当前结论之间缺什么连接？", "同情是否被用来取消证据、责任或公平比较？"]
+example = "他家庭困难，所以他提交的这份错误数据一定是真的。"
+boundary = "在量刑、资源分配和人道决策中，困难处境可能直接相关；但不会让事实自动为真。"
+confusions = ["人道考量与同情操纵", "价值判断"]
+related = ["appeal-to-emotion", "relative-privation", "appeal-to-flattery"]
+
+[[fallacy]]
+id = "appeal-to-flattery"
+name_zh = "诉诸奉承"
+name_en = "Appeal to Flattery"
+aliases = ["恭维谬误", "戴高帽"]
+category = "relevance"
+kind = "informal"
+severity = 2
+definition = "通过称赞受众的智慧、身份或品德，使其因自我形象而接受没有充分证据的结论。"
+pattern = "聪明的你一定看得出 P；因此应接受 P。"
+diagnostic = ["称赞是否增加了 P 的证据？", "若去掉称赞，支持 P 的理由是否仍足够？"]
+example = "真正有品位的人都会选这款产品，你肯定不会例外。"
+boundary = "礼貌和共享身份可以建立沟通；问题在于它们是否被用作证据替代或身份压力。"
+confusions = ["礼貌与奉承操纵", "身份诉求"]
+related = ["appeal-to-emotion", "appeal-to-loyalty", "plain-folks"]
+
+[[fallacy]]
+id = "appeal-to-ridicule"
+name_zh = "诉诸嘲笑"
+name_en = "Appeal to Ridicule"
+aliases = ["嘲讽谬误", "可笑即错误"]
+category = "relevance"
+kind = "informal"
+severity = 2
+definition = "通过把观点描述为荒谬、可笑或丢脸，代替证据和反驳。"
+pattern = "P 听起来可笑；因此 P 为假或不应考虑。"
+diagnostic = ["嘲笑是否指出了具体的错误机制？", "如果同一内容用中性语言表达，论证是否仍成立？"]
+example = "现在还谈隐私保护？这听起来也太天真了吧。"
+boundary = "讽刺可以揭示隐含荒谬，但必须能让读者看到为什么荒谬；单纯嘲笑不够。"
+confusions = ["归谬与嘲弄", "语气强硬"]
+related = ["appeal-to-emotion", "straw-man", "argumentum-ad-lapidem"]
+
+[[fallacy]]
+id = "appeal-to-spite"
+name_zh = "诉诸怨恨"
+name_en = "Appeal to Spite"
+aliases = ["仇恨诉求", "报复性说服"]
+category = "relevance"
+kind = "informal"
+severity = 3
+definition = "鼓励受众基于对某群体或个人的怨恨接受结论，而不评估主张本身。"
+pattern = "你不喜欢 G；P 会让 G 受损；因此 P 是正确或可取的。"
+diagnostic = ["怨恨与政策效果、事实真假何关？", "若受益者或受损者互换，评估标准是否改变？"]
+example = "那些傲慢的人最怕这项新规，所以新规一定合理。"
+boundary = "愤怒和不公正感可以指出需要调查的问题；但不能把“让某人难受”当作政策有效性的证明。"
+confusions = ["正义诉求与报复", "情感诉求", "scaremongering"]
+related = ["appeal-to-emotion", "scapegoating", "dehumanization"]
+
+[[fallacy]]
+id = "appeal-to-wealth"
+name_zh = "诉诸财富"
+name_en = "Appeal to Wealth"
+aliases = ["成功即正确", "富有即智慧"]
+category = "relevance"
+kind = "informal"
+severity = 2
+definition = "因为某人富有、成功或拥有高地位，就推出其主张真实或方法值得复制。"
+pattern = "A 很有钱或很成功；A 说 P；因此 P 为真或应照做。"
+diagnostic = ["财富或成功是否来自当前主张所声称的能力？", "是否有其他因素、运气或选择性样本解释成功？"]
+example = "这位亿万富翁说所有年轻人都该退学创业，所以这条建议一定正确。"
+boundary = "在某些领域，成功经验可能提供有价值的案例；但成功来源、可复制性和幸存者偏差需要分析。"
+confusions = ["专业经验与成功光环", "幸存者偏差"]
+related = ["appeal-to-false-authority", "survivorship-bias", "halo-effect"]
+
+[[fallacy]]
+id = "appeal-to-motive"
+name_zh = "诉诸动机"
+name_en = "Appeal to Motive"
+aliases = ["动机谬误", "先问动机"]
+category = "relevance"
+kind = "informal"
+severity = 2
+definition = "通过猜测或指出发言者可能有某种动机，推出其主张为假，而不是检验证据。"
+pattern = "A 可能因 P 获益；A 主张 P；因此 P 为假。"
+diagnostic = ["动机是否被证实，且它具体怎样污染了证据？", "独立核验主张的结果是什么？"]
+example = "他批评这项规则，肯定是因为自己会受影响，所以规则问题不存在。"
+boundary = "已披露的利益冲突、资助来源或激励结构可以影响可靠性；但它们通常提示需要独立证据，而非单独判决真假。"
+confusions = ["利益冲突披露与恶意推定", "起源谬误"]
+related = ["ad-hominem-circumstantial", "genetic-fallacy", "poisoning-the-well"]
+
+[[fallacy]]
+id = "appeal-to-loyalty"
+name_zh = "诉诸忠诚"
+name_en = "Appeal to Loyalty"
+aliases = ["忠诚绑架", "阵营压力"]
+category = "relevance"
+kind = "informal"
+severity = 3
+definition = "要求受众因群体、国家、公司或关系忠诚而接受主张或放弃质疑。"
+pattern = "真正的成员不会质疑 P；因此你应接受 P。"
+diagnostic = ["忠诚是否与 P 的真假或政策效果相关？", "质疑者是否被允许提出可检验问题？"]
+example = "你如果真是团队的一员，就不该问这次发布有没有风险。"
+boundary = "在承诺、保密或职责范围内，忠诚可能产生真实义务；但它不能普遍取消对事实和伦理的追问。"
+confusions = ["团队协作与忠诚绑架", "身份诉求"]
+related = ["appeal-to-flattery", "thought-terminating-cliche", "argumentum-ad-baculum"]
+
+[[fallacy]]
+id = "appeal-to-consequences"
+name_zh = "诉诸后果"
+name_en = "Appeal to Consequences"
+aliases = ["结果决定真假", "后果谬误"]
+category = "relevance"
+kind = "informal"
+severity = 2
+definition = "因为接受某主张会带来好或坏的结果，就推出该主张为真或假。"
+pattern = "如果 P 为真，后果会很糟；因此 P 为假。"
+diagnostic = ["后果的好坏能否影响事实真假？", "这里评估的是事实命题，还是决策方案的可取性？"]
+example = "如果人类不是宇宙中心，这会让人很难受，所以人类一定是宇宙中心。"
+boundary = "用于政策选择时，后果当然相关：我们可根据预期收益和风险选择行动；但不能用愿望决定事实。"
+confusions = ["实用决策与真理判断", "愿望思维"]
+related = ["wishful-thinking", "argumentum-ad-baculum", "is-ought"]
+
+[[fallacy]]
+id = "argumentum-ad-baculum"
+name_zh = "诉诸威胁"
+name_en = "Argumentum ad Baculum"
+aliases = ["棍棒谬误", "威胁式论证"]
+category = "relevance"
+kind = "informal"
+severity = 3
+definition = "用惩罚、排斥、暴力或不利后果威胁受众，使其接受主张。"
+pattern = "接受 P，否则你会受到伤害或失去资源；因此 P 为真。"
+diagnostic = ["威胁是否改变了主张真假？", "受众的同意是出于证据还是代价压力？"]
+example = "如果你不认同这项决策，就别想继续留在这个项目里。"
+boundary = "制度性后果可以是现实约束，也是伦理问题；但它不是关于 P 真假的证据。"
+confusions = ["权力与论证", "政策后果"]
+related = ["appeal-to-fear", "appeal-to-loyalty", "coercive-framing"]
+
+[[fallacy]]
+id = "appeal-to-ignorance"
+name_zh = "诉诸无知"
+name_en = "Appeal to Ignorance"
+aliases = ["无知论证", "没有证据即证明"]
+category = "relevance"
+kind = "informal"
+severity = 3
+definition = "因为没有证据证明 P 为假，就推出 P 为真；或没有证据证明 P 为真，就推出 P 为假。"
+pattern = "没有证据表明 ¬P；因此 P。"
+diagnostic = ["证据缺口是否意味着证据已被充分搜寻？", "当前举证责任属于哪一方？", "无证据是否只是尚未调查？"]
+example = "没人证明外星人没来过地球，所以他们已经来过。"
+boundary = "在封闭调查或特定法律标准下，证据缺失可能支持一个有限推断；但不能无条件推出普遍真理。"
+confusions = ["合理怀疑与绝对无知", "举证责任"]
+related = ["appeal-to-silence", "burden-of-proof-reversal", "absence-of-evidence"]
+
+[[fallacy]]
+id = "appeal-to-silence"
+name_zh = "诉诸沉默"
+name_en = "Argument from Silence"
+aliases = ["沉默即默认", "不回应即承认"]
+category = "relevance"
+kind = "informal"
+severity = 2
+definition = "以某人没有回应、没有记录或没有提及某事为由，推出他们知道、同意或有罪。"
+pattern = "A 没有说 P；因此 P 为假或 A 在隐瞒。"
+diagnostic = ["在该情境中，沉默是否被明确约定为某种信号？", "是否有其他更常见的沉默原因，如不知道、没看到或策略选择？"]
+example = "他一直没有回应这条指控，所以指控一定是真的。"
+boundary = "在明确要求逐项回答、且回应机会充分时，持续回避可以成为相关证据；但通常不能单独证明结论。"
+confusions = ["沉默证据与沉默证明", "回避讯号"]
+related = ["appeal-to-ignorance", "absence-of-evidence", "burden-of-proof-reversal"]
+
+[[fallacy]]
+id = "red-herring"
+name_zh = "红鲱鱼"
+name_en = "Red Herring"
+aliases = ["转移话题", "岔开论点"]
+category = "relevance"
+kind = "dialectical"
+severity = 2
+definition = "引入一个看似相关但实际不同的话题，使讨论偏离原结论。"
+pattern = "正在讨论 P；B 提出 Q；Q 吸引注意力；P 未被回应。"
+diagnostic = ["新话题是否是原结论的必要前提？", "回应结束后，原来的理由是否得到处理？"]
+example = "你问的是预算是否透明，但更值得我们关心的是团队有多辛苦。"
+boundary = "新话题可能与原问题有真实因果或价值联系；需要说明连接，而不是仅凭不同就判为红鲱鱼。"
+confusions = ["补充背景与转移话题", "whataboutism"]
+related = ["whataboutism", "straw-man", "relative-privation"]
+
+[[fallacy]]
+id = "straw-man"
+name_zh = "稻草人谬误"
+name_en = "Straw Man"
+aliases = ["稻草人", "曲解对方主张"]
+category = "relevance"
+kind = "dialectical"
+severity = 3
+definition = "把对方主张替换成更极端、更容易反驳的版本，再攻击替换后的版本。"
+pattern = "A 主张 P；B 将 P 改写为更强或更荒谬的 P'；B 反驳 P'；因此认为 P 被反驳。"
+diagnostic = ["被反驳的版本是否真的是对方原话或合理立场？", "作者是否省略了对方最重要的限定词？"]
+example = "对方说应减少不必要的监控，你却回答“那你是想让所有罪犯自由行动吗”。"
+boundary = "如果对方确实提出了更强主张，引用原文就不构成稻草人；合理解释模糊主张也需说明依据。"
+confusions = ["归谬与曲解", "强化对方论点", "反驳具体例子"]
+related = ["weak-man", "hollow-man", "false-equivalence"]
+
+[[fallacy]]
+id = "weak-man"
+name_zh = "弱人谬误"
+name_en = "Weak Man Fallacy"
+aliases = ["挑选弱版本", "稻草人变体"]
+category = "relevance"
+kind = "dialectical"
+severity = 3
+definition = "从同一立场中挑出最弱、最不清晰或最极端的支持者，用其失败代表整个立场。"
+pattern = "立场 P 有多种版本；B 选最弱 Pw；B 反驳 Pw；因此 P 被反驳。"
+diagnostic = ["被反驳的是该立场的代表性或最强版本吗？", "是否因为弱版本容易攻击而忽略更好的论证？"]
+example = "有人主张改善公共交通。你找出一个只会喊口号的人，然后说所有公共交通建议都没有可行方案。"
+boundary = "如果弱版本是实际决策、官方文本或主要传播版本，批评它可以有现实意义；但不能自动代表全部立场。"
+confusions = ["批评代表性观点与挑软柿子", "稻草人"]
+related = ["straw-man", "hollow-man", "nutpicking"]
+
+[[fallacy]]
+id = "hollow-man"
+name_zh = "空人谬误"
+name_en = "Hollow Man Fallacy"
+aliases = ["虚构对手", "无人稻草人"]
+category = "relevance"
+kind = "dialectical"
+severity = 2
+definition = "攻击一个没有具体主张者、没有原文或没有现实代表的虚构观点。"
+pattern = "B 构造一个“他们会说”的立场；B 攻击它；因此真实讨论被替代。"
+diagnostic = ["这个立场有可识别的支持者或文本吗？", "作者是否用无人承担的观点替代了对实际问题的回应？"]
+example = "有些专家肯定会说一切都好，所以我不需要回应当前这份具体报告。"
+boundary = "讨论常见论证类型时可以抽象举例；但若声称反驳现实立场，应给出代表来源。"
+confusions = ["假设性反驳与虚构对手", "弱人谬误"]
+related = ["straw-man", "weak-man", "nutpicking"]
+
+[[fallacy]]
+id = "false-equivalence"
+name_zh = "虚假等同"
+name_en = "False Equivalence"
+aliases = ["错误类比等同", "两边一样"]
+category = "relevance"
+kind = "informal"
+severity = 3
+definition = "把在两个关键维度上差异很大的事物说成等价，从而转移或平均判断。"
+pattern = "A 和 B 表面相似；因此它们在结论相关的所有方面相同。"
+diagnostic = ["被比较的关键维度是什么？", "差异是否足以改变结论或责任分配？"]
+example = "两个人都在网上说错话，所以他们的影响力和责任完全一样。"
+boundary = "比较需要选择相关维度，差异不一定使比较无效；关键是差异是否被隐藏。"
+confusions = ["合理类比", "道德等同", "伪装中立"]
+related = ["weak-analogy", "false-balance", "both-sidesism"]
+
+[[fallacy]]
+id = "relative-privation"
+name_zh = "相对剥夺谬误"
+name_en = "Relative Privation"
+aliases = ["还有更惨的", "比烂谬误"]
+category = "relevance"
+kind = "informal"
+severity = 2
+definition = "因为存在更严重的问题，就推出当前问题不重要、不值得关注或不能抱怨。"
+pattern = "A 比 B 轻；因此 A 不是问题或不应被处理。"
+diagnostic = ["更大的问题是否取消了较小问题的存在或道德要求？", "资源排序是否等于问题无效？"]
+example = "你说加班影响健康，但世界上还有人在挨饿，所以加班问题不值一提。"
+boundary = "在有限资源的优先排序中，严重程度比较是必要的；但不能从“更严重”推出“另一个问题不存在”。"
+confusions = ["优先级比较与问题否定", "whataboutism"]
+related = ["red-herring", "whataboutism", "appeal-to-pity"]
+
+[[fallacy]]
+id = "whataboutism"
+name_zh = "那另一个呢"
+name_en = "Whataboutism"
+aliases = ["反向质问", "以别处问题抵消"]
+category = "relevance"
+kind = "dialectical"
+severity = 2
+definition = "面对一项批评时，转而指出另一项问题，以抵消、转移或稀释当前讨论。"
+pattern = "A 批评 P；B 说“那 Q 呢”；讨论转向 Q，P 未被回答。"
+diagnostic = ["Q 与 P 是否共享同一评估标准或证据链？", "即使 Q 也严重，是否改变 P 的判断？"]
+example = "你问这家公司是否污染河流，他却回答“别的公司也污染，你怎么不说”。"
+boundary = "一致性比较、系统性问题分析和相关背景可以合理引入其他案例；但它们仍需回答原问题。"
+confusions = ["合理比较与转移焦点", "你也一样"]
+related = ["tu-quoque", "red-herring", "relative-privation"]
+
+[[fallacy]]
+id = "tone-policing"
+name_zh = "语气警察"
+name_en = "Tone Policing"
+aliases = ["只谈态度", "语气审查"]
+category = "relevance"
+kind = "dialectical"
+severity = 2
+definition = "把表达语气置于实质内容之上，用“不够礼貌”“太激动”等评价回避论点。"
+pattern = "A 提出 P，语气强烈；B 只批评语气；因此 P 被绕过。"
+diagnostic = ["语气问题是否真的妨碍了可理解性或安全性？", "去掉语气评价后，是否回应了 P 的理由？"]
+example = "你说这份安全报告漏了数据，但你语气太冲了，我们先讨论你的态度吧。"
+boundary = "在协作和公共讨论中，表达方式确实可能影响信任、伤害他人或降低沟通效率；但不能自动替代内容回应。"
+confusions = ["礼貌要求与语气转移", "情绪表达"]
+related = ["appeal-to-emotion", "ad-hominem-abusive", "thought-terminating-cliche"]
