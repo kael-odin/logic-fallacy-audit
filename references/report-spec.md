@@ -43,6 +43,8 @@ Quick 模式不省略原文证据和置信度。
 ## 边界说明
 ```
 
+英文报告使用 [report-template.en.md](../assets/report-template.en.md) 的对应标题和字段。两边术语以 [glossary.md](glossary.md) 为准。
+
 可按需要增加：
 
 - `## 事实状态`
@@ -224,6 +226,7 @@ Quick 模式不省略原文证据和置信度。
 ```bash
 python scripts/fallacy_cli.py segment path/to/source.txt --json
 python scripts/fallacy_cli.py locate path/to/source.txt --quote "需要引用的原文"
+python scripts/report_lint.py report.md --profile full --strict --source path/to/source.txt --require-locators
 ```
 
 路径写成 `-` 时，`segment` 从标准输入读取文本。
@@ -237,3 +240,5 @@ python scripts/fallacy_cli.py locate path/to/source.txt --quote "需要引用的
 ```
 
 行号对应规范化后的源文本。报告元信息记录 SHA-256；源文本内容改变后，旧行号不能继续使用。节选、字幕清洗和网页提取必须说明删除了什么，不能把处理后的文本冒充完整原文。
+
+单一位置且没有省略号时，校验器会检查引文文本是否存在于声明行区间。多位置引用和含省略号的压缩引用目前只核验行号范围。

@@ -61,6 +61,34 @@ class CliTests(unittest.TestCase):
         self.assertEqual(0, result.returncode, result.stderr)
         self.assertIn("0 errors", result.stdout)
 
+    def test_lint_english_report_with_source(self) -> None:
+        result = run_cli(
+            "lint-report",
+            "examples/sample-report.en.md",
+            "--profile",
+            "full",
+            "--source",
+            "examples/long-text-source.txt",
+            "--require-locators",
+            "--strict",
+        )
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertIn("0 errors", result.stdout)
+
+    def test_lint_mismatched_source_fails(self) -> None:
+        result = run_cli(
+            "lint-report",
+            "examples/sample-report.en.md",
+            "--profile",
+            "full",
+            "--source",
+            "README.en.md",
+            "--require-locators",
+            "--strict",
+        )
+        self.assertEqual(1, result.returncode)
+        self.assertIn("citation-text", result.stdout)
+
     def test_segment_example_returns_source_map(self) -> None:
         result = run_cli("segment", "examples/long-text-source.txt", "--json")
         self.assertEqual(0, result.returncode, result.stderr)

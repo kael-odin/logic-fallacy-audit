@@ -7,6 +7,7 @@
 ```bash
 python scripts/report_lint.py examples/sample-report.md --profile full --strict
 python scripts/fallacy_cli.py lint-report examples/sample-report.md --strict
+python scripts/report_lint.py examples/sample-report.en.md --profile full --strict --source examples/long-text-source.txt --require-locators
 ```
 
 ## Full / Debate 检查
@@ -20,6 +21,7 @@ python scripts/fallacy_cli.py lint-report examples/sample-report.md --strict
 - 改写建议包含可直接引用的改写段落。
 - 边界说明包含至少一项明确限制。
 - 必需章节不能重复出现后静默覆盖前文。
+- 中文模板与英文模板的固定字段均可识别。
 
 ## Quick 检查
 
@@ -28,6 +30,19 @@ Quick 模式仍保留六个核心章节，并检查原文引用、判定标签�
 ## Teaching 检查
 
 Teaching 使用与 Quick 相同的最小结构规则。教学模式可以增加讲解步骤、例子和练习，但正式文件仍必须包含六个核心章节、原文引用、判定标签和置信度。
+
+## 源文件引用核验
+
+提供 `--source` 时，校验器会检查：
+
+- `[Lx-Ly]` 的行号是否为正；
+- 结束行是否早于开始行；
+- 结束行是否超过源文件行数；
+- 单一位置且没有省略号的引文是否存在于对应行区间。
+
+`--require-locators` 要求每个 Full / Debate 问题卡和 Quick 报告至少有一个 `[Lx-Ly]`。
+
+多位置引文当前只核验位置范围，不逐一匹配每段引文。包含省略号的压缩引用也不做全文精确匹配。
 
 ## 明确不检查
 

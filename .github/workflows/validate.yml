@@ -30,6 +30,8 @@ jobs:
         run: ruff format --check scripts tests
       - name: Validate sample report
         run: python scripts/report_lint.py examples/sample-report.md --profile full --strict
+      - name: Validate English report with source locations
+        run: python scripts/report_lint.py examples/sample-report.en.md --profile full --strict --source examples/long-text-source.txt --require-locators
 
   validate:
     runs-on: ubuntu-latest

@@ -3,7 +3,7 @@ name: logic-fallacy-audit
 description: Analyze Chinese or English passages for logical fallacies, hidden premises, weak evidence, dialectical moves, and manipulative rhetoric, then produce an evidence-grounded report with confidence and false-positive boundaries. Use for argument analysis and debate critique, not for declaring whether a factual claim is true without evidence.
 license: MIT
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
   language: "zh-CN"
 ---
 
@@ -20,7 +20,8 @@ Turn a passage into a careful argument analysis. Identify the argument before na
 5. Read only the catalog files relevant to the passage from [references/catalog-index.md](references/catalog-index.md).
 6. When the passage relies on Chinese idioms, internet phrases, or debate one-liners, also read [references/chinese-patterns.md](references/chinese-patterns.md).
 7. For long files, subtitles, or multi-paragraph sources, read [references/long-text-workflow.md](references/long-text-workflow.md).
-8. For the ten most common entry points, use [references/core-fallacies.md](references/core-fallacies.md).
+8. For English reports, use [assets/report-template.en.md](assets/report-template.en.md) and [references/glossary.md](references/glossary.md).
+9. For the ten most common entry points, use [references/core-fallacies.md](references/core-fallacies.md).
 
 Available modes:
 
@@ -90,7 +91,7 @@ For each issue, include:
 - why the conclusion does not yet follow;
 - confidence and what would raise or lower it.
 
-Use [assets/report-template.md](assets/report-template.md) for `full` and `debate` output.
+Use [assets/report-template.md](assets/report-template.md) for Chinese `full` and `debate` output. Use [assets/report-template.en.md](assets/report-template.en.md) for English output. The headings and field names in either template are accepted by the report linter.
 
 If you save the report as a Markdown file in this repository, validate it:
 
@@ -142,6 +143,7 @@ If the CLI cannot run, read the relevant generated category file under `referenc
 - [references/argument-reconstruction.md](references/argument-reconstruction.md): how to expose hidden premises without inventing them.
 - [references/evidence-and-confidence.md](references/evidence-and-confidence.md): confidence calibration.
 - [references/long-text-workflow.md](references/long-text-workflow.md): source segmentation, line locations, and clean-input boundaries.
+- [references/glossary.md](references/glossary.md): fixed Chinese-English terms for report sections, labels, and reasoning types.
 - [references/report-lint.md](references/report-lint.md): automatically check report structure.
 - [references/explainer-style.md](references/explainer-style.md): clear explainer structure inspired by short critical-thinking videos.
 - [references/research-sources.md](references/research-sources.md): source basis and citation policy.

@@ -57,8 +57,8 @@ python scripts/fallacy_cli.py locate examples/long-text-source.txt --quote "三�
 
 发布前要求通过严格目录校验、生成目录检查、报告 lint、Ruff、完整单元测试和 Skill 规范校验。
 
-当前完整单元测试为 46 项，CI 还会直接运行示例 `segment` 与 `locate`。
+当前完整单元测试为 53 项，CI 还会直接运行示例 `segment`、`locate` 与中英文报告校验。
 
 ## 后续
 
-英文报告模板、引用编号校验和字幕专用清洗规则仍属于 v1.3 后续工作。
+字幕专用解析器和更细粒度的跨行引文片段匹配不在当前版本中。当前版本已提供清洗规则、行号范围核验和单一位置引文文本核验。

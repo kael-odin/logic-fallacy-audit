@@ -64,6 +64,7 @@ python scripts/fallacy_cli.py search "因果"
 python scripts/fallacy_cli.py show post-hoc
 python scripts/fallacy_cli.py render
 python scripts/fallacy_cli.py lint-report examples/sample-report.md --strict
+python scripts/fallacy_cli.py lint-report examples/sample-report.en.md --strict --source examples/long-text-source.txt --require-locators
 python scripts/fallacy_cli.py segment examples/long-text-source.txt --json
 python scripts/fallacy_cli.py locate examples/long-text-source.txt --quote "三个人的经历"
 ```
@@ -166,8 +167,10 @@ python scripts/fallacy_cli.py locate examples/long-text-source.txt --quote "三�
 - [逻辑基础](references/logic-basics.md)：有效性、条件、量词、归纳、概率与规范推理。
 - [任务矩阵](references/task-matrix.md)：按演绎、因果、统计、政策等任务选择分析路线。
 - [模式示例](examples/modes.md)：Quick、Full、Debate、Teaching 的输出差异。
+- [英文报告样例](examples/sample-report.en.md)：英文模板、引用位置与完整字段示例。
 - [报告结构校验](references/report-lint.md)：自动验收章节、引用、标签、置信度与边界字段。
 - [长文本与源文件定位](references/long-text-workflow.md)：候选块、SHA-256、行号与精确引文。
+- [中英术语表](references/glossary.md)：统一报告章节、判定标签和推理类型英译。
 - [源文本映射审查](docs/source-workflow-2026-11-07.md)：实现范围、失败路径与验收证据。
 
 ## 开发与验证

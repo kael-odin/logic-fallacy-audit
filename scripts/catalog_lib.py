@@ -837,6 +837,7 @@ def validate_skill(root: Path = ROOT) -> list[Issue]:
         "references/report-spec.md",
         "references/report-lint.md",
         "references/long-text-workflow.md",
+        "references/glossary.md",
         "references/false-positive-guards.md",
         "references/taxonomy.md",
         "references/chinese-patterns.md",
@@ -848,26 +849,47 @@ def validate_skill(root: Path = ROOT) -> list[Issue]:
 
 
 def validate_report_template(root: Path = ROOT) -> list[Issue]:
-    path = root / "assets" / "report-template.md"
-    if not path.exists():
-        return [Issue("error", "missing-template", "缺少 assets/report-template.md")]
-    text = path.read_text(encoding="utf-8")
-    required = [
-        "## 结论摘要",
-        "## 论证地图",
-        "## 关键问题",
-        "## 反向检验",
-        "## 改写建议",
-        "## 边界说明",
-        "**隐含前提的重建依据**",
-        "**相关但不主判**",
-        "**替代解释**",
-    ]
-    return [
-        Issue("error", "template-section", f"报告模板缺少章节 `{section}`")
-        for section in required
-        if section not in text
-    ]
+    templates = {
+        "assets/report-template.md": [
+            "## 结论摘要",
+            "## 论证地图",
+            "## 关键问题",
+            "## 反向检验",
+            "## 改写建议",
+            "## 边界说明",
+            "**隐含前提的重建依据**",
+            "**相关但不主判**",
+            "**替代解释**",
+        ],
+        "assets/report-template.en.md": [
+            "## Conclusion Summary",
+            "## Argument Map",
+            "## Key Issues",
+            "## Reverse Test",
+            "## Rewrite",
+            "## Boundaries",
+            "**Reconstruction Basis**",
+            "**Related but Not Primary**",
+            "**Alternative Explanation**",
+        ],
+    }
+    issues: list[Issue] = []
+    for relative, required in templates.items():
+        path = root / relative
+        if not path.exists():
+            issues.append(Issue("error", "missing-template", f"缺少 {relative}"))
+            continue
+        text = path.read_text(encoding="utf-8")
+        for section in required:
+            if section not in text:
+                issues.append(
+                    Issue(
+                        "error",
+                        "template-section",
+                        f"{relative} 缺少字段 `{section}`",
+                    )
+                )
+    return issues
 
 
 def validate_evals(catalog: Catalog, root: Path = ROOT) -> list[Issue]:
@@ -1009,14 +1031,17 @@ def validate_repository(catalog: Catalog, root: Path = ROOT) -> list[Issue]:
         ".github/ISSUE_TEMPLATE/config.yml",
         "references/catalog-index.md",
         "references/core-fallacies.md",
+        "references/glossary.md",
         "references/logic-basics.md",
         "references/report-lint.md",
         "references/task-matrix.md",
         "assets/report-template.md",
+        "assets/report-template.en.md",
         "assets/checklist.md",
         "evals/README.md",
         "evals/rubric.md",
         "examples/sample-report.md",
+        "examples/sample-report.en.md",
         "examples/long-text-source.txt",
         "examples/modes.md",
         "docs/product-spec.md",
@@ -1027,6 +1052,7 @@ def validate_repository(catalog: Catalog, root: Path = ROOT) -> list[Issue]:
         "docs/audit-v1.2-2026-11-07.md",
         "docs/catalog-expansion-250-2026-11-07.md",
         "docs/source-workflow-2026-11-07.md",
+        "docs/audit-v1.3-2026-11-07.md",
         "docs/content-backlog.md",
         "pyproject.toml",
         "scripts/report_lint.py",

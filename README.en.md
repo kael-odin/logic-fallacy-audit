@@ -4,7 +4,7 @@ Logic Fallacy Audit turns a passage into a structured argument review: claims, e
 
 The project is designed for Chinese and English argument analysis, debate preparation, editing, media literacy, and critical-thinking teaching. It is not a fact-checking oracle and does not infer a speaker's motives from a reasoning error.
 
-Latest tagged release: `1.2.0`. The current `main` branch contains 250 structured entries: 218 fallacies or argument patterns and 32 adjacent cognitive biases.
+Current release: `1.3.0`. The catalog contains 250 structured entries: 218 fallacies or argument patterns and 32 adjacent cognitive biases.
 
 ## What it does
 
@@ -22,6 +22,8 @@ git clone https://github.com/kael-odin/logic-fallacy-audit.git "${CODEX_HOME:-$H
 ```
 
 See [README.md](README.md) for the Chinese-first documentation, architecture, validation commands, and project boundaries.
+
+English reports can use [assets/report-template.en.md](assets/report-template.en.md). The bilingual terminology is fixed in [references/glossary.md](references/glossary.md).
 
 ## Validation
 

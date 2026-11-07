@@ -2,7 +2,7 @@
 
 All notable changes follow a simple milestone history.
 
-## Unreleased
+## 1.3.0 - 2026-11-07
 
 - Aligned the report specification with every field enforced by the linter.
 - Rejected duplicate report sections and empty problem-card or reverse-test fields.
@@ -12,6 +12,10 @@ All notable changes follow a simple milestone history.
 - Expanded behavior evaluations from 33 to 43 cases so every new entry has regression coverage.
 - Added deterministic long-text source maps with paragraph blocks, line spans, and SHA-256.
 - Added exact quote location and `Lx-y` citation guidance for saved sources.
+- Added optional source-backed citation validation and required-locator mode.
+- Added an English report template, complete English sample, and bilingual glossary.
+- Extended report linting to accept both Chinese and English headings, fields, verdicts, and impact labels.
+- Added CI checks for English reports with source-backed citation locations.
 
 ## 1.2.0 - 2026-11-07
 

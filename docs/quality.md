@@ -8,6 +8,7 @@ python scripts/fallacy_cli.py render --check
 python scripts/fallacy_cli.py segment examples/long-text-source.txt --json
 python scripts/fallacy_cli.py locate examples/long-text-source.txt --quote "三个人的经历"
 python scripts/report_lint.py examples/sample-report.md --profile full --strict
+python scripts/report_lint.py examples/sample-report.en.md --profile full --strict --source examples/long-text-source.txt --require-locators
 ruff check scripts tests
 ruff format --check scripts tests
 python -m unittest discover -s tests -v
@@ -28,6 +29,7 @@ python -m unittest discover -s tests -v
 - SKILL frontmatter 与必要引用存在；
 - 报告模板必需章节存在；
 - 样例报告通过结构、引用、标签、置信度和边界字段校验；
+- 英文样例通过双语字段和源文件行号核验；
 - 重复章节、空字段和未完成占位符会被拒绝；
 - SKILL、CITATION 与 CHANGELOG 版本一致；
 - 评测案例可解析且引用有效；

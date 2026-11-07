@@ -7,6 +7,8 @@ import sys
 from dataclasses import dataclass
 from pathlib import Path
 
+from source_map import SourceDocument, build_source_document, read_source
+
 REQUIRED_SECTIONS = [
     "结论摘要",
     "论证地图",
@@ -16,6 +18,15 @@ REQUIRED_SECTIONS = [
     "边界说明",
 ]
 
+SECTION_ALIASES = {
+    "结论摘要": ("结论摘要", "Conclusion Summary"),
+    "论证地图": ("论证地图", "Argument Map"),
+    "关键问题": ("关键问题", "Key Issues"),
+    "反向检验": ("反向检验", "Reverse Test"),
+    "改写建议": ("改写建议", "Rewrite"),
+    "边界说明": ("边界说明", "Boundaries"),
+}
+
 ARGUMENT_MAP_FIELDS = [
     "最终结论",
     "显式前提",
@@ -24,6 +35,15 @@ ARGUMENT_MAP_FIELDS = [
     "推理类型",
     "当前缺失环节",
 ]
+
+ARGUMENT_MAP_ALIASES = {
+    "最终结论": ("最终结论", "Final Conclusion"),
+    "显式前提": ("显式前提", "Explicit Premises"),
+    "必要隐含前提": ("必要隐含前提", "Necessary Implicit Premises"),
+    "隐含前提的重建依据": ("隐含前提的重建依据", "Reconstruction Basis"),
+    "推理类型": ("推理类型", "Reasoning Type"),
+    "当前缺失环节": ("当前缺失环节", "Current Gap"),
+}
 
 ISSUE_FIELDS = [
     "原文",
@@ -36,6 +56,20 @@ ISSUE_FIELDS = [
     "修复条件",
 ]
 
+ISSUE_FIELD_ALIASES = {
+    "原文": ("原文", "Original Text"),
+    "判定": ("判定", "Verdict"),
+    "机制": ("机制", "Mechanism"),
+    "为什么结论还不能成立": (
+        "为什么结论还不能成立",
+        "Why the Conclusion Does Not Yet Follow",
+    ),
+    "影响": ("影响", "Impact"),
+    "边界": ("边界", "Boundary"),
+    "相关但不主判": ("相关但不主判", "Related but Not Primary"),
+    "修复条件": ("修复条件", "Repair Conditions"),
+}
+
 REVERSE_TEST_FIELDS = [
     "最强版本",
     "反例或关键测试",
@@ -43,9 +77,35 @@ REVERSE_TEST_FIELDS = [
     "可能误判",
 ]
 
-FINDING_LABELS = ("确认", "较可能", "语境相关", "不构成谬误")
-IMPACT_LABELS = ("阻断", "重大", "局部", "表达")
-CONFIDENCE_PATTERN = re.compile(r"置信度\s*[:：]\s*(高|中|低)")
+REVERSE_TEST_ALIASES = {
+    "最强版本": ("最强版本", "Strongest Version"),
+    "反例或关键测试": ("反例或关键测试", "Counterexample or Key Test"),
+    "替代解释": ("替代解释", "Alternative Explanation"),
+    "可能误判": ("可能误判", "Possible Misjudgment"),
+}
+
+FIELD_ALIASES = {
+    **ARGUMENT_MAP_ALIASES,
+    **ISSUE_FIELD_ALIASES,
+    **REVERSE_TEST_ALIASES,
+}
+
+FINDING_LABELS = (
+    "确认",
+    "较可能",
+    "语境相关",
+    "不构成谬误",
+    "Confirmed",
+    "Likely",
+    "Context-dependent",
+    "Not a Fallacy",
+)
+IMPACT_LABELS = ("阻断", "重大", "局部", "表达", "Blocking", "Major", "Local", "Expression")
+CONFIDENCE_PATTERN = re.compile(
+    r"(?:置信度|confidence)\s*[:：]\s*(?:高|中|低|high|medium|low)",
+    re.IGNORECASE,
+)
+LOCATION_PATTERN = re.compile(r"\[L(\d+)(?:\s*-\s*L?(\d+))?\]")
 HEADING_PATTERN = re.compile(r"^(#{2,3})\s+(.+?)\s*$")
 FIELD_HEADER_PATTERN = re.compile(
     r"(?m)^(?P<indent>\s*)\*\*(?P<name>[^*\n]+)\*\*(?P<inline>[^\n]*)$"
@@ -58,6 +118,12 @@ PLACEHOLDER_MARKERS = (
     "[按相同结构重复。]",
     "[使结论成立所需但未明说的前提]",
     "[2–4 句",
+    "[Issue title]",
+    "[necessary excerpt]",
+    "[neutral restatement of the final claim]",
+    "[required excerpt]",
+    "[explain the context gap]",
+    "[repeat the same structure]",
 )
 
 
@@ -77,6 +143,7 @@ class ReportLintResult:
     path: Path
     profile: str
     issues: list[ReportIssue]
+    source_sha256: str | None = None
 
     @property
     def errors(self) -> list[ReportIssue]:
@@ -108,11 +175,12 @@ def _section_lines(
     sections: dict[str, tuple[int, int]],
     title: str,
 ) -> tuple[int, list[str]]:
-    bounds = sections.get(title)
-    if bounds is None:
-        return 0, []
-    start, end = bounds
-    return start + 1, lines[start + 1 : end]
+    for alias in SECTION_ALIASES.get(title, (title,)):
+        bounds = sections.get(alias)
+        if bounds is not None:
+            start, end = bounds
+            return start + 1, lines[start + 1 : end]
+    return 0, []
 
 
 def _duplicate_sections(lines: list[str]) -> list[tuple[int, str]]:
@@ -124,11 +192,17 @@ def _duplicate_sections(lines: list[str]) -> list[tuple[int, str]]:
             continue
         level, title = match.groups()
         title = title.strip()
-        if level != "##" or title not in REQUIRED_SECTIONS:
+        if level != "##":
             continue
-        if title in seen:
-            duplicates.append((index, title))
-        seen.add(title)
+        canonical = next(
+            (section for section, aliases in SECTION_ALIASES.items() if title in aliases),
+            None,
+        )
+        if canonical is None:
+            continue
+        if canonical in seen:
+            duplicates.append((index, canonical))
+        seen.add(canonical)
     return duplicates
 
 
@@ -145,12 +219,13 @@ def _field_values(text: str) -> dict[str, str]:
 
 
 def _field_value(fields: dict[str, str], name: str, *, prefix: bool = False) -> str | None:
-    if name in fields:
-        return fields[name]
-    if prefix:
-        for field_name, value in fields.items():
-            if field_name.startswith(name):
-                return value
+    for alias in FIELD_ALIASES.get(name, (name,)):
+        if alias in fields:
+            return fields[alias]
+        if prefix:
+            for field_name, value in fields.items():
+                if field_name.startswith(alias):
+                    return value
     return None
 
 
@@ -162,7 +237,86 @@ def _meaningful_field(value: str | None) -> bool:
     return bool(cleaned)
 
 
-def lint_report_text(text: str, path: Path, profile: str = "full") -> ReportLintResult:
+def _citation_fragment(value: str) -> str:
+    cleaned = LOCATION_PATTERN.sub("", value)
+    cleaned = re.sub(r"(?m)^\s*>\s?", "", cleaned).strip()
+    quoted = re.search(r"[“\"](.*?)[”\"]", cleaned, re.DOTALL)
+    if quoted:
+        return quoted.group(1).strip()
+    return cleaned.strip(" \t\r\n`*_>“”\"'。.!?")
+
+
+def _validate_citations(
+    value: str,
+    *,
+    source_document: SourceDocument | None,
+    require_locators: bool,
+    card_label: str,
+    report_line: int,
+    issues: list[ReportIssue],
+) -> None:
+    matches = list(LOCATION_PATTERN.finditer(value))
+    if not matches:
+        if require_locators:
+            issues.append(
+                ReportIssue(
+                    "error",
+                    "citation-missing",
+                    f"{card_label} 缺少 `[Lx-Ly]` 原文位置",
+                    report_line,
+                )
+            )
+        return
+
+    for match in matches:
+        start = int(match.group(1))
+        end = int(match.group(2) or start)
+        if start < 1 or end < start:
+            issues.append(
+                ReportIssue(
+                    "error",
+                    "citation-format",
+                    f"{card_label} 包含无效位置 `{match.group(0)}`",
+                    report_line,
+                )
+            )
+            continue
+        if source_document is None:
+            continue
+        if end > source_document.line_count:
+            issues.append(
+                ReportIssue(
+                    "error",
+                    "citation-range",
+                    f"{card_label} 的 `{match.group(0)}` 超出源文本行数",
+                    report_line,
+                )
+            )
+            continue
+        if len(matches) == 1:
+            fragment = _citation_fragment(value)
+            if "…" in fragment or "..." in fragment or len(fragment) < 4:
+                continue
+            source_range = "\n".join(line.text for line in source_document.lines[start - 1 : end])
+            if fragment not in source_range:
+                issues.append(
+                    ReportIssue(
+                        "error",
+                        "citation-text",
+                        f"{card_label} 的引用文本不在 `{match.group(0)}` 对应源文本中",
+                        report_line,
+                    )
+                )
+
+
+def lint_report_text(
+    text: str,
+    path: Path,
+    profile: str = "full",
+    *,
+    source_document: SourceDocument | None = None,
+    require_locators: bool = False,
+) -> ReportLintResult:
     lines = text.splitlines()
     issues: list[ReportIssue] = []
     sections = _section_map(lines)
@@ -183,12 +337,11 @@ def lint_report_text(text: str, path: Path, profile: str = "full") -> ReportLint
             issues.append(ReportIssue("error", "unfinished", "报告仍有未完成标记", index))
 
     for title in REQUIRED_SECTIONS:
-        if title not in sections:
+        start, content = _section_lines(lines, sections, title)
+        if start == 0:
             issues.append(ReportIssue("error", "missing-section", f"缺少必需章节 `## {title}`", 1))
             continue
-        _, content = _section_lines(lines, sections, title)
         if not any(line.strip() for line in content):
-            start, _ = _section_lines(lines, sections, title)
             issues.append(ReportIssue("error", "empty-section", f"章节 `## {title}` 为空", start))
 
     if profile in {"full", "debate"}:
@@ -309,6 +462,14 @@ def lint_report_text(text: str, path: Path, profile: str = "full") -> ReportLint
                         problem_start,
                     )
                 )
+            _validate_citations(
+                quote or "",
+                source_document=source_document,
+                require_locators=require_locators,
+                card_label=f"问题卡片 {block_index}",
+                report_line=problem_start,
+                issues=issues,
+            )
             verdict = _field_value(fields, "判定") or ""
             if not any(label in verdict for label in FINDING_LABELS):
                 issues.append(
@@ -351,11 +512,31 @@ def lint_report_text(text: str, path: Path, profile: str = "full") -> ReportLint
             issues.append(
                 ReportIssue("error", "quick-quote", "Quick 报告缺少原文引用", problem_start)
             )
+        quote_text = "\n".join(line for line in problem_lines if line.lstrip().startswith(">"))
+        _validate_citations(
+            quote_text,
+            source_document=source_document,
+            require_locators=require_locators,
+            card_label="Quick 报告",
+            report_line=problem_start,
+            issues=issues,
+        )
 
-    return ReportLintResult(path=path, profile=profile, issues=issues)
+    return ReportLintResult(
+        path=path,
+        profile=profile,
+        issues=issues,
+        source_sha256=source_document.sha256 if source_document else None,
+    )
 
 
-def lint_report_file(path: Path, profile: str = "full") -> ReportLintResult:
+def lint_report_file(
+    path: Path,
+    profile: str = "full",
+    *,
+    source_path: Path | None = None,
+    require_locators: bool = False,
+) -> ReportLintResult:
     try:
         text = path.read_text(encoding="utf-8")
     except OSError as exc:
@@ -364,7 +545,26 @@ def lint_report_file(path: Path, profile: str = "full") -> ReportLintResult:
             profile=profile,
             issues=[ReportIssue("error", "read-error", str(exc), 1)],
         )
-    return lint_report_text(text, path, profile)
+    source_document: SourceDocument | None = None
+    source_issue: ReportIssue | None = None
+    if source_path is not None:
+        try:
+            source_document = build_source_document(
+                read_source(source_path),
+                path=str(source_path),
+            )
+        except (OSError, UnicodeError) as exc:
+            source_issue = ReportIssue("error", "source-read", str(exc), 1)
+    result = lint_report_text(
+        text,
+        path,
+        profile,
+        source_document=source_document,
+        require_locators=require_locators,
+    )
+    if source_issue is not None:
+        result.issues.append(source_issue)
+    return result
 
 
 def format_result(result: ReportLintResult) -> str:
@@ -381,6 +581,7 @@ def result_to_dict(result: ReportLintResult) -> dict[str, object]:
         "profile": result.profile,
         "errors": len(result.errors),
         "warnings": len(result.warnings),
+        "source_sha256": result.source_sha256,
         "issues": [
             {
                 "level": issue.level,
@@ -405,10 +606,24 @@ def main(argv: list[str] | None = None) -> int:
         default="full",
     )
     parser.add_argument("--strict", action="store_true", help="把警告也视为失败")
+    parser.add_argument("--source", type=Path, help="可选源文本，用于核验 `[Lx-Ly]`")
+    parser.add_argument(
+        "--require-locators",
+        action="store_true",
+        help="要求每个问题卡提供至少一个 `[Lx-Ly]` 位置",
+    )
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args(argv)
 
-    results = [lint_report_file(path, args.profile) for path in args.files]
+    results = [
+        lint_report_file(
+            path,
+            args.profile,
+            source_path=args.source,
+            require_locators=args.require_locators,
+        )
+        for path in args.files
+    ]
     if args.json:
         print(
             json.dumps([result_to_dict(result) for result in results], ensure_ascii=False, indent=2)

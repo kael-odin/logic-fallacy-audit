@@ -164,7 +164,15 @@ def command_render(args: argparse.Namespace) -> int:
 
 
 def command_lint_report(args: argparse.Namespace) -> int:
-    results = [lint_report_file(path, args.profile) for path in args.files]
+    results = [
+        lint_report_file(
+            path,
+            args.profile,
+            source_path=args.source,
+            require_locators=args.require_locators,
+        )
+        for path in args.files
+    ]
     if args.json:
         print(
             json.dumps(
@@ -290,6 +298,12 @@ def build_parser() -> argparse.ArgumentParser:
         default="full",
     )
     report_parser.add_argument("--strict", action="store_true")
+    report_parser.add_argument("--source", type=Path, help="可选源文本，用于核验 `[Lx-Ly]`")
+    report_parser.add_argument(
+        "--require-locators",
+        action="store_true",
+        help="要求每个问题卡提供至少一个 `[Lx-Ly]` 位置",
+    )
     report_parser.add_argument("--json", action="store_true")
     report_parser.set_defaults(func=command_lint_report)
 
