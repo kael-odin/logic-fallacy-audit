@@ -3,7 +3,7 @@ name: logic-fallacy-audit
 description: Analyze Chinese or English passages for logical fallacies, hidden premises, weak evidence, dialectical moves, and manipulative rhetoric, then produce an evidence-grounded report with confidence and false-positive boundaries. Use for argument analysis and debate critique, not for declaring whether a factual claim is true without evidence.
 license: MIT
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   language: "zh-CN"
 ---
 
@@ -91,6 +91,12 @@ For each issue, include:
 
 Use [assets/report-template.md](assets/report-template.md) for `full` and `debate` output.
 
+If you save the report as a Markdown file in this repository, validate it:
+
+```bash
+python scripts/report_lint.py path/to/report.md --profile full --strict
+```
+
 ## Non-Negotiable Constraints
 
 - Do not infer motive, mental illness, identity, or moral character from a logical flaw.
@@ -125,6 +131,7 @@ If the CLI cannot run, read the relevant generated category file under `referenc
 - [references/task-matrix.md](references/task-matrix.md): choose the correct evaluation route by reasoning task.
 - [references/argument-reconstruction.md](references/argument-reconstruction.md): how to expose hidden premises without inventing them.
 - [references/evidence-and-confidence.md](references/evidence-and-confidence.md): confidence calibration.
+- [references/report-lint.md](references/report-lint.md): automatically check report structure.
 - [references/explainer-style.md](references/explainer-style.md): clear explainer structure inspired by short critical-thinking videos.
 - [references/research-sources.md](references/research-sources.md): source basis and citation policy.
 - [references/adjacent-biases.md](references/adjacent-biases.md): cognitive biases that are not automatically fallacies.

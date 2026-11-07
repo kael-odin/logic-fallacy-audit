@@ -5,6 +5,7 @@
 ```bash
 python scripts/fallacy_cli.py validate --strict
 python scripts/fallacy_cli.py render --check
+python scripts/report_lint.py examples/sample-report.md --profile full --strict
 ruff check scripts tests
 ruff format --check scripts tests
 python -m unittest discover -s tests -v
@@ -24,6 +25,7 @@ python -m unittest discover -s tests -v
 - 条目覆盖达到门槛；
 - SKILL frontmatter 与必要引用存在；
 - 报告模板必需章节存在；
+- 样例报告通过结构、引用、标签、置信度和边界字段校验；
 - SKILL、CITATION 与 CHANGELOG 版本一致；
 - 评测案例可解析且引用有效；
 - Markdown 相对链接不失效；
@@ -73,6 +75,6 @@ python -m unittest discover -s tests -v
 - 目录校验通过；
 - 生成文件无漂移；
 - 单元测试通过；
-- 至少 10 条行为评测案例存在；
+- 至少 30 条行为评测案例存在；
 - README 安装命令与仓库名一致；
 - GitHub Actions 在支持版本上通过。

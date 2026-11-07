@@ -28,6 +28,8 @@ jobs:
         run: ruff check scripts tests
       - name: Check Python formatting
         run: ruff format --check scripts tests
+      - name: Validate sample report
+        run: python scripts/report_lint.py examples/sample-report.md --profile full --strict
 
   validate:
     runs-on: ubuntu-latest

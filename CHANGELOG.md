@@ -2,6 +2,14 @@
 
 All notable changes follow a simple milestone history.
 
+## 1.2.0 - 2026-11-07
+
+- Added a deterministic Markdown report linter with Full/Debate and Quick profiles.
+- Added the `lint-report` CLI command and a report-lint reference guide.
+- Expanded behavior evaluations from 17 to 33 cases, including all four modes, mixed-language, long-form, and negative inputs.
+- Added report linter unit tests and a CI sample-report quality gate.
+- Added a v1.2 behavior audit record.
+
 ## 1.1.0 - 2026-11-07
 
 - Merged the duplicated `contextomy` entry into `quote-mining` and added synonym coverage.

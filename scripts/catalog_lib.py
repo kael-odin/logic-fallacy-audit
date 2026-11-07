@@ -835,6 +835,7 @@ def validate_skill(root: Path = ROOT) -> list[Issue]:
     required_refs = [
         "references/analysis-protocol.md",
         "references/report-spec.md",
+        "references/report-lint.md",
         "references/false-positive-guards.md",
         "references/taxonomy.md",
         "references/chinese-patterns.md",
@@ -955,8 +956,8 @@ def validate_evals(catalog: Catalog, root: Path = ROOT) -> list[Issue]:
                     case_id,
                 )
             )
-    if len(seen) < 10:
-        issues.append(Issue("error", "eval-coverage", "评测案例少于 10 条"))
+    if len(seen) < 30:
+        issues.append(Issue("error", "eval-coverage", "评测案例少于 30 条"))
     return issues
 
 
@@ -993,6 +994,7 @@ def validate_repository(catalog: Catalog, root: Path = ROOT) -> list[Issue]:
         "references/catalog-index.md",
         "references/core-fallacies.md",
         "references/logic-basics.md",
+        "references/report-lint.md",
         "references/task-matrix.md",
         "assets/report-template.md",
         "assets/checklist.md",
@@ -1005,8 +1007,11 @@ def validate_repository(catalog: Catalog, root: Path = ROOT) -> list[Issue]:
         "docs/quality.md",
         "docs/roadmap.md",
         "docs/content-audit-2026-11-07.md",
+        "docs/audit-v1.2-2026-11-07.md",
         "docs/content-backlog.md",
         "pyproject.toml",
+        "scripts/report_lint.py",
+        "tests/test_report_lint.py",
     ]
     for relative in required_files:
         if not (root / relative).exists():

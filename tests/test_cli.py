@@ -50,6 +50,17 @@ class CliTests(unittest.TestCase):
         self.assertEqual(0, result.returncode, result.stderr)
         self.assertIn("一致", result.stdout)
 
+    def test_lint_report_accepts_sample(self) -> None:
+        result = run_cli(
+            "lint-report",
+            "examples/sample-report.md",
+            "--profile",
+            "full",
+            "--strict",
+        )
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertIn("0 errors", result.stdout)
+
 
 if __name__ == "__main__":
     unittest.main()

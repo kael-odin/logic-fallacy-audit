@@ -72,8 +72,12 @@ class DocumentationTests(unittest.TestCase):
     def test_eval_suite_is_parseable_and_nonempty(self) -> None:
         lines = (ROOT / "evals" / "cases.jsonl").read_text(encoding="utf-8").splitlines()
         cases = [json.loads(line) for line in lines if line.strip()]
-        self.assertGreaterEqual(len(cases), 15)
+        self.assertGreaterEqual(len(cases), 30)
         self.assertTrue(any(not item["must_detect"] for item in cases))
+        self.assertEqual(
+            {"quick", "full", "debate", "teaching"},
+            {item["mode"] for item in cases},
+        )
 
     def test_readme_counts_match_catalog(self) -> None:
         text = (ROOT / "README.md").read_text(encoding="utf-8")

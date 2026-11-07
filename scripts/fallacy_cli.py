@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from pathlib import Path
 
 from catalog_lib import (
     ROOT,
@@ -17,6 +18,7 @@ from catalog_lib import (
     validate_repository,
     write_generated_files,
 )
+from report_lint import format_result, lint_report_file, result_to_dict
 
 
 def _print_issues(issues: list, strict: bool) -> int:
@@ -152,6 +154,23 @@ def command_render(args: argparse.Namespace) -> int:
     return 0
 
 
+def command_lint_report(args: argparse.Namespace) -> int:
+    results = [lint_report_file(path, args.profile) for path in args.files]
+    if args.json:
+        print(
+            json.dumps(
+                [result_to_dict(result) for result in results],
+                ensure_ascii=False,
+                indent=2,
+            )
+        )
+    else:
+        for result in results:
+            print(format_result(result))
+    failed = any(result.errors or (args.strict and result.warnings) for result in results)
+    return 1 if failed else 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="fallacy_cli",
@@ -196,6 +215,20 @@ def build_parser() -> argparse.ArgumentParser:
         help="只检查生成文件是否有漂移",
     )
     render_parser.set_defaults(func=command_render)
+
+    report_parser = subparsers.add_parser(
+        "lint-report",
+        help="校验 Markdown 逻辑分析报告的章节、证据与边界",
+    )
+    report_parser.add_argument("files", nargs="+", type=Path)
+    report_parser.add_argument(
+        "--profile",
+        choices=["full", "debate", "quick", "teaching"],
+        default="full",
+    )
+    report_parser.add_argument("--strict", action="store_true")
+    report_parser.add_argument("--json", action="store_true")
+    report_parser.set_defaults(func=command_lint_report)
     return parser
 
 

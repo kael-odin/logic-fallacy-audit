@@ -8,7 +8,8 @@
 2. 要求模型按 `mode` 输出报告。
 3. 检查是否覆盖 `must_detect`，是否合理处理 `may_detect`。
 4. 检查是否出现 `must_not_assert` 中禁止的高确定性断言。
-5. 按 rubric 评分。
+5. 把完整报告保存为临时 Markdown，运行 `python scripts/report_lint.py <report.md> --profile <mode> --strict`。
+6. 按 rubric 评分。
 
 `must_detect` 表示当前文本中可稳定识别的主要问题，不要求逐字使用某个标签，但报告必须描述同一推理机制。
 

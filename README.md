@@ -63,6 +63,7 @@ python scripts/fallacy_cli.py stats
 python scripts/fallacy_cli.py search "因果"
 python scripts/fallacy_cli.py show post-hoc
 python scripts/fallacy_cli.py render
+python scripts/fallacy_cli.py lint-report examples/sample-report.md --strict
 ```
 
 仅依赖 Python 3.11+ 标准库。
@@ -104,7 +105,7 @@ python scripts/fallacy_cli.py render
 
 ## 知识库
 
-知识库按论证功能分类，而不是只按传统教科书目录排列。当前 v1.1 覆盖：
+知识库按论证功能分类，而不是只按传统教科书目录排列。当前 v1.2 覆盖：
 
 **240 条结构化条目**：208 条谬误/论证模式，32 条与谬误相邻的认知偏差。
 
@@ -154,18 +155,21 @@ python scripts/fallacy_cli.py render
 - [产品规格](docs/product-spec.md)：目标用户、场景、模式、非目标与成功指标。
 - [架构说明](docs/architecture.md)：唯一数据源、生成流水线与失败模式。
 - [质量方案](docs/quality.md)：自动检查、人工评测与误报回归。
-- [路线图](docs/roadmap.md)：v1.1 状态与后续方向。
+- [路线图](docs/roadmap.md)：当前版本状态与后续方向。
 - [内容审查记录](docs/content-audit-2026-11-07.md)：本轮差距扫描、修复项与回归证据。
 - [内容候选池](docs/content-backlog.md)：尚未达到收录门槛的后续条目与评测方向。
+- [v1.2 行为审查](docs/audit-v1.2-2026-11-07.md)：报告验收、评测扩展与质量门记录。
 - [核心十类速查](references/core-fallacies.md)：你给出的十类可直接从这里进入。
 - [逻辑基础](references/logic-basics.md)：有效性、条件、量词、归纳、概率与规范推理。
 - [任务矩阵](references/task-matrix.md)：按演绎、因果、统计、政策等任务选择分析路线。
 - [模式示例](examples/modes.md)：Quick、Full、Debate、Teaching 的输出差异。
+- [报告结构校验](references/report-lint.md)：自动验收章节、引用、标签、置信度与边界字段。
 
 ## 开发与验证
 
 ```bash
 python scripts/fallacy_cli.py validate --strict
+python scripts/report_lint.py examples/sample-report.md --profile full --strict
 python -m unittest discover -s tests -v
 python scripts/fallacy_cli.py render --check
 ```
@@ -176,6 +180,7 @@ CI 会检查：
 - 目录 ID、别名、关联项和字段完整性；
 - 分类数量与生成文档是否漂移；
 - 报告模板必需章节；
+- 样例报告的引用、判定、置信度与边界字段；
 - 评测样例结构；
 - Python 脚本与单元测试。
 
