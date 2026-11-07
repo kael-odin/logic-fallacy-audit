@@ -4,7 +4,7 @@ Logic Fallacy Audit turns a passage into a structured argument review: claims, e
 
 The project is designed for Chinese and English argument analysis, debate preparation, editing, media literacy, and critical-thinking teaching. It is not a fact-checking oracle and does not infer a speaker's motives from a reasoning error.
 
-Current release: `1.3.0`. The catalog contains 250 structured entries: 218 fallacies or argument patterns and 32 adjacent cognitive biases.
+Current release: `1.4.0`. The catalog contains 250 structured entries: 218 fallacies or argument patterns and 32 adjacent cognitive biases.
 
 ## What it does
 
@@ -13,6 +13,8 @@ Current release: `1.3.0`. The catalog contains 250 structured entries: 218 falla
 - Matches reasoning defects to a structured, maintainable fallacy catalog.
 - Requires quoted evidence, confidence labels, counterexamples, and false-positive boundaries.
 - Creates deterministic source maps with line spans, SHA-256, and exact quote locations.
+- Generates Mermaid argument maps, issue graphs, and before/after comparisons from reports.
+- Includes teaching-mode guidance, graded exercises with answers, and Chinese rewrite examples.
 - Produces quick, full, debate, or teaching reports.
 
 ## Install for Codex
@@ -32,6 +34,7 @@ python scripts/fallacy_cli.py validate --strict
 python scripts/report_lint.py examples/sample-report.md --profile full --strict
 python scripts/fallacy_cli.py segment examples/long-text-source.txt --json
 python scripts/fallacy_cli.py locate examples/long-text-source.txt --quote "三个人的经历"
+python scripts/fallacy_cli.py diagram examples/sample-report.md --kind compare
 python -m unittest discover -s tests -v
 python scripts/fallacy_cli.py render --check
 ```

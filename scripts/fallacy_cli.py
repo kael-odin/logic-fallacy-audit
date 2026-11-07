@@ -18,6 +18,7 @@ from catalog_lib import (
     validate_repository,
     write_generated_files,
 )
+from report_diagram import diagram_to_dict, parse_report_diagram, render_diagram
 from report_lint import format_result, lint_report_file, result_to_dict
 from source_map import (
     build_source_document,
@@ -242,6 +243,36 @@ def command_locate(args: argparse.Namespace) -> int:
     return 0 if matches else 1
 
 
+def command_diagram(args: argparse.Namespace) -> int:
+    try:
+        text = args.report.read_text(encoding="utf-8")
+    except (OSError, UnicodeError) as exc:
+        print(f"[ERROR] report-read: {exc}", file=sys.stderr)
+        return 1
+    try:
+        diagram = parse_report_diagram(text)
+        mermaid = render_diagram(diagram, args.kind)
+    except ValueError as exc:
+        print(f"[ERROR] diagram: {exc}", file=sys.stderr)
+        return 1
+    if args.json:
+        print(
+            json.dumps(
+                {
+                    "path": str(args.report),
+                    "kind": args.kind,
+                    "diagram": diagram_to_dict(diagram),
+                    "mermaid": mermaid,
+                },
+                ensure_ascii=False,
+                indent=2,
+            )
+        )
+    else:
+        print(mermaid)
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="fallacy_cli",
@@ -329,6 +360,19 @@ def build_parser() -> argparse.ArgumentParser:
     locate_parser.add_argument("--quote", required=True, help="需要精确定位的原文片段")
     locate_parser.add_argument("--json", action="store_true")
     locate_parser.set_defaults(func=command_locate)
+
+    diagram_parser = subparsers.add_parser(
+        "diagram",
+        help="从 Markdown 报告生成 Mermaid 论证图或问题关系图",
+    )
+    diagram_parser.add_argument("report", type=Path)
+    diagram_parser.add_argument(
+        "--kind",
+        choices=["argument", "issues", "compare"],
+        default="argument",
+    )
+    diagram_parser.add_argument("--json", action="store_true")
+    diagram_parser.set_defaults(func=command_diagram)
     return parser
 
 

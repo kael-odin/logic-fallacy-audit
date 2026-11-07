@@ -3,7 +3,7 @@ name: logic-fallacy-audit
 description: Analyze Chinese or English passages for logical fallacies, hidden premises, weak evidence, dialectical moves, and manipulative rhetoric, then produce an evidence-grounded report with confidence and false-positive boundaries. Use for argument analysis and debate critique, not for declaring whether a factual claim is true without evidence.
 license: MIT
 metadata:
-  version: "1.3.0"
+  version: "1.4.0"
   language: "zh-CN"
 ---
 
@@ -21,7 +21,9 @@ Turn a passage into a careful argument analysis. Identify the argument before na
 6. When the passage relies on Chinese idioms, internet phrases, or debate one-liners, also read [references/chinese-patterns.md](references/chinese-patterns.md).
 7. For long files, subtitles, or multi-paragraph sources, read [references/long-text-workflow.md](references/long-text-workflow.md).
 8. For English reports, use [assets/report-template.en.md](assets/report-template.en.md) and [references/glossary.md](references/glossary.md).
-9. For the ten most common entry points, use [references/core-fallacies.md](references/core-fallacies.md).
+9. For teaching output, read [references/teaching-mode.md](references/teaching-mode.md).
+10. For argument graphs or before/after comparison, read [references/visualization.md](references/visualization.md).
+11. For the ten most common entry points, use [references/core-fallacies.md](references/core-fallacies.md).
 
 Available modes:
 
@@ -108,6 +110,14 @@ python scripts/fallacy_cli.py locate path/to/source.txt --quote "exact excerpt"
 
 Cite located excerpts as `[L12-L14] "exact text"` and record the source SHA-256 in the report metadata.
 
+For a saved report, generate Mermaid diagrams:
+
+```bash
+python scripts/fallacy_cli.py diagram path/to/report.md --kind argument
+python scripts/fallacy_cli.py diagram path/to/report.md --kind issues
+python scripts/fallacy_cli.py diagram path/to/report.md --kind compare
+```
+
 ## Non-Negotiable Constraints
 
 - Do not infer motive, mental illness, identity, or moral character from a logical flaw.
@@ -144,6 +154,8 @@ If the CLI cannot run, read the relevant generated category file under `referenc
 - [references/evidence-and-confidence.md](references/evidence-and-confidence.md): confidence calibration.
 - [references/long-text-workflow.md](references/long-text-workflow.md): source segmentation, line locations, and clean-input boundaries.
 - [references/glossary.md](references/glossary.md): fixed Chinese-English terms for report sections, labels, and reasoning types.
+- [references/teaching-mode.md](references/teaching-mode.md): lesson flow, difficulty levels, answer keys, and feedback.
+- [references/visualization.md](references/visualization.md): Mermaid argument, issue, and before/after diagrams.
 - [references/report-lint.md](references/report-lint.md): automatically check report structure.
 - [references/explainer-style.md](references/explainer-style.md): clear explainer structure inspired by short critical-thinking videos.
 - [references/research-sources.md](references/research-sources.md): source basis and citation policy.

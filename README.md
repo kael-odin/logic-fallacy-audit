@@ -67,6 +67,7 @@ python scripts/fallacy_cli.py lint-report examples/sample-report.md --strict
 python scripts/fallacy_cli.py lint-report examples/sample-report.en.md --strict --source examples/long-text-source.txt --require-locators
 python scripts/fallacy_cli.py segment examples/long-text-source.txt --json
 python scripts/fallacy_cli.py locate examples/long-text-source.txt --quote "三个人的经历"
+python scripts/fallacy_cli.py diagram examples/sample-report.md --kind compare
 ```
 
 仅依赖 Python 3.11+ 标准库。
@@ -168,6 +169,11 @@ python scripts/fallacy_cli.py locate examples/long-text-source.txt --quote "三�
 - [任务矩阵](references/task-matrix.md)：按演绎、因果、统计、政策等任务选择分析路线。
 - [模式示例](examples/modes.md)：Quick、Full、Debate、Teaching 的输出差异。
 - [英文报告样例](examples/sample-report.en.md)：英文模板、引用位置与完整字段示例。
+- [课堂练习与答案](examples/exercises.md)：10 道分级练习与隐藏答案。
+- [中文逻辑改写示例](examples/rewrites.md)：6 组原句、修复版本与修复点。
+- [教学报告样例](examples/teaching-report.md)：分步讲解、练习与答案。
+- [教学模式规范](references/teaching-mode.md)：难度、反馈和答案一致性。
+- [论证图规范](references/visualization.md)：Mermaid 论证图、问题图和前后对照。
 - [报告结构校验](references/report-lint.md)：自动验收章节、引用、标签、置信度与边界字段。
 - [长文本与源文件定位](references/long-text-workflow.md)：候选块、SHA-256、行号与精确引文。
 - [中英术语表](references/glossary.md)：统一报告章节、判定标签和推理类型英译。
@@ -190,6 +196,8 @@ CI 会检查：
 - 报告模板必需章节；
 - 样例报告的引用、判定、置信度与边界字段；
 - 长文本候选块、SHA-256、行号和精确引文定位；
+- Mermaid 论证图、问题关系图和修复前后对照；
+- Teaching 报告结构与带答案练习库；
 - 评测样例结构；
 - Python 脚本与单元测试。
 

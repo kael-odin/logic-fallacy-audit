@@ -57,3 +57,5 @@
 5. 所以结论应改成：“这位邻居报告了改善；这是个案，不能证明普遍疗效。”
 
 对应条目：`anecdotal-evidence`、`post-hoc`、`hasty-generalization`。
+
+完整教学结构见 [teaching-report.md](teaching-report.md)，更多练习见 [exercises.md](exercises.md)。

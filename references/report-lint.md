@@ -31,6 +31,8 @@ Quick 模式仍保留六个核心章节，并检查原文引用、判定标签�
 
 Teaching 使用与 Quick 相同的最小结构规则。教学模式可以增加讲解步骤、例子和练习，但正式文件仍必须包含六个核心章节、原文引用、判定标签和置信度。
 
+完整教学结构见 [teaching-mode.md](teaching-mode.md)，样例见 [teaching-report.md](../examples/teaching-report.md)。
+
 ## 源文件引用核验
 
 提供 `--source` 时，校验器会检查：

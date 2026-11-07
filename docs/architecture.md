@@ -10,6 +10,7 @@ SKILL.md
                  └─ CLI / tests / CI
                        └─ 报告结构校验（report_lint）
                             └─ 源文本映射（source_map）
+                                 └─ 图表生成（report_diagram）
 ```
 
 ## 2. 唯一数据源
@@ -99,6 +100,7 @@ catalog/*.toml
 | 条目缺 ID 导致校验崩溃 | 安全 ID 读取与结构化错误 |
 | 报告章节或证据字段缺失 | `report_lint.py` + CI 样例门禁 |
 | 引文无法追溯或源文本版本漂移 | `source_map.py` + SHA-256 + 行号定位 |
+| 图表关系超出报告证据 | 只从论证地图与问题卡生成，不推断精确攻击目标 |
 | 行为退化 | 固定评测集 + rubric |
 
 ## 8. 扩展原则

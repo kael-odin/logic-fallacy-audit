@@ -2,6 +2,14 @@
 
 All notable changes follow a simple milestone history.
 
+## 1.4.0 - 2026-11-07
+
+- Added a report diagram generator for Mermaid argument, issue, and before/after views.
+- Added `diagram` CLI support for Chinese and English Markdown reports.
+- Added teaching-mode guidance, ten graded exercises with answers, and a complete teaching sample.
+- Added six Chinese before/after rewrite examples.
+- Added CI and unit-test coverage for teaching materials and diagram generation.
+
 ## 1.3.0 - 2026-11-07
 
 - Aligned the report specification with every field enforced by the linter.

@@ -120,6 +120,26 @@ class CliTests(unittest.TestCase):
         self.assertEqual(1, result.returncode)
         self.assertIn("未找到", result.stdout)
 
+    def test_diagram_argument_returns_mermaid(self) -> None:
+        result = run_cli("diagram", "examples/sample-report.md", "--kind", "argument")
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertIn("```mermaid", result.stdout)
+        self.assertIn("P1 --> C1", result.stdout)
+
+    def test_diagram_compare_json(self) -> None:
+        result = run_cli(
+            "diagram",
+            "examples/sample-report.en.md",
+            "--kind",
+            "compare",
+            "--json",
+        )
+        self.assertEqual(0, result.returncode, result.stderr)
+        payload = json.loads(result.stdout)
+        self.assertEqual("compare", payload["kind"])
+        self.assertEqual(2, len(payload["diagram"]["issues"]))
+        self.assertIn("subgraph AFTER", payload["mermaid"])
+
 
 if __name__ == "__main__":
     unittest.main()

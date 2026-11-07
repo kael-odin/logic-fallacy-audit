@@ -32,6 +32,10 @@ jobs:
         run: python scripts/report_lint.py examples/sample-report.md --profile full --strict
       - name: Validate English report with source locations
         run: python scripts/report_lint.py examples/sample-report.en.md --profile full --strict --source examples/long-text-source.txt --require-locators
+      - name: Validate teaching report
+        run: python scripts/report_lint.py examples/teaching-report.md --profile teaching --strict
+      - name: Validate Mermaid diagram generation
+        run: python scripts/fallacy_cli.py diagram examples/sample-report.md --kind compare > /dev/null
 
   validate:
     runs-on: ubuntu-latest
