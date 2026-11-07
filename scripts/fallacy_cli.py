@@ -19,6 +19,15 @@ from catalog_lib import (
     write_generated_files,
 )
 from report_lint import format_result, lint_report_file, result_to_dict
+from source_map import (
+    build_source_document,
+    format_quote_matches,
+    format_source_document,
+    locate_quote,
+    quote_matches_to_dict,
+    read_source,
+    source_document_to_dict,
+)
 
 
 def _print_issues(issues: list, strict: bool) -> int:
@@ -171,6 +180,60 @@ def command_lint_report(args: argparse.Namespace) -> int:
     return 1 if failed else 0
 
 
+def _load_source(args: argparse.Namespace):
+    try:
+        text = read_source(args.source)
+    except (OSError, UnicodeError) as exc:
+        print(f"[ERROR] source-read: {exc}", file=sys.stderr)
+        return None
+    max_chars = int(getattr(args, "max_chars", 0))
+    if max_chars < 0:
+        print("[ERROR] max-chars: 必须是非负整数", file=sys.stderr)
+        return None
+    return build_source_document(
+        text,
+        path=str(args.source),
+        max_chars=max_chars,
+    )
+
+
+def command_segment(args: argparse.Namespace) -> int:
+    document = _load_source(args)
+    if document is None:
+        return 1
+    if args.json:
+        print(json.dumps(source_document_to_dict(document), ensure_ascii=False, indent=2))
+    else:
+        print(format_source_document(document))
+    return 0
+
+
+def command_locate(args: argparse.Namespace) -> int:
+    document = _load_source(args)
+    if document is None:
+        return 1
+    try:
+        matches = locate_quote(document, args.quote)
+    except ValueError as exc:
+        print(f"[ERROR] quote: {exc}", file=sys.stderr)
+        return 1
+    if args.json:
+        print(
+            json.dumps(
+                {
+                    "path": document.path,
+                    "sha256": document.sha256,
+                    "matches": quote_matches_to_dict(matches),
+                },
+                ensure_ascii=False,
+                indent=2,
+            )
+        )
+    else:
+        print(format_quote_matches(matches))
+    return 0 if matches else 1
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="fallacy_cli",
@@ -229,6 +292,29 @@ def build_parser() -> argparse.ArgumentParser:
     report_parser.add_argument("--strict", action="store_true")
     report_parser.add_argument("--json", action="store_true")
     report_parser.set_defaults(func=command_lint_report)
+
+    segment_parser = subparsers.add_parser(
+        "segment",
+        help="按段落生成源文本行号与候选块",
+    )
+    segment_parser.add_argument("source", type=Path, help="UTF-8 文本文件；使用 - 读取标准输入")
+    segment_parser.add_argument(
+        "--max-chars",
+        type=int,
+        default=0,
+        help="可选的长块字符上限；0 表示不按长度切分",
+    )
+    segment_parser.add_argument("--json", action="store_true")
+    segment_parser.set_defaults(func=command_segment)
+
+    locate_parser = subparsers.add_parser(
+        "locate",
+        help="在源文本中查找精确引文并返回行号",
+    )
+    locate_parser.add_argument("source", type=Path, help="UTF-8 文本文件；使用 - 读取标准输入")
+    locate_parser.add_argument("--quote", required=True, help="需要精确定位的原文片段")
+    locate_parser.add_argument("--json", action="store_true")
+    locate_parser.set_defaults(func=command_locate)
     return parser
 
 

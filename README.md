@@ -64,6 +64,8 @@ python scripts/fallacy_cli.py search "因果"
 python scripts/fallacy_cli.py show post-hoc
 python scripts/fallacy_cli.py render
 python scripts/fallacy_cli.py lint-report examples/sample-report.md --strict
+python scripts/fallacy_cli.py segment examples/long-text-source.txt --json
+python scripts/fallacy_cli.py locate examples/long-text-source.txt --quote "三个人的经历"
 ```
 
 仅依赖 Python 3.11+ 标准库。
@@ -165,6 +167,8 @@ python scripts/fallacy_cli.py lint-report examples/sample-report.md --strict
 - [任务矩阵](references/task-matrix.md)：按演绎、因果、统计、政策等任务选择分析路线。
 - [模式示例](examples/modes.md)：Quick、Full、Debate、Teaching 的输出差异。
 - [报告结构校验](references/report-lint.md)：自动验收章节、引用、标签、置信度与边界字段。
+- [长文本与源文件定位](references/long-text-workflow.md)：候选块、SHA-256、行号与精确引文。
+- [源文本映射审查](docs/source-workflow-2026-11-07.md)：实现范围、失败路径与验收证据。
 
 ## 开发与验证
 
@@ -182,6 +186,7 @@ CI 会检查：
 - 分类数量与生成文档是否漂移；
 - 报告模板必需章节；
 - 样例报告的引用、判定、置信度与边界字段；
+- 长文本候选块、SHA-256、行号和精确引文定位；
 - 评测样例结构；
 - Python 脚本与单元测试。
 

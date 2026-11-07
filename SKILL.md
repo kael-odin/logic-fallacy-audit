@@ -19,7 +19,8 @@ Turn a passage into a careful argument analysis. Identify the argument before na
 4. Read [references/false-positive-guards.md](references/false-positive-guards.md).
 5. Read only the catalog files relevant to the passage from [references/catalog-index.md](references/catalog-index.md).
 6. When the passage relies on Chinese idioms, internet phrases, or debate one-liners, also read [references/chinese-patterns.md](references/chinese-patterns.md).
-7. For the ten most common entry points, use [references/core-fallacies.md](references/core-fallacies.md).
+7. For long files, subtitles, or multi-paragraph sources, read [references/long-text-workflow.md](references/long-text-workflow.md).
+8. For the ten most common entry points, use [references/core-fallacies.md](references/core-fallacies.md).
 
 Available modes:
 
@@ -97,6 +98,15 @@ If you save the report as a Markdown file in this repository, validate it:
 python scripts/report_lint.py path/to/report.md --profile full --strict
 ```
 
+For a saved long source, generate stable locations before writing findings:
+
+```bash
+python scripts/fallacy_cli.py segment path/to/source.txt --json
+python scripts/fallacy_cli.py locate path/to/source.txt --quote "exact excerpt"
+```
+
+Cite located excerpts as `[L12-L14] "exact text"` and record the source SHA-256 in the report metadata.
+
 ## Non-Negotiable Constraints
 
 - Do not infer motive, mental illness, identity, or moral character from a logical flaw.
@@ -131,6 +141,7 @@ If the CLI cannot run, read the relevant generated category file under `referenc
 - [references/task-matrix.md](references/task-matrix.md): choose the correct evaluation route by reasoning task.
 - [references/argument-reconstruction.md](references/argument-reconstruction.md): how to expose hidden premises without inventing them.
 - [references/evidence-and-confidence.md](references/evidence-and-confidence.md): confidence calibration.
+- [references/long-text-workflow.md](references/long-text-workflow.md): source segmentation, line locations, and clean-input boundaries.
 - [references/report-lint.md](references/report-lint.md): automatically check report structure.
 - [references/explainer-style.md](references/explainer-style.md): clear explainer structure inspired by short critical-thinking videos.
 - [references/research-sources.md](references/research-sources.md): source basis and citation policy.

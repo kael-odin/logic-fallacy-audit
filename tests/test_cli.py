@@ -61,6 +61,37 @@ class CliTests(unittest.TestCase):
         self.assertEqual(0, result.returncode, result.stderr)
         self.assertIn("0 errors", result.stdout)
 
+    def test_segment_example_returns_source_map(self) -> None:
+        result = run_cli("segment", "examples/long-text-source.txt", "--json")
+        self.assertEqual(0, result.returncode, result.stderr)
+        payload = json.loads(result.stdout)
+        self.assertEqual(64, len(payload["sha256"]))
+        self.assertGreaterEqual(payload["block_count"], 3)
+        self.assertEqual("U1", payload["blocks"][0]["id"])
+
+    def test_locate_example_quote_returns_line_numbers(self) -> None:
+        result = run_cli(
+            "locate",
+            "examples/long-text-source.txt",
+            "--quote",
+            "三个人的经历",
+            "--json",
+        )
+        self.assertEqual(0, result.returncode, result.stderr)
+        payload = json.loads(result.stdout)
+        self.assertEqual(1, len(payload["matches"]))
+        self.assertGreaterEqual(payload["matches"][0]["line_start"], 1)
+
+    def test_locate_missing_quote_fails(self) -> None:
+        result = run_cli(
+            "locate",
+            "examples/long-text-source.txt",
+            "--quote",
+            "这段文字不存在",
+        )
+        self.assertEqual(1, result.returncode)
+        self.assertIn("未找到", result.stdout)
+
 
 if __name__ == "__main__":
     unittest.main()

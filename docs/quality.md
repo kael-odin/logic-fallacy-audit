@@ -5,6 +5,8 @@
 ```bash
 python scripts/fallacy_cli.py validate --strict
 python scripts/fallacy_cli.py render --check
+python scripts/fallacy_cli.py segment examples/long-text-source.txt --json
+python scripts/fallacy_cli.py locate examples/long-text-source.txt --quote "三个人的经历"
 python scripts/report_lint.py examples/sample-report.md --profile full --strict
 ruff check scripts tests
 ruff format --check scripts tests
@@ -30,6 +32,7 @@ python -m unittest discover -s tests -v
 - SKILL、CITATION 与 CHANGELOG 版本一致；
 - 评测案例可解析且引用有效；
 - 评测 mode 类型有效，且四种模式均有样本；
+- 长文本候选块、SHA-256、行号与精确引文定位通过测试；
 - Markdown 相对链接不失效；
 - 生成目录无缺失、漂移或残留文件；
 - CLI 和示例报告关键行为通过测试。

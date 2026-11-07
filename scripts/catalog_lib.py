@@ -836,6 +836,7 @@ def validate_skill(root: Path = ROOT) -> list[Issue]:
         "references/analysis-protocol.md",
         "references/report-spec.md",
         "references/report-lint.md",
+        "references/long-text-workflow.md",
         "references/false-positive-guards.md",
         "references/taxonomy.md",
         "references/chinese-patterns.md",
@@ -1016,6 +1017,7 @@ def validate_repository(catalog: Catalog, root: Path = ROOT) -> list[Issue]:
         "evals/README.md",
         "evals/rubric.md",
         "examples/sample-report.md",
+        "examples/long-text-source.txt",
         "examples/modes.md",
         "docs/product-spec.md",
         "docs/architecture.md",
@@ -1024,10 +1026,13 @@ def validate_repository(catalog: Catalog, root: Path = ROOT) -> list[Issue]:
         "docs/content-audit-2026-11-07.md",
         "docs/audit-v1.2-2026-11-07.md",
         "docs/catalog-expansion-250-2026-11-07.md",
+        "docs/source-workflow-2026-11-07.md",
         "docs/content-backlog.md",
         "pyproject.toml",
         "scripts/report_lint.py",
+        "scripts/source_map.py",
         "tests/test_report_lint.py",
+        "tests/test_source_map.py",
     ]
     for relative in required_files:
         if not (root / relative).exists():

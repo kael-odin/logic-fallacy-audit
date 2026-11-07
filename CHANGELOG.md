@@ -10,6 +10,8 @@ All notable changes follow a simple milestone history.
 - Updated the content backlog to distinguish completed evaluation coverage from remaining candidates.
 - Expanded the catalog from 240 to 250 entries with ten mechanism-level additions.
 - Expanded behavior evaluations from 33 to 43 cases so every new entry has regression coverage.
+- Added deterministic long-text source maps with paragraph blocks, line spans, and SHA-256.
+- Added exact quote location and `Lx-y` citation guidance for saved sources.
 
 ## 1.2.0 - 2026-11-07
 

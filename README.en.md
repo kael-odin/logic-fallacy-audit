@@ -12,6 +12,7 @@ Latest tagged release: `1.2.0`. The current `main` branch contains 250 structure
 - Separates deductive validity, evidential support, dialectical fairness, and rhetorical pressure.
 - Matches reasoning defects to a structured, maintainable fallacy catalog.
 - Requires quoted evidence, confidence labels, counterexamples, and false-positive boundaries.
+- Creates deterministic source maps with line spans, SHA-256, and exact quote locations.
 - Produces quick, full, debate, or teaching reports.
 
 ## Install for Codex
@@ -27,6 +28,8 @@ See [README.md](README.md) for the Chinese-first documentation, architecture, va
 ```bash
 python scripts/fallacy_cli.py validate --strict
 python scripts/report_lint.py examples/sample-report.md --profile full --strict
+python scripts/fallacy_cli.py segment examples/long-text-source.txt --json
+python scripts/fallacy_cli.py locate examples/long-text-source.txt --quote "三个人的经历"
 python -m unittest discover -s tests -v
 python scripts/fallacy_cli.py render --check
 ```
