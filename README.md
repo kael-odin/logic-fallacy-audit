@@ -68,6 +68,7 @@ python scripts/fallacy_cli.py lint-report examples/sample-report.en.md --strict 
 python scripts/fallacy_cli.py segment examples/long-text-source.txt --json
 python scripts/fallacy_cli.py locate examples/long-text-source.txt --quote "三个人的经历"
 python scripts/fallacy_cli.py diagram examples/sample-report.md --kind compare
+python scripts/fallacy_cli.py regression-dashboard --check
 ```
 
 仅依赖 Python 3.11+ 标准库。
@@ -174,6 +175,8 @@ python scripts/fallacy_cli.py diagram examples/sample-report.md --kind compare
 - [教学报告样例](examples/teaching-report.md)：分步讲解、练习与答案。
 - [教学模式规范](references/teaching-mode.md)：难度、反馈和答案一致性。
 - [论证图规范](references/visualization.md)：Mermaid 论证图、问题图和前后对照。
+- [专项评分表](evals/rubrics/README.md)：政策、统计和长对话评分维度。
+- [误报与回归看板](docs/regression-dashboard.md)：已修复、仍存在与边界变化。
 - [报告结构校验](references/report-lint.md)：自动验收章节、引用、标签、置信度与边界字段。
 - [长文本与源文件定位](references/long-text-workflow.md)：候选块、SHA-256、行号与精确引文。
 - [中英术语表](references/glossary.md)：统一报告章节、判定标签和推理类型英译。

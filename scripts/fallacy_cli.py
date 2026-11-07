@@ -18,6 +18,7 @@ from catalog_lib import (
     validate_repository,
     write_generated_files,
 )
+from regression_dashboard import dashboard_is_current, write_dashboard
 from report_diagram import diagram_to_dict, parse_report_diagram, render_diagram
 from report_lint import format_result, lint_report_file, result_to_dict
 from source_map import (
@@ -273,6 +274,22 @@ def command_diagram(args: argparse.Namespace) -> int:
     return 0
 
 
+def command_regression_dashboard(args: argparse.Namespace) -> int:
+    if args.check:
+        if not dashboard_is_current():
+            print("[DRIFT] docs/regression-dashboard.md", file=sys.stderr)
+            return 1
+        print("回归看板已与账本一致。")
+        return 0
+    try:
+        output = write_dashboard()
+    except (OSError, ValueError) as exc:
+        print(f"[ERROR] regression-dashboard: {exc}", file=sys.stderr)
+        return 1
+    print(f"已生成 {output.relative_to(ROOT)}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="fallacy_cli",
@@ -373,6 +390,13 @@ def build_parser() -> argparse.ArgumentParser:
     )
     diagram_parser.add_argument("--json", action="store_true")
     diagram_parser.set_defaults(func=command_diagram)
+
+    dashboard_parser = subparsers.add_parser(
+        "regression-dashboard",
+        help="校验回归账本并生成误报看板",
+    )
+    dashboard_parser.add_argument("--check", action="store_true")
+    dashboard_parser.set_defaults(func=command_regression_dashboard)
     return parser
 
 

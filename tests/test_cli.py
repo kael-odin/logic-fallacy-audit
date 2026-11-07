@@ -140,6 +140,11 @@ class CliTests(unittest.TestCase):
         self.assertEqual(2, len(payload["diagram"]["issues"]))
         self.assertIn("subgraph AFTER", payload["mermaid"])
 
+    def test_regression_dashboard_check(self) -> None:
+        result = run_cli("regression-dashboard", "--check")
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertIn("一致", result.stdout)
+
 
 if __name__ == "__main__":
     unittest.main()

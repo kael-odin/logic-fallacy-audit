@@ -15,6 +15,7 @@ Current release: `1.4.0`. The catalog contains 250 structured entries: 218 falla
 - Creates deterministic source maps with line spans, SHA-256, and exact quote locations.
 - Generates Mermaid argument maps, issue graphs, and before/after comparisons from reports.
 - Includes teaching-mode guidance, graded exercises with answers, and Chinese rewrite examples.
+- Includes specialized policy, statistics, and long-dialogue rubrics plus a generated regression dashboard.
 - Produces quick, full, debate, or teaching reports.
 
 ## Install for Codex
@@ -35,6 +36,7 @@ python scripts/report_lint.py examples/sample-report.md --profile full --strict
 python scripts/fallacy_cli.py segment examples/long-text-source.txt --json
 python scripts/fallacy_cli.py locate examples/long-text-source.txt --quote "三个人的经历"
 python scripts/fallacy_cli.py diagram examples/sample-report.md --kind compare
+python scripts/fallacy_cli.py regression-dashboard --check
 python -m unittest discover -s tests -v
 python scripts/fallacy_cli.py render --check
 ```

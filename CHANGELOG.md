@@ -2,6 +2,13 @@
 
 All notable changes follow a simple milestone history.
 
+## Unreleased
+
+- Added a structured false-positive and regression ledger.
+- Added a generated regression dashboard with open, fixed, invalidated, and boundary states.
+- Added specialized rubrics for policy, statistics, and long-dialogue evaluation.
+- Added CLI and CI checks for regression ledger validity and dashboard drift.
+
 ## 1.4.0 - 2026-11-07
 
 - Added a report diagram generator for Mermaid argument, issue, and before/after views.
