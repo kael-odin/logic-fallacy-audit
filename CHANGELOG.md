@@ -8,6 +8,7 @@ All notable changes follow a simple milestone history.
 - Added a generated regression dashboard with open, fixed, invalidated, and boundary states.
 - Added specialized rubrics for policy, statistics, and long-dialogue evaluation.
 - Added CLI and CI checks for regression ledger validity and dashboard drift.
+- Added a model-run ledger with explicit fixture/model separation and a generated run dashboard.
 
 ## 1.4.0 - 2026-11-07
 

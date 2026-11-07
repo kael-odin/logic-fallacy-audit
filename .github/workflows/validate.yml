@@ -38,6 +38,8 @@ jobs:
         run: python scripts/fallacy_cli.py diagram examples/sample-report.md --kind compare > /dev/null
       - name: Check regression dashboard
         run: python scripts/fallacy_cli.py regression-dashboard --check
+      - name: Check model-run dashboard
+        run: python scripts/eval_runner.py dashboard --check
 
   validate:
     runs-on: ubuntu-latest

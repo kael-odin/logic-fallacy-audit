@@ -16,6 +16,7 @@ Current release: `1.4.0`. The catalog contains 250 structured entries: 218 falla
 - Generates Mermaid argument maps, issue graphs, and before/after comparisons from reports.
 - Includes teaching-mode guidance, graded exercises with answers, and Chinese rewrite examples.
 - Includes specialized policy, statistics, and long-dialogue rubrics plus a generated regression dashboard.
+- Includes a model-run ledger and dashboard that distinguish curated fixtures from real model runs.
 - Produces quick, full, debate, or teaching reports.
 
 ## Install for Codex
@@ -37,6 +38,7 @@ python scripts/fallacy_cli.py segment examples/long-text-source.txt --json
 python scripts/fallacy_cli.py locate examples/long-text-source.txt --quote "三个人的经历"
 python scripts/fallacy_cli.py diagram examples/sample-report.md --kind compare
 python scripts/fallacy_cli.py regression-dashboard --check
+python scripts/eval_runner.py dashboard --check
 python -m unittest discover -s tests -v
 python scripts/fallacy_cli.py render --check
 ```

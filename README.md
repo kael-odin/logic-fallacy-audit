@@ -69,6 +69,7 @@ python scripts/fallacy_cli.py segment examples/long-text-source.txt --json
 python scripts/fallacy_cli.py locate examples/long-text-source.txt --quote "三个人的经历"
 python scripts/fallacy_cli.py diagram examples/sample-report.md --kind compare
 python scripts/fallacy_cli.py regression-dashboard --check
+python scripts/eval_runner.py dashboard --check
 ```
 
 仅依赖 Python 3.11+ 标准库。
@@ -177,6 +178,8 @@ python scripts/fallacy_cli.py regression-dashboard --check
 - [论证图规范](references/visualization.md)：Mermaid 论证图、问题图和前后对照。
 - [专项评分表](evals/rubrics/README.md)：政策、统计和长对话评分维度。
 - [误报与回归看板](docs/regression-dashboard.md)：已修复、仍存在与边界变化。
+- [模型运行看板](docs/model-run-dashboard.md)：模型、Prompt 版本、日期与通过情况。
+- [模型运行账本说明](evals/model-runs/README.md)：fixture 与真实模型记录的区别。
 - [报告结构校验](references/report-lint.md)：自动验收章节、引用、标签、置信度与边界字段。
 - [长文本与源文件定位](references/long-text-workflow.md)：候选块、SHA-256、行号与精确引文。
 - [中英术语表](references/glossary.md)：统一报告章节、判定标签和推理类型英译。

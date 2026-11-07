@@ -157,6 +157,7 @@ If the CLI cannot run, read the relevant generated category file under `referenc
 - [references/teaching-mode.md](references/teaching-mode.md): lesson flow, difficulty levels, answer keys, and feedback.
 - [references/visualization.md](references/visualization.md): Mermaid argument, issue, and before/after diagrams.
 - [evals/rubrics/README.md](evals/rubrics/README.md): specialized policy, statistics, and long-dialogue rubrics.
+- [evals/model-runs/README.md](evals/model-runs/README.md): real model-run recording and fixture/model separation.
 - [references/report-lint.md](references/report-lint.md): automatically check report structure.
 - [references/explainer-style.md](references/explainer-style.md): clear explainer structure inspired by short critical-thinking videos.
 - [references/research-sources.md](references/research-sources.md): source basis and citation policy.

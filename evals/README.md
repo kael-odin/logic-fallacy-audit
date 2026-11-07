@@ -20,3 +20,4 @@
 - 模型表现变化时，保存输入、输出、模型与日期。
 - 评测输入应短小、原创、可公开，不包含真实隐私或攻击性个人信息。
 - 新发现的误报或校验缺陷登记到 [regressions.jsonl](regressions.jsonl)，看板由脚本生成。
+- 真实模型输出使用 [model-runs/README.md](model-runs/README.md) 登记，curated fixture 不作为模型能力比较。

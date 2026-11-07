@@ -12,6 +12,7 @@ python scripts/report_lint.py examples/sample-report.en.md --profile full --stri
 python scripts/report_lint.py examples/teaching-report.md --profile teaching --strict
 python scripts/fallacy_cli.py diagram examples/sample-report.md --kind compare
 python scripts/fallacy_cli.py regression-dashboard --check
+python scripts/eval_runner.py dashboard --check
 ruff check scripts tests
 ruff format --check scripts tests
 python -m unittest discover -s tests -v
@@ -35,6 +36,7 @@ python -m unittest discover -s tests -v
 - 英文样例通过双语字段和源文件行号核验；
 - 教学报告、练习答案和 Mermaid 图表生成通过测试；
 - 回归账本、专项 rubric 与误报看板通过测试和漂移检查；
+- 模型运行账本区分 fixture 与真实模型，并检查运行看板漂移；
 - 重复章节、空字段和未完成占位符会被拒绝；
 - SKILL、CITATION 与 CHANGELOG 版本一致；
 - 评测案例可解析且引用有效；
