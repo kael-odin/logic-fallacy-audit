@@ -100,7 +100,18 @@ FINDING_LABELS = (
     "Context-dependent",
     "Not a Fallacy",
 )
-IMPACT_LABELS = ("阻断", "重大", "局部", "表达", "Blocking", "Major", "Local", "Expression")
+IMPACT_LABELS = (
+    "阻断",
+    "重大",
+    "局部",
+    "表达",
+    "无",
+    "Blocking",
+    "Major",
+    "Local",
+    "Expression",
+    "None",
+)
 CONFIDENCE_PATTERN = re.compile(
     r"(?:置信度|confidence)\s*[:：]\s*(?:高|中|低|high|medium|low)",
     re.IGNORECASE,

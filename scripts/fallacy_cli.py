@@ -6,11 +6,10 @@ import sys
 from pathlib import Path
 
 from catalog_lib import (
-    CORE_FALLACY_IDS,
-    COVERAGE_SNAPSHOT_DATE,
     ROOT,
     CatalogParseError,
     build_coverage_doc,
+    coverage_snapshot,
     format_catalog_stats,
     format_entry,
     generated_drift,
@@ -82,22 +81,7 @@ def command_stats(args: argparse.Namespace) -> int:
 def command_coverage(args: argparse.Namespace) -> int:
     catalog = load_catalog(ROOT)
     if args.json:
-        payload = {
-            "snapshot_date": COVERAGE_SNAPSHOT_DATE,
-            "total": len(catalog.entries),
-            "fallacies": len(catalog.fallacy_entries),
-            "biases": len(catalog.bias_entries),
-            "categories": len(catalog.categories),
-            "core_fallacies": {
-                entry_id: {
-                    "name_zh": catalog.entry_by_id[entry_id].name_zh,
-                    "name_en": catalog.entry_by_id[entry_id].name_en,
-                    "diagnostic_questions": len(catalog.entry_by_id[entry_id].data["diagnostic"]),
-                }
-                for entry_id in CORE_FALLACY_IDS
-            },
-        }
-        print(json.dumps(payload, ensure_ascii=False, indent=2))
+        print(json.dumps(coverage_snapshot(catalog), ensure_ascii=False, indent=2))
     else:
         print(build_coverage_doc(catalog))
     return 0

@@ -2,6 +2,8 @@
 
 `cases.jsonl` 是 Skill 的人工/模型评测集，不是传统单元测试。自动化脚本只校验格式、目录 ID 和必需字段；推理质量仍需按 [rubric.md](rubric.md) 评审。
 
+当前共 60 条行为评测，覆盖 `quick`、`full`、`debate`、`teaching` 和 `explainer` 五种模式。
+
 ## 运行方式
 
 1. 把一条 `input` 原样交给已加载 `$logic-fallacy-audit` 的模型。

@@ -182,6 +182,11 @@ def _normalize_lookup(value: str) -> str:
     return unicodedata.normalize("NFKC", value).strip().casefold()
 
 
+def _search_key(value: str) -> str:
+    normalized = _normalize_lookup(value)
+    return re.sub(r"[\W_]+", " ", normalized).strip()
+
+
 def _load_toml(path: Path) -> dict[str, Any]:
     try:
         return tomllib.loads(path.read_text(encoding="utf-8"))
@@ -560,10 +565,9 @@ def build_catalog_index(catalog: Catalog) -> str:
     return "\n".join(lines)
 
 
-def build_coverage_doc(catalog: Catalog) -> str:
+def coverage_snapshot(catalog: Catalog) -> dict[str, Any]:
     entries = catalog.entries
     total = len(entries)
-    entry_by_id = catalog.entry_by_id
 
     def text_ok(field: str, minimum: int = 1) -> int:
         return sum(
@@ -580,14 +584,18 @@ def build_coverage_doc(catalog: Catalog) -> str:
         )
 
     checks = [
-        ("定义至少 20 字", text_ok("definition", 20)),
-        ("独立推理式", text_ok("pattern", 8)),
-        ("至少 2 个诊断问题", list_ok("diagnostic", 2)),
-        ("原创例子", text_ok("example", 12)),
-        ("误判边界", text_ok("boundary", 15)),
-        ("至少 1 个易混淆项", list_ok("confusions", 1)),
-        ("至少 1 个关联条目", list_ok("related", 1)),
-        ("至少 1 个检索别名", list_ok("aliases", 1)),
+        {"id": "definition", "label": "定义至少 20 字", "passed": text_ok("definition", 20)},
+        {"id": "pattern", "label": "独立推理式", "passed": text_ok("pattern", 8)},
+        {"id": "diagnostic", "label": "至少 2 个诊断问题", "passed": list_ok("diagnostic", 2)},
+        {
+            "id": "example",
+            "label": "例子字段非空（原创性需人工复核）",
+            "passed": text_ok("example", 12),
+        },
+        {"id": "boundary", "label": "误判边界", "passed": text_ok("boundary", 15)},
+        {"id": "confusions", "label": "至少 1 个易混淆项", "passed": list_ok("confusions", 1)},
+        {"id": "related", "label": "至少 1 个关联条目", "passed": list_ok("related", 1)},
+        {"id": "aliases", "label": "至少 1 个检索别名", "passed": list_ok("aliases", 1)},
     ]
     complete_entries = sum(
         isinstance(item.data.get("definition"), str)
@@ -608,6 +616,45 @@ def build_coverage_doc(catalog: Catalog) -> str:
         and len(item.data["aliases"]) >= 1
         for item in entries
     )
+    return {
+        "snapshot_date": COVERAGE_SNAPSHOT_DATE,
+        "total": total,
+        "fallacies": len(catalog.fallacy_entries),
+        "biases": len(catalog.bias_entries),
+        "categories": len(catalog.categories),
+        "complete_entries": complete_entries,
+        "field_checks": [
+            {
+                **check,
+                "total": total,
+                "ratio": (check["passed"] / total) if total else 0.0,
+            }
+            for check in checks
+        ],
+        "category_counts": {
+            category.id: {
+                "name_zh": category.name_zh,
+                "name_en": category.name_en,
+                "count": catalog.counts[category.id],
+            }
+            for category in catalog.categories
+        },
+        "core_fallacies": {
+            entry_id: {
+                "name_zh": catalog.entry_by_id[entry_id].name_zh,
+                "name_en": catalog.entry_by_id[entry_id].name_en,
+                "diagnostic_questions": len(catalog.entry_by_id[entry_id].data["diagnostic"]),
+            }
+            for entry_id in CORE_FALLACY_IDS
+        },
+        "example_originality_verified": False,
+    }
+
+
+def build_coverage_doc(catalog: Catalog) -> str:
+    snapshot = coverage_snapshot(catalog)
+    total = snapshot["total"]
+    entry_by_id = catalog.entry_by_id
 
     lines = [
         "# 知识覆盖审计",
@@ -621,19 +668,21 @@ def build_coverage_doc(catalog: Catalog) -> str:
         "| 指标 | 数量 |",
         "|---|---:|",
         f"| 结构化条目 | {total} |",
-        f"| 谬误/论证模式 | {len(catalog.fallacy_entries)} |",
-        f"| 相邻认知偏差 | {len(catalog.bias_entries)} |",
-        f"| 主分类 | {len(catalog.categories)} |",
-        f"| 同时通过全部结构门槛 | {complete_entries} |",
+        f"| 谬误/论证模式 | {snapshot['fallacies']} |",
+        f"| 相邻认知偏差 | {snapshot['biases']} |",
+        f"| 主分类 | {snapshot['categories']} |",
+        f"| 同时通过全部结构门槛 | {snapshot['complete_entries']} |",
         "",
         "## 字段完整性",
         "",
         "| 分析维度 | 通过 | 覆盖率 |",
         "|---|---:|---:|",
     ]
-    for label, passed in checks:
-        ratio = (passed / total * 100) if total else 0
-        lines.append(f"| {label} | {passed}/{total} | {ratio:.1f}% |")
+    for check in snapshot["field_checks"]:
+        lines.append(
+            f"| {check['label']} | {check['passed']}/{check['total']} | "
+            f"{check['ratio'] * 100:.1f}% |"
+        )
 
     lines.extend(
         [
@@ -643,7 +692,7 @@ def build_coverage_doc(catalog: Catalog) -> str:
             "- 可复述的失败机制，而不是只有名称；",
             "- 能用于定位断点的推理式；",
             "- 至少两个诊断问题；",
-            "- 一个原创例子；",
+            "- 一个非空例子；贡献规范要求原创，原创性由人工复核；",
             "- 一条“何时可能不是谬误”的边界；",
             "- 易混淆概念和关联条目；",
             "- 中英文检索入口与至少一个别名。",
@@ -694,6 +743,8 @@ def build_coverage_doc(catalog: Catalog) -> str:
             "- [Wikipedia: List of Fallacies](https://en.wikipedia.org/wiki/List_of_fallacies)",
             "",
             "外部资料用于名称与概念差距核对。它们彼此并不完全一致，因此本仓库不把任何单一清单当作绝对标准。",
+            "",
+            "结构脚本只验证例子字段和长度。原创性、事实准确性和无明显复制仍需人工内容审查。",
             "",
             "## 复现",
             "",
@@ -772,7 +823,7 @@ def build_category_doc(catalog: Catalog, category_id: str) -> str:
                 "",
                 diagnostic,
                 "",
-                "### 原创例子",
+                "### 例子（原创性人工复核）",
                 "",
                 f"> {item.data['example']}",
                 "",
@@ -1215,6 +1266,7 @@ def validate_repository(catalog: Catalog, root: Path = ROOT) -> list[Issue]:
         "evals/model-runs/ledger.jsonl",
         "examples/sample-report.md",
         "examples/sample-report.en.md",
+        "examples/valid-argument-report.md",
         "examples/explainer-report.md",
         "examples/teaching-report.md",
         "examples/exercises.md",
@@ -1233,6 +1285,7 @@ def validate_repository(catalog: Catalog, root: Path = ROOT) -> list[Issue]:
         "docs/audit-v1.4-2026-11-07.md",
         "docs/audit-v1.5-dashboard-2026-11-07.md",
         "docs/audit-v2.0-2026-11-07.md",
+        "docs/audit-v2.0.1-2026-11-07.md",
         "docs/regression-dashboard.md",
         "docs/model-run-dashboard.md",
         "docs/content-backlog.md",
@@ -1293,13 +1346,13 @@ def validate_repository(catalog: Catalog, root: Path = ROOT) -> list[Issue]:
 
 
 def search_entries(catalog: Catalog, query: str, limit: int = 10) -> list[Entry]:
-    needle = _normalize_lookup(query)
+    needle = _search_key(query)
     if not needle:
         return []
     scored: list[tuple[int, int, Entry]] = []
     for item in catalog.entries:
         haystacks = [item.id, item.name_zh, item.name_en, *item.aliases]
-        folded = [_normalize_lookup(value) for value in haystacks]
+        folded = [_search_key(value) for value in haystacks]
         score = 0
         if needle in folded:
             score = 100
@@ -1308,7 +1361,7 @@ def search_entries(catalog: Catalog, query: str, limit: int = 10) -> list[Entry]
         elif any(needle in value for value in folded):
             score = 80
         else:
-            body = _normalize_lookup(
+            body = _search_key(
                 " ".join(
                     str(item.data[field])
                     for field in ["definition", "pattern", "example", "boundary"]
@@ -1317,7 +1370,7 @@ def search_entries(catalog: Catalog, query: str, limit: int = 10) -> list[Entry]
             if needle in body:
                 score = 30
             else:
-                diagnostics = _normalize_lookup(" ".join(item.data["diagnostic"]))
+                diagnostics = _search_key(" ".join(item.data["diagnostic"]))
                 if needle in diagnostics:
                     score = 20
         if score:

@@ -50,7 +50,7 @@ class DocumentationTests(unittest.TestCase):
         for label in [
             "定义至少 20 字",
             "至少 2 个诊断问题",
-            "原创例子",
+            "例子字段非空（原创性需人工复核）",
             "误判边界",
             "至少 1 个关联条目",
         ]:
@@ -87,6 +87,12 @@ class DocumentationTests(unittest.TestCase):
             self.assertIn(heading, text)
         self.assertIn("草率概括", text)
         self.assertIn("错误归因", text)
+
+    def test_valid_argument_report_has_no_fallacy_card(self) -> None:
+        text = (ROOT / "examples" / "valid-argument-report.md").read_text(encoding="utf-8")
+        self.assertIn("`不构成谬误`", text)
+        self.assertIn("`无`", text)
+        self.assertIn("未发现稳定谬误模式", text)
 
     def test_eval_suite_is_parseable_and_nonempty(self) -> None:
         lines = (ROOT / "evals" / "cases.jsonl").read_text(encoding="utf-8").splitlines()

@@ -3,7 +3,7 @@ name: logic-fallacy-audit
 description: Analyze Chinese or English passages for logical fallacies, hidden premises, weak evidence, dialectical moves, and manipulative rhetoric, then produce an evidence-grounded report or explainer-style breakdown with confidence and false-positive boundaries. Use for argument analysis, debate critique, and logic explainers, not for declaring whether a factual claim is true without evidence.
 license: MIT
 metadata:
-  version: "2.0.0"
+  version: "2.0.1"
   language: "zh-CN"
 ---
 

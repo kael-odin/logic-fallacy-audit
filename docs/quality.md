@@ -9,6 +9,7 @@ python scripts/fallacy_cli.py segment examples/long-text-source.txt --json
 python scripts/fallacy_cli.py locate examples/long-text-source.txt --quote "三个人的经历"
 python scripts/report_lint.py examples/sample-report.md --profile full --strict
 python scripts/report_lint.py examples/explainer-report.md --profile explainer --strict
+python scripts/report_lint.py examples/valid-argument-report.md --profile full --strict
 python scripts/report_lint.py examples/sample-report.en.md --profile full --strict --source examples/long-text-source.txt --require-locators
 python scripts/report_lint.py examples/teaching-report.md --profile teaching --strict
 python scripts/fallacy_cli.py diagram examples/sample-report.md --kind compare

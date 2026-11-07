@@ -4,6 +4,7 @@ import argparse
 import json
 import re
 import sys
+import unicodedata
 from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
@@ -116,12 +117,27 @@ def _verdict_text(report_text: str) -> str:
 
 def detect_entry_ids(report_text: str) -> set[str]:
     catalog = load_catalog(ROOT)
-    verdicts = _normalize(_verdict_text(report_text))
-    detected: set[str] = set()
+    verdicts = unicodedata.normalize("NFKC", _verdict_text(report_text)).casefold()
+    matches: list[tuple[int, int, str]] = []
     for entry in catalog.entries:
         tokens = [entry.id, entry.name_zh, entry.name_en, *entry.aliases]
-        if any(_normalize(token) in verdicts for token in tokens if token):
-            detected.add(entry.id)
+        for token in tokens:
+            normalized = unicodedata.normalize("NFKC", token).casefold().strip()
+            if not normalized:
+                continue
+            for match in re.finditer(re.escape(normalized), verdicts):
+                matches.append((match.start(), match.end(), entry.id))
+    detected: set[str] = set()
+    for start, end, entry_id in matches:
+        contained = any(
+            other_id != entry_id
+            and other_start <= start
+            and end <= other_end
+            and (other_end - other_start) > (end - start)
+            for other_start, other_end, other_id in matches
+        )
+        if not contained:
+            detected.add(entry_id)
     return detected
 
 
@@ -133,8 +149,7 @@ def evaluate_case(
     report_text = report_path.read_text(encoding="utf-8")
     lint = lint_report_text(report_text, report_path, profile=case.mode)
     detected = detect_entry_ids(report_text)
-    missing = tuple(case.mode and value for value in case.must_detect if value not in detected)
-    missing = tuple(value for value in missing if value)
+    missing = tuple(value for value in case.must_detect if value not in detected)
     optional = tuple(value for value in case.may_detect if value in detected)
     passed = not lint.errors and not missing
     try:

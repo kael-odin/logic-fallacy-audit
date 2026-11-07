@@ -32,6 +32,8 @@ jobs:
         run: python scripts/report_lint.py examples/sample-report.md --profile full --strict
       - name: Validate explainer report
         run: python scripts/report_lint.py examples/explainer-report.md --profile explainer --strict
+      - name: Validate valid-argument report
+        run: python scripts/report_lint.py examples/valid-argument-report.md --profile full --strict
       - name: Validate English report with source locations
         run: python scripts/report_lint.py examples/sample-report.en.md --profile full --strict --source examples/long-text-source.txt --require-locators
       - name: Validate teaching report

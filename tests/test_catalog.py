@@ -127,6 +127,8 @@ class CatalogTests(unittest.TestCase):
     def test_search_by_external_name_alias(self) -> None:
         matches = search_entries(self.catalog, "argument from fallacy", limit=5)
         self.assertEqual("fallacy-fallacy", matches[0].id)
+        matches = search_entries(self.catalog, "argument-from-fallacy", limit=5)
+        self.assertEqual("fallacy-fallacy", matches[0].id)
 
     def test_search_normalizes_fullwidth_text(self) -> None:
         matches = search_entries(self.catalog, "ＳＴＲＡＷ　ＭＡＮ", limit=3)

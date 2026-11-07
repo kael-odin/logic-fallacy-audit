@@ -41,7 +41,7 @@ SKILL.md
 | `definition` | 失败机制 |
 | `pattern` | 论证式 |
 | `diagnostic` | 至少两个诊断问题 |
-| `example` | 原创例子 |
+| `example` | 示例；要求原创并使用低争议场景，原创性由人工复核 |
 | `boundary` | 可能合理的情形 |
 | `confusions` | 相邻概念 |
 | `related` | 关联条目 ID |

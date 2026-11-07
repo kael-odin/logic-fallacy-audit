@@ -6,6 +6,15 @@ All notable changes follow a simple milestone history.
 
 - No changes yet.
 
+## 2.0.1 - 2026-11-07
+
+- Added `无 / None` as a valid impact level for `不构成谬误` cards, so a robust passage does not need an invented defect.
+- Added a complete full-profile valid-argument report and `eval-060-full-valid-argument`.
+- Corrected coverage language: structural checks prove non-empty examples, not originality; originality remains a manual content-review requirement.
+- Added field-level completeness data and an explicit `example_originality_verified: false` flag to `coverage --json`.
+- Normalized punctuation, hyphens, and spaces in catalog search so external names such as `argument-from-fallacy` resolve correctly.
+- Hardened evaluation label detection against nested aliases such as `Circumstantial Ad Hominem` versus `Ad Hominem`.
+
 ## 2.0.0 - 2026-11-07
 
 - Added `explainer` as a fifth report mode with a dedicated template, complete sample, style guide, specialized rubric, and two regression cases.

@@ -6,6 +6,8 @@
 
 这不是“贴标签式找茬”工具。它会先重建对方最强版本，再判断问题出在演绎有效性、证据强度、论证责任、语言歧义还是说服手法。报告必须给原文依据、置信度和误判边界。
 
+当前发布：`v2.0.1`。
+
 ## 它适合什么
 
 - 分析社交媒体长文、评论区争论、短视频口播稿或辩论发言。
@@ -76,6 +78,7 @@ python scripts/fallacy_cli.py show post-hoc
 python scripts/fallacy_cli.py render
 python scripts/fallacy_cli.py lint-report examples/sample-report.md --strict
 python scripts/fallacy_cli.py lint-report examples/explainer-report.md --profile explainer --strict
+python scripts/fallacy_cli.py lint-report examples/valid-argument-report.md --strict
 python scripts/fallacy_cli.py lint-report examples/sample-report.en.md --strict --source examples/long-text-source.txt --require-locators
 python scripts/fallacy_cli.py segment examples/long-text-source.txt --json
 python scripts/fallacy_cli.py locate examples/long-text-source.txt --quote "三个人的经历"
@@ -140,7 +143,7 @@ python scripts/eval_runner.py dashboard --check
 
 人类可读目录从 [references/catalog-index.md](references/catalog-index.md) 进入。结构化数据在 [catalog/](catalog/)；修改数据后运行 `python scripts/fallacy_cli.py render`，生成文件会同步更新。
 
-每个条目都包含：定义、推理式、至少两个诊断问题、原创例子、误判边界、易混淆项、关联条目和中英文检索入口。覆盖审计由脚本从同一数据源生成：[references/knowledge-coverage.md](references/knowledge-coverage.md)。
+每个条目都包含：定义、推理式、至少两个诊断问题、例子、误判边界、易混淆项、关联条目和中英文检索入口。例子按贡献规范要求原创，原创性由人工复核；覆盖审计由脚本从同一数据源生成：[references/knowledge-coverage.md](references/knowledge-coverage.md)。
 
 ## 报告质量原则
 
@@ -181,12 +184,14 @@ python scripts/eval_runner.py dashboard --check
 - [v1.2 行为审查](docs/audit-v1.2-2026-11-07.md)：报告验收、评测扩展与质量门记录。
 - [250 条目录扩充审查](docs/catalog-expansion-250-2026-11-07.md)：v1.3 外部差距扫描、新增机制与边界。
 - [v2.0 解说与覆盖审查](docs/audit-v2.0-2026-11-07.md)：260 条覆盖、Explainer 设计、评测和发布证据。
+- [v2.0.1 稳健报告修订](docs/audit-v2.0.1-2026-11-07.md)：无谬误报告、覆盖证据和搜索/评测加固。
 - [核心十类速查](references/core-fallacies.md)：你给出的十类可直接从这里进入。
 - [核心十类深度卡](references/core-fallacies.md#深度分析卡)：每类包含结构测试、最小反例、合理边界、混淆项与报告句式。
 - [知识覆盖审计](references/knowledge-coverage.md)：自动统计条目字段完整性、分类分布和核心十类覆盖。
 - [逻辑基础](references/logic-basics.md)：有效性、条件、量词、归纳、概率与规范推理。
 - [任务矩阵](references/task-matrix.md)：按演绎、因果、统计、政策等任务选择分析路线。
 - [模式示例](examples/modes.md)：Quick、Full、Debate、Teaching、Explainer 的输出差异。
+- [有效论证样例](examples/valid-argument-report.md)：用 `不构成谬误` 卡片示范“没有发现谬误”如何不被硬造问题。
 - [Explainer 完整样例](examples/explainer-report.md)：可直接改造成逻辑解说或口播脚本的证据型报告。
 - [Explainer 风格规范](references/explainer-style.md)：七拍结构、反例写法、口播层边界与发布检查。
 - [英文报告样例](examples/sample-report.en.md)：英文模板、引用位置与完整字段示例。
@@ -210,6 +215,7 @@ python scripts/eval_runner.py dashboard --check
 python scripts/fallacy_cli.py validate --strict
 python scripts/report_lint.py examples/sample-report.md --profile full --strict
 python scripts/report_lint.py examples/explainer-report.md --profile explainer --strict
+python scripts/report_lint.py examples/valid-argument-report.md --profile full --strict
 python -m unittest discover -s tests -v
 python scripts/fallacy_cli.py render --check
 ```
@@ -222,6 +228,7 @@ CI 会检查：
 - 报告模板必需章节；
 - 样例报告的引用、判定、置信度与边界字段；
 - Explainer 报告复用 Full 的字段门槛，并校验独立样例；
+- Full 的“不构成谬误”报告通过 `无` 影响等级验证，不强迫把稳健文本写成缺陷；
 - 知识覆盖审计与 catalog 同步，不把条目数量当作唯一质量指标；
 - 长文本候选块、SHA-256、行号和精确引文定位；
 - Mermaid 论证图、问题关系图和修复前后对照；

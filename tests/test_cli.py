@@ -35,6 +35,9 @@ class CliTests(unittest.TestCase):
         self.assertEqual(0, result.returncode, result.stderr)
         payload = json.loads(result.stdout)
         self.assertEqual(260, payload["total"])
+        self.assertEqual(260, payload["complete_entries"])
+        self.assertFalse(payload["example_originality_verified"])
+        self.assertTrue(all(check["passed"] == 260 for check in payload["field_checks"]))
         self.assertEqual(10, len(payload["core_fallacies"]))
         self.assertIn("straw-man", payload["core_fallacies"])
 
@@ -75,6 +78,17 @@ class CliTests(unittest.TestCase):
             "examples/explainer-report.md",
             "--profile",
             "explainer",
+            "--strict",
+        )
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertIn("0 errors", result.stdout)
+
+    def test_lint_valid_argument_report_accepts_sample(self) -> None:
+        result = run_cli(
+            "lint-report",
+            "examples/valid-argument-report.md",
+            "--profile",
+            "full",
             "--strict",
         )
         self.assertEqual(0, result.returncode, result.stderr)

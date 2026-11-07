@@ -6,15 +6,16 @@
 
 | 项目 | 数量 |
 |---|---:|
-| 运行记录 | 1 |
+| 运行记录 | 2 |
 | 模型运行 | 0 |
-| Fixture 运行 | 1 |
+| Fixture 运行 | 2 |
 
 ## 最近运行
 
 | Run | 类型 | 模型 | 日期 | Prompt | 通过 | 案例数 |
 |---|---|---|---|---|---:|---:|
 | `fixture-2026-11-07-curated` | fixture | curated-sample-reports | 2026-11-07 | `repository-fixtures` | 2 | 2 |
+| `fixture-2026-11-07-valid-argument` | fixture | curated-sample-reports | 2026-11-07 | `repository-fixtures` | 3 | 3 |
 
 ## 失败与缺口
 

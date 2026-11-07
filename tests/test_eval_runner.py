@@ -10,6 +10,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from eval_runner import (
     dashboard_is_current,
+    detect_entry_ids,
     evaluate_manifest,
     load_cases,
     load_ledger,
@@ -33,9 +34,28 @@ class EvalRunnerTests(unittest.TestCase):
             date="2026-11-07",
             prompt_version="test",
         )
-        self.assertEqual(2, len(record.results))
+        self.assertEqual(3, len(record.results))
         self.assertTrue(all(result.passed for result in record.results))
         self.assertIn("hasty-generalization", record.results[0].detected)
+        valid_result = next(
+            result for result in record.results if result.case_id == "eval-060-full-valid-argument"
+        )
+        self.assertEqual((), valid_result.detected)
+
+    def test_nested_alias_is_not_double_counted(self) -> None:
+        report = """# 报告
+
+## 关键问题
+
+### 1. 处境式攻击
+
+**判定**
+
+`Confirmed` · Circumstantial Ad Hominem · Confidence: High
+"""
+        detected = detect_entry_ids(report)
+        self.assertIn("ad-hominem-circumstantial", detected)
+        self.assertNotIn("ad-hominem-abusive", detected)
 
     def test_ledger_is_valid(self) -> None:
         records = load_ledger()
