@@ -6,7 +6,7 @@
 |---|---|---|
 | 政策论证 | [policy.md](policy.md) | `eval-020-policy-slide`、`eval-029-policy-only-benefits` |
 | 统计数据 | [statistics.md](statistics.md) | `eval-008-base-rate`、`eval-021-observational-coffee`、`eval-023-founder-survivors`、`eval-043-ludic-fallacy` |
-| 长对话 | [long-dialogue.md](long-dialogue.md) | `eval-026-goalposts-dialogue`、`eval-031-long-dialogue-straw`、`eval-038-courtiers-reply`、`eval-039-ergo-decedo` |
+| 长对话 | [long-dialogue.md](long-dialogue.md) | `eval-026-goalposts-dialogue`、`eval-031-long-dialogue-straw`、`eval-038-courtiers-reply`、`eval-039-ergo-decedo`、`eval-046-reported-speech-irony` |
 
 每份专项评分表 6 个维度，每项 0–2 分，满分 12 分。
 

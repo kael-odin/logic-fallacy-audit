@@ -1,6 +1,6 @@
 # 长对话评分表
 
-重点案例：`eval-026-goalposts-dialogue`、`eval-031-long-dialogue-straw`、`eval-038-courtiers-reply`、`eval-039-ergo-decedo`。
+重点案例：`eval-026-goalposts-dialogue`、`eval-031-long-dialogue-straw`、`eval-038-courtiers-reply`、`eval-039-ergo-decedo`、`eval-046-reported-speech-irony`。
 
 | 维度 | 0 | 1 | 2 |
 |---|---|---|---|
