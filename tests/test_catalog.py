@@ -32,8 +32,8 @@ class CatalogTests(unittest.TestCase):
         self.assertEqual([], [issue.format() for issue in issues])
 
     def test_coverage_thresholds(self) -> None:
-        self.assertGreaterEqual(len(self.catalog.entries), 250)
-        self.assertGreaterEqual(len(self.catalog.fallacy_entries), 200)
+        self.assertGreaterEqual(len(self.catalog.entries), 260)
+        self.assertGreaterEqual(len(self.catalog.fallacy_entries), 228)
         self.assertGreaterEqual(len(self.catalog.bias_entries), 30)
         self.assertEqual(10, len(self.catalog.categories))
 
@@ -69,6 +69,16 @@ class CatalogTests(unittest.TestCase):
             "inverse-gamblers-fallacy",
             "ludic-fallacy",
             "homunculus-fallacy",
+            "accident-fallacy",
+            "ambiguous-middle-term",
+            "exhaustive-effort-fallacy",
+            "furtive-fallacy",
+            "if-by-whiskey",
+            "inflation-of-conflict",
+            "nut-picking",
+            "pooh-pooh",
+            "referential-fallacy",
+            "psychologists-fallacy",
         }
         self.assertEqual(set(), expected - set(self.catalog.entry_by_id))
 
@@ -113,6 +123,10 @@ class CatalogTests(unittest.TestCase):
     def test_search_by_mechanism(self) -> None:
         matches = search_entries(self.catalog, "第三变量", limit=20)
         self.assertIn("cum-hoc", [item.id for item in matches])
+
+    def test_search_by_external_name_alias(self) -> None:
+        matches = search_entries(self.catalog, "argument from fallacy", limit=5)
+        self.assertEqual("fallacy-fallacy", matches[0].id)
 
     def test_search_normalizes_fullwidth_text(self) -> None:
         matches = search_entries(self.catalog, "ＳＴＲＡＷ　ＭＡＮ", limit=3)

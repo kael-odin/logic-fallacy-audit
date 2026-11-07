@@ -8,7 +8,7 @@
 
 > 本文件由结构化目录生成。修改 `catalog/` 后再运行 `python scripts/fallacy_cli.py render`。
 
-共 **23** 条。
+共 **24** 条。
 
 ## 快速索引
 
@@ -24,6 +24,7 @@
 | 抽样偏差 | Sampling Bias | `sampling-bias` |
 | 幸存者偏差 | Survivorship Bias | `survivorship-bias` |
 | 樱桃挑选 | Cherry Picking | `cherry-picking` |
+| 极端样本挑选 | Nut-Picking | `nut-picking` |
 | 德州神枪手谬误 | Texas Sharpshooter Fallacy | `texas-sharpshooter` |
 | 多重比较问题 | Multiple Comparisons Problem | `multiple-comparisons` |
 | P 值操纵 | P-Hacking | `p-hacking` |
@@ -464,6 +465,49 @@ selective evidence、card stacking、p-hacking
 
 ---
 
+## 极端样本挑选
+
+**Nut-Picking** · `nut-picking`
+
+- 类型：统计推理
+- 默认影响：高影响
+- 别名：只挑极端成员、坚果挑选、nut picking fallacy
+
+### 定义
+
+从对立群体或大量材料中专门挑出最极端、最异常或最容易嘲笑的例子，再把它当作该群体或整体立场的代表。
+
+### 推理式
+
+```text
+群体 G 中可找到极端成员 X；X 表达 P；因此 G 的典型立场是 P。
+```
+
+### 诊断问题
+
+1. X 是按预先规则抽样，还是按最极端特征选出？
+2. G 中典型成员和总体分布是什么？
+3. 如果对支持者也做同样挑选，会得到什么结果？
+
+### 原创例子
+
+> 截取某社群三条最激烈发言，所以这个社群整体都支持暴力。
+
+### 何时可能不是谬误
+
+极端成员可以说明群体内部存在某问题；但不能在没有代表性抽样时估计其普遍程度。
+
+### 容易混淆
+
+樱桃挑选、弱人谬误、草率概括
+
+### 相关条目
+
+樱桃挑选 (`cherry-picking`)、弱人谬误 (`weak-man`)、草率概括 (`hasty-generalization`)
+
+
+---
+
 ## 德州神枪手谬误
 
 **Texas Sharpshooter Fallacy** · `texas-sharpshooter`
@@ -554,7 +598,7 @@ P 值操纵 (`p-hacking`)、德州神枪手谬误 (`texas-sharpshooter`)、樱�
 
 - 类型：统计推理
 - 默认影响：高影响
-- 别名：数据挖掘到显著、规格搜索
+- 别名：数据挖掘到显著、规格搜索、garden of forking paths
 
 ### 定义
 

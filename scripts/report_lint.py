@@ -125,6 +125,7 @@ PLACEHOLDER_MARKERS = (
     "[explain the context gap]",
     "[repeat the same structure]",
 )
+FULL_PROFILES = {"full", "debate", "explainer"}
 
 
 @dataclass(frozen=True)
@@ -344,7 +345,7 @@ def lint_report_text(
         if not any(line.strip() for line in content):
             issues.append(ReportIssue("error", "empty-section", f"章节 `## {title}` 为空", start))
 
-    if profile in {"full", "debate"}:
+    if profile in FULL_PROFILES:
         argument_start, argument_lines = _section_lines(lines, sections, "论证地图")
         argument_text = "\n".join(argument_lines)
         argument_fields = _field_values(argument_text)
@@ -420,7 +421,7 @@ def lint_report_text(
     if not any(line.strip() for line in problem_lines):
         issues.append(ReportIssue("error", "no-findings", "关键问题章节为空", problem_start))
 
-    if profile in {"full", "debate"}:
+    if profile in FULL_PROFILES:
         finding_blocks = re.split(r"(?m)^###\s+", problem_text)
         blocks = [block for block in finding_blocks[1:] if block.strip()]
         if not blocks:
@@ -602,7 +603,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("files", nargs="+", type=Path)
     parser.add_argument(
         "--profile",
-        choices=["full", "debate", "quick", "teaching"],
+        choices=["full", "debate", "quick", "teaching", "explainer"],
         default="full",
     )
     parser.add_argument("--strict", action="store_true", help="把警告也视为失败")

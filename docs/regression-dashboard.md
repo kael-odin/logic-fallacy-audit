@@ -32,11 +32,11 @@
 | `english-section-alias-missed` | high | report | 英文章节已解析但存在性预检查仍只匹配中文 | `v1.3.0` | `eval-030-mixed-formal` | `tests/test_report_lint.py::test_english_sample_passes_with_source_locations`<br>`examples/sample-report.en.md` |
 | `eval-mode-type-crash` | high | evaluation | 非字符串 mode 会触发不可哈希类型异常 | `v1.2.0` | 无 | `tests/test_catalog.py::test_invalid_eval_value_types_do_not_crash` |
 | `missing-entry-id-crash` | high | catalog | 缺失 ID 的条目会让目录校验路径崩溃 | `v1.1.0` | 无 | `tests/test_catalog.py::test_missing_id_reports_error_without_crashing` |
-| `model-run-ledger-gap` | high | evaluation | 尚未建立不同模型、日期和提示词版本的运行账本 | `unreleased-v1.5` | `eval-044-workplace-generalization`、`eval-045-supplement-anecdote` | `scripts/eval_runner.py`<br>`evals/model-runs/ledger.jsonl`<br>`docs/model-run-dashboard.md`<br>`tests/test_eval_runner.py` |
+| `model-run-ledger-gap` | high | evaluation | 尚未建立不同模型、日期和提示词版本的运行账本 | `v1.5.0` | `eval-044-workplace-generalization`、`eval-045-supplement-anecdote` | `scripts/eval_runner.py`<br>`evals/model-runs/ledger.jsonl`<br>`docs/model-run-dashboard.md`<br>`tests/test_eval_runner.py` |
 | `contextomy-duplicate` | medium | content | contextomy 与 quote-mining 重复描述同一机制 | `v1.1.0` | `eval-024-legal-quote` | `tests/test_catalog.py::test_duplicate_context_is_merged`<br>`references/catalog/04-ambiguity.md` |
 | `duplicate-report-section-overwrite` | medium | report | 重复必需章节会覆盖前一章节而不报错 | `v1.2.0` | 无 | `tests/test_report_lint.py::test_duplicate_required_section_is_reported` |
-| `irony-and-reported-speech-eval-gap` | medium | evaluation | 尚缺反讽、引用与转述同时出现的长对话回归样本 | `unreleased-v1.5` | `eval-046-reported-speech-irony` | `evals/cases.jsonl`<br>`evals/rubrics/long-dialogue.md` |
-| `multi-argument-unit-eval-gap` | medium | evaluation | 尚缺同一输入包含多个独立论证单元的回归样本 | `unreleased-v1.5` | `eval-047-multi-argument-units` | `evals/cases.jsonl`<br>`docs/quality.md` |
+| `irony-and-reported-speech-eval-gap` | medium | evaluation | 尚缺反讽、引用与转述同时出现的长对话回归样本 | `v1.5.0` | `eval-046-reported-speech-irony` | `evals/cases.jsonl`<br>`evals/rubrics/long-dialogue.md` |
+| `multi-argument-unit-eval-gap` | medium | evaluation | 尚缺同一输入包含多个独立论证单元的回归样本 | `v1.5.0` | `eval-047-multi-argument-units` | `evals/cases.jsonl`<br>`docs/quality.md` |
 | `stale-generated-catalog` | medium | docs | 旧生成分类文件不会被检测或清理 | `v1.1.0` | 无 | `tests/test_docs.py::test_stale_generated_file_is_detected_and_removed` |
 
 ## 已失效

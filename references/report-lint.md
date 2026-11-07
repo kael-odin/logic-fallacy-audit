@@ -6,11 +6,12 @@
 
 ```bash
 python scripts/report_lint.py examples/sample-report.md --profile full --strict
+python scripts/report_lint.py examples/explainer-report.md --profile explainer --strict
 python scripts/fallacy_cli.py lint-report examples/sample-report.md --strict
 python scripts/report_lint.py examples/sample-report.en.md --profile full --strict --source examples/long-text-source.txt --require-locators
 ```
 
-## Full / Debate 检查
+## Full / Debate / Explainer 检查
 
 - 六个必需章节：结论摘要、论证地图、关键问题、反向检验、改写建议、边界说明。
 - 论证地图包含结论、显式前提、隐含前提、重建依据、推理类型和当前缺口。
@@ -22,6 +23,8 @@ python scripts/report_lint.py examples/sample-report.en.md --profile full --stri
 - 边界说明包含至少一项明确限制。
 - 必需章节不能重复出现后静默覆盖前文。
 - 中文模板与英文模板的固定字段均可识别。
+
+`explainer` 使用与 Full 相同的问题卡和数据门槛，额外允许 `## 解说节奏`、`## 口播层` 等展示章节。展示章节不能替代六个核心章节。
 
 ## Quick 检查
 
@@ -42,7 +45,7 @@ Teaching 使用与 Quick 相同的最小结构规则。教学模式可以增加�
 - 结束行是否超过源文件行数；
 - 单一位置且没有省略号的引文是否存在于对应行区间。
 
-`--require-locators` 要求每个 Full / Debate 问题卡和 Quick 报告至少有一个 `[Lx-Ly]`。
+`--require-locators` 要求每个 Full / Debate / Explainer 问题卡和 Quick 报告至少有一个 `[Lx-Ly]`。
 
 多位置引文当前只核验位置范围，不逐一匹配每段引文。包含省略号的压缩引用也不做全文精确匹配。
 

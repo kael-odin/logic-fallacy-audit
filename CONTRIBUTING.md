@@ -22,7 +22,7 @@ diagnostic = ["...", "..."]
 example = "..."
 boundary = "..."
 confusions = ["..."]
-related = []
+related = ["existing-entry-id"]
 ```
 
 4. 运行：
@@ -30,19 +30,22 @@ related = []
 ```bash
 python scripts/fallacy_cli.py validate --strict
 python scripts/fallacy_cli.py render
+python scripts/fallacy_cli.py coverage
 python -m unittest discover -s tests -v
 ```
 
-5. 提交 `catalog/` 与生成后的 `references/catalog/`、`references/catalog-index.md` 和 `references/adjacent-biases.md`。
+5. 提交 `catalog/` 与生成后的 `references/catalog/`、`references/catalog-index.md`、`references/adjacent-biases.md` 和 `references/knowledge-coverage.md`。
 
 ## 条目质量标准
 
 - `definition` 说明推理机制，不只写“这是错误”。
 - `pattern` 能表达主张之间的关系。
 - `diagnostic` 至少包含两个可回答的问题。
+- `aliases` 至少包含一个检索别名，英文通行名优先写成自然短语。
 - `example` 是原创短例，不能大段复制教材或视频文案。
 - `boundary` 说明该模式何时可能合理。
 - `confusions` 说明最容易混淆的邻近概念。
+- `related` 至少指向一个已存在条目。
 - 不要把人格评价、动机猜测或单一情绪词当作谬误证据。
 
 ## 命名与归类
@@ -51,7 +54,7 @@ python -m unittest discover -s tests -v
 - 别名写入 `aliases`，不要为同义词重复建条。
 - 跨类别条目使用 `related` 关联。
 - 传统名称不统一时，优先采用中文传播广、英文可检索且定义较稳定的名称。
-- 认知偏差不是逻辑谬误，必须放在 `catalog/adjacent-biases.toml`。
+- 认知偏差不是逻辑谬误，必须放在 `catalog/10-adjacent-biases.toml`。
 
 ## 提交前检查
 
@@ -59,5 +62,6 @@ python -m unittest discover -s tests -v
 git diff --check
 python scripts/fallacy_cli.py validate --strict
 python scripts/fallacy_cli.py render --check
+python scripts/fallacy_cli.py coverage --json
 python -m unittest discover -s tests -v
 ```

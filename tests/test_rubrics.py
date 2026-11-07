@@ -16,11 +16,17 @@ class SpecializedRubricTests(unittest.TestCase):
         cls.case_ids = {json.loads(line)["id"] for line in lines if line.strip()}
 
     def test_rubric_files_exist(self) -> None:
-        expected = {"README.md", "policy.md", "statistics.md", "long-dialogue.md"}
+        expected = {
+            "README.md",
+            "policy.md",
+            "statistics.md",
+            "long-dialogue.md",
+            "explainer.md",
+        }
         self.assertEqual(expected, {path.name for path in RUBRIC_DIR.glob("*.md")})
 
     def test_rubrics_have_six_dimensions(self) -> None:
-        for name in ("policy.md", "statistics.md", "long-dialogue.md"):
+        for name in ("policy.md", "statistics.md", "long-dialogue.md", "explainer.md"):
             with self.subTest(name=name):
                 text = (RUBRIC_DIR / name).read_text(encoding="utf-8")
                 dimensions = [

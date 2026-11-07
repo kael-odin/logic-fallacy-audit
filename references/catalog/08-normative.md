@@ -8,7 +8,7 @@
 
 > 本文件由结构化目录生成。修改 `catalog/` 后再运行 `python scripts/fallacy_cli.py render`。
 
-共 **17** 条。
+共 **18** 条。
 
 ## 快速索引
 
@@ -31,6 +31,7 @@
 | 道德等同 | Moral Equivalence | `moral-equivalence` |
 | 公正世界推断 | Just-World Inference | `just-world-inference` |
 | 诉诸现状 | Appeal to Status Quo | `appeal-to-status-quo` |
+| 穷尽努力谬误 | Fallacy of Exhaustive Effort | `exhaustive-effort-fallacy` |
 
 ---
 
@@ -748,6 +749,49 @@ status quo bias、appeal to tradition、loss aversion
 ### 相关条目
 
 诉诸传统 (`appeal-to-tradition`)、现状偏差 (`status-quo-bias`)、损失厌恶 (`loss-aversion`)
+
+
+---
+
+## 穷尽努力谬误
+
+**Fallacy of Exhaustive Effort** · `exhaustive-effort-fallacy`
+
+- 类型：非形式谬误
+- 默认影响：中等
+- 别名：次优条件叠加、最大化剩余条件、second best fallacy
+
+### 定义
+
+在无法满足最优方案的全部条件时，假定尽可能多满足其余条件就必然产生次优结果，却忽略条件之间的依赖和替代关系。
+
+### 推理式
+
+```text
+最佳方案要求 A+B+C；C 无法满足；于是尽量满足 A+B；因此 B 一定优于其他可行方案。
+```
+
+### 诊断问题
+
+1. 各项条件是否彼此独立，还是必须联合满足？
+2. 是否比较了违反部分条件但整体更优的替代方案？
+3. “尽可能多”是以什么目标函数衡量？
+
+### 原创例子
+
+> 完美医疗方案需要低成本、全覆盖和零等待；零等待做不到，所以先把成本压到最低就一定是次优选择。
+
+### 何时可能不是谬误
+
+在条件近似独立、目标可加且没有替代互动时，逐项补齐可以合理；政策和复杂系统通常需要比较整体方案。
+
+### 容易混淆
+
+涅槃谬误、虚假两难、分解式政策
+
+### 相关条目
+
+涅槃谬误 (`nirvana-fallacy`)、虚假两难 (`false-dilemma`)、滑坡谬误 (`slippery-slope`)
 
 
 [返回分类索引](../catalog-index.md)

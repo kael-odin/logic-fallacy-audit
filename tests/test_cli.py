@@ -30,6 +30,14 @@ class CliTests(unittest.TestCase):
         self.assertGreaterEqual(payload["fallacies"], 200)
         self.assertGreaterEqual(payload["biases"], 30)
 
+    def test_coverage_json_reports_core_ten(self) -> None:
+        result = run_cli("coverage", "--json")
+        self.assertEqual(0, result.returncode, result.stderr)
+        payload = json.loads(result.stdout)
+        self.assertEqual(260, payload["total"])
+        self.assertEqual(10, len(payload["core_fallacies"]))
+        self.assertIn("straw-man", payload["core_fallacies"])
+
     def test_search_returns_specific_entry(self) -> None:
         result = run_cli("search", "偷换概念")
         self.assertEqual(0, result.returncode, result.stderr)
@@ -56,6 +64,17 @@ class CliTests(unittest.TestCase):
             "examples/sample-report.md",
             "--profile",
             "full",
+            "--strict",
+        )
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertIn("0 errors", result.stdout)
+
+    def test_lint_explainer_report_accepts_sample(self) -> None:
+        result = run_cli(
+            "lint-report",
+            "examples/explainer-report.md",
+            "--profile",
+            "explainer",
             "--strict",
         )
         self.assertEqual(0, result.returncode, result.stderr)

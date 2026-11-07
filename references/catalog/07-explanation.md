@@ -8,7 +8,7 @@
 
 > 本文件由结构化目录生成。修改 `catalog/` 后再运行 `python scripts/fallacy_cli.py render`。
 
-共 **12** 条。
+共 **14** 条。
 
 ## 快速索引
 
@@ -26,6 +26,8 @@
 | 证据缺失推演 | Absence-of-Evidence Reasoning | `absence-of-evidence` |
 | 历史学家谬误 | Historian's Fallacy | `historians-fallacy` |
 | 小人谬误 | Homunculus Fallacy | `homunculus-fallacy` |
+| 隐秘动机谬误 | Furtive Fallacy | `furtive-fallacy` |
+| 心理学家谬误 | Psychologist's Fallacy | `psychologists-fallacy` |
 
 ---
 
@@ -538,6 +540,92 @@ appeal to ignorance、appeal to silence、unfalsifiable conspiracy
 ### 相关条目
 
 循环论证 (`circular-reasoning`)、具体化谬误 (`reification`)、心智投射谬误 (`mind-projection-fallacy`)
+
+
+---
+
+## 隐秘动机谬误
+
+**Furtive Fallacy** · `furtive-fallacy`
+
+- 类型：非形式谬误
+- 默认影响：高影响
+- 别名：恶意决策推定、结果反推阴谋
+
+### 定义
+
+因为出现了坏结果，就推定决策者必然出于隐秘、恶意或操纵动机，而没有先比较无能、误判、制度约束和偶然因素。
+
+### 推理式
+
+```text
+结果 R 很坏；因此某人必然暗中想让 R 发生；未提供意图、通信或行动证据。
+```
+
+### 诊断问题
+
+1. 除恶意意图外，有哪些非意图或制度性解释？
+2. 决策者当时的信息、能力和激励是什么？
+3. 是否存在能区分疏忽与故意行为的具体证据？
+
+### 原创例子
+
+> 系统发生重大故障，所以管理层一定早就知道并故意隐瞒，而不是存在未发现的测试缺口。
+
+### 何时可能不是谬误
+
+有会议记录、刻意销毁证据或重复隐瞒时，意图假设可以成立；问题是从坏结果直接跳到恶意内心。
+
+### 容易混淆
+
+诉诸动机、阴谋动机推定、意图性偏差
+
+### 相关条目
+
+阴谋动机推定 (`conspiratorial-motive-inference`)、诉诸动机 (`appeal-to-motive`)、意向性偏差 (`intentionality-bias`)
+
+
+---
+
+## 心理学家谬误
+
+**Psychologist's Fallacy** · `psychologists-fallacy`
+
+- 类型：非形式谬误
+- 默认影响：中等
+- 别名：观察者知识投射、把自己的理解当作对象状态
+
+### 定义
+
+分析者把自己已经知道的信息、概念或反应，直接当成被观察者在当时也拥有或正在经历的状态。
+
+### 推理式
+
+```text
+观察者 O 知道 X；因此被观察者 A 在情境中也必然知道或体验到 X。
+```
+
+### 诊断问题
+
+1. 被观察者在当时实际接触到哪些信息？
+2. 观察者使用了哪些后来才获得的概念？
+3. 能否区分文本表达、读者反应和作者意图？
+
+### 原创例子
+
+> 现代读者一眼看出这段诗在写失去，所以诗人写作时一定清楚自己在表达这种心理状态。
+
+### 何时可能不是谬误
+
+解释者需要理解行动者的理由，但也能指出行动者未意识到的结构；问题是把分析者的知识直接替代对象的视角。
+
+### 容易混淆
+
+历史学家谬误、心智投射谬误、意图谬误
+
+### 相关条目
+
+历史学家谬误 (`historians-fallacy`)、心智投射谬误 (`mind-projection-fallacy`)、后见之明偏差 (`hindsight-bias`)
 
 
 [返回分类索引](../catalog-index.md)

@@ -8,6 +8,7 @@ python scripts/fallacy_cli.py render --check
 python scripts/fallacy_cli.py segment examples/long-text-source.txt --json
 python scripts/fallacy_cli.py locate examples/long-text-source.txt --quote "三个人的经历"
 python scripts/report_lint.py examples/sample-report.md --profile full --strict
+python scripts/report_lint.py examples/explainer-report.md --profile explainer --strict
 python scripts/report_lint.py examples/sample-report.en.md --profile full --strict --source examples/long-text-source.txt --require-locators
 python scripts/report_lint.py examples/teaching-report.md --profile teaching --strict
 python scripts/fallacy_cli.py diagram examples/sample-report.md --kind compare
@@ -37,10 +38,11 @@ python -m unittest discover -s tests -v
 - 教学报告、练习答案和 Mermaid 图表生成通过测试；
 - 回归账本、专项 rubric 与误报看板通过测试和漂移检查；
 - 模型运行账本区分 fixture 与真实模型，并检查运行看板漂移；
+- 知识覆盖审计从 catalog 自动生成，核心十类和全部条目字段完整性可复现；
 - 重复章节、空字段和未完成占位符会被拒绝；
 - SKILL、CITATION 与 CHANGELOG 版本一致；
 - 评测案例可解析且引用有效；
-- 评测 mode 类型有效，且四种模式均有样本；
+- 评测 mode 类型有效，且五种模式均有样本；
 - 长文本候选块、SHA-256、行号与精确引文定位通过测试；
 - Markdown 相对链接不失效；
 - 生成目录无缺失、漂移或残留文件；

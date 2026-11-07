@@ -9,7 +9,7 @@
 3. 检查是否覆盖 `must_detect`，是否合理处理 `may_detect`。
 4. 检查是否出现 `must_not_assert` 中禁止的高确定性断言。
 5. 把完整报告保存为临时 Markdown，运行 `python scripts/report_lint.py <report.md> --profile <mode> --strict`。
-6. 按通用 [rubric.md](rubric.md) 评分；政策、统计和长对话案例再按 [专项评分表](rubrics/README.md) 复核。
+6. 按通用 [rubric.md](rubric.md) 评分；政策、统计、长对话和 Explainer 案例再按 [专项评分表](rubrics/README.md) 复核。
 
 `must_detect` 表示当前文本中可稳定识别的主要问题，不要求逐字使用某个标签，但报告必须描述同一推理机制。
 

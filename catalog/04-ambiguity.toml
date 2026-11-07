@@ -381,3 +381,35 @@ example = "“每位员工都能获得一种培训”被理解成“存在一种
 boundary = "自然语言常依赖上下文省略范围；只有范围变化承担了关键推理时才成为问题。"
 confusions = ["quantifier shift", "amphiboly", "scope of negation"]
 related = ["quantifier-shift", "amphiboly", "scope-of-negation"]
+
+[[fallacy]]
+id = "ambiguous-middle-term"
+name_zh = "歧义中项"
+name_en = "Ambiguous Middle Term"
+aliases = ["中项歧义", "歧义中项谬误", "ambiguous middle"]
+category = "ambiguity"
+kind = "informal"
+severity = 2
+definition = "三段论的中项在两个前提中看似相同，实际却使用了不同含义，使两个前提无法通过同一个概念连接。"
+pattern = "A 是 B（B 含义 B1）；C 是 B（B 含义 B2）；因此 A 与 C 有结论关系。"
+diagnostic = ["中项在每个前提中分别指什么？", "用明确释义替换中项后，前提是否仍然连接？", "两个前提是否只靠同一个词形看起来相关？"]
+example = "所有法律都保护权利；重力定律是法律；所以重力定律保护权利。"
+boundary = "类比、隐喻和多义词可以正常交流；只有词义变化承担了三段论的连接作用时才构成歧义中项。"
+confusions = ["偷换概念", "四词项谬误", "中项不周延"]
+related = ["equivocation", "four-terms", "undistributed-middle"]
+
+[[fallacy]]
+id = "referential-fallacy"
+name_zh = "指称谬误"
+name_en = "Referential Fallacy"
+aliases = ["词必有所指", "名称存在即对象存在"]
+category = "ambiguity"
+kind = "informal"
+severity = 2
+definition = "因为一个词、名称或描述可以被使用，就推出它必然指称现实中存在的某个对象，或把语言结构直接投射为世界结构。"
+pattern = "词项 T 在语言中有意义；因此 T 所指的对象存在，或必然具有该词暗示的属性。"
+diagnostic = ["T 是在指称对象，还是在命名概念、角色、假设或虚构实体？", "是否有独立于词语的证据证明其指称对象存在？", "把语言结构改写成集合或动作描述后，推论是否仍成立？"]
+example = "我们讨论“完美犯罪”，所以现实中一定存在一种完美犯罪。"
+boundary = "数学对象、虚构角色和制度实体可以在约定语境中合法存在；问题是从词项有意义直接跳到现实存在。"
+confusions = ["具体化谬误", "使用与提及混淆", "范畴错误"]
+related = ["reification", "use-mention-confusion", "category-mistake"]

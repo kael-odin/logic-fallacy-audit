@@ -6,8 +6,11 @@ import sys
 from pathlib import Path
 
 from catalog_lib import (
+    CORE_FALLACY_IDS,
+    COVERAGE_SNAPSHOT_DATE,
     ROOT,
     CatalogParseError,
+    build_coverage_doc,
     format_catalog_stats,
     format_entry,
     generated_drift,
@@ -73,6 +76,30 @@ def command_stats(args: argparse.Namespace) -> int:
         print(json.dumps(payload, ensure_ascii=False, indent=2))
     else:
         print(format_catalog_stats(catalog))
+    return 0
+
+
+def command_coverage(args: argparse.Namespace) -> int:
+    catalog = load_catalog(ROOT)
+    if args.json:
+        payload = {
+            "snapshot_date": COVERAGE_SNAPSHOT_DATE,
+            "total": len(catalog.entries),
+            "fallacies": len(catalog.fallacy_entries),
+            "biases": len(catalog.bias_entries),
+            "categories": len(catalog.categories),
+            "core_fallacies": {
+                entry_id: {
+                    "name_zh": catalog.entry_by_id[entry_id].name_zh,
+                    "name_en": catalog.entry_by_id[entry_id].name_en,
+                    "diagnostic_questions": len(catalog.entry_by_id[entry_id].data["diagnostic"]),
+                }
+                for entry_id in CORE_FALLACY_IDS
+            },
+        }
+        print(json.dumps(payload, ensure_ascii=False, indent=2))
+    else:
+        print(build_coverage_doc(catalog))
     return 0
 
 
@@ -309,6 +336,10 @@ def build_parser() -> argparse.ArgumentParser:
     stats_parser.add_argument("--json", action="store_true")
     stats_parser.set_defaults(func=command_stats)
 
+    coverage_parser = subparsers.add_parser("coverage", help="显示知识覆盖与字段完整性审计")
+    coverage_parser.add_argument("--json", action="store_true")
+    coverage_parser.set_defaults(func=command_coverage)
+
     categories_parser = subparsers.add_parser("categories", help="列出分类")
     categories_parser.set_defaults(func=command_categories)
 
@@ -342,7 +373,7 @@ def build_parser() -> argparse.ArgumentParser:
     report_parser.add_argument("files", nargs="+", type=Path)
     report_parser.add_argument(
         "--profile",
-        choices=["full", "debate", "quick", "teaching"],
+        choices=["full", "debate", "quick", "teaching", "explainer"],
         default="full",
     )
     report_parser.add_argument("--strict", action="store_true")

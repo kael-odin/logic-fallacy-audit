@@ -8,7 +8,7 @@
 
 > 本文件由结构化目录生成。修改 `catalog/` 后再运行 `python scripts/fallacy_cli.py render`。
 
-共 **24** 条。
+共 **26** 条。
 
 ## 快速索引
 
@@ -38,6 +38,8 @@
 | 打包谬误 | Package-Deal Fallacy | `package-deal-fallacy` |
 | 心智投射谬误 | Mind Projection Fallacy | `mind-projection-fallacy` |
 | 范围歧义 | Scope Ambiguity | `scope-ambiguity` |
+| 歧义中项 | Ambiguous Middle Term | `ambiguous-middle-term` |
+| 指称谬误 | Referential Fallacy | `referential-fallacy` |
 
 ---
 
@@ -1047,6 +1049,92 @@ quantifier shift、amphiboly、scope of negation
 ### 相关条目
 
 量词移位 (`quantifier-shift`)、句法歧义 (`amphiboly`)、否定范围错误 (`scope-of-negation`)
+
+
+---
+
+## 歧义中项
+
+**Ambiguous Middle Term** · `ambiguous-middle-term`
+
+- 类型：非形式谬误
+- 默认影响：中等
+- 别名：中项歧义、歧义中项谬误、ambiguous middle
+
+### 定义
+
+三段论的中项在两个前提中看似相同，实际却使用了不同含义，使两个前提无法通过同一个概念连接。
+
+### 推理式
+
+```text
+A 是 B（B 含义 B1）；C 是 B（B 含义 B2）；因此 A 与 C 有结论关系。
+```
+
+### 诊断问题
+
+1. 中项在每个前提中分别指什么？
+2. 用明确释义替换中项后，前提是否仍然连接？
+3. 两个前提是否只靠同一个词形看起来相关？
+
+### 原创例子
+
+> 所有法律都保护权利；重力定律是法律；所以重力定律保护权利。
+
+### 何时可能不是谬误
+
+类比、隐喻和多义词可以正常交流；只有词义变化承担了三段论的连接作用时才构成歧义中项。
+
+### 容易混淆
+
+偷换概念、四词项谬误、中项不周延
+
+### 相关条目
+
+偷换概念 (`equivocation`)、四词项谬误 (`four-terms`)、中项不周延 (`undistributed-middle`)
+
+
+---
+
+## 指称谬误
+
+**Referential Fallacy** · `referential-fallacy`
+
+- 类型：非形式谬误
+- 默认影响：中等
+- 别名：词必有所指、名称存在即对象存在
+
+### 定义
+
+因为一个词、名称或描述可以被使用，就推出它必然指称现实中存在的某个对象，或把语言结构直接投射为世界结构。
+
+### 推理式
+
+```text
+词项 T 在语言中有意义；因此 T 所指的对象存在，或必然具有该词暗示的属性。
+```
+
+### 诊断问题
+
+1. T 是在指称对象，还是在命名概念、角色、假设或虚构实体？
+2. 是否有独立于词语的证据证明其指称对象存在？
+3. 把语言结构改写成集合或动作描述后，推论是否仍成立？
+
+### 原创例子
+
+> 我们讨论“完美犯罪”，所以现实中一定存在一种完美犯罪。
+
+### 何时可能不是谬误
+
+数学对象、虚构角色和制度实体可以在约定语境中合法存在；问题是从词项有意义直接跳到现实存在。
+
+### 容易混淆
+
+具体化谬误、使用与提及混淆、范畴错误
+
+### 相关条目
+
+具体化谬误 (`reification`)、使用与提及混淆 (`use-mention-confusion`)、范畴错误 (`category-mistake`)
 
 
 [返回分类索引](../catalog-index.md)

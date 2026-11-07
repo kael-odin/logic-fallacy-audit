@@ -4,7 +4,7 @@ Logic Fallacy Audit turns a passage into a structured argument review: claims, e
 
 The project is designed for Chinese and English argument analysis, debate preparation, editing, media literacy, and critical-thinking teaching. It is not a fact-checking oracle and does not infer a speaker's motives from a reasoning error.
 
-Current release: `1.4.0`. The catalog contains 250 structured entries: 218 fallacies or argument patterns and 32 adjacent cognitive biases.
+Current release: `2.0.0`. The catalog contains 260 structured entries: 228 fallacies or argument patterns and 32 adjacent cognitive biases.
 
 ## What it does
 
@@ -15,9 +15,11 @@ Current release: `1.4.0`. The catalog contains 250 structured entries: 218 falla
 - Creates deterministic source maps with line spans, SHA-256, and exact quote locations.
 - Generates Mermaid argument maps, issue graphs, and before/after comparisons from reports.
 - Includes teaching-mode guidance, graded exercises with answers, and Chinese rewrite examples.
-- Includes specialized policy, statistics, and long-dialogue rubrics plus a generated regression dashboard.
+- Includes specialized policy, statistics, long-dialogue, and explainer rubrics plus a generated regression dashboard.
 - Includes a model-run ledger and dashboard that distinguish curated fixtures from real model runs.
-- Produces quick, full, debate, or teaching reports.
+- Produces quick, full, debate, teaching, or explainer reports.
+- Turns a rigorous report into a neutral explainer rhythm: quote, charitable reconstruction, hidden premise, break, minimal counterexample, boundary, and repair.
+- Generates a knowledge-coverage audit for every catalog entry and the ten core fallacies.
 
 ## Install for Codex
 
@@ -33,7 +35,9 @@ English reports can use [assets/report-template.en.md](assets/report-template.en
 
 ```bash
 python scripts/fallacy_cli.py validate --strict
+python scripts/fallacy_cli.py coverage
 python scripts/report_lint.py examples/sample-report.md --profile full --strict
+python scripts/report_lint.py examples/explainer-report.md --profile explainer --strict
 python scripts/fallacy_cli.py segment examples/long-text-source.txt --json
 python scripts/fallacy_cli.py locate examples/long-text-source.txt --quote "三个人的经历"
 python scripts/fallacy_cli.py diagram examples/sample-report.md --kind compare

@@ -57,6 +57,15 @@ class ReportLintTests(unittest.TestCase):
         )
         self.assertEqual([], [issue.format() for issue in result.issues])
 
+    def test_explainer_report_passes_explainer_profile(self) -> None:
+        path = ROOT / "examples" / "explainer-report.md"
+        result = lint_report_text(
+            path.read_text(encoding="utf-8"),
+            path,
+            profile="explainer",
+        )
+        self.assertEqual([], [issue.format() for issue in result.issues])
+
     def test_missing_sections_and_fields_are_reported(self) -> None:
         bad = "# 报告\n\n## 结论摘要\n\n只有一句。"
         result = lint_report_text(bad, Path("bad.md"), profile="full")

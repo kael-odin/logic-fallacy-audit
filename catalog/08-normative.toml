@@ -269,3 +269,19 @@ example = "这个流程一直存在，所以不需要重新设计，哪怕它已
 boundary = "现状具有协调、转换成本和既得预期，这些是真实因素；但不能自动证明现状最优。"
 confusions = ["status quo bias", "appeal to tradition", "loss aversion"]
 related = ["appeal-to-tradition", "status-quo-bias", "loss-aversion"]
+
+[[fallacy]]
+id = "exhaustive-effort-fallacy"
+name_zh = "穷尽努力谬误"
+name_en = "Fallacy of Exhaustive Effort"
+aliases = ["次优条件叠加", "最大化剩余条件", "second best fallacy"]
+category = "normative"
+kind = "informal"
+severity = 2
+definition = "在无法满足最优方案的全部条件时，假定尽可能多满足其余条件就必然产生次优结果，却忽略条件之间的依赖和替代关系。"
+pattern = "最佳方案要求 A+B+C；C 无法满足；于是尽量满足 A+B；因此 B 一定优于其他可行方案。"
+diagnostic = ["各项条件是否彼此独立，还是必须联合满足？", "是否比较了违反部分条件但整体更优的替代方案？", "“尽可能多”是以什么目标函数衡量？"]
+example = "完美医疗方案需要低成本、全覆盖和零等待；零等待做不到，所以先把成本压到最低就一定是次优选择。"
+boundary = "在条件近似独立、目标可加且没有替代互动时，逐项补齐可以合理；政策和复杂系统通常需要比较整体方案。"
+confusions = ["涅槃谬误", "虚假两难", "分解式政策"]
+related = ["nirvana-fallacy", "false-dilemma", "slippery-slope"]

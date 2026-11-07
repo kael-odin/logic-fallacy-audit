@@ -4,11 +4,29 @@ All notable changes follow a simple milestone history.
 
 ## Unreleased
 
+- No changes yet.
+
+## 2.0.0 - 2026-11-07
+
+- Added `explainer` as a fifth report mode with a dedicated template, complete sample, style guide, specialized rubric, and two regression cases.
+- Added the seven-beat explainer flow: quote, surface claim, hidden premise, break, minimal counterexample, boundary, and testable repair.
+- Expanded the catalog from 250 to 260 entries with accident, ambiguous-middle-term, exhaustive-effort, furtive, if-by-whiskey, inflation-of-conflict, nut-picking, pooh-pooh, referential, and psychologist's-fallacy mechanisms.
+- Added common external-name aliases for existing entries, including argument-from-fallacy, argument-from-ignorance, false-authority, wrong-direction, Ipse Dixit, and Garden of Forking Paths.
+- Added a generated knowledge-coverage audit that verifies all 260 entries have definitions, reasoning patterns, at least two diagnostic questions, examples, boundaries, confusions, related entries, and aliases.
+- Expanded the ten requested core fallacies into deep analysis cards with structure tests, minimal counterexamples, legitimate boundaries, common confusions, and report-ready wording.
+- Extended report linting and evaluation validation to include `explainer` while reusing the full evidence contract.
+- Added a dedicated explainer rubric covering hook fidelity, charitable reconstruction, stepwise clarity, minimal counterexamples, boundary integrity, and separation of spoken and evidentiary layers.
+- Completed the v1.5 evaluation-operations documentation and reconciled the roadmap, Skill metadata, Citation File Format, README, and release version.
+
+## 1.5.0 - 2026-11-07
+
 - Added a structured false-positive and regression ledger.
 - Added a generated regression dashboard with open, fixed, invalidated, and boundary states.
 - Added specialized rubrics for policy, statistics, and long-dialogue evaluation.
 - Added CLI and CI checks for regression ledger validity and dashboard drift.
 - Added a model-run ledger with explicit fixture/model separation and a generated run dashboard.
+- Added reported-speech/irony and multi-argument-unit regression coverage.
+- Closed the first v1.5 implementation batch while keeping real-model coverage as an explicit open item.
 
 ## 1.4.0 - 2026-11-07
 

@@ -78,6 +78,7 @@ CORE_FALLACY_IDS = [
 ID_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 SEMVER_PATTERN = re.compile(r"^\d+\.\d+\.\d+$")
 GENERATED_CATALOG_PATTERN = re.compile(r"^\d{2}-[a-z0-9-]+\.md$")
+COVERAGE_SNAPSHOT_DATE = "2026-11-07"
 
 
 @dataclass(frozen=True)
@@ -350,7 +351,7 @@ def validate_catalog(catalog: Catalog) -> list[Issue]:
         if en_key:
             en_name_owners[en_key] = entry_id
 
-        aliases = _require_string_list(entry, "aliases", issues, min_items=0)
+        aliases = _require_string_list(entry, "aliases", issues, min_items=1)
         normalized_aliases = [_normalize_lookup(alias) for alias in aliases]
         if entry_id and _normalize_lookup(entry_id) in normalized_aliases:
             issues.append(Issue("error", "self-alias", "别名不能与 ID 相同", entry_id))
@@ -381,7 +382,7 @@ def validate_catalog(catalog: Catalog) -> list[Issue]:
         _require_text(entry, "boundary", issues, min_chars=15)
         _require_string_list(entry, "diagnostic", issues, min_items=2)
         _require_string_list(entry, "confusions", issues, min_items=1)
-        related = _require_string_list(entry, "related", issues, min_items=0)
+        related = _require_string_list(entry, "related", issues, min_items=1)
         if len(related) != len(set(related)):
             issues.append(Issue("error", "duplicate-related", "related 数组存在重复项", entry_id))
         if entry_id and entry_id in related:
@@ -559,6 +560,162 @@ def build_catalog_index(catalog: Catalog) -> str:
     return "\n".join(lines)
 
 
+def build_coverage_doc(catalog: Catalog) -> str:
+    entries = catalog.entries
+    total = len(entries)
+    entry_by_id = catalog.entry_by_id
+
+    def text_ok(field: str, minimum: int = 1) -> int:
+        return sum(
+            isinstance(item.data.get(field), str) and len(str(item.data[field]).strip()) >= minimum
+            for item in entries
+        )
+
+    def list_ok(field: str, minimum: int = 1) -> int:
+        return sum(
+            isinstance(item.data.get(field), list)
+            and len(item.data[field]) >= minimum
+            and all(isinstance(value, str) and value.strip() for value in item.data[field])
+            for item in entries
+        )
+
+    checks = [
+        ("定义至少 20 字", text_ok("definition", 20)),
+        ("独立推理式", text_ok("pattern", 8)),
+        ("至少 2 个诊断问题", list_ok("diagnostic", 2)),
+        ("原创例子", text_ok("example", 12)),
+        ("误判边界", text_ok("boundary", 15)),
+        ("至少 1 个易混淆项", list_ok("confusions", 1)),
+        ("至少 1 个关联条目", list_ok("related", 1)),
+        ("至少 1 个检索别名", list_ok("aliases", 1)),
+    ]
+    complete_entries = sum(
+        isinstance(item.data.get("definition"), str)
+        and len(str(item.data["definition"]).strip()) >= 20
+        and isinstance(item.data.get("pattern"), str)
+        and len(str(item.data["pattern"]).strip()) >= 8
+        and isinstance(item.data.get("diagnostic"), list)
+        and len(item.data["diagnostic"]) >= 2
+        and isinstance(item.data.get("example"), str)
+        and len(str(item.data["example"]).strip()) >= 12
+        and isinstance(item.data.get("boundary"), str)
+        and len(str(item.data["boundary"]).strip()) >= 15
+        and isinstance(item.data.get("confusions"), list)
+        and len(item.data["confusions"]) >= 1
+        and isinstance(item.data.get("related"), list)
+        and len(item.data["related"]) >= 1
+        and isinstance(item.data.get("aliases"), list)
+        and len(item.data["aliases"]) >= 1
+        for item in entries
+    )
+
+    lines = [
+        "# 知识覆盖审计",
+        "",
+        "> 本文件由 `python scripts/fallacy_cli.py render` 生成。请修改 `catalog/` 后重新生成。",
+        "",
+        f"审计快照：**{COVERAGE_SNAPSHOT_DATE}**。本表证明目录的结构完整性与可诊断性，不宣称覆盖所有哲学传统。",
+        "",
+        "## 总览",
+        "",
+        "| 指标 | 数量 |",
+        "|---|---:|",
+        f"| 结构化条目 | {total} |",
+        f"| 谬误/论证模式 | {len(catalog.fallacy_entries)} |",
+        f"| 相邻认知偏差 | {len(catalog.bias_entries)} |",
+        f"| 主分类 | {len(catalog.categories)} |",
+        f"| 同时通过全部结构门槛 | {complete_entries} |",
+        "",
+        "## 字段完整性",
+        "",
+        "| 分析维度 | 通过 | 覆盖率 |",
+        "|---|---:|---:|",
+    ]
+    for label, passed in checks:
+        ratio = (passed / total * 100) if total else 0
+        lines.append(f"| {label} | {passed}/{total} | {ratio:.1f}% |")
+
+    lines.extend(
+        [
+            "",
+            "每个条目都具备：",
+            "",
+            "- 可复述的失败机制，而不是只有名称；",
+            "- 能用于定位断点的推理式；",
+            "- 至少两个诊断问题；",
+            "- 一个原创例子；",
+            "- 一条“何时可能不是谬误”的边界；",
+            "- 易混淆概念和关联条目；",
+            "- 中英文检索入口与至少一个别名。",
+            "",
+            "## 分类覆盖",
+            "",
+            "| 分类 | 条目数 | 报告提示 |",
+            "|---|---:|---|",
+        ]
+    )
+    for category in catalog.categories:
+        lines.append(
+            f"| {_md_escape(category.name_zh)} (`{category.id}`) | "
+            f"{catalog.counts[category.id]} | {_md_escape(category.report_hint)} |"
+        )
+
+    lines.extend(
+        [
+            "",
+            "## 核心十类",
+            "",
+            "| 中文名 | English | ID | 分类 | 诊断问题 |",
+            "|---|---|---|---|---:|",
+        ]
+    )
+    for core_id in CORE_FALLACY_IDS:
+        item = entry_by_id[core_id]
+        category = catalog.category_by_id[item.category]
+        lines.append(
+            f"| {_md_escape(item.name_zh)} | {_md_escape(item.name_en)} | `{item.id}` | "
+            f"{_md_escape(category.name_zh)} | {len(item.data['diagnostic'])} |"
+        )
+
+    lines.extend(
+        [
+            "",
+            "核心十类的逐项测试、反例、常见误判和报告句式见 "
+            "[`core-fallacies.md`](core-fallacies.md)。",
+            "",
+            "## 外部参照",
+            "",
+            "覆盖差距检查参考以下公开资料，但条目定义、例子和边界均为本项目重新整理：",
+            "",
+            "- [Stanford Encyclopedia of Philosophy: Fallacies](https://plato.stanford.edu/entries/fallacies/)",
+            "- [Internet Encyclopedia of Philosophy: Fallacies](https://iep.utm.edu/fallacy/)",
+            "- [Purdue OWL: Logical Fallacies](https://owl.purdue.edu/owl/general_writing/academic_writing/logic_in_argumentative_writing/fallacies.html)",
+            "- [UNC Writing Center: Fallacies](https://writingcenter.unc.edu/tips-and-tools/fallacies/)",
+            "- [Wikipedia: List of Fallacies](https://en.wikipedia.org/wiki/List_of_fallacies)",
+            "",
+            "外部资料用于名称与概念差距核对。它们彼此并不完全一致，因此本仓库不把任何单一清单当作绝对标准。",
+            "",
+            "## 复现",
+            "",
+            "```bash",
+            "python scripts/fallacy_cli.py coverage",
+            "python scripts/fallacy_cli.py coverage --json",
+            "python scripts/fallacy_cli.py validate --strict",
+            "python scripts/fallacy_cli.py render --check",
+            "```",
+            "",
+            "## 解释边界",
+            "",
+            "- 结构完整不等于每条定义都无需修订。",
+            "- 条目数量不等于分析质量；报告仍需论证重建、原文证据和误报复核。",
+            "- 同一概念可能因学派不同而使用不同名称；别名只用于检索，不用于制造额外发现。",
+            "- 专业领域论证仍需相应领域知识与事实核查。",
+            "",
+        ]
+    )
+    return "\n".join(lines)
+
+
 def build_category_doc(catalog: Catalog, category_id: str) -> str:
     category = catalog.category_by_id[category_id]
     items = [item for item in catalog.entries if item.category == category_id]
@@ -712,6 +869,7 @@ def expected_generated_files(catalog: Catalog, root: Path = ROOT) -> dict[Path, 
     outputs: dict[Path, str] = {
         root / "references" / "catalog-index.md": build_catalog_index(catalog),
         root / "references" / "adjacent-biases.md": build_adjacent_biases_doc(catalog),
+        root / "references" / "knowledge-coverage.md": build_coverage_doc(catalog),
     }
     for category in catalog.categories:
         path = root / "references" / "catalog" / _category_filename(catalog, category.id)
@@ -851,18 +1009,20 @@ def validate_skill(root: Path = ROOT) -> list[Issue]:
 
 
 def validate_report_template(root: Path = ROOT) -> list[Issue]:
+    full_sections = [
+        "## 结论摘要",
+        "## 论证地图",
+        "## 关键问题",
+        "## 反向检验",
+        "## 改写建议",
+        "## 边界说明",
+        "**隐含前提的重建依据**",
+        "**相关但不主判**",
+        "**替代解释**",
+    ]
     templates = {
-        "assets/report-template.md": [
-            "## 结论摘要",
-            "## 论证地图",
-            "## 关键问题",
-            "## 反向检验",
-            "## 改写建议",
-            "## 边界说明",
-            "**隐含前提的重建依据**",
-            "**相关但不主判**",
-            "**替代解释**",
-        ],
+        "assets/report-template.md": full_sections,
+        "assets/report-template.explainer.md": full_sections,
         "assets/report-template.en.md": [
             "## Conclusion Summary",
             "## Argument Map",
@@ -901,7 +1061,7 @@ def validate_evals(catalog: Catalog, root: Path = ROOT) -> list[Issue]:
     issues: list[Issue] = []
     seen: set[str] = set()
     mode_counts: Counter[str] = Counter()
-    expected_modes = {"quick", "full", "debate", "teaching"}
+    expected_modes = {"quick", "full", "debate", "teaching", "explainer"}
     entry_ids = set(catalog.entry_by_id)
     for line_number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
         if not line.strip():
@@ -1032,12 +1192,14 @@ def validate_repository(catalog: Catalog, root: Path = ROOT) -> list[Issue]:
         ".github/ISSUE_TEMPLATE/bug-report.yml",
         ".github/ISSUE_TEMPLATE/config.yml",
         "references/catalog-index.md",
+        "references/knowledge-coverage.md",
         "references/core-fallacies.md",
         "references/glossary.md",
         "references/logic-basics.md",
         "references/report-lint.md",
         "references/task-matrix.md",
         "assets/report-template.md",
+        "assets/report-template.explainer.md",
         "assets/report-template.en.md",
         "assets/checklist.md",
         "evals/README.md",
@@ -1047,11 +1209,13 @@ def validate_repository(catalog: Catalog, root: Path = ROOT) -> list[Issue]:
         "evals/rubrics/policy.md",
         "evals/rubrics/statistics.md",
         "evals/rubrics/long-dialogue.md",
+        "evals/rubrics/explainer.md",
         "evals/model-runs/README.md",
         "evals/model-runs/fixture-manifest.json",
         "evals/model-runs/ledger.jsonl",
         "examples/sample-report.md",
         "examples/sample-report.en.md",
+        "examples/explainer-report.md",
         "examples/teaching-report.md",
         "examples/exercises.md",
         "examples/rewrites.md",
@@ -1068,6 +1232,7 @@ def validate_repository(catalog: Catalog, root: Path = ROOT) -> list[Issue]:
         "docs/audit-v1.3-2026-11-07.md",
         "docs/audit-v1.4-2026-11-07.md",
         "docs/audit-v1.5-dashboard-2026-11-07.md",
+        "docs/audit-v2.0-2026-11-07.md",
         "docs/regression-dashboard.md",
         "docs/model-run-dashboard.md",
         "docs/content-backlog.md",

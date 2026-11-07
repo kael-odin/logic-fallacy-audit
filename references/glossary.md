@@ -112,3 +112,13 @@
 - 同一报告不混用多个同义译法。
 - `Confirmed` 表示当前文本证据下的判断，不表示事实主张已被外部核验。
 - 英文报告也必须保留原文语言；理解翻译不能替代必要引文。
+
+## 11. 分析模式
+
+| 中文 | English | 参数 |
+|---|---|---|
+| 快速诊断 | Quick | `quick` |
+| 完整报告 | Full | `full` |
+| 辩论准备 | Debate | `debate` |
+| 教学讲解 | Teaching | `teaching` |
+| 逻辑解说 | Explainer | `explainer` |

@@ -1,10 +1,10 @@
 interface:
   display_name: "逻辑谬误分析"
-  short_description: "把一段文字拆成主张、证据、隐藏前提、推理断点与可修正版本"
+  short_description: "用证据拆解谬误、隐藏前提和推理断点，可输出严谨报告或逻辑解说"
   icon_small: "./assets/icon.svg"
   icon_large: "./assets/icon.svg"
   brand_color: "#315C5A"
-  default_prompt: "Use $logic-fallacy-audit to analyze the following passage and produce an evidence-grounded Chinese logical fallacy report."
+  default_prompt: "Use $logic-fallacy-audit to analyze the following passage and produce an evidence-grounded Chinese report. Use explainer mode when an accessible logic-commentary breakdown is requested."
 
 policy:
   allow_implicit_invocation: true

@@ -30,7 +30,8 @@
 | 谬误匹配 | 名称、机制、原文证据、置信度、修复条件 |
 | 误报防御 | 最强版本、反例、语境相关判定 |
 | 改写建议 | 补充证据后的可检验论证 |
-| 报告模式 | `quick`、`full`、`debate`、`teaching` |
+| 报告模式 | `quick`、`full`、`debate`、`teaching`、`explainer` |
+| 逻辑解说 | “原话 → 表面主张 → 隐藏前提 → 断点 → 最小反例 → 边界 → 修复” |
 
 ## 快速使用
 
@@ -55,15 +56,26 @@ $logic-fallacy-audit 分析下面这段话，使用 full 模式：
 “……”
 ```
 
+如果需要接近短篇逻辑科普视频的解说节奏：
+
+```text
+$logic-fallacy-audit 使用 explainer 模式分析下面这段话：
+“……”
+```
+
+`explainer` 只改变叙事顺序，不降低证据标准，也不会模仿或复制具体创作者的口吻与文案。
+
 ### 直接使用仓库
 
 ```bash
 python scripts/fallacy_cli.py validate
 python scripts/fallacy_cli.py stats
+python scripts/fallacy_cli.py coverage
 python scripts/fallacy_cli.py search "因果"
 python scripts/fallacy_cli.py show post-hoc
 python scripts/fallacy_cli.py render
 python scripts/fallacy_cli.py lint-report examples/sample-report.md --strict
+python scripts/fallacy_cli.py lint-report examples/explainer-report.md --profile explainer --strict
 python scripts/fallacy_cli.py lint-report examples/sample-report.en.md --strict --source examples/long-text-source.txt --require-locators
 python scripts/fallacy_cli.py segment examples/long-text-source.txt --json
 python scripts/fallacy_cli.py locate examples/long-text-source.txt --quote "三个人的经历"
@@ -113,7 +125,7 @@ python scripts/eval_runner.py dashboard --check
 
 知识库按论证功能分类，而不是只按传统教科书目录排列。当前 `main` 分支覆盖：
 
-**250 条结构化条目**：218 条谬误/论证模式，32 条与谬误相邻的认知偏差。
+**260 条结构化条目**：228 条谬误/论证模式，32 条与谬误相邻的认知偏差。
 
 - 形式与演绎错误
 - 相关性与人身攻击
@@ -127,6 +139,8 @@ python scripts/eval_runner.py dashboard --check
 - 与谬误相邻的认知偏差
 
 人类可读目录从 [references/catalog-index.md](references/catalog-index.md) 进入。结构化数据在 [catalog/](catalog/)；修改数据后运行 `python scripts/fallacy_cli.py render`，生成文件会同步更新。
+
+每个条目都包含：定义、推理式、至少两个诊断问题、原创例子、误判边界、易混淆项、关联条目和中英文检索入口。覆盖审计由脚本从同一数据源生成：[references/knowledge-coverage.md](references/knowledge-coverage.md)。
 
 ## 报告质量原则
 
@@ -165,18 +179,23 @@ python scripts/eval_runner.py dashboard --check
 - [内容审查记录](docs/content-audit-2026-11-07.md)：本轮差距扫描、修复项与回归证据。
 - [内容候选池](docs/content-backlog.md)：尚未达到收录门槛的后续条目与评测方向。
 - [v1.2 行为审查](docs/audit-v1.2-2026-11-07.md)：报告验收、评测扩展与质量门记录。
-- [250 条目录扩充审查](docs/catalog-expansion-250-2026-11-07.md)：本轮外部差距扫描、新增机制与边界。
+- [250 条目录扩充审查](docs/catalog-expansion-250-2026-11-07.md)：v1.3 外部差距扫描、新增机制与边界。
+- [v2.0 解说与覆盖审查](docs/audit-v2.0-2026-11-07.md)：260 条覆盖、Explainer 设计、评测和发布证据。
 - [核心十类速查](references/core-fallacies.md)：你给出的十类可直接从这里进入。
+- [核心十类深度卡](references/core-fallacies.md#深度分析卡)：每类包含结构测试、最小反例、合理边界、混淆项与报告句式。
+- [知识覆盖审计](references/knowledge-coverage.md)：自动统计条目字段完整性、分类分布和核心十类覆盖。
 - [逻辑基础](references/logic-basics.md)：有效性、条件、量词、归纳、概率与规范推理。
 - [任务矩阵](references/task-matrix.md)：按演绎、因果、统计、政策等任务选择分析路线。
-- [模式示例](examples/modes.md)：Quick、Full、Debate、Teaching 的输出差异。
+- [模式示例](examples/modes.md)：Quick、Full、Debate、Teaching、Explainer 的输出差异。
+- [Explainer 完整样例](examples/explainer-report.md)：可直接改造成逻辑解说或口播脚本的证据型报告。
+- [Explainer 风格规范](references/explainer-style.md)：七拍结构、反例写法、口播层边界与发布检查。
 - [英文报告样例](examples/sample-report.en.md)：英文模板、引用位置与完整字段示例。
 - [课堂练习与答案](examples/exercises.md)：10 道分级练习与隐藏答案。
 - [中文逻辑改写示例](examples/rewrites.md)：6 组原句、修复版本与修复点。
 - [教学报告样例](examples/teaching-report.md)：分步讲解、练习与答案。
 - [教学模式规范](references/teaching-mode.md)：难度、反馈和答案一致性。
 - [论证图规范](references/visualization.md)：Mermaid 论证图、问题图和前后对照。
-- [专项评分表](evals/rubrics/README.md)：政策、统计和长对话评分维度。
+- [专项评分表](evals/rubrics/README.md)：政策、统计、长对话和逻辑解说评分维度。
 - [误报与回归看板](docs/regression-dashboard.md)：已修复、仍存在与边界变化。
 - [模型运行看板](docs/model-run-dashboard.md)：模型、Prompt 版本、日期与通过情况。
 - [模型运行账本说明](evals/model-runs/README.md)：fixture 与真实模型记录的区别。
@@ -190,6 +209,7 @@ python scripts/eval_runner.py dashboard --check
 ```bash
 python scripts/fallacy_cli.py validate --strict
 python scripts/report_lint.py examples/sample-report.md --profile full --strict
+python scripts/report_lint.py examples/explainer-report.md --profile explainer --strict
 python -m unittest discover -s tests -v
 python scripts/fallacy_cli.py render --check
 ```
@@ -201,6 +221,8 @@ CI 会检查：
 - 分类数量与生成文档是否漂移；
 - 报告模板必需章节；
 - 样例报告的引用、判定、置信度与边界字段；
+- Explainer 报告复用 Full 的字段门槛，并校验独立样例；
+- 知识覆盖审计与 catalog 同步，不把条目数量当作唯一质量指标；
 - 长文本候选块、SHA-256、行号和精确引文定位；
 - Mermaid 论证图、问题关系图和修复前后对照；
 - Teaching 报告结构与带答案练习库；

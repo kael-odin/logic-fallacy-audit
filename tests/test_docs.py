@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from catalog_lib import (
+    build_coverage_doc,
     expected_generated_files,
     generated_drift,
     load_catalog,
@@ -38,6 +39,24 @@ class DocumentationTests(unittest.TestCase):
         for path, expected in expected_generated_files(self.catalog).items():
             self.assertTrue(path.exists(), str(path))
             self.assertEqual(expected, path.read_text(encoding="utf-8"), str(path))
+
+    def test_knowledge_coverage_is_complete(self) -> None:
+        text = build_coverage_doc(self.catalog)
+        self.assertIn(f"| 结构化条目 | {len(self.catalog.entries)} |", text)
+        self.assertIn(
+            f"| 同时通过全部结构门槛 | {len(self.catalog.entries)} |",
+            text,
+        )
+        for label in [
+            "定义至少 20 字",
+            "至少 2 个诊断问题",
+            "原创例子",
+            "误判边界",
+            "至少 1 个关联条目",
+        ]:
+            self.assertIn(
+                f"| {label} | {len(self.catalog.entries)}/{len(self.catalog.entries)} |", text
+            )
 
     def test_stale_generated_file_is_detected_and_removed(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -75,7 +94,7 @@ class DocumentationTests(unittest.TestCase):
         self.assertGreaterEqual(len(cases), 40)
         self.assertTrue(any(not item["must_detect"] for item in cases))
         self.assertEqual(
-            {"quick", "full", "debate", "teaching"},
+            {"quick", "full", "debate", "teaching", "explainer"},
             {item["mode"] for item in cases},
         )
 

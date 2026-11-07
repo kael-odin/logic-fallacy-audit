@@ -1,9 +1,9 @@
 ---
 name: logic-fallacy-audit
-description: Analyze Chinese or English passages for logical fallacies, hidden premises, weak evidence, dialectical moves, and manipulative rhetoric, then produce an evidence-grounded report with confidence and false-positive boundaries. Use for argument analysis and debate critique, not for declaring whether a factual claim is true without evidence.
+description: Analyze Chinese or English passages for logical fallacies, hidden premises, weak evidence, dialectical moves, and manipulative rhetoric, then produce an evidence-grounded report or explainer-style breakdown with confidence and false-positive boundaries. Use for argument analysis, debate critique, and logic explainers, not for declaring whether a factual claim is true without evidence.
 license: MIT
 metadata:
-  version: "1.4.0"
+  version: "2.0.0"
   language: "zh-CN"
 ---
 
@@ -24,6 +24,7 @@ Turn a passage into a careful argument analysis. Identify the argument before na
 9. For teaching output, read [references/teaching-mode.md](references/teaching-mode.md).
 10. For argument graphs or before/after comparison, read [references/visualization.md](references/visualization.md).
 11. For the ten most common entry points, use [references/core-fallacies.md](references/core-fallacies.md).
+12. For an explainer-style breakdown, read [references/explainer-style.md](references/explainer-style.md).
 
 Available modes:
 
@@ -31,8 +32,11 @@ Available modes:
 - `full`: the default report for multi-paragraph text.
 - `debate`: a reply-ready analysis that also states what evidence would change the judgment.
 - `teaching`: explains the reasoning slowly with examples and exercises.
+- `explainer`: a neutral, scene-by-scene breakdown with the rhythm “原话 → 表面主张 → 隐藏前提 → 断点 → 最小反例 → 边界 → 修复”.
 
 If the user does not name a mode, choose `quick` for fewer than 250 Chinese characters and `full` otherwise.
+
+Choose `explainer` when the user asks for a Bilibili-style explanation, a short-video logic breakdown, an accessible commentary, or a report they can turn into a script. Keep the analysis evidence-grounded; do not imitate a creator's voice or copy video wording.
 
 If `full` is requested for a text with fewer than 250 Chinese characters or only one argument unit, limit the report to at most four primary findings. Merge labels that describe the same inferential break. Mention secondary labels under `相关但不主判`.
 
@@ -93,12 +97,18 @@ For each issue, include:
 - why the conclusion does not yet follow;
 - confidence and what would raise or lower it.
 
-Use [assets/report-template.md](assets/report-template.md) for Chinese `full` and `debate` output. Use [assets/report-template.en.md](assets/report-template.en.md) for English output. The headings and field names in either template are accepted by the report linter.
+Use [assets/report-template.md](assets/report-template.md) for Chinese `full` and `debate` output. Use [assets/report-template.explainer.md](assets/report-template.explainer.md) for `explainer`. Use [assets/report-template.en.md](assets/report-template.en.md) for English output. The headings and field names in these templates are accepted by the report linter.
 
 If you save the report as a Markdown file in this repository, validate it:
 
 ```bash
 python scripts/report_lint.py path/to/report.md --profile full --strict
+```
+
+For an explainer report:
+
+```bash
+python scripts/report_lint.py path/to/report.md --profile explainer --strict
 ```
 
 For a saved long source, generate stable locations before writing findings:
@@ -132,6 +142,20 @@ python scripts/fallacy_cli.py diagram path/to/report.md --kind compare
 - When the passage is satire, fiction, reported speech, or a hypothetical, analyze it as such.
 - When context is missing, lower confidence and state the exact missing information.
 
+## Explainer Mode
+
+Keep the same evidentiary and false-positive standards as `full`. The difference is presentation:
+
+1. Open with the exact sentence that creates the surprise or tension.
+2. Restate the strongest version of the argument before naming a problem.
+3. Expose one hidden premise at a time.
+4. Use a minimal counterexample that preserves the original premise structure.
+5. State who or what the problem affects.
+6. Give the strongest reason the original move might still be reasonable.
+7. End with a narrower, testable repair and the evidence that would change the judgment.
+
+Do not use mockery, motive attribution, “obviously stupid” framing, invented dialogue, or claims about what the speaker secretly wants. If the user asks for a video script, keep the same citations and boundary notes available outside the spoken section.
+
 ## Query the Catalog
 
 Use the bundled CLI when a fast lookup helps:
@@ -156,9 +180,10 @@ If the CLI cannot run, read the relevant generated category file under `referenc
 - [references/glossary.md](references/glossary.md): fixed Chinese-English terms for report sections, labels, and reasoning types.
 - [references/teaching-mode.md](references/teaching-mode.md): lesson flow, difficulty levels, answer keys, and feedback.
 - [references/visualization.md](references/visualization.md): Mermaid argument, issue, and before/after diagrams.
-- [evals/rubrics/README.md](evals/rubrics/README.md): specialized policy, statistics, and long-dialogue rubrics.
+- [evals/rubrics/README.md](evals/rubrics/README.md): specialized policy, statistics, long-dialogue, and explainer rubrics.
 - [evals/model-runs/README.md](evals/model-runs/README.md): real model-run recording and fixture/model separation.
 - [references/report-lint.md](references/report-lint.md): automatically check report structure.
 - [references/explainer-style.md](references/explainer-style.md): clear explainer structure inspired by short critical-thinking videos.
+- [references/knowledge-coverage.md](references/knowledge-coverage.md): generated completeness audit for the catalog, core ten, and category coverage.
 - [references/research-sources.md](references/research-sources.md): source basis and citation policy.
 - [references/adjacent-biases.md](references/adjacent-biases.md): cognitive biases that are not automatically fallacies.

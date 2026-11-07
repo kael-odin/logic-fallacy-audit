@@ -30,6 +30,8 @@ jobs:
         run: ruff format --check scripts tests
       - name: Validate sample report
         run: python scripts/report_lint.py examples/sample-report.md --profile full --strict
+      - name: Validate explainer report
+        run: python scripts/report_lint.py examples/explainer-report.md --profile explainer --strict
       - name: Validate English report with source locations
         run: python scripts/report_lint.py examples/sample-report.en.md --profile full --strict --source examples/long-text-source.txt --require-locators
       - name: Validate teaching report
@@ -54,6 +56,8 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Validate catalog and repository
         run: python scripts/fallacy_cli.py validate --strict
+      - name: Validate knowledge coverage audit
+        run: python scripts/fallacy_cli.py coverage --json > /dev/null
       - name: Check generated catalog
         run: python scripts/fallacy_cli.py render --check
       - name: Validate long-text source workflow

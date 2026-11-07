@@ -159,6 +159,22 @@ confusions = ["selective evidence", "card stacking", "p-hacking"]
 related = ["selective-evidence", "card-stacking", "p-hacking"]
 
 [[fallacy]]
+id = "nut-picking"
+name_zh = "极端样本挑选"
+name_en = "Nut-Picking"
+aliases = ["只挑极端成员", "坚果挑选", "nut picking fallacy"]
+category = "statistical"
+kind = "statistical"
+severity = 3
+definition = "从对立群体或大量材料中专门挑出最极端、最异常或最容易嘲笑的例子，再把它当作该群体或整体立场的代表。"
+pattern = "群体 G 中可找到极端成员 X；X 表达 P；因此 G 的典型立场是 P。"
+diagnostic = ["X 是按预先规则抽样，还是按最极端特征选出？", "G 中典型成员和总体分布是什么？", "如果对支持者也做同样挑选，会得到什么结果？"]
+example = "截取某社群三条最激烈发言，所以这个社群整体都支持暴力。"
+boundary = "极端成员可以说明群体内部存在某问题；但不能在没有代表性抽样时估计其普遍程度。"
+confusions = ["樱桃挑选", "弱人谬误", "草率概括"]
+related = ["cherry-picking", "weak-man", "hasty-generalization"]
+
+[[fallacy]]
 id = "texas-sharpshooter"
 name_zh = "德州神枪手谬误"
 name_en = "Texas Sharpshooter Fallacy"
@@ -194,7 +210,7 @@ related = ["p-hacking", "texas-sharpshooter", "cherry-picking"]
 id = "p-hacking"
 name_zh = "P 值操纵"
 name_en = "P-Hacking"
-aliases = ["数据挖掘到显著", "规格搜索"]
+aliases = ["数据挖掘到显著", "规格搜索", "garden of forking paths"]
 category = "statistical"
 kind = "statistical"
 severity = 3

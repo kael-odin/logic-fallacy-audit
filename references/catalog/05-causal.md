@@ -8,7 +8,7 @@
 
 > 本文件由结构化目录生成。修改 `catalog/` 后再运行 `python scripts/fallacy_cli.py render`。
 
-共 **26** 条。
+共 **27** 条。
 
 ## 快速索引
 
@@ -40,6 +40,7 @@
 | 事后必然论 | Retrospective Determinism | `retrospective-determinism` |
 | 压倒性例外 | Overwhelming Exception | `overwhelming-exception` |
 | 忽略共同原因 | Ignoring a Common Cause | `ignoring-common-cause` |
+| 偶然例外谬误 | Accident Fallacy | `accident-fallacy` |
 
 ---
 
@@ -472,7 +473,7 @@ single cause、false cause、broken window fallacy
 
 - 类型：非形式谬误
 - 默认影响：高影响
-- 别名：反向因果、结果当原因
+- 别名：反向因果、结果当原因、wrong direction
 
 ### 定义
 
@@ -1141,6 +1142,49 @@ A 与 B 相关；因此 A 导致 B；未检查共同原因 C。
 ### 相关条目
 
 相关即因果 (`cum-hoc`)、虚假因果 (`false-cause`)、单一原因谬误 (`single-cause`)
+
+
+---
+
+## 偶然例外谬误
+
+**Accident Fallacy** · `accident-fallacy`
+
+- 类型：非形式谬误
+- 默认影响：中等
+- 别名：偶然谬误、一般规则忽略例外、destroying the exception
+
+### 定义
+
+把一条通常适用的一般规则套到具有相关特殊性的个案上，却不检查该例外是否改变了规则原本要保护的目的。
+
+### 推理式
+
+```text
+一般规则 R 在正常条件下支持结论 C；个案 X 具有相关例外特征；仍直接套用 R 推出 C。
+```
+
+### 诊断问题
+
+1. 个案的哪个特征可能使一般规则不适用？
+2. 规则的目的和例外条件是否允许当前套用？
+3. 如果处理这个例外，是否会造成相反但可解释的结果？
+
+### 原创例子
+
+> 公司原则上禁止远程办公，所以员工家人在急诊时也不能临时远程处理紧急工作。
+
+### 何时可能不是谬误
+
+规则可以有意保留有限例外以维持可执行性；问题是把经验概括当成没有边界的绝对规则。
+
+### 容易混淆
+
+草率概括、没有真正的苏格兰人、规则与例外
+
+### 相关条目
+
+草率概括 (`hasty-generalization`)、没有真正的苏格兰人 (`no-true-scotsman`)、虚假两难 (`false-dilemma`)
 
 
 [返回分类索引](../catalog-index.md)

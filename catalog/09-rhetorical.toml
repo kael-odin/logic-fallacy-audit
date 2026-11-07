@@ -333,3 +333,51 @@ example = "把裁员描述为“释放人才进入市场”，因此不再讨论
 boundary = "所有叙述都需要框架；问题在于框架隐蔽、单边或阻止替代描述被比较。"
 confusions = ["framing effect", "loaded language", "strategic vagueness"]
 related = ["framing-effect", "loaded-language", "euphemism"]
+
+[[fallacy]]
+id = "if-by-whiskey"
+name_zh = "威士忌式两面话"
+name_en = "If-by-Whiskey"
+aliases = ["两面讨好修辞", "条件式骑墙", "if by whiskey fallacy"]
+category = "rhetorical"
+kind = "rhetorical"
+severity = 2
+definition = "对争议问题用“如果……那么支持；如果……那么反对”的对称措辞同时取悦双方，却不明确自己的实际立场和承诺条件。"
+pattern = "若按解释 A 理解 P，则我赞成；若按解释 B 理解 P，则我反对；因此听众各自认为作者支持自己。"
+diagnostic = ["作者究竟承诺采用哪一种解释或政策？", "两个“如果”分支是否会导致不同的实际行动？", "去掉华丽措辞后，立场能否被反驳或追责？"]
+example = "如果这项改革能提高公平，我完全支持；如果它损害效率，我当然反对。至于具体方案，我不表态。"
+boundary = "有条件立场和承认权衡可以合理；问题是用条件句隐藏不可同时兑现的承诺，避免说明实际选择。"
+confusions = ["偷换概念", "护城河与城堡", "倾向性措辞"]
+related = ["equivocation", "motte-and-bailey", "loaded-language"]
+
+[[fallacy]]
+id = "inflation-of-conflict"
+name_zh = "夸大专家分歧"
+name_en = "Inflation of Conflict"
+aliases = ["冲突膨胀", "把细节争议说成整体共识崩塌"]
+category = "rhetorical"
+kind = "rhetorical"
+severity = 2
+definition = "把专业领域内关于范围、估计或方法的局部争议，扩大成整体结论没有证据或专家毫无共识，从而取消现有证据权重。"
+pattern = "专家在细节 D 上存在分歧；因此结论 C 完全没有可靠支持。"
+diagnostic = ["争议涉及核心结论、参数范围还是方法细节？", "多数独立证据和系统综述怎样分布？", "分歧是否改变结论方向、强度或不确定性？"]
+example = "两项研究对风险下降 20% 还是 15% 有分歧，所以专家根本不知道这项措施有没有效果。"
+boundary = "真实而根本的专家冲突会降低置信度；问题是把有限争议扩大到整个证据体系。"
+confusions = ["虚假平衡", "诉诸权威", "诉诸无知"]
+related = ["false-balance", "appeal-to-authority", "appeal-to-ignorance"]
+
+[[fallacy]]
+id = "pooh-pooh"
+name_zh = "嗤之以鼻谬误"
+name_en = "Pooh-Pooh Fallacy"
+aliases = ["轻蔑否定", "不值得回应式反驳", "pooh-poohing"]
+category = "rhetorical"
+kind = "rhetorical"
+severity = 2
+definition = "不说明对方主张或证据哪里错误，只用嘲笑、轻蔑或“这不值一驳”的姿态让受众跳过论证本身。"
+pattern = "A 提出 P 和理由；B 说 P 很可笑、不值讨论；因此受众把 P 当作已被反驳。"
+diagnostic = ["B 是否具体回应了 P 的证据和推理？", "如果移除嘲讽语气，还剩什么反驳？", "被嘲笑的内容是否可能事实正确但表达笨拙？"]
+example = "有人提出测试数据可能有统计缺陷，主持人笑着说这问题不值一驳，于是继续原结论。"
+boundary = "简短的轻蔑回应可能只是拒绝低质量挑衅；当它替代对可检验论证的回应时才构成问题。"
+confusions = ["诉诸嘲笑", "诉诸顽石", "断言式证明"]
+related = ["appeal-to-ridicule", "argumentum-ad-lapidem", "proof-by-assertion"]

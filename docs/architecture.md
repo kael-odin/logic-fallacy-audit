@@ -17,6 +17,8 @@ SKILL.md
 
 `catalog/*.toml` 是知识库唯一数据源。`references/catalog/`、`references/catalog-index.md` 和 `references/adjacent-biases.md` 由脚本生成，不应手工修改。
 
+`references/knowledge-coverage.md` 也从同一数据源生成，用于记录全部条目的字段完整性、分类分布、核心十类覆盖和复现命令。
+
 这样处理的原因：
 
 - 避免文档与检索结果不一致；
@@ -102,6 +104,8 @@ catalog/*.toml
 | 引文无法追溯或源文本版本漂移 | `source_map.py` + SHA-256 + 行号定位 |
 | 图表关系超出报告证据 | 只从论证地图与问题卡生成，不推断精确攻击目标 |
 | 行为退化 | 固定评测集 + rubric |
+| 条目数量被误当成知识完整性 | 生成知识覆盖审计 + 字段完整性门槛 |
+| 解说表达削弱证据 | Explainer 复用 Full 的问题卡和边界校验 |
 
 ## 8. 扩展原则
 
