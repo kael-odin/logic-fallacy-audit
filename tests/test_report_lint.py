@@ -62,6 +62,26 @@ class ReportLintTests(unittest.TestCase):
         result = lint_report_text(bad, Path("missing-field.md"), profile="full")
         self.assertIn("issue-field", {issue.code for issue in result.issues})
 
+    def test_empty_issue_field_is_reported(self) -> None:
+        sample = (ROOT / "examples" / "sample-report.md").read_text(encoding="utf-8")
+        bad = sample.replace(
+            "提供离职访谈、岗位压力指标、同时期留任者比较和替代原因数据。",
+            "",
+            1,
+        )
+        result = lint_report_text(bad, Path("empty-field.md"), profile="full")
+        self.assertIn("issue-field-empty", {issue.code for issue in result.issues})
+
+    def test_duplicate_required_section_is_reported(self) -> None:
+        sample = (ROOT / "examples" / "sample-report.md").read_text(encoding="utf-8")
+        bad = sample.replace(
+            "## 边界说明",
+            "## 边界说明\n\n这是重复章节。\n\n## 边界说明",
+            1,
+        )
+        result = lint_report_text(bad, Path("duplicate-section.md"), profile="full")
+        self.assertIn("duplicate-section", {issue.code for issue in result.issues})
+
     def test_quick_and_teaching_profiles_use_minimal_rules(self) -> None:
         for profile in ("quick", "teaching"):
             with self.subTest(profile=profile):

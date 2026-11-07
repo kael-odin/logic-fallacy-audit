@@ -26,8 +26,10 @@ python -m unittest discover -s tests -v
 - SKILL frontmatter 与必要引用存在；
 - 报告模板必需章节存在；
 - 样例报告通过结构、引用、标签、置信度和边界字段校验；
+- 重复章节、空字段和未完成占位符会被拒绝；
 - SKILL、CITATION 与 CHANGELOG 版本一致；
 - 评测案例可解析且引用有效；
+- 评测 mode 类型有效，且四种模式均有样本；
 - Markdown 相对链接不失效；
 - 生成目录无缺失、漂移或残留文件；
 - CLI 和示例报告关键行为通过测试。

@@ -2,6 +2,13 @@
 
 All notable changes follow a simple milestone history.
 
+## Unreleased
+
+- Aligned the report specification with every field enforced by the linter.
+- Rejected duplicate report sections and empty problem-card or reverse-test fields.
+- Hardened behavior-evaluation validation against invalid mode types and missing modes.
+- Updated the content backlog to distinguish completed evaluation coverage from remaining candidates.
+
 ## 1.2.0 - 2026-11-07
 
 - Added a deterministic Markdown report linter with Full/Debate and Quick profiles.

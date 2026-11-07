@@ -47,6 +47,9 @@ FINDING_LABELS = ("确认", "较可能", "语境相关", "不构成谬误")
 IMPACT_LABELS = ("阻断", "重大", "局部", "表达")
 CONFIDENCE_PATTERN = re.compile(r"置信度\s*[:：]\s*(高|中|低)")
 HEADING_PATTERN = re.compile(r"^(#{2,3})\s+(.+?)\s*$")
+FIELD_HEADER_PATTERN = re.compile(
+    r"(?m)^(?P<indent>\s*)\*\*(?P<name>[^*\n]+)\*\*(?P<inline>[^\n]*)$"
+)
 PLACEHOLDER_MARKERS = (
     "[问题标题]",
     "[必要片段]",
@@ -112,10 +115,62 @@ def _section_lines(
     return start + 1, lines[start + 1 : end]
 
 
+def _duplicate_sections(lines: list[str]) -> list[tuple[int, str]]:
+    seen: set[str] = set()
+    duplicates: list[tuple[int, str]] = []
+    for index, line in enumerate(lines, start=1):
+        match = HEADING_PATTERN.match(line)
+        if not match:
+            continue
+        level, title = match.groups()
+        title = title.strip()
+        if level != "##" or title not in REQUIRED_SECTIONS:
+            continue
+        if title in seen:
+            duplicates.append((index, title))
+        seen.add(title)
+    return duplicates
+
+
+def _field_values(text: str) -> dict[str, str]:
+    matches = list(FIELD_HEADER_PATTERN.finditer(text))
+    values: dict[str, str] = {}
+    for index, match in enumerate(matches):
+        end = matches[index + 1].start() if index + 1 < len(matches) else len(text)
+        inline = match.group("inline").strip().lstrip(":：").strip()
+        following = text[match.end() : end].strip()
+        value = "\n".join(part for part in (inline, following) if part)
+        values[match.group("name").strip()] = value
+    return values
+
+
+def _field_value(fields: dict[str, str], name: str, *, prefix: bool = False) -> str | None:
+    if name in fields:
+        return fields[name]
+    if prefix:
+        for field_name, value in fields.items():
+            if field_name.startswith(name):
+                return value
+    return None
+
+
+def _meaningful_field(value: str | None) -> bool:
+    if value is None:
+        return False
+    cleaned = re.sub(r"(?m)^\s*>\s?", "", value)
+    cleaned = cleaned.strip(" \t\r\n`*_>“”\"'")
+    return bool(cleaned)
+
+
 def lint_report_text(text: str, path: Path, profile: str = "full") -> ReportLintResult:
     lines = text.splitlines()
     issues: list[ReportIssue] = []
     sections = _section_map(lines)
+
+    for index, title in _duplicate_sections(lines):
+        issues.append(
+            ReportIssue("error", "duplicate-section", f"必需章节 `## {title}` 重复", index)
+        )
 
     for marker in PLACEHOLDER_MARKERS:
         for index, line in enumerate(lines, start=1):
@@ -139,8 +194,10 @@ def lint_report_text(text: str, path: Path, profile: str = "full") -> ReportLint
     if profile in {"full", "debate"}:
         argument_start, argument_lines = _section_lines(lines, sections, "论证地图")
         argument_text = "\n".join(argument_lines)
+        argument_fields = _field_values(argument_text)
         for field in ARGUMENT_MAP_FIELDS:
-            if field not in argument_text:
+            value = _field_value(argument_fields, field, prefix=True)
+            if value is None:
                 issues.append(
                     ReportIssue(
                         "error",
@@ -149,16 +206,36 @@ def lint_report_text(text: str, path: Path, profile: str = "full") -> ReportLint
                         argument_start,
                     )
                 )
+            elif not _meaningful_field(value):
+                issues.append(
+                    ReportIssue(
+                        "error",
+                        "argument-map-empty",
+                        f"论证地图字段 `{field}` 为空",
+                        argument_start,
+                    )
+                )
 
         reverse_start, reverse_lines = _section_lines(lines, sections, "反向检验")
         reverse_text = "\n".join(reverse_lines)
+        reverse_fields = _field_values(reverse_text)
         for field in REVERSE_TEST_FIELDS:
-            if f"**{field}**" not in reverse_text:
+            value = _field_value(reverse_fields, field)
+            if value is None:
                 issues.append(
                     ReportIssue(
                         "error",
                         "reverse-test-field",
                         f"反向检验缺少 `{field}`",
+                        reverse_start,
+                    )
+                )
+            elif not _meaningful_field(value):
+                issues.append(
+                    ReportIssue(
+                        "error",
+                        "reverse-test-empty",
+                        f"反向检验字段 `{field}` 为空",
                         reverse_start,
                     )
                 )
@@ -199,8 +276,10 @@ def lint_report_text(text: str, path: Path, profile: str = "full") -> ReportLint
             )
         for block_index, block in enumerate(blocks, start=1):
             title = block.splitlines()[0].strip() if block.splitlines() else ""
+            fields = _field_values(block)
             for field in ISSUE_FIELDS:
-                if f"**{field}**" not in block:
+                value = _field_value(fields, field)
+                if value is None:
                     issues.append(
                         ReportIssue(
                             "error",
@@ -209,7 +288,19 @@ def lint_report_text(text: str, path: Path, profile: str = "full") -> ReportLint
                             problem_start,
                         )
                     )
-            if not any(line.lstrip().startswith(">") for line in block.splitlines()):
+                elif not _meaningful_field(value):
+                    issues.append(
+                        ReportIssue(
+                            "error",
+                            "issue-field-empty",
+                            f"问题卡片 {block_index} `{title}` 的 `{field}` 为空",
+                            problem_start,
+                        )
+                    )
+            quote = _field_value(fields, "原文")
+            if not _meaningful_field(quote) or not any(
+                line.lstrip().startswith(">") for line in (quote or "").splitlines()
+            ):
                 issues.append(
                     ReportIssue(
                         "error",
@@ -218,7 +309,8 @@ def lint_report_text(text: str, path: Path, profile: str = "full") -> ReportLint
                         problem_start,
                     )
                 )
-            if not any(label in block for label in FINDING_LABELS):
+            verdict = _field_value(fields, "判定") or ""
+            if not any(label in verdict for label in FINDING_LABELS):
                 issues.append(
                     ReportIssue(
                         "error",
@@ -227,7 +319,7 @@ def lint_report_text(text: str, path: Path, profile: str = "full") -> ReportLint
                         problem_start,
                     )
                 )
-            if not CONFIDENCE_PATTERN.search(block):
+            if not CONFIDENCE_PATTERN.search(verdict):
                 issues.append(
                     ReportIssue(
                         "error",
@@ -236,7 +328,8 @@ def lint_report_text(text: str, path: Path, profile: str = "full") -> ReportLint
                         problem_start,
                     )
                 )
-            if not any(label in block for label in IMPACT_LABELS):
+            impact = _field_value(fields, "影响") or ""
+            if not any(label in impact for label in IMPACT_LABELS):
                 issues.append(
                     ReportIssue(
                         "error",

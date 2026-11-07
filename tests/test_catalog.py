@@ -267,7 +267,7 @@ class CatalogTests(unittest.TestCase):
                 json.dumps(
                     {
                         "id": "eval-invalid-types",
-                        "mode": "quick",
+                        "mode": ["quick"],
                         "input": "这是一个长度足够的行为评测输入。",
                         "must_detect": [{"bad": "id"}],
                         "may_detect": [["bad"]],
@@ -280,6 +280,8 @@ class CatalogTests(unittest.TestCase):
             )
             issues = validate_evals(self.catalog, root)
         codes = {issue.code for issue in issues}
+        self.assertIn("eval-mode", codes)
+        self.assertIn("eval-mode-coverage", codes)
         self.assertIn("eval-list-item", codes)
         self.assertIn("eval-forbidden-items", codes)
 

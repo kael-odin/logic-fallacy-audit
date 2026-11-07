@@ -875,6 +875,8 @@ def validate_evals(catalog: Catalog, root: Path = ROOT) -> list[Issue]:
         return [Issue("error", "missing-evals", "缺少 evals/cases.jsonl")]
     issues: list[Issue] = []
     seen: set[str] = set()
+    mode_counts: Counter[str] = Counter()
+    expected_modes = {"quick", "full", "debate", "teaching"}
     entry_ids = set(catalog.entry_by_id)
     for line_number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
         if not line.strip():
@@ -891,8 +893,11 @@ def validate_evals(catalog: Catalog, root: Path = ROOT) -> list[Issue]:
         if case_id in seen:
             issues.append(Issue("error", "eval-duplicate", "评测 ID 重复", case_id))
         seen.add(case_id)
-        if item.get("mode") not in {"quick", "full", "debate", "teaching"}:
+        mode = item.get("mode")
+        if not isinstance(mode, str) or mode not in expected_modes:
             issues.append(Issue("error", "eval-mode", "评测 mode 无效", case_id))
+        else:
+            mode_counts[mode] += 1
         if not ID_PATTERN.fullmatch(case_id):
             issues.append(Issue("error", "eval-id", "评测 ID 必须是 kebab-case", case_id))
         if not isinstance(item.get("input"), str) or len(item.get("input", "").strip()) < 10:
@@ -958,6 +963,16 @@ def validate_evals(catalog: Catalog, root: Path = ROOT) -> list[Issue]:
             )
     if len(seen) < 30:
         issues.append(Issue("error", "eval-coverage", "评测案例少于 30 条"))
+    for mode in sorted(expected_modes):
+        if mode_counts[mode] == 0:
+            issues.append(
+                Issue(
+                    "error",
+                    "eval-mode-coverage",
+                    f"行为评测缺少 `{mode}` 模式",
+                    mode,
+                )
+            )
     return issues
 
 
