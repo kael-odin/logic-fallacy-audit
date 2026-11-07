@@ -77,6 +77,6 @@ python -m unittest discover -s tests -v
 - 目录校验通过；
 - 生成文件无漂移；
 - 单元测试通过；
-- 至少 30 条行为评测案例存在；
+- 至少 40 条行为评测案例存在；
 - README 安装命令与仓库名一致；
 - GitHub Actions 在支持版本上通过。

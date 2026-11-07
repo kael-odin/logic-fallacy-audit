@@ -8,7 +8,7 @@
 
 > 本文件由结构化目录生成。修改 `catalog/` 后再运行 `python scripts/fallacy_cli.py render`。
 
-共 **11** 条。
+共 **12** 条。
 
 ## 快速索引
 
@@ -25,6 +25,7 @@
 | 正反都赢 | Heads-I-Win-Tails-You-Lose | `heads-i-win-tails-you-lose` |
 | 证据缺失推演 | Absence-of-Evidence Reasoning | `absence-of-evidence` |
 | 历史学家谬误 | Historian's Fallacy | `historians-fallacy` |
+| 小人谬误 | Homunculus Fallacy | `homunculus-fallacy` |
 
 ---
 
@@ -494,6 +495,49 @@ appeal to ignorance、appeal to silence、unfalsifiable conspiracy
 ### 相关条目
 
 后见之明偏差 (`hindsight-bias`)、结果偏差 (`outcome-bias`)、事后归因 (`post-hoc`)
+
+
+---
+
+## 小人谬误
+
+**Homunculus Fallacy** · `homunculus-fallacy`
+
+- 类型：非形式谬误
+- 默认影响：中等
+- 别名：内部小人解释、解释者回归、用能力解释能力
+
+### 定义
+
+用内部小主体或同一能力来解释待解释现象，使解释只是把问题缩小或复制，没有给出更基本机制。
+
+### 推理式
+
+```text
+现象 X 需要解释；内部实体 H 具有 X 能力；因此 X 得到解释。
+```
+
+### 诊断问题
+
+1. 内部实体的机制是否比原现象更清楚？
+2. 解释是否把同一问题原样复制到更小层级？
+3. 能否指出可观察步骤而不是再假设一个执行者？
+
+### 原创例子
+
+> 人为什么能理解语言？因为大脑里有一个小翻译官能理解所有语言。
+
+### 何时可能不是谬误
+
+多主体模型和简化执行者可以是计算或教学工具；只要进一步说明其操作步骤，就不必构成循环解释。
+
+### 容易混淆
+
+循环论证、具体化谬误、心智投射谬误
+
+### 相关条目
+
+循环论证 (`circular-reasoning`)、具体化谬误 (`reification`)、心智投射谬误 (`mind-projection-fallacy`)
 
 
 [返回分类索引](../catalog-index.md)

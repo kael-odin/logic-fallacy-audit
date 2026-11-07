@@ -381,3 +381,35 @@ example = "球队穿新球鞋后赢了，所以那双鞋使胜利不可避免。
 boundary = "确定性系统可以由定律和初始条件推出结果；复杂社会事件通常仍需概率和反事实比较。"
 confusions = ["事后归因", "后见之明偏差", "模态辖域谬误"]
 related = ["post-hoc", "hindsight-bias", "modal-scope-fallacy"]
+
+[[fallacy]]
+id = "overwhelming-exception"
+name_zh = "压倒性例外"
+name_en = "Overwhelming Exception"
+aliases = ["例外吞掉结论", "限定过多", "只剩特例的概括"]
+category = "causal"
+kind = "informal"
+severity = 2
+definition = "一般结论不断加上大量例外，排除后只剩极窄范围，却仍保留原来的强概括语气和结论。"
+pattern = "一般命题 P 适用于 X；追加例外 E1、E2……；剩余范围远小于 P 的表面含义；仍用 P 支撑原结论。"
+diagnostic = ["例外覆盖了目标范围的多大比例？", "去掉例外后，原结论还剩多少信息量？", "标题和结论是否明确承认收窄后的范围？"]
+example = "公司充分听取所有员工意见，当然，新员工、外包、远程员工和一线值班人员除外；所以不存在沟通问题。"
+boundary = "合理概括可以包含有限例外；问题是例外太多使原命题失去预测力，而表述仍暗示范围很广。"
+confusions = ["过度概括", "草率概括", "没有真正的苏格兰人"]
+related = ["sweeping-generalization", "hasty-generalization", "no-true-scotsman"]
+
+[[fallacy]]
+id = "ignoring-common-cause"
+name_zh = "忽略共同原因"
+name_en = "Ignoring a Common Cause"
+aliases = ["第三变量忽略", "混杂因素忽略", "共同因素误判"]
+category = "causal"
+kind = "informal"
+severity = 2
+definition = "观察到两个现象相关，就推断其中一个导致另一个，却没有检查是否存在同时影响二者的第三因素。"
+pattern = "A 与 B 相关；因此 A 导致 B；未检查共同原因 C。"
+diagnostic = ["是否存在同时影响 A 和 B 的第三变量？", "控制该变量后关联是否减弱？", "时间顺序和干预证据能否区分共同原因与因果方向？"]
+example = "冰淇淋销量和溺水人数一起上升，所以吃冰淇淋导致溺水。"
+boundary = "共同原因必须可解释、可测量，而不是无限添加未知变量；控制混杂后相关仍可支持因果。"
+confusions = ["相关即因果", "虚假因果", "单一原因谬误"]
+related = ["cum-hoc", "false-cause", "single-cause"]

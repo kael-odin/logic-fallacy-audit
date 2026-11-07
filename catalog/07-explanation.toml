@@ -173,3 +173,19 @@ example = "用今天才知道的故障原因，断言当年的工程师“显然
 boundary = "历史行动者仍需对当时可合理获得的信息、预警和流程负责；后见信息可以用于学习而非直接定罪。"
 confusions = ["后见之明偏差", "结果偏差", "事后归因"]
 related = ["hindsight-bias", "outcome-bias", "post-hoc"]
+
+[[fallacy]]
+id = "homunculus-fallacy"
+name_zh = "小人谬误"
+name_en = "Homunculus Fallacy"
+aliases = ["内部小人解释", "解释者回归", "用能力解释能力"]
+category = "explanation"
+kind = "informal"
+severity = 2
+definition = "用内部小主体或同一能力来解释待解释现象，使解释只是把问题缩小或复制，没有给出更基本机制。"
+pattern = "现象 X 需要解释；内部实体 H 具有 X 能力；因此 X 得到解释。"
+diagnostic = ["内部实体的机制是否比原现象更清楚？", "解释是否把同一问题原样复制到更小层级？", "能否指出可观察步骤而不是再假设一个执行者？"]
+example = "人为什么能理解语言？因为大脑里有一个小翻译官能理解所有语言。"
+boundary = "多主体模型和简化执行者可以是计算或教学工具；只要进一步说明其操作步骤，就不必构成循环解释。"
+confusions = ["循环论证", "具体化谬误", "心智投射谬误"]
+related = ["circular-reasoning", "reification", "mind-projection-fallacy"]

@@ -32,7 +32,7 @@ class CatalogTests(unittest.TestCase):
         self.assertEqual([], [issue.format() for issue in issues])
 
     def test_coverage_thresholds(self) -> None:
-        self.assertGreaterEqual(len(self.catalog.entries), 230)
+        self.assertGreaterEqual(len(self.catalog.entries), 250)
         self.assertGreaterEqual(len(self.catalog.fallacy_entries), 200)
         self.assertGreaterEqual(len(self.catalog.bias_entries), 30)
         self.assertEqual(10, len(self.catalog.categories))
@@ -59,6 +59,16 @@ class CatalogTests(unittest.TestCase):
             "proving-too-much",
             "invincible-ignorance",
             "entitlement-to-opinion",
+            "politicians-syllogism",
+            "bulverism",
+            "courtiers-reply",
+            "ergo-decedo",
+            "false-attribution",
+            "overwhelming-exception",
+            "ignoring-common-cause",
+            "inverse-gamblers-fallacy",
+            "ludic-fallacy",
+            "homunculus-fallacy",
         }
         self.assertEqual(set(), expected - set(self.catalog.entry_by_id))
 

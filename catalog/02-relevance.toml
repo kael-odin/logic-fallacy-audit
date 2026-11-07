@@ -605,3 +605,67 @@ example = "无论提供多少次原始记录，他都说不相信，并因此坚
 boundary = "怀疑来源质量、要求可重复证据和暂缓判断都合理；不可战胜的无知指拒绝设置任何可接受证据条件。"
 confusions = ["不可证伪", "诉诸无知", "自我封闭论证"]
 related = ["unfalsifiability", "appeal-to-ignorance", "self-sealing-argument"]
+
+[[fallacy]]
+id = "bulverism"
+name_zh = "布尔弗主义"
+name_en = "Bulverism"
+aliases = ["先假定你错了", "心理发生解释替代反驳", "动机解释替代论证"]
+category = "relevance"
+kind = "informal"
+severity = 2
+definition = "不先证明对方结论错误，而把对方为何相信该结论归因于心理、身份或利益，并借此假定结论已经被驳倒。"
+pattern = "A 相信 P；A 相信 P 是因为原因 R；因此 P 错误。"
+diagnostic = ["原文是否独立证明 P 错误，而不只是解释 A 为何相信 P？", "原因 R 即使存在，能否改变 P 的真假？", "同一解释是否也能套在相反立场上？"]
+example = "他反对这个方案只是因为他害怕改变，所以这个方案没有问题。"
+boundary = "动机和利益可以影响证言可信度或提示偏见；但必须先回应证据，不能把来源解释当成结论反驳。"
+confusions = ["发生学谬误", "诉诸动机", "处境式人身攻击"]
+related = ["genetic-fallacy", "appeal-to-motive", "ad-hominem-circumstantial"]
+
+[[fallacy]]
+id = "courtiers-reply"
+name_zh = "侍臣式回应"
+name_en = "Courtier's Reply"
+aliases = ["圈内资格挡箭牌", "不懂内部知识就不能批评", "门槛式回避"]
+category = "relevance"
+kind = "dialectical"
+severity = 2
+definition = "以批评者未掌握圈内术语、经验或权威资格为由，拒绝回应其中可以独立检验的事实和推理。"
+pattern = "批评者 C 缺少资格 I；因此 C 对 P 的批评不需要回答。"
+diagnostic = ["批评中的关键主张能否独立检验？", "缺少的资格是否真的会改变这些证据的解释？", "回应是否给出了可复核内容，而非只要求更多身份凭证？"]
+example = "他没读过我们的内部教材，所以关于这套理论可能伤害儿童的批评不值一驳。"
+boundary = "复杂领域确实需要专业知识；指出具体缺失能力可以合理。但资格要求不能替代对可检验批评的回应。"
+confusions = ["诉诸权威", "处境式人身攻击", "不可战胜的无知"]
+related = ["appeal-to-authority", "ad-hominem-circumstantial", "invincible-ignorance"]
+
+[[fallacy]]
+id = "ergo-decedo"
+name_zh = "因此离开谬误"
+name_en = "Ergo Decedo"
+aliases = ["不喜欢就离开", "外人无权批评", "先驱逐再回应"]
+category = "relevance"
+kind = "dialectical"
+severity = 2
+definition = "不回应批评内容，而把批评者标成群体外人，并推出其无权参与讨论、应该离开或闭嘴。"
+pattern = "C 不属于群体 G；C 批评群体做法 P；因此 P 不需要回应，C 应离开。"
+diagnostic = ["成员身份与 P 的真假或政策效果有什么关系？", "受影响者或外部审查是否能提供有效证据？", "“离开”是否替代了对批评的实质回答？"]
+example = "你不是本地人，没资格谈这座城市的交通政策；不习惯就搬走。"
+boundary = "本地经验、利益相关性和正式投票资格可能与决策程序有关；但这不等于外部批评的事实内容自动无效。"
+confusions = ["处境式人身攻击", "关联污染", "语气警察"]
+related = ["ad-hominem-circumstantial", "guilt-by-association", "tone-policing"]
+
+[[fallacy]]
+id = "false-attribution"
+name_zh = "虚假归属"
+name_en = "False Attribution"
+aliases = ["来源误归", "张冠李戴引用", "错误署名"]
+category = "relevance"
+kind = "informal"
+severity = 2
+definition = "把陈述、观点或证据归给错误的个人、机构或材料，使内容获得不应有的可信度或解释框架。"
+pattern = "来源 S 据称支持 P；证据实际来自 T 或并不存在；因此 P 被当作有 S 支持。"
+diagnostic = ["原始文本、记录或可追溯链接在哪里？", "转述链中哪一步改变了来源？", "即使来源正确，该来源是否真的支持当前结论？"]
+example = "文章称风险报告由医学会发布；论文页脚却显示它来自营销公司，学会只是转载。"
+boundary = "单纯的引用格式错误不一定影响论证；当错误来源被用来支撑可信度、归属责任或解释含义时，才成为实质问题。"
+confusions = ["断章取义", "诉诸伪权威", "模糊来源词"]
+related = ["quote-mining", "appeal-to-false-authority", "weasel-words"]

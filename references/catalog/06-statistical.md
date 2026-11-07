@@ -8,7 +8,7 @@
 
 > 本文件由结构化目录生成。修改 `catalog/` 后再运行 `python scripts/fallacy_cli.py render`。
 
-共 **21** 条。
+共 **23** 条。
 
 ## 快速索引
 
@@ -35,6 +35,8 @@
 | 麦克纳马拉谬误 | McNamara Fallacy | `mcnemara-fallacy` |
 | 辛普森悖论陷阱 | Simpson's Paradox Trap | `simpsons-paradox` |
 | 重复计数 | Double Counting | `double-counting` |
+| 逆赌徒谬误 | Inverse Gambler's Fallacy | `inverse-gamblers-fallacy` |
+| 游戏谬误 | Ludic Fallacy | `ludic-fallacy` |
 
 ---
 
@@ -924,6 +926,92 @@ ecological fallacy、confounding、collider bias
 ### 相关条目
 
 分母忽视 (`denominator-neglect`)、多重比较问题 (`multiple-comparisons`)、误导性平均值 (`misleading-average`)
+
+
+---
+
+## 逆赌徒谬误
+
+**Inverse Gambler's Fallacy** · `inverse-gamblers-fallacy`
+
+- 类型：统计推理
+- 默认影响：中等
+- 别名：罕见结果反推多次尝试、逆赌徒、结果反推未观察试验
+
+### 定义
+
+从一次罕见结果推断此前已经发生大量未观察到的尝试，却没有给出试验次数、选择过程或先验证据。
+
+### 推理式
+
+```text
+观察到罕见结果 R；因此 R 之前已有大量未观察试验 N。
+```
+
+### 诊断问题
+
+1. 对试验次数 N 是否有直接证据？
+2. 结果 R 在单次试验和多次试验模型下的概率各是多少？
+3. 观察者是否只看到被选中的罕见案例？
+
+### 原创例子
+
+> 他第一次买彩票就中了大奖，所以之前肯定已经暗中买过成千上万次。
+
+### 何时可能不是谬误
+
+在已知抽样模型下，罕见观测可以更新对试验次数的概率判断；关键是先验、似然和选择机制。
+
+### 容易混淆
+
+赌徒谬误、多重比较、选择偏差
+
+### 相关条目
+
+赌徒谬误 (`gamblers-fallacy`)、多重比较问题 (`multiple-comparisons`)、选择偏差 (`selection-bias`)
+
+
+---
+
+## 游戏谬误
+
+**Ludic Fallacy** · `ludic-fallacy`
+
+- 类型：统计推理
+- 默认影响：高影响
+- 别名：封闭模型当开放世界、把概率游戏当现实、规则世界误推
+
+### 定义
+
+把受明确规则约束、概率分布已知的模型结果直接用于开放世界，忽略未知事件、规则变化和模型外风险。
+
+### 推理式
+
+```text
+模型 M 在封闭规则下给出概率 P；现实属于开放系统；因此现实风险等于 P。
+```
+
+### 诊断问题
+
+1. 模型边界是否覆盖了现实中的主要不确定来源？
+2. 未知事件或反馈是否会改变分布本身？
+3. 决策在模型失效时是否仍然稳健？
+
+### 原创例子
+
+> 过去十年数据算出最大损失，所以未来任何损失都不会超过这个数。
+
+### 何时可能不是谬误
+
+简化模型是必要工具，压力测试和情景分析也能改善决策；问题是把模型的已知范围误当成世界的全部范围。
+
+### 容易混淆
+
+虚假精确、不可能证据标准、过度自信偏差
+
+### 相关条目
+
+虚假精确 (`false-precision`)、不可能证据标准 (`impossible-expectation`)、过度自信偏差 (`overconfidence-bias`)
 
 
 [返回分类索引](../catalog-index.md)

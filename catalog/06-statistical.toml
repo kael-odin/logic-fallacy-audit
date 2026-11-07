@@ -333,3 +333,35 @@ example = "一百名用户同时点赞两条帖子，却被报告为两百次独
 boundary = "互动次数和独立人数可以分别统计；问题在于分母和指标未说明，导致重复解释。"
 confusions = ["分母忽视", "多重比较", "平均数的误导"]
 related = ["denominator-neglect", "multiple-comparisons", "misleading-average"]
+
+[[fallacy]]
+id = "inverse-gamblers-fallacy"
+name_zh = "逆赌徒谬误"
+name_en = "Inverse Gambler's Fallacy"
+aliases = ["罕见结果反推多次尝试", "逆赌徒", "结果反推未观察试验"]
+category = "statistical"
+kind = "statistical"
+severity = 2
+definition = "从一次罕见结果推断此前已经发生大量未观察到的尝试，却没有给出试验次数、选择过程或先验证据。"
+pattern = "观察到罕见结果 R；因此 R 之前已有大量未观察试验 N。"
+diagnostic = ["对试验次数 N 是否有直接证据？", "结果 R 在单次试验和多次试验模型下的概率各是多少？", "观察者是否只看到被选中的罕见案例？"]
+example = "他第一次买彩票就中了大奖，所以之前肯定已经暗中买过成千上万次。"
+boundary = "在已知抽样模型下，罕见观测可以更新对试验次数的概率判断；关键是先验、似然和选择机制。"
+confusions = ["赌徒谬误", "多重比较", "选择偏差"]
+related = ["gamblers-fallacy", "multiple-comparisons", "selection-bias"]
+
+[[fallacy]]
+id = "ludic-fallacy"
+name_zh = "游戏谬误"
+name_en = "Ludic Fallacy"
+aliases = ["封闭模型当开放世界", "把概率游戏当现实", "规则世界误推"]
+category = "statistical"
+kind = "statistical"
+severity = 3
+definition = "把受明确规则约束、概率分布已知的模型结果直接用于开放世界，忽略未知事件、规则变化和模型外风险。"
+pattern = "模型 M 在封闭规则下给出概率 P；现实属于开放系统；因此现实风险等于 P。"
+diagnostic = ["模型边界是否覆盖了现实中的主要不确定来源？", "未知事件或反馈是否会改变分布本身？", "决策在模型失效时是否仍然稳健？"]
+example = "过去十年数据算出最大损失，所以未来任何损失都不会超过这个数。"
+boundary = "简化模型是必要工具，压力测试和情景分析也能改善决策；问题是把模型的已知范围误当成世界的全部范围。"
+confusions = ["虚假精确", "不可能证据标准", "过度自信偏差"]
+related = ["false-precision", "impossible-expectation", "overconfidence-bias"]

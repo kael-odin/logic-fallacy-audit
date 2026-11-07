@@ -961,8 +961,8 @@ def validate_evals(catalog: Catalog, root: Path = ROOT) -> list[Issue]:
                     case_id,
                 )
             )
-    if len(seen) < 30:
-        issues.append(Issue("error", "eval-coverage", "评测案例少于 30 条"))
+    if len(seen) < 40:
+        issues.append(Issue("error", "eval-coverage", "评测案例少于 40 条"))
     for mode in sorted(expected_modes):
         if mode_counts[mode] == 0:
             issues.append(
@@ -1023,6 +1023,7 @@ def validate_repository(catalog: Catalog, root: Path = ROOT) -> list[Issue]:
         "docs/roadmap.md",
         "docs/content-audit-2026-11-07.md",
         "docs/audit-v1.2-2026-11-07.md",
+        "docs/catalog-expansion-250-2026-11-07.md",
         "docs/content-backlog.md",
         "pyproject.toml",
         "scripts/report_lint.py",

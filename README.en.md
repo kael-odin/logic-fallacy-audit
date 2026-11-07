@@ -4,7 +4,7 @@ Logic Fallacy Audit turns a passage into a structured argument review: claims, e
 
 The project is designed for Chinese and English argument analysis, debate preparation, editing, media literacy, and critical-thinking teaching. It is not a fact-checking oracle and does not infer a speaker's motives from a reasoning error.
 
-Current release: `1.2.0`. The catalog contains 240 structured entries: 208 fallacies or argument patterns and 32 adjacent cognitive biases.
+Latest tagged release: `1.2.0`. The current `main` branch contains 250 structured entries: 218 fallacies or argument patterns and 32 adjacent cognitive biases.
 
 ## What it does
 

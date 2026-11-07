@@ -8,7 +8,7 @@
 
 > 本文件由结构化目录生成。修改 `catalog/` 后再运行 `python scripts/fallacy_cli.py render`。
 
-共 **19** 条。
+共 **20** 条。
 
 ## 快速索引
 
@@ -33,6 +33,7 @@
 | 否定前提推出肯定结论 | Affirmative Conclusion from a Negative Premise | `affirmative-conclusion-from-negative-premise` |
 | 肯定前提推出否定结论 | Negative Conclusion from Affirmative Premises | `negative-conclusion-from-affirmative-premises` |
 | 全否定前提谬误 | Exclusive Premises | `exclusive-premises` |
+| 政客三段论 | Politician's Syllogism | `politicians-syllogism` |
 
 ---
 
@@ -830,6 +831,49 @@ a 与 b 指同一对象；主体知道或相信 a 是 F；因此主体知道或�
 ### 相关条目
 
 否定前提推出肯定结论 (`affirmative-conclusion-from-negative-premise`)、肯定前提推出否定结论 (`negative-conclusion-from-affirmative-premises`)、中项不周延 (`undistributed-middle`)
+
+
+---
+
+## 政客三段论
+
+**Politician's Syllogism** · `politicians-syllogism`
+
+- 类型：形式错误
+- 默认影响：中等
+- 别名：必须做点什么谬误、行动方案偷换、某事必须做
+
+### 定义
+
+从“必须采取某种行动”和“这个方案也属于行动”推出“必须采用这个具体方案”，把行动必要性与方案有效性混为一谈。
+
+### 推理式
+
+```text
+必须行动；方案 P 是行动；因此必须采用 P。
+```
+
+### 诊断问题
+
+1. 目标是否必然要求采取具体方案 P？
+2. P 是否被证明有效，是否比较过替代方案？
+3. 论证是否从“需要行动”偷换成“需要这个行动”？
+
+### 原创例子
+
+> 服务已经宕机，我们必须马上做点什么；重启数据库也是做点什么，所以必须立刻重启数据库。
+
+### 何时可能不是谬误
+
+紧急场景可以先采取低风险、可逆的暂定措施；仍需说明该措施与目标的关系，并及时复核。
+
+### 容易混淆
+
+虚假两难、完美方案谬误、不推出结论
+
+### 相关条目
+
+虚假两难 (`false-dilemma`)、涅槃谬误 (`nirvana-fallacy`)、政策瘫痪谬误 (`policy-paralysis`)
 
 
 [返回分类索引](../catalog-index.md)

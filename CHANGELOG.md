@@ -8,6 +8,8 @@ All notable changes follow a simple milestone history.
 - Rejected duplicate report sections and empty problem-card or reverse-test fields.
 - Hardened behavior-evaluation validation against invalid mode types and missing modes.
 - Updated the content backlog to distinguish completed evaluation coverage from remaining candidates.
+- Expanded the catalog from 240 to 250 entries with ten mechanism-level additions.
+- Expanded behavior evaluations from 33 to 43 cases so every new entry has regression coverage.
 
 ## 1.2.0 - 2026-11-07
 

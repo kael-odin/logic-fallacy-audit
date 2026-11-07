@@ -8,7 +8,7 @@
 
 > 本文件由结构化目录生成。修改 `catalog/` 后再运行 `python scripts/fallacy_cli.py render`。
 
-共 **24** 条。
+共 **26** 条。
 
 ## 快速索引
 
@@ -38,6 +38,8 @@
 | 零和谬误 | Zero-Sum Fallacy | `zero-sum-fallacy` |
 | 完美主义标准 | Perfectionist Fallacy | `perfectionist-fallacy` |
 | 事后必然论 | Retrospective Determinism | `retrospective-determinism` |
+| 压倒性例外 | Overwhelming Exception | `overwhelming-exception` |
+| 忽略共同原因 | Ignoring a Common Cause | `ignoring-common-cause` |
 
 ---
 
@@ -1053,6 +1055,92 @@ E 已发生，且发生时存在 C；因此 C 必然导致 E。
 ### 相关条目
 
 事后归因 (`post-hoc`)、后见之明偏差 (`hindsight-bias`)、模态辖域谬误 (`modal-scope-fallacy`)
+
+
+---
+
+## 压倒性例外
+
+**Overwhelming Exception** · `overwhelming-exception`
+
+- 类型：非形式谬误
+- 默认影响：中等
+- 别名：例外吞掉结论、限定过多、只剩特例的概括
+
+### 定义
+
+一般结论不断加上大量例外，排除后只剩极窄范围，却仍保留原来的强概括语气和结论。
+
+### 推理式
+
+```text
+一般命题 P 适用于 X；追加例外 E1、E2……；剩余范围远小于 P 的表面含义；仍用 P 支撑原结论。
+```
+
+### 诊断问题
+
+1. 例外覆盖了目标范围的多大比例？
+2. 去掉例外后，原结论还剩多少信息量？
+3. 标题和结论是否明确承认收窄后的范围？
+
+### 原创例子
+
+> 公司充分听取所有员工意见，当然，新员工、外包、远程员工和一线值班人员除外；所以不存在沟通问题。
+
+### 何时可能不是谬误
+
+合理概括可以包含有限例外；问题是例外太多使原命题失去预测力，而表述仍暗示范围很广。
+
+### 容易混淆
+
+过度概括、草率概括、没有真正的苏格兰人
+
+### 相关条目
+
+过度概括 (`sweeping-generalization`)、草率概括 (`hasty-generalization`)、没有真正的苏格兰人 (`no-true-scotsman`)
+
+
+---
+
+## 忽略共同原因
+
+**Ignoring a Common Cause** · `ignoring-common-cause`
+
+- 类型：非形式谬误
+- 默认影响：中等
+- 别名：第三变量忽略、混杂因素忽略、共同因素误判
+
+### 定义
+
+观察到两个现象相关，就推断其中一个导致另一个，却没有检查是否存在同时影响二者的第三因素。
+
+### 推理式
+
+```text
+A 与 B 相关；因此 A 导致 B；未检查共同原因 C。
+```
+
+### 诊断问题
+
+1. 是否存在同时影响 A 和 B 的第三变量？
+2. 控制该变量后关联是否减弱？
+3. 时间顺序和干预证据能否区分共同原因与因果方向？
+
+### 原创例子
+
+> 冰淇淋销量和溺水人数一起上升，所以吃冰淇淋导致溺水。
+
+### 何时可能不是谬误
+
+共同原因必须可解释、可测量，而不是无限添加未知变量；控制混杂后相关仍可支持因果。
+
+### 容易混淆
+
+相关即因果、虚假因果、单一原因谬误
+
+### 相关条目
+
+相关即因果 (`cum-hoc`)、虚假因果 (`false-cause`)、单一原因谬误 (`single-cause`)
 
 
 [返回分类索引](../catalog-index.md)

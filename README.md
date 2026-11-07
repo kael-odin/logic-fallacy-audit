@@ -105,9 +105,9 @@ python scripts/fallacy_cli.py lint-report examples/sample-report.md --strict
 
 ## 知识库
 
-知识库按论证功能分类，而不是只按传统教科书目录排列。当前 v1.2 覆盖：
+知识库按论证功能分类，而不是只按传统教科书目录排列。当前 `main` 分支覆盖：
 
-**240 条结构化条目**：208 条谬误/论证模式，32 条与谬误相邻的认知偏差。
+**250 条结构化条目**：218 条谬误/论证模式，32 条与谬误相邻的认知偏差。
 
 - 形式与演绎错误
 - 相关性与人身攻击
@@ -159,6 +159,7 @@ python scripts/fallacy_cli.py lint-report examples/sample-report.md --strict
 - [内容审查记录](docs/content-audit-2026-11-07.md)：本轮差距扫描、修复项与回归证据。
 - [内容候选池](docs/content-backlog.md)：尚未达到收录门槛的后续条目与评测方向。
 - [v1.2 行为审查](docs/audit-v1.2-2026-11-07.md)：报告验收、评测扩展与质量门记录。
+- [250 条目录扩充审查](docs/catalog-expansion-250-2026-11-07.md)：本轮外部差距扫描、新增机制与边界。
 - [核心十类速查](references/core-fallacies.md)：你给出的十类可直接从这里进入。
 - [逻辑基础](references/logic-basics.md)：有效性、条件、量词、归纳、概率与规范推理。
 - [任务矩阵](references/task-matrix.md)：按演绎、因果、统计、政策等任务选择分析路线。
