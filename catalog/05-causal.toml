@@ -365,3 +365,19 @@ example = "这款安全工具不能挡住所有攻击，所以装上它没有意
 boundary = "某些安全、医疗或法律标准确实要求通过硬门槛；仍需区分必要门槛与全面完美要求。"
 confusions = ["nirvana fallacy", "false dilemma", "risk policy"]
 related = ["nirvana-fallacy", "false-dilemma", "causal-oversimplification"]
+
+[[fallacy]]
+id = "retrospective-determinism"
+name_zh = "事后必然论"
+name_en = "Retrospective Determinism"
+aliases = ["结果反推必然", "既然发生所以不可避免"]
+category = "causal"
+kind = "informal"
+severity = 2
+definition = "因为某事件已经发生，就断言当时的环境使它不可避免，并把事后解释提升为必然因果。"
+pattern = "E 已发生，且发生时存在 C；因此 C 必然导致 E。"
+diagnostic = ["在事件发生前，C 条件下 E 的概率有多大？", "是否存在未发生的替代结果和阻断因素？"]
+example = "球队穿新球鞋后赢了，所以那双鞋使胜利不可避免。"
+boundary = "确定性系统可以由定律和初始条件推出结果；复杂社会事件通常仍需概率和反事实比较。"
+confusions = ["事后归因", "后见之明偏差", "模态辖域谬误"]
+related = ["post-hoc", "hindsight-bias", "modal-scope-fallacy"]

@@ -1,0 +1,55 @@
+name: 谬误内容补充
+description: 提交漏收、重复或有边界争议的谬误条目
+title: "[内容] "
+labels:
+  - content
+body:
+  - type: input
+    id: term
+    attributes:
+      label: 名称
+      description: 请提供中文名、英文名和常见别名
+      placeholder: 中文名 / English Name / aliases
+    validations:
+      required: true
+  - type: textarea
+    id: mechanism
+    attributes:
+      label: 推理机制
+      description: 请说明前提、结论和具体断点，不要只解释名称
+      placeholder: P1 ...；P2 ...；因此 C；断点是 ...
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: 原创短例
+      description: 不使用真实个人隐私或大段受版权保护材料
+    validations:
+      required: true
+  - type: textarea
+    id: boundary
+    attributes:
+      label: 合理情形
+      description: 说明该模式何时可能成立或不是谬误
+    validations:
+      required: true
+  - type: input
+    id: related
+    attributes:
+      label: 相关条目
+      description: 如果已有条目覆盖，请写出 ID 并说明为何需要新增
+      placeholder: straw-man / cum-hoc / ...
+    validations:
+      required: false
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: 提交检查
+      options:
+        - label: 已搜索现有条目和别名
+          required: true
+        - label: 例子为原创或有权公开
+          required: true
+        - label: 已说明误报边界
+          required: true

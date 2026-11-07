@@ -3,11 +3,12 @@ from __future__ import annotations
 import json
 import re
 import tomllib
+import unicodedata
 from collections import Counter
+from collections.abc import Iterable
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Iterable
-
+from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG_DIR = ROOT / "catalog"
@@ -75,6 +76,8 @@ CORE_FALLACY_IDS = [
 ]
 
 ID_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+SEMVER_PATTERN = re.compile(r"^\d+\.\d+\.\d+$")
+GENERATED_CATALOG_PATTERN = re.compile(r"^\d{2}-[a-z0-9-]+\.md$")
 
 
 @dataclass(frozen=True)
@@ -93,31 +96,38 @@ class Entry:
 
     @property
     def id(self) -> str:
-        return str(self.data["id"])
+        return str(self.data.get("id", "")).strip()
 
     @property
     def name_zh(self) -> str:
-        return str(self.data["name_zh"])
+        return str(self.data.get("name_zh", "")).strip()
 
     @property
     def name_en(self) -> str:
-        return str(self.data["name_en"])
+        return str(self.data.get("name_en", "")).strip()
 
     @property
     def category(self) -> str:
-        return str(self.data["category"])
+        return str(self.data.get("category", "")).strip()
 
     @property
     def aliases(self) -> list[str]:
-        return list(self.data.get("aliases", []))
+        value = self.data.get("aliases", [])
+        if not isinstance(value, list):
+            return []
+        return [item.strip() for item in value if isinstance(item, str) and item.strip()]
 
     @property
     def related(self) -> list[str]:
-        return list(self.data.get("related", []))
+        value = self.data.get("related", [])
+        if not isinstance(value, list):
+            return []
+        return [item.strip() for item in value if isinstance(item, str) and item.strip()]
 
     @property
     def severity(self) -> int:
-        return int(self.data["severity"])
+        value = self.data.get("severity")
+        return value if isinstance(value, int) and not isinstance(value, bool) else 0
 
 
 @dataclass(frozen=True)
@@ -144,7 +154,7 @@ class Catalog:
 
     @property
     def entry_by_id(self) -> dict[str, Entry]:
-        return {item.id: item for item in self.entries}
+        return {item.id: item for item in self.entries if item.id}
 
     @property
     def fallacy_entries(self) -> list[Entry]:
@@ -161,6 +171,14 @@ class Catalog:
 
 class CatalogParseError(RuntimeError):
     pass
+
+
+def _entry_id(entry: Entry) -> str:
+    return str(entry.data.get("id", "")).strip()
+
+
+def _normalize_lookup(value: str) -> str:
+    return unicodedata.normalize("NFKC", value).strip().casefold()
 
 
 def _load_toml(path: Path) -> dict[str, Any]:
@@ -207,7 +225,9 @@ def _require_text(
 ) -> str:
     value = entry.data.get(field)
     if not isinstance(value, str) or not value.strip():
-        issues.append(Issue("error", "missing-text", f"字段 `{field}` 必须是非空字符串", entry.id))
+        issues.append(
+            Issue("error", "missing-text", f"字段 `{field}` 必须是非空字符串", _entry_id(entry))
+        )
         return ""
     if len(value.strip()) < min_chars:
         issues.append(
@@ -215,7 +235,7 @@ def _require_text(
                 "error",
                 "short-text",
                 f"字段 `{field}` 少于 {min_chars} 个字符",
-                entry.id,
+                _entry_id(entry),
             )
         )
     return value.strip()
@@ -230,7 +250,9 @@ def _require_string_list(
 ) -> list[str]:
     value = entry.data.get(field)
     if not isinstance(value, list):
-        issues.append(Issue("error", "invalid-list", f"字段 `{field}` 必须是数组", entry.id))
+        issues.append(
+            Issue("error", "invalid-list", f"字段 `{field}` 必须是数组", _entry_id(entry))
+        )
         return []
     if len(value) < min_items:
         issues.append(
@@ -238,7 +260,7 @@ def _require_string_list(
                 "error",
                 "short-list",
                 f"字段 `{field}` 至少需要 {min_items} 项",
-                entry.id,
+                _entry_id(entry),
             )
         )
     cleaned: list[str] = []
@@ -249,7 +271,7 @@ def _require_string_list(
                     "error",
                     "invalid-list-item",
                     f"字段 `{field}` 第 {index + 1} 项必须是非空字符串",
-                    entry.id,
+                    _entry_id(entry),
                 )
             )
             continue
@@ -264,9 +286,7 @@ def validate_catalog(catalog: Catalog) -> list[Issue]:
     category_names: set[str] = set()
     for category in catalog.categories:
         missing = [
-            field
-            for field in CATEGORY_REQUIRED_FIELDS
-            if not str(getattr(category, field)).strip()
+            field for field in CATEGORY_REQUIRED_FIELDS if not str(getattr(category, field)).strip()
         ]
         if missing:
             issues.append(
@@ -278,9 +298,7 @@ def validate_catalog(catalog: Catalog) -> list[Issue]:
                 )
             )
         if not ID_PATTERN.fullmatch(category.id):
-            issues.append(
-                Issue("error", "category-id", "分类 ID 必须是 kebab-case", category.id)
-            )
+            issues.append(Issue("error", "category-id", "分类 ID 必须是 kebab-case", category.id))
         if category.id in category_ids:
             issues.append(Issue("error", "duplicate-category", "分类 ID 重复", category.id))
         if category.name_zh in category_names:
@@ -293,7 +311,10 @@ def validate_catalog(catalog: Catalog) -> list[Issue]:
     entry_ids: set[str] = set()
     zh_names: set[str] = set()
     en_names: set[str] = set()
+    zh_name_owners: dict[str, str] = {}
+    en_name_owners: dict[str, str] = {}
     for entry in catalog.entries:
+        entry_id = str(entry.data.get("id", "")).strip()
         missing_fields = sorted(ENTRY_REQUIRED_FIELDS - set(entry.data))
         if missing_fields:
             issues.append(
@@ -301,52 +322,58 @@ def validate_catalog(catalog: Catalog) -> list[Issue]:
                     "error",
                     "missing-fields",
                     f"条目缺少字段: {', '.join(missing_fields)}",
-                    entry.id,
+                    entry_id,
                 )
             )
 
-        if not ID_PATTERN.fullmatch(entry.id):
-            issues.append(Issue("error", "invalid-id", "ID 必须是 kebab-case", entry.id))
-        if entry.id in entry_ids:
-            issues.append(Issue("error", "duplicate-id", "条目 ID 重复", entry.id))
-        entry_ids.add(entry.id)
+        if not entry_id:
+            issues.append(Issue("error", "missing-id", "条目必须包含非空 ID"))
+        elif not ID_PATTERN.fullmatch(entry_id):
+            issues.append(Issue("error", "invalid-id", "ID 必须是 kebab-case", entry_id))
+        if entry_id and entry_id in entry_ids:
+            issues.append(Issue("error", "duplicate-id", "条目 ID 重复", entry_id))
+        if entry_id:
+            entry_ids.add(entry_id)
 
         zh = _require_text(entry, "name_zh", issues, min_chars=2)
         en = _require_text(entry, "name_en", issues, min_chars=2)
-        if zh in zh_names:
-            issues.append(Issue("error", "duplicate-zh-name", "中文名重复", entry.id))
-        if en.casefold() in en_names:
-            issues.append(Issue("error", "duplicate-en-name", "英文名重复", entry.id))
-        zh_names.add(zh)
-        en_names.add(en.casefold())
+        zh_key = _normalize_lookup(zh)
+        en_key = _normalize_lookup(en)
+        if zh_key in zh_names:
+            issues.append(Issue("error", "duplicate-zh-name", "中文名重复", entry_id))
+        if en_key in en_names:
+            issues.append(Issue("error", "duplicate-en-name", "英文名重复", entry_id))
+        zh_names.add(zh_key)
+        en_names.add(en_key)
+        if zh_key:
+            zh_name_owners[zh_key] = entry_id
+        if en_key:
+            en_name_owners[en_key] = entry_id
 
         aliases = _require_string_list(entry, "aliases", issues, min_items=0)
-        if entry.id in aliases:
-            issues.append(Issue("error", "self-alias", "别名不能与 ID 相同", entry.id))
-        if len(aliases) != len(set(aliases)):
-            issues.append(Issue("error", "duplicate-alias", "别名数组存在重复项", entry.id))
+        normalized_aliases = [_normalize_lookup(alias) for alias in aliases]
+        if entry_id and _normalize_lookup(entry_id) in normalized_aliases:
+            issues.append(Issue("error", "self-alias", "别名不能与 ID 相同", entry_id))
+        if len(normalized_aliases) != len(set(normalized_aliases)):
+            issues.append(Issue("error", "duplicate-alias", "别名数组存在重复项", entry_id))
 
-        category = str(entry.data.get("category", ""))
+        category = str(entry.data.get("category", "")).strip()
         if category not in category_ids:
-            issues.append(
-                Issue("error", "unknown-category", f"未知分类 `{category}`", entry.id)
-            )
+            issues.append(Issue("error", "unknown-category", f"未知分类 `{category}`", entry_id))
 
-        kind = str(entry.data.get("kind", ""))
+        kind = str(entry.data.get("kind", "")).strip()
         if kind not in ALLOWED_KINDS:
-            issues.append(Issue("error", "unknown-kind", f"未知 kind `{kind}`", entry.id))
+            issues.append(Issue("error", "unknown-kind", f"未知 kind `{kind}`", entry_id))
         if category == "bias" and kind != "bias":
-            issues.append(
-                Issue("error", "bias-kind", "bias 分类的 kind 必须是 bias", entry.id)
-            )
+            issues.append(Issue("error", "bias-kind", "bias 分类的 kind 必须是 bias", entry_id))
         if category != "bias" and kind == "bias":
             issues.append(
-                Issue("error", "non-bias-kind", "非 bias 分类不能使用 bias kind", entry.id)
+                Issue("error", "non-bias-kind", "非 bias 分类不能使用 bias kind", entry_id)
             )
 
         severity = entry.data.get("severity")
         if not isinstance(severity, int) or isinstance(severity, bool) or severity not in {1, 2, 3}:
-            issues.append(Issue("error", "severity", "severity 必须是 1、2 或 3", entry.id))
+            issues.append(Issue("error", "severity", "severity 必须是 1、2 或 3", entry_id))
 
         _require_text(entry, "definition", issues, min_chars=20)
         _require_text(entry, "pattern", issues, min_chars=8)
@@ -356,11 +383,12 @@ def validate_catalog(catalog: Catalog) -> list[Issue]:
         _require_string_list(entry, "confusions", issues, min_items=1)
         related = _require_string_list(entry, "related", issues, min_items=0)
         if len(related) != len(set(related)):
-            issues.append(Issue("error", "duplicate-related", "related 数组存在重复项", entry.id))
-        if entry.id in related:
-            issues.append(Issue("error", "self-related", "related 不能引用自身", entry.id))
+            issues.append(Issue("error", "duplicate-related", "related 数组存在重复项", entry_id))
+        if entry_id and entry_id in related:
+            issues.append(Issue("error", "self-related", "related 不能引用自身", entry_id))
 
     for entry in catalog.entries:
+        entry_id = str(entry.data.get("id", "")).strip()
         for related_id in entry.related:
             if related_id not in entry_ids:
                 issues.append(
@@ -368,22 +396,71 @@ def validate_catalog(catalog: Catalog) -> list[Issue]:
                         "error",
                         "missing-related",
                         f"related 指向不存在的条目 `{related_id}`",
-                        entry.id,
+                        entry_id,
                     )
                 )
 
+    alias_owners: dict[str, str] = {}
+    normalized_entry_ids = {_normalize_lookup(item) for item in entry_ids}
+    for entry in catalog.entries:
+        entry_id = str(entry.data.get("id", "")).strip()
+        for alias in entry.aliases:
+            key = _normalize_lookup(alias)
+            normalized_id = _normalize_lookup(entry_id)
+            if key in normalized_entry_ids and key != normalized_id:
+                issues.append(
+                    Issue(
+                        "error",
+                        "alias-id-collision",
+                        f"别名 `{alias}` 与另一个条目 ID 冲突",
+                        entry_id,
+                    )
+                )
+            if key in zh_name_owners and zh_name_owners[key] != entry_id:
+                issues.append(
+                    Issue(
+                        "error",
+                        "alias-name-collision",
+                        f"别名 `{alias}` 与另一个中文主名冲突",
+                        entry_id,
+                    )
+                )
+            if key in en_name_owners and en_name_owners[key] != entry_id:
+                issues.append(
+                    Issue(
+                        "error",
+                        "alias-name-collision",
+                        f"别名 `{alias}` 与另一个英文主名冲突",
+                        entry_id,
+                    )
+                )
+            owner = alias_owners.get(key)
+            if owner and owner != entry_id:
+                issues.append(
+                    Issue(
+                        "error",
+                        "alias-conflict",
+                        f"别名 `{alias}` 已被 `{owner}` 使用",
+                        entry_id,
+                    )
+                )
+            alias_owners[key] = entry_id
+
     for core_id in CORE_FALLACY_IDS:
         if core_id not in entry_ids:
-            issues.append(
-                Issue("error", "missing-core", f"核心十类缺少条目 `{core_id}`", core_id)
-            )
+            issues.append(Issue("error", "missing-core", f"核心十类缺少条目 `{core_id}`", core_id))
 
-    if len(catalog.fallacy_entries) < 180:
+    counts = catalog.counts
+    for category in catalog.categories:
+        if counts[category.id] == 0:
+            issues.append(Issue("error", "empty-category", "分类下没有条目", category.id))
+
+    if len(catalog.fallacy_entries) < 200:
         issues.append(
             Issue(
                 "error",
                 "coverage",
-                f"谬误/论证模式少于 180 条，当前 {len(catalog.fallacy_entries)} 条",
+                f"谬误/论证模式少于 200 条，当前 {len(catalog.fallacy_entries)} 条",
             )
         )
     if len(catalog.bias_entries) < 30:
@@ -419,25 +496,16 @@ def _alias_text(entry: Entry) -> str:
 def _related_text(entry: Entry, entry_by_id: dict[str, Entry]) -> str:
     if not entry.related:
         return "无"
-    return "、".join(
-        f"{entry_by_id[item].name_zh} (`{item}`)" for item in entry.related
-    )
+    return "、".join(f"{entry_by_id[item].name_zh} (`{item}`)" for item in entry.related)
 
 
-def _category_filename(category_id: str) -> str:
-    order = {
-        "formal": "01",
-        "relevance": "02",
-        "presumption": "03",
-        "ambiguity": "04",
-        "causal": "05",
-        "statistical": "06",
-        "explanation": "07",
-        "normative": "08",
-        "rhetorical": "09",
-        "bias": "10",
-    }
-    return f"{order[category_id]}-{category_id}.md"
+def _category_filename(catalog: Catalog, category_id: str) -> str:
+    category_ids = [category.id for category in catalog.categories]
+    try:
+        index = category_ids.index(category_id) + 1
+    except ValueError as exc:
+        raise KeyError(f"Unknown category: {category_id}") from exc
+    return f"{index:02d}-{category_id}.md"
 
 
 def build_catalog_index(catalog: Catalog) -> str:
@@ -471,7 +539,7 @@ def build_catalog_index(catalog: Catalog) -> str:
         ]
     )
     for category in catalog.categories:
-        filename = _category_filename(category.id)
+        filename = _category_filename(catalog, category.id)
         lines.append(
             f"| {_md_escape(category.name_zh)} | {_md_escape(category.name_en)} | {counts[category.id]} | [{filename}](catalog/{filename}) |"
         )
@@ -515,9 +583,7 @@ def build_category_doc(catalog: Catalog, category_id: str) -> str:
         "|---|---|---|",
     ]
     for item in items:
-        lines.append(
-            f"| {_md_escape(item.name_zh)} | {_md_escape(item.name_en)} | `{item.id}` |"
-        )
+        lines.append(f"| {_md_escape(item.name_zh)} | {_md_escape(item.name_en)} | `{item.id}` |")
 
     for item in items:
         diagnostic = "\n".join(
@@ -576,6 +642,7 @@ def build_adjacent_biases_doc(catalog: Catalog) -> str:
     category = catalog.category_by_id["bias"]
     items = catalog.bias_entries
     entry_by_id = catalog.entry_by_id
+    sources = "、".join(f"`catalog/{source}`" for source in sorted({item.source for item in items}))
     lines = [
         "# 与谬误相邻的认知偏差",
         "",
@@ -585,7 +652,7 @@ def build_adjacent_biases_doc(catalog: Catalog) -> str:
         "",
         "> 认知偏差是判断倾向，不是逻辑谬误。报告只有在能指出具体推理步骤受影响时，才可把偏差作为解释背景。",
         "",
-        f"当前收录 **{len(items)}** 条。完整机器可读数据位于 `catalog/10-adjacent-biases.toml`。",
+        f"当前收录 **{len(items)}** 条。完整机器可读数据位于 {sources}。",
         "",
         "## 偏差速查",
         "",
@@ -593,9 +660,7 @@ def build_adjacent_biases_doc(catalog: Catalog) -> str:
         "|---|---|---|",
     ]
     for item in items:
-        lines.append(
-            f"| {_md_escape(item.name_zh)} | {_md_escape(item.name_en)} | `{item.id}` |"
-        )
+        lines.append(f"| {_md_escape(item.name_zh)} | {_md_escape(item.name_en)} | `{item.id}` |")
 
     for item in items:
         diagnostic = "\n".join(
@@ -643,35 +708,56 @@ def build_adjacent_biases_doc(catalog: Catalog) -> str:
     return "\n".join(lines)
 
 
-def expected_generated_files(catalog: Catalog) -> dict[Path, str]:
+def expected_generated_files(catalog: Catalog, root: Path = ROOT) -> dict[Path, str]:
     outputs: dict[Path, str] = {
-        ROOT / "references" / "catalog-index.md": build_catalog_index(catalog),
-        ROOT / "references" / "adjacent-biases.md": build_adjacent_biases_doc(catalog),
+        root / "references" / "catalog-index.md": build_catalog_index(catalog),
+        root / "references" / "adjacent-biases.md": build_adjacent_biases_doc(catalog),
     }
     for category in catalog.categories:
-        path = ROOT / "references" / "catalog" / _category_filename(category.id)
+        path = root / "references" / "catalog" / _category_filename(catalog, category.id)
         outputs[path] = build_category_doc(catalog, category.id)
     return outputs
 
 
-def write_generated_files(catalog: Catalog) -> list[Path]:
+def write_generated_files(
+    catalog: Catalog,
+    root: Path = ROOT,
+) -> tuple[list[Path], list[Path]]:
     written: list[Path] = []
-    for path, content in expected_generated_files(catalog).items():
+    expected = expected_generated_files(catalog, root)
+    for path, content in expected.items():
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(content, encoding="utf-8", newline="\n")
         written.append(path)
-    return written
+    removed: list[Path] = []
+    generated_dir = root / "references" / "catalog"
+    if generated_dir.exists():
+        for path in sorted(generated_dir.glob("*.md")):
+            if (
+                path.is_file()
+                and GENERATED_CATALOG_PATTERN.fullmatch(path.name)
+                and path not in expected
+            ):
+                path.unlink()
+                removed.append(path)
+    return written, removed
 
 
-def generated_drift(catalog: Catalog) -> list[Path]:
+def generated_drift(catalog: Catalog, root: Path = ROOT) -> list[Path]:
     drift: list[Path] = []
-    for path, content in expected_generated_files(catalog).items():
+    expected = expected_generated_files(catalog, root)
+    for path, content in expected.items():
         if not path.exists():
             drift.append(path)
             continue
         current = path.read_text(encoding="utf-8")
         if current != content:
             drift.append(path)
+    generated_dir = root / "references" / "catalog"
+    if generated_dir.exists():
+        for path in sorted(generated_dir.glob("*.md")):
+            if GENERATED_CATALOG_PATTERN.fullmatch(path.name) and path not in expected:
+                drift.append(path)
     return drift
 
 
@@ -688,14 +774,7 @@ def validate_markdown_links(root: Path = ROOT) -> list[Issue]:
         text = _strip_fenced_blocks(path.read_text(encoding="utf-8"))
         for raw_target in link_pattern.findall(text):
             target = raw_target.strip().strip("<>")
-            if (
-                not target
-                or target.startswith("#")
-                or target.startswith("http://")
-                or target.startswith("https://")
-                or target.startswith("mailto:")
-                or target.startswith("codex://")
-            ):
+            if not target or target.startswith(("#", "http://", "https://", "mailto:", "codex://")):
                 continue
             target = target.split("#", 1)[0].split("?", 1)[0]
             if not target:
@@ -739,10 +818,20 @@ def validate_skill(root: Path = ROOT) -> list[Issue]:
         issues.append(Issue("error", "frontmatter", "SKILL.md frontmatter 未闭合"))
         return issues
     frontmatter = parts[1]
-    if "name: logic-fallacy-audit" not in frontmatter:
+    name_match = re.search(r"^name:\s*(.+?)\s*$", frontmatter, re.MULTILINE)
+    description_match = re.search(r"^description:\s*(.+?)\s*$", frontmatter, re.MULTILINE)
+    version_match = re.search(
+        r"^\s+version:\s*[\"']?([^\"'\n]+)[\"']?\s*$", frontmatter, re.MULTILINE
+    )
+    skill_name = name_match.group(1).strip("\"'") if name_match else ""
+    description = description_match.group(1).strip("\"'") if description_match else ""
+    version = version_match.group(1).strip() if version_match else ""
+    if skill_name != "logic-fallacy-audit":
         issues.append(Issue("error", "skill-name", "Skill name 必须为 logic-fallacy-audit"))
-    if "description:" not in frontmatter:
-        issues.append(Issue("error", "skill-description", "SKILL.md 缺少 description"))
+    if len(description) < 40:
+        issues.append(Issue("error", "skill-description", "Skill description 缺失或过短"))
+    if not SEMVER_PATTERN.fullmatch(version):
+        issues.append(Issue("error", "skill-version", "Skill metadata.version 必须是语义版本"))
     required_refs = [
         "references/analysis-protocol.md",
         "references/report-spec.md",
@@ -768,6 +857,9 @@ def validate_report_template(root: Path = ROOT) -> list[Issue]:
         "## 反向检验",
         "## 改写建议",
         "## 边界说明",
+        "**隐含前提的重建依据**",
+        "**相关但不主判**",
+        "**替代解释**",
     ]
     return [
         Issue("error", "template-section", f"报告模板缺少章节 `{section}`")
@@ -789,37 +881,79 @@ def validate_evals(catalog: Catalog, root: Path = ROOT) -> list[Issue]:
         try:
             item = json.loads(line)
         except json.JSONDecodeError as exc:
-            issues.append(
-                Issue("error", "eval-json", f"第 {line_number} 行 JSON 无效: {exc}")
-            )
+            issues.append(Issue("error", "eval-json", f"第 {line_number} 行 JSON 无效: {exc}"))
             continue
         for field in ["id", "mode", "input", "must_detect", "may_detect", "must_not_assert"]:
             if field not in item:
-                issues.append(
-                    Issue("error", "eval-field", f"第 {line_number} 行缺少 `{field}`")
-                )
+                issues.append(Issue("error", "eval-field", f"第 {line_number} 行缺少 `{field}`"))
         case_id = str(item.get("id", ""))
         if case_id in seen:
             issues.append(Issue("error", "eval-duplicate", "评测 ID 重复", case_id))
         seen.add(case_id)
         if item.get("mode") not in {"quick", "full", "debate", "teaching"}:
             issues.append(Issue("error", "eval-mode", "评测 mode 无效", case_id))
+        if not ID_PATTERN.fullmatch(case_id):
+            issues.append(Issue("error", "eval-id", "评测 ID 必须是 kebab-case", case_id))
         if not isinstance(item.get("input"), str) or len(item.get("input", "").strip()) < 10:
             issues.append(Issue("error", "eval-input", "评测 input 至少 10 个字符", case_id))
+        detect_sets: dict[str, set[str]] = {}
         for field in ["must_detect", "may_detect"]:
             values = item.get(field)
             if not isinstance(values, list):
                 issues.append(Issue("error", "eval-list", f"`{field}` 必须是数组", case_id))
                 continue
+            if not all(isinstance(value, str) and value.strip() for value in values):
+                issues.append(
+                    Issue(
+                        "error",
+                        "eval-list-item",
+                        f"`{field}` 必须由非空字符串组成",
+                        case_id,
+                    )
+                )
+                continue
+            if len(values) != len(set(values)):
+                issues.append(
+                    Issue("error", "eval-duplicate-entry", f"`{field}` 存在重复项", case_id)
+                )
+            detect_sets[field] = set(values)
             for value in values:
                 if value not in entry_ids:
                     issues.append(
                         Issue("error", "eval-entry", f"`{field}` 指向未知条目 `{value}`", case_id)
                     )
+        overlap = detect_sets.get("must_detect", set()) & detect_sets.get("may_detect", set())
+        if overlap:
+            issues.append(
+                Issue(
+                    "error",
+                    "eval-overlap",
+                    f"must_detect 与 may_detect 重叠: {', '.join(sorted(overlap))}",
+                    case_id,
+                )
+            )
         must_not = item.get("must_not_assert")
         if not isinstance(must_not, list) or not must_not:
             issues.append(
                 Issue("error", "eval-forbidden", "must_not_assert 必须是非空数组", case_id)
+            )
+        elif not all(isinstance(value, str) and value.strip() for value in must_not):
+            issues.append(
+                Issue(
+                    "error",
+                    "eval-forbidden-items",
+                    "must_not_assert 必须由非空字符串组成",
+                    case_id,
+                )
+            )
+        elif len(must_not) != len(set(must_not)):
+            issues.append(
+                Issue(
+                    "error",
+                    "eval-forbidden-duplicate",
+                    "must_not_assert 存在重复项",
+                    case_id,
+                )
             )
     if len(seen) < 10:
         issues.append(Issue("error", "eval-coverage", "评测案例少于 10 条"))
@@ -827,48 +961,103 @@ def validate_evals(catalog: Catalog, root: Path = ROOT) -> list[Issue]:
 
 
 def validate_repository(catalog: Catalog, root: Path = ROOT) -> list[Issue]:
-    issues = validate_catalog(catalog)
+    catalog_issues = validate_catalog(catalog)
+    issues = list(catalog_issues)
     issues.extend(validate_skill(root))
     issues.extend(validate_report_template(root))
     issues.extend(validate_evals(catalog, root))
     issues.extend(validate_markdown_links(root))
+    if not any(issue.level == "error" for issue in catalog_issues):
+        for path in generated_drift(catalog, root):
+            issues.append(
+                Issue(
+                    "error",
+                    "generated-drift",
+                    f"生成文件缺失、过期或为残留文件: {path.relative_to(root)}",
+                )
+            )
 
     required_files = [
+        "catalog/categories.toml",
         "README.md",
         "README.en.md",
         "LICENSE",
+        "CHANGELOG.md",
+        "CITATION.cff",
         "CONTRIBUTING.md",
         "agents/openai.yaml",
         ".github/workflows/validate.yml",
+        ".github/ISSUE_TEMPLATE/content-gap.yml",
+        ".github/ISSUE_TEMPLATE/bug-report.yml",
+        ".github/ISSUE_TEMPLATE/config.yml",
         "references/catalog-index.md",
         "references/core-fallacies.md",
         "references/logic-basics.md",
         "references/task-matrix.md",
         "assets/report-template.md",
         "assets/checklist.md",
+        "evals/README.md",
+        "evals/rubric.md",
         "examples/sample-report.md",
         "examples/modes.md",
         "docs/product-spec.md",
         "docs/architecture.md",
         "docs/quality.md",
         "docs/roadmap.md",
+        "docs/content-audit-2026-11-07.md",
+        "docs/content-backlog.md",
+        "pyproject.toml",
     ]
     for relative in required_files:
         if not (root / relative).exists():
+            issues.append(Issue("error", "required-file", f"缺少必需文件 `{relative}`"))
+
+    version_files = {
+        "skill": root / "SKILL.md",
+        "citation": root / "CITATION.cff",
+        "changelog": root / "CHANGELOG.md",
+    }
+    if all(path.exists() for path in version_files.values()):
+        skill_text = version_files["skill"].read_text(encoding="utf-8")
+        skill_version_match = re.search(
+            r"^\s+version:\s*[\"']?([^\"'\n]+)[\"']?\s*$",
+            skill_text,
+            re.MULTILINE,
+        )
+        citation_text = version_files["citation"].read_text(encoding="utf-8")
+        citation_version_match = re.search(r"^version:\s*([^\s]+)\s*$", citation_text, re.MULTILINE)
+        changelog_text = version_files["changelog"].read_text(encoding="utf-8")
+        skill_version = skill_version_match.group(1).strip() if skill_version_match else ""
+        citation_version = (
+            citation_version_match.group(1).strip("\"'") if citation_version_match else ""
+        )
+        if skill_version != citation_version:
             issues.append(
-                Issue("error", "required-file", f"缺少必需文件 `{relative}`")
+                Issue(
+                    "error",
+                    "version-mismatch",
+                    f"SKILL.md 版本 {skill_version or '缺失'} 与 CITATION.cff 版本 {citation_version or '缺失'} 不一致",
+                )
+            )
+        if skill_version and f"## {skill_version}" not in changelog_text:
+            issues.append(
+                Issue(
+                    "error",
+                    "changelog-version",
+                    f"CHANGELOG.md 缺少版本 `{skill_version}`",
+                )
             )
     return issues
 
 
 def search_entries(catalog: Catalog, query: str, limit: int = 10) -> list[Entry]:
-    needle = query.strip().casefold()
+    needle = _normalize_lookup(query)
     if not needle:
         return []
     scored: list[tuple[int, int, Entry]] = []
     for item in catalog.entries:
         haystacks = [item.id, item.name_zh, item.name_en, *item.aliases]
-        folded = [value.casefold() for value in haystacks]
+        folded = [_normalize_lookup(value) for value in haystacks]
         score = 0
         if needle in folded:
             score = 100
@@ -877,14 +1066,16 @@ def search_entries(catalog: Catalog, query: str, limit: int = 10) -> list[Entry]
         elif any(needle in value for value in folded):
             score = 80
         else:
-            body = " ".join(
-                str(item.data[field])
-                for field in ["definition", "pattern", "example", "boundary"]
-            ).casefold()
+            body = _normalize_lookup(
+                " ".join(
+                    str(item.data[field])
+                    for field in ["definition", "pattern", "example", "boundary"]
+                )
+            )
             if needle in body:
                 score = 30
             else:
-                diagnostics = " ".join(item.data["diagnostic"]).casefold()
+                diagnostics = _normalize_lookup(" ".join(item.data["diagnostic"]))
                 if needle in diagnostics:
                     score = 20
         if score:

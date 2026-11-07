@@ -2,7 +2,7 @@
 id = "affirming-the-consequent"
 name_zh = "肯定后件"
 name_en = "Affirming the Consequent"
-aliases = ["逆命题谬误", "条件倒置"]
+aliases = ["肯定后件谬误", "后件误推", "条件倒置"]
 category = "formal"
 kind = "formal"
 severity = 3
@@ -237,3 +237,67 @@ example = "并不是所有高收入者都幸福，所以所有高收入者都不
 boundary = "有些自然语言句法确实把否定前移；语义分析需要参照上下文和词的辖域。"
 confusions = ["否定合取错误", "量词歧义", "全称与特称混淆"]
 related = ["negating-a-conjunction", "quantifier-shift", "modal-scope-fallacy"]
+
+[[fallacy]]
+id = "masked-man-fallacy"
+name_zh = "面具人谬误"
+name_en = "Masked Man Fallacy"
+aliases = ["蒙面人谬误", "同一性替换谬误", "illicit substitution of identicals"]
+category = "formal"
+kind = "formal"
+severity = 3
+definition = "在外延相同但涉及知识、信念或描述的语境中，把两个指称同一对象的表达式随意互换，得出不同真值的结论。"
+pattern = "a 与 b 指同一对象；主体知道或相信 a 是 F；因此主体知道或相信 b 是 F。"
+diagnostic = ["替换发生在普通对象层面，还是发生在“知道、相信、寻找、描述”等语境中？", "两个表达式是否在主体视角下可识别为同一对象？"]
+example = "你认识站在门口的人；站在门口的人其实是市长；因此你认识市长。"
+boundary = "在纯粹外延语境中，同一对象的不同名称通常可以替换；知识、信念、感知和引语语境会产生指称不透明。"
+confusions = ["偷换概念", "使用与提及混淆", "范畴错误"]
+related = ["use-mention-confusion", "equivocation", "category-mistake"]
+
+[[fallacy]]
+id = "affirmative-conclusion-from-negative-premise"
+name_zh = "否定前提推出肯定结论"
+name_en = "Affirmative Conclusion from a Negative Premise"
+aliases = ["否定前提肯定结论", "illicit negative"]
+category = "formal"
+kind = "formal"
+severity = 3
+definition = "三段论至少有一个否定前提，却推出肯定结论；这种形式不能保证结论跟随前提。"
+pattern = "没有 A 是 B；所有 C 是 A；因此所有 C 是 B。"
+diagnostic = ["前提是否包含否定，而结论却是肯定归属？", "结论是否与前提已经排除的关系相冲突？"]
+example = "没有爬行动物是恒温动物；所有蛇都是爬行动物；因此所有蛇都是恒温动物。"
+boundary = "肯定结论本身可能因其他独立证据为真；形式错误只说明当前两个前提不足以推出它。"
+confusions = ["否定前件", "全否定前提", "小项不当周延"]
+related = ["negative-conclusion-from-affirmative-premises", "exclusive-premises", "illicit-minor"]
+
+[[fallacy]]
+id = "negative-conclusion-from-affirmative-premises"
+name_zh = "肯定前提推出否定结论"
+name_en = "Negative Conclusion from Affirmative Premises"
+aliases = ["肯定前提否定结论", "illicit affirmative"]
+category = "formal"
+kind = "formal"
+severity = 3
+definition = "三段论两个前提都是肯定命题，却推出否定结论；前提只建立包含关系，不能保证两个词项互斥。"
+pattern = "所有 A 是 B；所有 B 是 C；因此没有 A 是 C。"
+diagnostic = ["两个前提是否都在陈述包含或归属？", "否定结论是否引入了前提没有提供的排斥关系？"]
+example = "所有狗都是哺乳动物；所有哺乳动物都是动物；因此没有狗是动物。"
+boundary = "若另有独立前提证明两个类别互斥，否定结论可以得到支持；问题在于当前肯定前提自身不足。"
+confusions = ["否定后件", "全否定前提", "虚假两难"]
+related = ["affirmative-conclusion-from-negative-premise", "exclusive-premises", "illicit-major"]
+
+[[fallacy]]
+id = "exclusive-premises"
+name_zh = "全否定前提谬误"
+name_en = "Exclusive Premises"
+aliases = ["双否定前提", "排他前提谬误"]
+category = "formal"
+kind = "formal"
+severity = 3
+definition = "三段论的两个前提都是否定命题，因此没有建立中项与两个端项之间的肯定连接，不能合法推出端点关系。"
+pattern = "没有 A 是 B；没有 C 是 A；因此 C 与 B 具有某个确定关系。"
+diagnostic = ["两个前提是否都只说明排斥，没有共同覆盖的对象？", "结论是否需要一个尚未建立的肯定连接？"]
+example = "没有猫是爬行动物；没有狗是猫；因此没有狗是爬行动物。"
+boundary = "两个否定前提可以共同支持有限观察或统计结论；作为标准三段论，它们不足以确定端点关系。"
+confusions = ["肯定前提推出否定结论", "否定前提推出肯定结论", "中项不周延"]
+related = ["affirmative-conclusion-from-negative-premise", "negative-conclusion-from-affirmative-premises", "undistributed-middle"]

@@ -8,7 +8,7 @@
 
 > 本文件由结构化目录生成。修改 `catalog/` 后再运行 `python scripts/fallacy_cli.py render`。
 
-共 **20** 条。
+共 **24** 条。
 
 ## 快速索引
 
@@ -31,8 +31,12 @@
 | 误导性隐喻 | Misleading Metaphor | `misleading-metaphor` |
 | 删去限定词 | Suppressed Qualifier | `suppressed-qualifier` |
 | 断章取义 | Quote Mining | `quote-mining` |
-| 语境剥离 | Contextomy | `contextomy` |
 | 模糊来源词 | Weasel Words | `weasel-words` |
+| 词源谬误 | Etymological Fallacy | `etymological-fallacy` |
+| 不完整比较 | Incomplete Comparison | `incomplete-comparison` |
+| 抹除相关项 | Suppressed Correlative | `suppressed-correlative` |
+| 打包谬误 | Package-Deal Fallacy | `package-deal-fallacy` |
+| 心智投射谬误 | Mind Projection Fallacy | `mind-projection-fallacy` |
 | 范围歧义 | Scope Ambiguity | `scope-ambiguity` |
 
 ---
@@ -158,7 +162,7 @@ quote-mining、suppressed qualifier、语气强调
 
 ### 相关条目
 
-断章取义 (`quote-mining`)、删去限定词 (`suppressed-qualifier`)、语境剥离 (`contextomy`)
+断章取义 (`quote-mining`)、删去限定词 (`suppressed-qualifier`)、堆牌说服 (`card-stacking`)
 
 
 ---
@@ -704,7 +708,7 @@ quote-mining、accent、hasty-generalization
 
 ### 相关条目
 
-断章取义 (`quote-mining`)、重音歧义 (`accent`)、语境剥离 (`contextomy`)
+断章取义 (`quote-mining`)、重音歧义 (`accent`)、堆牌说服 (`card-stacking`)
 
 
 ---
@@ -715,80 +719,39 @@ quote-mining、accent、hasty-generalization
 
 - 类型：修辞模式
 - 默认影响：高影响
-- 别名：contextomy、截取引语
+- 别名：contextomy、截取引语、语境剥离、脱离语境、去语境化
 
 ### 定义
 
-截取原话的一部分，使引语在当前语境中暗示原作者并未表达或明确反对的立场。
+截取原话或把它移出原语境，使引语暗示原作者并未表达、甚至明确反对的立场。
 
 ### 推理式
 
 ```text
-原文在上下文 C 中表达 P；引用只保留片段 F，使读者理解为 Q；Q 与 P 冲突。
+原文在上下文 C 中表达 P；引用只保留片段 F 或搬到语境 C′，使读者理解为 Q；Q 与 P 冲突。
 ```
 
 ### 诊断问题
 
 1. 被引用句的完整段落和限定是什么？
-2. 原作者随后是否澄清或反对当前用法？
+2. 原话回答什么问题、针对谁、发生在何时？
+3. 原作者随后是否澄清或反对当前用法？
 
 ### 原创例子
 
-> 作者写“不能只靠单一指标判断”，被引用为“不能靠指标判断”。
+> 作者写“不能只靠单一指标判断”，被引用为“不能靠指标判断”；技术文档中的“此版本默认不安全”又被说成“产品整体不安全”。
 
 ### 何时可能不是谬误
 
-选择性引用不等于断章取义；如果片段没有改变原意，压缩通常可接受。
+选择性引用或跨语境引用不等于断章取义；如果片段和原则在新语境中保留原意与适用范围，压缩通常可接受。
 
 ### 容易混淆
 
-accent、suppressed qualifier、card stacking
+accent、suppressed qualifier、card stacking、misleading framing
 
 ### 相关条目
 
-重音歧义 (`accent`)、删去限定词 (`suppressed-qualifier`)、语境剥离 (`contextomy`)
-
-
----
-
-## 语境剥离
-
-**Contextomy** · `contextomy`
-
-- 类型：修辞模式
-- 默认影响：高影响
-- 别名：脱离语境、去语境化
-
-### 定义
-
-把一个陈述从其时间、对话、制度或论证语境中移出，使它在另一语境下产生不同结论。
-
-### 推理式
-
-```text
-原陈述在语境 C 中回答 Q；被搬到语境 C′ 中当作回答 R。
-```
-
-### 诊断问题
-
-1. 原话在回答什么问题，针对谁，发生在何时？
-2. 新语境是否改变了指代、条件和结论？
-
-### 原创例子
-
-> 把技术文档中的“默认不安全”截出，写成“专家承认产品不安全”。
-
-### 何时可能不是谬误
-
-跨语境引用可以用于说明普遍原则；需要证明原则在新语境仍适用。
-
-### 容易混淆
-
-quote-mining、accent、misleading framing
-
-### 相关条目
-
-断章取义 (`quote-mining`)、重音歧义 (`accent`)、删去限定词 (`suppressed-qualifier`)
+重音歧义 (`accent`)、删去限定词 (`suppressed-qualifier`)、堆牌说服 (`card-stacking`)
 
 
 ---
@@ -831,6 +794,217 @@ appeal to authority、unsubstantiated authority、vagueness
 ### 相关条目
 
 诉诸权威 (`appeal-to-authority`)、无依据权威引用 (`unsubstantiated-authority`)、策略性模糊 (`strategic-vagueness`)
+
+
+---
+
+## 词源谬误
+
+**Etymological Fallacy** · `etymological-fallacy`
+
+- 类型：非形式谬误
+- 默认影响：中等
+- 别名：起源词义决定现状、词源即真义
+
+### 定义
+
+因为一个词过去具有某种词源或历史含义，就断言它今天只能或必须按该含义使用。
+
+### 推理式
+
+```text
+W 历史上表示 M1；W 今天常用于 M2；因此 M2 用法错误。
+```
+
+### 诊断问题
+
+1. 当前语言共同体的实际用法是什么？
+2. 历史含义能否解释今天的语义变化，而不是替代当前定义？
+
+### 原创例子
+
+> “dinner”历史上常指午餐，所以今天把晚餐叫 dinner 一定是误用。
+
+### 何时可能不是谬误
+
+词源可以解释术语演变、法律原意和专业命名；但语言意义会随使用变化。
+
+### 容易混淆
+
+发生学谬误、偷换概念、说服性定义
+
+### 相关条目
+
+发生学谬误 (`genetic-fallacy`)、偷换概念 (`equivocation`)、说服性定义 (`persuasive-definition`)
+
+
+---
+
+## 不完整比较
+
+**Incomplete Comparison** · `incomplete-comparison`
+
+- 类型：非形式谬误
+- 默认影响：中等
+- 别名：缺少比较基准、更好但不说比谁好
+
+### 定义
+
+使用“更好、更快、更安全、更便宜”等比较词，却没有说明比较对象、维度或测量标准。
+
+### 推理式
+
+```text
+A 是更好的；因此应选 A；但“比什么、好多少、在什么条件下”均未给出。
+```
+
+### 诊断问题
+
+1. 比较对象是谁？
+2. 使用的是哪个指标、基线和时间范围？
+3. 其他维度是否可能给出相反排序？
+
+### 原创例子
+
+> 这款方案更高效，所以应该采用，但报告没有说明和哪个方案、按什么指标比较。
+
+### 何时可能不是谬误
+
+共享语境可能省略显而易见的标准；高风险或争议结论仍需要明确比较。
+
+### 容易混淆
+
+虚假等同、误导性平均值、删去限定词
+
+### 相关条目
+
+虚假等同 (`false-equivalence`)、误导性平均值 (`misleading-average`)、删去限定词 (`suppressed-qualifier`)
+
+
+---
+
+## 抹除相关项
+
+**Suppressed Correlative** · `suppressed-correlative`
+
+- 类型：修辞模式
+- 默认影响：中等
+- 别名：相关项压制、对立项消解
+
+### 定义
+
+把一对相对概念中的一项扩展到几乎涵盖全部，使另一项失去可区分意义，再用被扩张的词制造评价。
+
+### 推理式
+
+```text
+相对词 F 与 G 本应有区分；把 F 重新定义为几乎所有人都符合；因此“F”不再提供证据却保留赞美含义。
+```
+
+### 诊断问题
+
+1. 在当前定义下，什么情况才算不具备 F？
+2. 如果反例不存在，F 是否还有评价信息？
+
+### 原创例子
+
+> 只要产品有一点优点都算“高品质”，于是所有产品都被称为高品质。
+
+### 何时可能不是谬误
+
+概念边界可以渐进和模糊；问题在于无限扩张到无法区分，却继续使用其评价力量。
+
+### 容易混淆
+
+连续体谬误、说服性定义、策略性模糊
+
+### 相关条目
+
+连续体谬误 (`continuum-fallacy`)、说服性定义 (`persuasive-definition`)、策略性模糊 (`strategic-vagueness`)
+
+
+---
+
+## 打包谬误
+
+**Package-Deal Fallacy** · `package-deal-fallacy`
+
+- 类型：非形式谬误
+- 默认影响：中等
+- 别名：概念捆绑、强行打包
+
+### 定义
+
+把若干本可分别评价的观点、属性或政策强行视为不可分割的一整包，从而用其中一项的好恶代替逐项判断。
+
+### 推理式
+
+```text
+A 与 B 常被一起讨论；因此支持 A 就必须支持 B；或反对 B 就等于反对 A。
+```
+
+### 诊断问题
+
+1. A 与 B 是否在定义上必然绑定？
+2. 能否分别支持、修改或拒绝其中各项？
+
+### 原创例子
+
+> 你支持环境保护，就必须接受这份包含所有条款的法案。
+
+### 何时可能不是谬误
+
+某些政策包因制度成本或互赖关系确实需要整体表决；仍需证明不可拆分。
+
+### 容易混淆
+
+虚假两难、护城河与城堡、道德等同
+
+### 相关条目
+
+虚假两难 (`false-dilemma`)、护城河与城堡 (`motte-and-bailey`)、虚假等同 (`false-equivalence`)
+
+
+---
+
+## 心智投射谬误
+
+**Mind Projection Fallacy** · `mind-projection-fallacy`
+
+- 类型：非形式谬误
+- 默认影响：中等
+- 别名：把感受当客观属性、主观印象客观化
+
+### 定义
+
+把自己对对象的感受、描述方式或概念框架，当成对象独立于观察者而固有的属性。
+
+### 推理式
+
+```text
+我在框架 F 下经验到 X 具有属性 P；因此 X 本身客观地就是 P。
+```
+
+### 诊断问题
+
+1. 该属性依赖观察者、工具或描述框架吗？
+2. 更换测量方式后，属性是否保持？
+
+### 原创例子
+
+> 我觉得这间房很冷，所以房间的客观温度一定很低。
+
+### 何时可能不是谬误
+
+经过校准的测量可以支持观察者无关的属性；问题在于把未经检验的直觉直接客观化。
+
+### 容易混淆
+
+具体化谬误、范畴错误、框架效应
+
+### 相关条目
+
+具体化谬误 (`reification`)、范畴错误 (`category-mistake`)、框架效应 (`framing-effect`)
 
 
 ---

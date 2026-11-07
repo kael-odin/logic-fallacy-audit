@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 先阅读贡献规范
+    url: https://github.com/kael-odin/logic-fallacy-audit/blob/main/CONTRIBUTING.md
+    about: 新增条目和提交前检查要求

@@ -8,7 +8,7 @@
 
 > 本文件由结构化目录生成。修改 `catalog/` 后再运行 `python scripts/fallacy_cli.py render`。
 
-共 **20** 条。
+共 **21** 条。
 
 ## 快速索引
 
@@ -34,6 +34,7 @@
 | 统计显著性谬误 | Statistical Significance Fallacy | `statistical-significance-fallacy` |
 | 麦克纳马拉谬误 | McNamara Fallacy | `mcnemara-fallacy` |
 | 辛普森悖论陷阱 | Simpson's Paradox Trap | `simpsons-paradox` |
+| 重复计数 | Double Counting | `double-counting` |
 
 ---
 
@@ -880,6 +881,49 @@ ecological fallacy、confounding、collider bias
 ### 相关条目
 
 生态谬误 (`ecological-fallacy`)、选择偏差 (`selection-bias`)、误导性平均值 (`misleading-average`)
+
+
+---
+
+## 重复计数
+
+**Double Counting** · `double-counting`
+
+- 类型：统计推理
+- 默认影响：高影响
+- 别名：同一证据算两次、重叠样本重复汇总
+
+### 定义
+
+把同一事件、样本或收益在多个类别中重复相加，使证据量、概率或收益被系统性夸大。
+
+### 推理式
+
+```text
+同一集合 S 同时被计入 A 与 B；论证把 |A|+|B| 当作独立总量，忽略重叠 |A∩B|。
+```
+
+### 诊断问题
+
+1. 不同类别是否使用同一批人或事件？
+2. 概率相加时是否可能超过 100%？
+3. 收益是否已在成本或其他项目中计算过？
+
+### 原创例子
+
+> 一百名用户同时点赞两条帖子，却被报告为两百次独立用户支持。
+
+### 何时可能不是谬误
+
+互动次数和独立人数可以分别统计；问题在于分母和指标未说明，导致重复解释。
+
+### 容易混淆
+
+分母忽视、多重比较、平均数的误导
+
+### 相关条目
+
+分母忽视 (`denominator-neglect`)、多重比较问题 (`multiple-comparisons`)、误导性平均值 (`misleading-average`)
 
 
 [返回分类索引](../catalog-index.md)

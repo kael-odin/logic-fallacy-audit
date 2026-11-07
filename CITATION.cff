@@ -8,8 +8,8 @@ authors:
 repository-code: "https://github.com/kael-odin/logic-fallacy-audit"
 url: "https://github.com/kael-odin/logic-fallacy-audit"
 license: MIT
-version: 1.0.0
-date-released: 2026-11-06
+version: 1.1.0
+date-released: 2026-11-07
 abstract: >-
   A Chinese-first argument-analysis skill and structured knowledge base for
   logical fallacies, hidden premises, evidence quality, dialectical moves,

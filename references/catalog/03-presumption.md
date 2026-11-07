@@ -8,7 +8,7 @@
 
 > 本文件由结构化目录生成。修改 `catalog/` 后再运行 `python scripts/fallacy_cli.py render`。
 
-共 **30** 条。
+共 **33** 条。
 
 ## 快速索引
 
@@ -43,6 +43,9 @@
 | 海狮式纠缠 | Sealioning | `sealioning` |
 | 我只是问问 | JAQing Off | `jaqing-off` |
 | 不推出结论 | Non Sequitur | `non-sequitur` |
+| 中庸谬误 | Argument to Moderation | `argument-to-moderation` |
+| 证明过多 | Proving Too Much | `proving-too-much` |
+| 观点豁免谬误 | I'm Entitled to My Opinion | `entitlement-to-opinion` |
 | 标准不一致 | Inconsistent Standards | `inconsistent-standards` |
 
 ---
@@ -1261,6 +1264,132 @@ P；因此 C；无法说明 P 怎样增加 C 的可信度。
 ### 相关条目
 
 谬误谬误 (`fallacy-fallacy`)、红鲱鱼 (`red-herring`)、虚假因果 (`false-cause`)
+
+
+---
+
+## 中庸谬误
+
+**Argument to Moderation** · `argument-to-moderation`
+
+- 类型：非形式谬误
+- 默认影响：高影响
+- 别名：虚假折中、中间立场谬误、argumentum ad temperantiam
+
+### 定义
+
+因为两个立场处于对立位置，就把其中点或折中方案当作更真、更公平或更合理的结论。
+
+### 推理式
+
+```text
+A 与 B 对立；M 位于两者之间；因此 M 正确或最好。
+```
+
+### 诊断问题
+
+1. 中间点在每个相关维度上是否都得到证据支持？
+2. 真实情况是否可能更接近一端，或根本不在两端之间？
+
+### 原创例子
+
+> 一方说风险很高，另一方说风险为零，所以风险一定是一半。
+
+### 何时可能不是谬误
+
+折中可以在谈判中处理利益和价值冲突；但世界状态不由立场距离决定。
+
+### 容易混淆
+
+虚假平衡、虚假两难、两边都有理
+
+### 相关条目
+
+虚假平衡 (`false-balance`)、强行两边都有理 (`both-sidesism`)、虚假两难 (`false-dilemma`)
+
+
+---
+
+## 证明过多
+
+**Proving Too Much** · `proving-too-much`
+
+- 类型：非形式谬误
+- 默认影响：高影响
+- 别名：过度证明、原则证明过宽
+
+### 定义
+
+一个论证所依赖的原则不仅支持当前结论，还会支持明显不可接受或自相矛盾的结论，因此该原则需要额外限制。
+
+### 推理式
+
+```text
+原则 W 被用来证明 P；同一原则 W 也证明不可接受的 R；因此当前论证没有安全地建立 P。
+```
+
+### 诊断问题
+
+1. 把同一推理模板替换成另一个案例，会得到什么结论？
+2. 支持者是否愿意接受那些延伸结论，或能说明相关差异？
+
+### 原创例子
+
+> “只要是传统就应保留”会同时证明互相冲突的旧制度都应保留。
+
+### 何时可能不是谬误
+
+如果延伸结论其实可接受，或案例存在独立相关差异，证明过多不成立。
+
+### 容易混淆
+
+滑坡谬误、特殊豁免、归谬法
+
+### 相关条目
+
+特殊豁免 (`special-pleading`)、滑坡谬误 (`slippery-slope`)、标准不一致 (`inconsistent-standards`)
+
+
+---
+
+## 观点豁免谬误
+
+**I'm Entitled to My Opinion** · `entitlement-to-opinion`
+
+- 类型：辩证规则
+- 默认影响：中等
+- 别名：我有权有观点、观点自由即免于批评
+
+### 定义
+
+把拥有表达意见的权利，偷换成该意见免于证据审查、批评或公共后果。
+
+### 推理式
+
+```text
+A 有权表达 P；因此 P 不应被要求证据或批评。
+```
+
+### 诊断问题
+
+1. 当前讨论的是表达权利，还是主张真假与论证质量？
+2. 批评是否阻止了发言，还是仅检验了内容？
+
+### 原创例子
+
+> 我有权发表看法，所以你不能再问我这些数据从哪里来。
+
+### 何时可能不是谬误
+
+表达自由和免受骚扰是真实原则；它们不自动使事实主张获得免证地位。
+
+### 容易混淆
+
+诉诸固执、终止思考的陈词、语气警察
+
+### 相关条目
+
+断言式证明 (`proof-by-assertion`)、终止思考的陈词 (`thought-terminating-cliche`)、举证责任倒置 (`burden-of-proof-reversal`)
 
 
 ---

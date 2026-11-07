@@ -36,6 +36,12 @@
 
 用途：演绎逻辑、有效性、量词与形式推理的教学框架。
 
+### Wikipedia: List of Fallacies
+
+- [List of Fallacies](https://en.wikipedia.org/wiki/List_of_fallacies)
+
+用途：2026-11-07 仅作为常见名称覆盖率的二次差距检查。它不是本项目定义的权威来源，条目边界和例子均结合形式逻辑、非形式逻辑和论证理论重新编写。
+
 ## 2. 论证理论
 
 - Douglas Walton, *A Pragmatic Theory of Fallacy* (1995).

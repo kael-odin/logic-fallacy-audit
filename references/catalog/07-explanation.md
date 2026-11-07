@@ -8,7 +8,7 @@
 
 > 本文件由结构化目录生成。修改 `catalog/` 后再运行 `python scripts/fallacy_cli.py render`。
 
-共 **10** 条。
+共 **11** 条。
 
 ## 快速索引
 
@@ -24,6 +24,7 @@
 | 假旗预设 | False-Flag Assumption | `false-flag-assumption` |
 | 正反都赢 | Heads-I-Win-Tails-You-Lose | `heads-i-win-tails-you-lose` |
 | 证据缺失推演 | Absence-of-Evidence Reasoning | `absence-of-evidence` |
+| 历史学家谬误 | Historian's Fallacy | `historians-fallacy` |
 
 ---
 
@@ -204,7 +205,7 @@ appeal to motive、false cause、scapegoating
 
 - 类型：非形式谬误
 - 默认影响：中等
-- 别名：随机聚类当信号、模式幻觉
+- 别名：随机聚类当信号、随机聚类误读、聚簇过度解释
 
 ### 定义
 
@@ -451,6 +452,48 @@ appeal to ignorance、appeal to silence、unfalsifiable conspiracy
 ### 相关条目
 
 诉诸无知 (`appeal-to-ignorance`)、诉诸沉默 (`appeal-to-silence`)、不可证伪阴谋解释 (`unfalsifiable-conspiracy`)
+
+
+---
+
+## 历史学家谬误
+
+**Historian's Fallacy** · `historians-fallacy`
+
+- 类型：非形式谬误
+- 默认影响：高影响
+- 别名：后见判断历史、用今天信息审判过去
+
+### 定义
+
+用后来才获得的信息和结果，判断过去行动者在当时是否本应轻易预见，并忽略其真实信息环境。
+
+### 推理式
+
+```text
+决策 D 在时间 t 基于信息 I_t 作出；分析者用后来信息 I_t+ 评判；因此 D 当时显然错误。
+```
+
+### 诊断问题
+
+1. 决策时实际可获得哪些信息和选项？
+2. 后来的结果是概率性后果还是当时已知的确定事实？
+
+### 原创例子
+
+> 用今天才知道的故障原因，断言当年的工程师“显然”忽略了所有线索。
+
+### 何时可能不是谬误
+
+历史行动者仍需对当时可合理获得的信息、预警和流程负责；后见信息可以用于学习而非直接定罪。
+
+### 容易混淆
+
+后见之明偏差、结果偏差、事后归因
+
+### 相关条目
+
+后见之明偏差 (`hindsight-bias`)、结果偏差 (`outcome-bias`)、事后归因 (`post-hoc`)
 
 
 [返回分类索引](../catalog-index.md)

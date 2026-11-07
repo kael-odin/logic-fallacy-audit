@@ -463,6 +463,54 @@ confusions = ["形式无效", "无关信息", "省略前提"]
 related = ["fallacy-fallacy", "red-herring", "false-cause"]
 
 [[fallacy]]
+id = "argument-to-moderation"
+name_zh = "中庸谬误"
+name_en = "Argument to Moderation"
+aliases = ["虚假折中", "中间立场谬误", "argumentum ad temperantiam"]
+category = "presumption"
+kind = "informal"
+severity = 3
+definition = "因为两个立场处于对立位置，就把其中点或折中方案当作更真、更公平或更合理的结论。"
+pattern = "A 与 B 对立；M 位于两者之间；因此 M 正确或最好。"
+diagnostic = ["中间点在每个相关维度上是否都得到证据支持？", "真实情况是否可能更接近一端，或根本不在两端之间？"]
+example = "一方说风险很高，另一方说风险为零，所以风险一定是一半。"
+boundary = "折中可以在谈判中处理利益和价值冲突；但世界状态不由立场距离决定。"
+confusions = ["虚假平衡", "虚假两难", "两边都有理"]
+related = ["false-balance", "both-sidesism", "false-dilemma"]
+
+[[fallacy]]
+id = "proving-too-much"
+name_zh = "证明过多"
+name_en = "Proving Too Much"
+aliases = ["过度证明", "原则证明过宽"]
+category = "presumption"
+kind = "informal"
+severity = 3
+definition = "一个论证所依赖的原则不仅支持当前结论，还会支持明显不可接受或自相矛盾的结论，因此该原则需要额外限制。"
+pattern = "原则 W 被用来证明 P；同一原则 W 也证明不可接受的 R；因此当前论证没有安全地建立 P。"
+diagnostic = ["把同一推理模板替换成另一个案例，会得到什么结论？", "支持者是否愿意接受那些延伸结论，或能说明相关差异？"]
+example = "“只要是传统就应保留”会同时证明互相冲突的旧制度都应保留。"
+boundary = "如果延伸结论其实可接受，或案例存在独立相关差异，证明过多不成立。"
+confusions = ["滑坡谬误", "特殊豁免", "归谬法"]
+related = ["special-pleading", "slippery-slope", "inconsistent-standards"]
+
+[[fallacy]]
+id = "entitlement-to-opinion"
+name_zh = "观点豁免谬误"
+name_en = "I'm Entitled to My Opinion"
+aliases = ["我有权有观点", "观点自由即免于批评"]
+category = "presumption"
+kind = "dialectical"
+severity = 2
+definition = "把拥有表达意见的权利，偷换成该意见免于证据审查、批评或公共后果。"
+pattern = "A 有权表达 P；因此 P 不应被要求证据或批评。"
+diagnostic = ["当前讨论的是表达权利，还是主张真假与论证质量？", "批评是否阻止了发言，还是仅检验了内容？"]
+example = "我有权发表看法，所以你不能再问我这些数据从哪里来。"
+boundary = "表达自由和免受骚扰是真实原则；它们不自动使事实主张获得免证地位。"
+confusions = ["诉诸固执", "终止思考的陈词", "语气警察"]
+related = ["proof-by-assertion", "thought-terminating-cliche", "burden-of-proof-reversal"]
+
+[[fallacy]]
 id = "inconsistent-standards"
 name_zh = "标准不一致"
 name_en = "Inconsistent Standards"

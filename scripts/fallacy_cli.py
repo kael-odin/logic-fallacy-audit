@@ -3,7 +3,6 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from pathlib import Path
 
 from catalog_lib import (
     ROOT,
@@ -145,9 +144,11 @@ def command_render(args: argparse.Namespace) -> int:
         print("生成文件已与 catalog 数据一致。")
         return 0
 
-    written = write_generated_files(catalog)
+    written, removed = write_generated_files(catalog)
     for path in written:
         print(f"已生成 {path.relative_to(ROOT)}")
+    for path in removed:
+        print(f"已移除残留 {path.relative_to(ROOT)}")
     return 0
 
 

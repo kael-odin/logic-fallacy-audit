@@ -2,6 +2,22 @@
 
 All notable changes follow a simple milestone history.
 
+## 1.1.0 - 2026-11-07
+
+- Merged the duplicated `contextomy` entry into `quote-mining` and added synonym coverage.
+- Added 20 common fallacies and argument patterns after an external coverage cross-check.
+- Added global alias collision, empty category, and safe missing-ID validation.
+- Hardened full-repository validation and evaluation parsing against malformed field types.
+- Added Unicode NFKC normalization for aliases, name collisions, and CLI search.
+- Added stale generated-file detection and automatic cleanup.
+- Removed the hard-coded category numbering map.
+- Added README coverage consistency and regression tests.
+- Added Ruff linting, CI concurrency, and workflow timeout guards.
+- Added structured issue templates and a maintained content backlog.
+- Added five behavior-evaluation cases for the new fallacy patterns.
+- Corrected the merged quote-mining boundary and masked-man related references.
+- Published the 2026-11-07 content and repository audit record.
+
 ## 1.0.0 - 2026-11-06
 
 - Added the installable `logic-fallacy-audit` skill.

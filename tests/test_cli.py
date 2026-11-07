@@ -26,8 +26,8 @@ class CliTests(unittest.TestCase):
         result = run_cli("stats", "--json")
         self.assertEqual(0, result.returncode, result.stderr)
         payload = json.loads(result.stdout)
-        self.assertGreaterEqual(payload["total"], 220)
-        self.assertGreaterEqual(payload["fallacies"], 180)
+        self.assertGreaterEqual(payload["total"], 230)
+        self.assertGreaterEqual(payload["fallacies"], 200)
         self.assertGreaterEqual(payload["biases"], 30)
 
     def test_search_returns_specific_entry(self) -> None:

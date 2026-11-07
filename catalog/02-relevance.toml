@@ -525,3 +525,83 @@ example = "你说这份安全报告漏了数据，但你语气太冲了，我们
 boundary = "在协作和公共讨论中，表达方式确实可能影响信任、伤害他人或降低沟通效率；但不能自动替代内容回应。"
 confusions = ["礼貌要求与语气转移", "情绪表达"]
 related = ["appeal-to-emotion", "ad-hominem-abusive", "thought-terminating-cliche"]
+
+[[fallacy]]
+id = "appeal-to-poverty"
+name_zh = "诉诸贫穷"
+name_en = "Appeal to Poverty"
+aliases = ["穷人更可信", "贫穷即正确", "argumentum ad lazarum"]
+category = "relevance"
+kind = "informal"
+severity = 2
+definition = "因为发言者贫穷、资源少或处境弱势，就推出其事实判断正确、道德立场可靠或方案更优。"
+pattern = "A 贫穷或弱势；A 主张 P；因此 P 更可信或更正确。"
+diagnostic = ["经济处境与当前事实主张之间有什么证据关系？", "若同一句话由更富裕者说出，内容是否改变？"]
+example = "他收入最低，所以他关于这项工程安全性的判断一定最准确。"
+boundary = "弱势群体的亲历可以揭示被忽略的成本和需求；这说明需要听取，不等于其全部结论自动为真。"
+confusions = ["诉诸财富", "诉诸同情", "基于处境的人身攻击"]
+related = ["appeal-to-wealth", "appeal-to-pity", "ad-hominem-circumstantial"]
+
+[[fallacy]]
+id = "appeal-to-minority"
+name_zh = "诉诸少数"
+name_en = "Appeal to Minority"
+aliases = ["少数即正确", "冷门观点更可信"]
+category = "relevance"
+kind = "informal"
+severity = 2
+definition = "因为某观点只有少数人接受或与主流相反，就推出它更真、更勇敢或更值得相信。"
+pattern = "只有少数人支持 P；因此 P 为真或优于多数意见。"
+diagnostic = ["少数地位是否增加了 P 的证据？", "该少数观点是否经过独立检验，而非只因反主流而被高估？"]
+example = "几乎没人认同这个疗法，所以它一定藏着主流医学不愿承认的真相。"
+boundary = "少数观点可能揭示群体偏差、创新或被压制的证据；仍需说明具体证据和推理。"
+confusions = ["诉诸流行", "诉诸新颖", "阴谋论式推理"]
+related = ["appeal-to-popularity", "appeal-to-novelty", "unfalsifiable-conspiracy"]
+
+[[fallacy]]
+id = "appeal-to-accomplishment"
+name_zh = "诉诸成就资格"
+name_en = "Appeal to Accomplishment"
+aliases = ["你做出过什么", "没做到就不能批评"]
+category = "relevance"
+kind = "informal"
+severity = 2
+definition = "因为批评者本人没有完成过某项成就，就断定批评无效或必须无条件接受实践者的判断。"
+pattern = "A 没有完成 X；A 批评 X 或某方案；因此 A 的批评不成立。"
+diagnostic = ["完成该事是否需要当前批评所涉及的专门知识？", "批评者是否提供了可独立检查的证据和理由？"]
+example = "你没拍过电影，所以你对这场剪辑事故的分析一定没有价值。"
+boundary = "实际经验可以提供操作细节和可信度；但多数专业判断仍可由公开标准、证据和逻辑检验。"
+confusions = ["处境式人身攻击", "诉诸权威", "语气警察"]
+related = ["ad-hominem-circumstantial", "appeal-to-authority", "appeal-to-wealth"]
+
+[[fallacy]]
+id = "appeal-to-shame"
+name_zh = "诉诸羞耻"
+name_en = "Appeal to Shame"
+aliases = ["羞耻绑架", "丢脸即错误"]
+category = "relevance"
+kind = "informal"
+severity = 2
+definition = "通过让受众因接受某主张而感到羞耻、丢脸或被群体排斥，迫使其改变判断。"
+pattern = "接受 P 会显得愚蠢或丢脸；因此 P 为假或应拒绝 P。"
+diagnostic = ["羞耻与 P 的证据或政策效果有什么关系？", "去掉身份压力后，支持和反对 P 的理由是否变化？"]
+example = "真正有能力的人不会要求风险披露，你别显得这么胆小。"
+boundary = "羞耻和声誉可以维持规范与责任；但它们不是事实真假或专业效果的直接证据。"
+confusions = ["诉诸情感", "诉诸嘲笑", "诉诸忠诚"]
+related = ["appeal-to-emotion", "appeal-to-ridicule", "appeal-to-loyalty"]
+
+[[fallacy]]
+id = "invincible-ignorance"
+name_zh = "不可战胜的无知"
+name_en = "Invincible Ignorance"
+aliases = ["固执无知", "拒绝一切证据"]
+category = "relevance"
+kind = "dialectical"
+severity = 3
+definition = "面对持续、相关且可检验的证据仍一概拒绝，并把拒绝接受本身当成立场未被反驳的证明。"
+pattern = "关于 P 的证据不断出现；A 不检查也不回应；A 以“你们说服不了我”宣称 P 仍成立。"
+diagnostic = ["哪些具体证据曾被逐项回应？", "拒绝是否存在可说明的方法问题，还是只以不接受作为结论？"]
+example = "无论提供多少次原始记录，他都说不相信，并因此坚持自己的指控已被证明。"
+boundary = "怀疑来源质量、要求可重复证据和暂缓判断都合理；不可战胜的无知指拒绝设置任何可接受证据条件。"
+confusions = ["不可证伪", "诉诸无知", "自我封闭论证"]
+related = ["unfalsifiability", "appeal-to-ignorance", "self-sealing-argument"]

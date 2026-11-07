@@ -8,7 +8,7 @@
 
 > 本文件由结构化目录生成。修改 `catalog/` 后再运行 `python scripts/fallacy_cli.py render`。
 
-共 **23** 条。
+共 **24** 条。
 
 ## 快速索引
 
@@ -37,6 +37,7 @@
 | 劳动总量谬误 | Lump of Labor Fallacy | `lump-of-labor` |
 | 零和谬误 | Zero-Sum Fallacy | `zero-sum-fallacy` |
 | 完美主义标准 | Perfectionist Fallacy | `perfectionist-fallacy` |
+| 事后必然论 | Retrospective Determinism | `retrospective-determinism` |
 
 ---
 
@@ -1010,6 +1011,48 @@ nirvana fallacy、false dilemma、risk policy
 ### 相关条目
 
 涅槃谬误 (`nirvana-fallacy`)、虚假两难 (`false-dilemma`)、因果过度简化 (`causal-oversimplification`)
+
+
+---
+
+## 事后必然论
+
+**Retrospective Determinism** · `retrospective-determinism`
+
+- 类型：非形式谬误
+- 默认影响：中等
+- 别名：结果反推必然、既然发生所以不可避免
+
+### 定义
+
+因为某事件已经发生，就断言当时的环境使它不可避免，并把事后解释提升为必然因果。
+
+### 推理式
+
+```text
+E 已发生，且发生时存在 C；因此 C 必然导致 E。
+```
+
+### 诊断问题
+
+1. 在事件发生前，C 条件下 E 的概率有多大？
+2. 是否存在未发生的替代结果和阻断因素？
+
+### 原创例子
+
+> 球队穿新球鞋后赢了，所以那双鞋使胜利不可避免。
+
+### 何时可能不是谬误
+
+确定性系统可以由定律和初始条件推出结果；复杂社会事件通常仍需概率和反事实比较。
+
+### 容易混淆
+
+事后归因、后见之明偏差、模态辖域谬误
+
+### 相关条目
+
+事后归因 (`post-hoc`)、后见之明偏差 (`hindsight-bias`)、模态辖域谬误 (`modal-scope-fallacy`)
 
 
 [返回分类索引](../catalog-index.md)

@@ -5,6 +5,8 @@
 ```bash
 python scripts/fallacy_cli.py validate --strict
 python scripts/fallacy_cli.py render --check
+ruff check scripts tests
+ruff format --check scripts tests
 python -m unittest discover -s tests -v
 ```
 
@@ -14,15 +16,20 @@ python -m unittest discover -s tests -v
 - 必需字段完整；
 - ID 唯一且符合 kebab-case；
 - 分类存在；
+- 分类非空；
 - 关联 ID 有效；
+- 别名不与任何其他 ID、主名或别名冲突；
+- 缺少 ID 时返回校验错误而不是崩溃；
 - 核心十类存在；
 - 条目覆盖达到门槛；
 - SKILL frontmatter 与必要引用存在；
 - 报告模板必需章节存在；
+- SKILL、CITATION 与 CHANGELOG 版本一致；
 - 评测案例可解析且引用有效；
 - Markdown 相对链接不失效；
-- 生成目录无漂移；
+- 生成目录无缺失、漂移或残留文件；
 - CLI 和示例报告关键行为通过测试。
+- Python 代码通过固定版本的 Ruff 静态检查。
 
 ## 2. 人工检查
 

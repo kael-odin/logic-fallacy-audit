@@ -317,3 +317,19 @@ example = "两家医院总体死亡率看似不同，但按病情严重程度分
 boundary = "分层不一定越细越好，可能引入碰撞偏差；关键是明确目标因果结构和变量角色。"
 confusions = ["ecological fallacy", "confounding", "collider bias"]
 related = ["ecological-fallacy", "selection-bias", "misleading-average"]
+
+[[fallacy]]
+id = "double-counting"
+name_zh = "重复计数"
+name_en = "Double Counting"
+aliases = ["同一证据算两次", "重叠样本重复汇总"]
+category = "statistical"
+kind = "statistical"
+severity = 3
+definition = "把同一事件、样本或收益在多个类别中重复相加，使证据量、概率或收益被系统性夸大。"
+pattern = "同一集合 S 同时被计入 A 与 B；论证把 |A|+|B| 当作独立总量，忽略重叠 |A∩B|。"
+diagnostic = ["不同类别是否使用同一批人或事件？", "概率相加时是否可能超过 100%？", "收益是否已在成本或其他项目中计算过？"]
+example = "一百名用户同时点赞两条帖子，却被报告为两百次独立用户支持。"
+boundary = "互动次数和独立人数可以分别统计；问题在于分母和指标未说明，导致重复解释。"
+confusions = ["分母忽视", "多重比较", "平均数的误导"]
+related = ["denominator-neglect", "multiple-comparisons", "misleading-average"]

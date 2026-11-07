@@ -8,7 +8,7 @@
 
 > 本文件由结构化目录生成。修改 `catalog/` 后再运行 `python scripts/fallacy_cli.py render`。
 
-共 **15** 条。
+共 **19** 条。
 
 ## 快速索引
 
@@ -29,6 +29,10 @@
 | 模态辖域谬误 | Modal Scope Fallacy | `modal-scope-fallacy` |
 | 量词移位 | Quantifier Shift | `quantifier-shift` |
 | 否定范围错误 | Scope of Negation Error | `scope-of-negation` |
+| 面具人谬误 | Masked Man Fallacy | `masked-man-fallacy` |
+| 否定前提推出肯定结论 | Affirmative Conclusion from a Negative Premise | `affirmative-conclusion-from-negative-premise` |
+| 肯定前提推出否定结论 | Negative Conclusion from Affirmative Premises | `negative-conclusion-from-affirmative-premises` |
+| 全否定前提谬误 | Exclusive Premises | `exclusive-premises` |
 
 ---
 
@@ -38,7 +42,7 @@
 
 - 类型：形式错误
 - 默认影响：高影响
-- 别名：逆命题谬误、条件倒置
+- 别名：肯定后件谬误、后件误推、条件倒置
 
 ### 定义
 
@@ -658,6 +662,174 @@ P → Q；因此 Q → P。
 ### 相关条目
 
 否定合取错误 (`negating-a-conjunction`)、量词移位 (`quantifier-shift`)、模态辖域谬误 (`modal-scope-fallacy`)
+
+
+---
+
+## 面具人谬误
+
+**Masked Man Fallacy** · `masked-man-fallacy`
+
+- 类型：形式错误
+- 默认影响：高影响
+- 别名：蒙面人谬误、同一性替换谬误、illicit substitution of identicals
+
+### 定义
+
+在外延相同但涉及知识、信念或描述的语境中，把两个指称同一对象的表达式随意互换，得出不同真值的结论。
+
+### 推理式
+
+```text
+a 与 b 指同一对象；主体知道或相信 a 是 F；因此主体知道或相信 b 是 F。
+```
+
+### 诊断问题
+
+1. 替换发生在普通对象层面，还是发生在“知道、相信、寻找、描述”等语境中？
+2. 两个表达式是否在主体视角下可识别为同一对象？
+
+### 原创例子
+
+> 你认识站在门口的人；站在门口的人其实是市长；因此你认识市长。
+
+### 何时可能不是谬误
+
+在纯粹外延语境中，同一对象的不同名称通常可以替换；知识、信念、感知和引语语境会产生指称不透明。
+
+### 容易混淆
+
+偷换概念、使用与提及混淆、范畴错误
+
+### 相关条目
+
+使用与提及混淆 (`use-mention-confusion`)、偷换概念 (`equivocation`)、范畴错误 (`category-mistake`)
+
+
+---
+
+## 否定前提推出肯定结论
+
+**Affirmative Conclusion from a Negative Premise** · `affirmative-conclusion-from-negative-premise`
+
+- 类型：形式错误
+- 默认影响：高影响
+- 别名：否定前提肯定结论、illicit negative
+
+### 定义
+
+三段论至少有一个否定前提，却推出肯定结论；这种形式不能保证结论跟随前提。
+
+### 推理式
+
+```text
+没有 A 是 B；所有 C 是 A；因此所有 C 是 B。
+```
+
+### 诊断问题
+
+1. 前提是否包含否定，而结论却是肯定归属？
+2. 结论是否与前提已经排除的关系相冲突？
+
+### 原创例子
+
+> 没有爬行动物是恒温动物；所有蛇都是爬行动物；因此所有蛇都是恒温动物。
+
+### 何时可能不是谬误
+
+肯定结论本身可能因其他独立证据为真；形式错误只说明当前两个前提不足以推出它。
+
+### 容易混淆
+
+否定前件、全否定前提、小项不当周延
+
+### 相关条目
+
+肯定前提推出否定结论 (`negative-conclusion-from-affirmative-premises`)、全否定前提谬误 (`exclusive-premises`)、小项不当周延 (`illicit-minor`)
+
+
+---
+
+## 肯定前提推出否定结论
+
+**Negative Conclusion from Affirmative Premises** · `negative-conclusion-from-affirmative-premises`
+
+- 类型：形式错误
+- 默认影响：高影响
+- 别名：肯定前提否定结论、illicit affirmative
+
+### 定义
+
+三段论两个前提都是肯定命题，却推出否定结论；前提只建立包含关系，不能保证两个词项互斥。
+
+### 推理式
+
+```text
+所有 A 是 B；所有 B 是 C；因此没有 A 是 C。
+```
+
+### 诊断问题
+
+1. 两个前提是否都在陈述包含或归属？
+2. 否定结论是否引入了前提没有提供的排斥关系？
+
+### 原创例子
+
+> 所有狗都是哺乳动物；所有哺乳动物都是动物；因此没有狗是动物。
+
+### 何时可能不是谬误
+
+若另有独立前提证明两个类别互斥，否定结论可以得到支持；问题在于当前肯定前提自身不足。
+
+### 容易混淆
+
+否定后件、全否定前提、虚假两难
+
+### 相关条目
+
+否定前提推出肯定结论 (`affirmative-conclusion-from-negative-premise`)、全否定前提谬误 (`exclusive-premises`)、大项不当周延 (`illicit-major`)
+
+
+---
+
+## 全否定前提谬误
+
+**Exclusive Premises** · `exclusive-premises`
+
+- 类型：形式错误
+- 默认影响：高影响
+- 别名：双否定前提、排他前提谬误
+
+### 定义
+
+三段论的两个前提都是否定命题，因此没有建立中项与两个端项之间的肯定连接，不能合法推出端点关系。
+
+### 推理式
+
+```text
+没有 A 是 B；没有 C 是 A；因此 C 与 B 具有某个确定关系。
+```
+
+### 诊断问题
+
+1. 两个前提是否都只说明排斥，没有共同覆盖的对象？
+2. 结论是否需要一个尚未建立的肯定连接？
+
+### 原创例子
+
+> 没有猫是爬行动物；没有狗是猫；因此没有狗是爬行动物。
+
+### 何时可能不是谬误
+
+两个否定前提可以共同支持有限观察或统计结论；作为标准三段论，它们不足以确定端点关系。
+
+### 容易混淆
+
+肯定前提推出否定结论、否定前提推出肯定结论、中项不周延
+
+### 相关条目
+
+否定前提推出肯定结论 (`affirmative-conclusion-from-negative-premise`)、肯定前提推出否定结论 (`negative-conclusion-from-affirmative-premises`)、中项不周延 (`undistributed-middle`)
 
 
 [返回分类索引](../catalog-index.md)
